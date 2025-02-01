@@ -137,7 +137,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6 dark:bg-black dark:text-white">
       <div className="flex flex-wrap gap-4 mb-4">
         {languages.map((lang) => (
           <button
@@ -147,7 +147,7 @@ export default function HomePage() {
               ${
                 lang === language
                   ? "bg-blue-500 text-white border-blue-500 hover:bg-blue-600"
-                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                  : "bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
               }`}
             aria-pressed={lang === language}
           >
@@ -165,7 +165,7 @@ export default function HomePage() {
               ${
                 selectedCategory === category.id
                   ? "bg-blue-500 text-white hover:bg-blue-600"
-                  : "bg-gray-100 text-black hover:bg-gray-200"
+                  : "bg-gray-100 text-black hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
               }`}
             aria-pressed={selectedCategory === category.id}
           >
@@ -174,7 +174,8 @@ export default function HomePage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Use grid-cols-1 to ensure one column layout */}
+      <div className="grid grid-cols-1 gap-4 items-start">
         {selectedCategoryData.azkars.map((azkar) => (
           <AzkarCard
             key={azkar.id}
@@ -207,9 +208,15 @@ function AzkarCard({
 
   const getButtonText = useCallback((): string => {
     if (isCompleted) {
-      return uiTranslations.completed?.[language] || "Completed";
+      return (
+        uiTranslations.completed?.[
+          language as keyof typeof uiTranslations.completed
+        ] || "Completed"
+      );
     }
-    const tapText = uiTranslations.tap?.[language] || "Tap";
+    const tapText =
+      uiTranslations.tap?.[language as keyof typeof uiTranslations.tap] ||
+      "Tap";
     return `${tapText} (${counter}/${azkar.count})`;
   }, [isCompleted, uiTranslations, language, counter, azkar.count]);
 
@@ -227,14 +234,22 @@ function AzkarCard({
 
   return (
     <div
-      className={`${
-        isCompleted ? "bg-green-100" : "bg-white"
-      } shadow rounded p-4 transition-colors`}
+      className={`shadow rounded p-4 transition-colors 
+        ${
+          isCompleted
+            ? "bg-green-100 dark:bg-green-800"
+            : "bg-white dark:bg-gray-800"
+        } 
+        dark:text-white`}
       role="article"
       aria-label={`Azkar card - ${getContent()}`}
     >
       <div className="mb-2">
-        <p className="text-xl font-bold text-right" lang="ar" dir="rtl">
+        <p
+          className="text-xl font-bold text-right content-arabic"
+          lang="ar"
+          dir="rtl"
+        >
           {azkar.content.arabic}
         </p>
         {language !== "عربي" && (
@@ -244,7 +259,9 @@ function AzkarCard({
         )}
       </div>
       <div className="mb-4" dir={language === "عربي" ? "rtl" : "ltr"}>
-        <p className="text-sm text-gray-600">{getVirtues()}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          {getVirtues()}
+        </p>
       </div>
       <div className="flex items-center justify-center">
         <button
