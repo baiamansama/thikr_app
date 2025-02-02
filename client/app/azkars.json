@@ -1,141 +1,348 @@
 {
   "metadata": {
-    "version": "1.1.0",
-    "lastUpdated": "2025-02-01",
+    "version": "2.0.0",
+    "lastUpdated": "2025-02-02",
     "supportedLanguages": ["عربي", "english", "кыргыз", "français", "español"]
   },
-  "localization": {
-    "ui": {
-      "actions": {
-        "tap": {
-          "english": "Tap",
-          "кыргыз": "Бас",
-          "عربي": "اضغط",
-          "français": "Appuyer",
-          "español": "Tocar"
-        },
-        "completed": {
-          "english": "Completed",
-          "кыргыз": "Аяктады",
-          "عربي": "منجز",
-          "français": "Terminé",
-          "español": "Completado"
-        }
+  "uiTranslations": {
+    "actions": {
+      "tap": {
+        "عربي": "اضغط",
+        "english": "Tap",
+        "кыргыз": "Бас",
+        "français": "Appuyer",
+        "español": "Tocar"
+      },
+      "completed": {
+        "عربي": "منجز",
+        "english": "Completed",
+        "кыргыз": "Аяктады",
+        "français": "Terminé",
+        "español": "Completado"
+      }
+    },
+    "toggleTranslation": {
+      "show": {
+        "عربي": "عرض الترجمة",
+        "english": "Show Translation",
+        "кыргыз": "Котормону Көрсөт",
+        "français": "Afficher la traduction",
+        "español": "Mostrar traducción"
       }
     }
   },
-  "categories": {
-    "morning": {
+  "themes": [
+    {
+      "id": "auto",
+      "translations": {
+        "عربي": "تلقائي",
+        "english": "Auto",
+        "кыргыз": "Автоматтык",
+        "français": "Automatique",
+        "español": "Automático"
+      }
+    },
+    {
+      "id": "light",
+      "translations": {
+        "عربي": "فاتح",
+        "english": "Light",
+        "кыргыз": "Ачык",
+        "français": "Clair",
+        "español": "Claro"
+      }
+    },
+    {
+      "id": "sepia",
+      "translations": {
+        "عربي": "سبيا",
+        "english": "Sepia",
+        "кыргыз": "Сепия",
+        "français": "Sépia",
+        "español": "Sepia"
+      }
+    },
+    {
+      "id": "dark",
+      "translations": {
+        "عربي": "داكن",
+        "english": "Dark",
+        "кыргыз": "Караңгы",
+        "français": "Sombre",
+        "español": "Oscuro"
+      }
+    }
+  ],
+  "categories": [
+    {
       "id": "morning",
       "translations": {
+        "عربي": "أذكار الصباح",
         "english": "Morning Azkar",
         "кыргыз": "Таңкы зикир",
-        "عربي": "أذكار الصباح",
         "français": "Azkar du matin",
         "español": "Azkar de la mañana"
       },
       "azkars": [
         {
           "id": "morning_1",
-          "count": 3,
-          "content": {
-            "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا",
-            "translations": {
-              "english": "O Allah, by You we enter the morning",
-              "кыргыз": "О Аллах, уруксатың менен таңга киребиз",
-              "français": "Ô Allah, par Toi nous entrons dans le matin",
-              "español": "Oh Allah, por Ti entramos en la mañana"
+          "count": 1,
+          "lines": [
+            {
+              "lineNumber": 1,
+              "arabic": "أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ",
+              "translations": {
+                "english": "I seek refuge in Allah from the accursed devil.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 2,
+              "arabic": "اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ",
+              "translations": {
+                "english": "Allah! There is no god except Him, the Ever-Living, All-Sustaining.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 3,
+              "arabic": "لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ",
+              "translations": {
+                "english": "Neither drowsiness nor sleep overtakes Him.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 4,
+              "arabic": "لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ",
+              "translations": {
+                "english": "To Him belongs whatever is in the heavens and whatever is on the earth.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 5,
+              "arabic": "مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ",
+              "translations": {
+                "english": "Who could possibly intercede with Him without His permission?",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 6,
+              "arabic": "يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ",
+              "translations": {
+                "english": "He fully knows what is ahead of them and what is behind them.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 7,
+              "arabic": "وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء",
+              "translations": {
+                "english": "But no one can grasp any of His knowledge—except what He wills to reveal.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 8,
+              "arabic": "وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ",
+              "translations": {
+                "english": "His Seat encompasses the heavens and the earth.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 9,
+              "arabic": "وَلاَ يَؤُودُهُ حِفْظُهُمَا",
+              "translations": {
+                "english": "And the preservation of both does not tire Him.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 10,
+              "arabic": "وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+              "translations": {
+                "english": "For He is the Most High, the Greatest.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
             }
-          },
+          ],
           "virtues": {
-            "arabic": "فضل ذكر الصباح...",
-            "translations": {
-              "english": "Benefits of morning dhikr...",
-              "кыргыз": "Таңкы зикирдин пайдасы...",
-              "français": "Bienfaits du dhikr du matin...",
-              "español": "Beneficios del dhikr de la mañana..."
-            }
+            "lines": []
           }
         },
         {
           "id": "morning_2",
-          "count": 2,
-          "content": {
-            "arabic": "اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَتَ عَرْشِكَ وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ أَنَّكَ أَنْتَ اللَّهُ لَا إِلٰهَ إِلَّا أَنتَ",
-            "translations": {
-              "english": "O Allah, I testify before You and I testify before Your throne bearers, Your angels, and all Your creation, that You are Allah, there is no god but You.",
-              "кыргыз": "тагыраак котормосу жолдоо...",
-              "français": "Ô Allah, je témoigne devant Toi et je témoigne devant les porteurs de Ton trône, Tes anges et toute Ta création, que Tu es Allah, il n'y a pas d'autre dieu que Toi.",
-              "español": "Oh Allah, soy testigo ante Ti y ante los portadores de Tu trono, Tus ángeles y toda Tu creación, que Tú eres Allah, no hay más dios que Tú."
+          "count": 3,
+          "lines": [
+            {
+              "lineNumber": 1,
+              "arabic": "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم",
+              "translations": {
+                "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 2,
+              "arabic": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+              "translations": {
+                "english": "Say, 'He is Allah—One.'",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 3,
+              "arabic": "ٱللَّهُ ٱلصَّمَدُ",
+              "translations": {
+                "english": "Allah—the Sustainer.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 4,
+              "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+              "translations": {
+                "english": "He has never had offspring, nor was He born.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 5,
+              "arabic": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+              "translations": {
+                "english": "And there is none comparable to Him.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
             }
-          },
+          ],
           "virtues": {
-            "arabic": "فضله عظيم...",
-            "translations": {
-              "english": "Its reward is immense...",
-              "кыргыз": "Чооң сооп...",
-              "français": "Sa récompense est immense...",
-              "español": "Su recompensa es inmensa..."
-            }
+            "lines": []
           }
         }
       ]
     },
-    "evening": {
+    {
       "id": "evening",
       "translations": {
+        "عربي": "أذكار المساء",
         "english": "Evening Azkar",
         "кыргыз": "Кечки зикир",
-        "عربي": "أذكار المساء",
         "français": "Azkar du soir",
         "español": "Azkar de la tarde"
       },
       "azkars": [
         {
           "id": "evening_1",
-          "count": 3,
-          "content": {
-            "arabic": "اللَّهُمَّ بِكَ أَمْسَيْنَا",
-            "translations": {
-              "english": "O Allah, by You we enter the evening",
-              "кыргыз": "тагыраак котормосу жолдоо...",
-              "français": "Ô Allah, par Toi nous entrons dans le soir",
-              "español": "Oh Allah, por Ti entramos en la tarde"
+          "count": 1,
+          "lines": [
+            {
+              "lineNumber": 1,
+              "arabic": "اللّهُـمَّ مَا أَصْبَـَحَ بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِكَ",
+              "translations": {
+                "english": "Allah, whatever blessing has been granted to me this morning or to any of Your creation",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 2,
+              "arabic": "فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـكَ",
+              "translations": {
+                "english": "is solely from You; You have no partner.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 3,
+              "arabic": "فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـرُ",
+              "translations": {
+                "english": "All praise and thanks belong to You.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
             }
-          },
+          ],
           "virtues": {
-            "arabic": "فوائد أذكار المساء ...",
-            "translations": {
-              "english": "Benefits of evening dhikr...",
-              "кыргыз": "тагыраак котормосу жолдоо...",
-              "français": "Bienfaits du dhikr du soir...",
-              "español": "Beneficios del dhikr de la tarde..."
-            }
+            "lines": []
           }
         },
         {
           "id": "evening_2",
-          "count": 2,
-          "content": {
-            "arabic": "اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَتَ عَرْشِكَ وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ أَنَّكَ أَنْتَ اللَّهُ لَا إِلٰهَ إِلَّا أَنتَ",
-            "translations": {
-              "english": "O Allah, I testify before You and I testify before Your throne bearers, Your angels, and all Your creation, that You are Allah, there is no god but You.",
-              "кыргыз": "тагыраак котормосу жолдоо...",
-              "français": "Ô Allah, je témoigne devant Toi et je témoigne devant les porteurs de Ton trône, Tes anges et toute Ta création, que Tu es Allah, il n'y a pas d'autre dieu que Toi.",
-              "español": "Oh Allah, soy testigo ante Ti y ante los portadores de Tu trono, Tus ángeles y toda Tu creación, que Tú eres Allah, no hay más dios que Tú."
+          "count": 1,
+          "lines": [
+            {
+              "lineNumber": 1,
+              "arabic": "أَمْسَيْنا وَأَمْسى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ",
+              "translations": {
+                "english": "We have entered a new day; all dominion is Allah's. Praise is to Allah.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 2,
+              "arabic": "لاَ إِلَهَ إلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ",
+              "translations": {
+                "english": "None has the right to be worshiped but Allah alone. He has no partner.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
+            },
+            {
+              "lineNumber": 3,
+              "arabic": "لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+              "translations": {
+                "english": "To Him belongs the dominion, and to Him is the praise; He is Able to do all things.",
+                "кыргыз": "",
+                "français": "",
+                "español": ""
+              }
             }
-          },
+          ],
           "virtues": {
-            "arabic": "فضله عظيم...",
-            "translations": {
-              "english": "Its reward is immense...",
-              "кыргыз": "тагыраак котормосу жолдоо...",
-              "français": "Sa récompense est immense...",
-              "español": "Su recompensa es inmensa..."
-            }
+            "lines": []
           }
         }
       ]
     }
-  }
+  ]
 }
