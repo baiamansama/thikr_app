@@ -305,7 +305,6 @@ function AzkarCard({
 
   const getButtonText = useCallback((): string => {
     if (isCompleted) {
-      // Append the max count on the right side when completed
       return `${uiTranslations.actions.completed[language] || "Completed"} (${
         azkar.count
       })`;
@@ -315,7 +314,7 @@ function AzkarCard({
   }, [isCompleted, uiTranslations, language, counter, azkar.count]);
 
   return (
-    <div className="card p-4 bg-white dark:bg-gray-800 rounded shadow transition-colors">
+    <div className="card p-4 rounded shadow transition-colors">
       <div className="mb-4">
         {azkar.lines.map((line) => (
           <div key={line.lineNumber} className="mb-2">
