@@ -349,13 +349,15 @@ function AzkarCard({
             >
               {line.arabic}
             </p>
-            {language !== "عربي" && showTranslation && (
-              <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
-                {line.translations[language] !== ""
-                  ? line.translations[language]
-                  : line.arabic}
-              </p>
-            )}
+            {/* For azkar lines, if translation is available, display it.
+                Otherwise, do not fall back to Arabic. */}
+            {language !== "عربي" &&
+              showTranslation &&
+              line.translations[language] !== "" && (
+                <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
+                  {line.translations[language]}
+                </p>
+              )}
           </div>
         ))}
       </div>
