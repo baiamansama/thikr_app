@@ -95,7 +95,7 @@ const ToggleSwitch: React.FC<IToggleSwitchProps> = ({ enabled, onToggle }) => {
         border 
         ${
           enabled
-            ? "bg-[#ccd5ae] border-[#ccd5ae] dark:bg-[#ccd5ae] dark:border-[#ccd5ae]"
+            ? "bg-[#606c38] border-[#606c38] dark:bg-[#606c38] dark:border-[#606c38]"
             : "bg-transparent border-gray-400 dark:border-gray-600"
         } 
         focus:outline-none focus:ring-2 focus:ring-offset-2`}
@@ -210,7 +210,7 @@ export default function HomePage() {
                 className={`flex justify-center items-center cursor-pointer px-3 py-1 rounded border transition-colors
                   ${
                     lang === language
-                      ? "bg-[#ccd5ae] text-[var(--card-text)] border-[#ccd5ae] hover:bg-[#ccd5ae]/90"
+                      ? "bg-[#606c38] text-[var(--card-text)] border-[#606c38] hover:bg-[#606c38]/90"
                       : "bg-transparent border-current hover:opacity-80"
                   }`}
                 aria-pressed={lang === language}
@@ -229,7 +229,7 @@ export default function HomePage() {
                 className={`flex justify-center items-center gap-2 px-3 py-1 rounded border transition-colors
                   ${
                     item.id === theme
-                      ? "bg-[#ccd5ae] text-[var(--card-text)] border-[#ccd5ae] hover:bg-[#ccd5ae]/90"
+                      ? "bg-[#606c38] text-[var(--card-text)] border-[#606c38] hover:bg-[#606c38]/90"
                       : "bg-transparent border-current hover:opacity-80"
                   }`}
                 aria-pressed={item.id === theme}
@@ -248,7 +248,7 @@ export default function HomePage() {
                 className={`flex justify-center items-center cursor-pointer px-4 py-2 rounded border transition-colors
                   ${
                     selectedCategory === category.id
-                      ? "bg-[#ccd5ae] text-[var(--card-text)] border-[#ccd5ae] hover:bg-[#ccd5ae]/90"
+                      ? "bg-[#606c38] text-[var(--card-text)] border-[#606c38] hover:bg-[#606c38]/90"
                       : "bg-transparent border-current hover:opacity-80"
                   }`}
                 aria-pressed={selectedCategory === category.id}
@@ -365,8 +365,8 @@ function AzkarCard({
           disabled={isCompleted}
           className={`w-full py-4 text-lg font-bold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
             isCompleted
-              ? "bg-[#606c38] cursor-not-allowed"
-              : "bg-[#ccd5ae] text-[var(--card-text)] hover:bg-[#ccd5ae]/90 active:bg-[#ccd5ae]/80"
+              ? "bg-[#283618] cursor-not-allowed"
+              : "bg-[#606c38] text-[var(--card-text)] hover:bg-[#606c38]/90 active:bg-[#606c38]/80"
           }`}
           aria-label={`Progress: ${counter} of ${azkar.count}`}
         >
