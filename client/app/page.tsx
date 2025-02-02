@@ -65,6 +65,7 @@ export interface IThikrDB {
   language: string;
   theme: string;
   counters: { [azkarId: string]: number };
+  showTranslation: boolean;
 }
 
 interface IAzkarCardProps {
@@ -94,7 +95,7 @@ const ToggleSwitch: React.FC<IToggleSwitchProps> = ({ enabled, onToggle }) => {
         border 
         ${
           enabled
-            ? "bg-blue-500 border-blue-500 dark:bg-blue-400 dark:border-blue-400"
+            ? "bg-[#ccd5ae] border-[#ccd5ae] dark:bg-[#ccd5ae] dark:border-[#ccd5ae]"
             : "bg-transparent border-gray-400 dark:border-gray-600"
         } 
         focus:outline-none focus:ring-2 focus:ring-offset-2`}
@@ -117,11 +118,11 @@ export default function HomePage() {
     language: INITIAL_LANGUAGE,
     theme: INITIAL_THEME,
     counters: {},
+    showTranslation: false,
   };
 
   const [hasMounted, setHasMounted] = useState(false);
   const [db, setDb] = useState<IThikrDB>(initialDB);
-  const [showTranslation, setShowTranslation] = useState<boolean>(false);
 
   useEffect(() => {
     setHasMounted(true);
@@ -140,7 +141,7 @@ export default function HomePage() {
     }
   }, [db, hasMounted]);
 
-  const { language, selectedCategory, theme, counters } = db;
+  const { language, selectedCategory, theme, counters, showTranslation } = db;
 
   const handleLanguageClick = useCallback((lang: string) => {
     setDb((prev) => ({ ...prev, language: lang }));
@@ -162,7 +163,7 @@ export default function HomePage() {
   }, []);
 
   const toggleTranslation = useCallback(() => {
-    setShowTranslation((prev) => !prev);
+    setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
   }, []);
 
   const selectedCategoryData = useMemo(() => {
@@ -201,15 +202,15 @@ export default function HomePage() {
     <div className="container mx-auto px-4 py-6 transition-colors">
       <div className="flex flex-col gap-4">
         <div className="settings p-4">
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center">
             {supportedLanguages.map((lang) => (
               <button
                 key={lang}
                 onClick={() => handleLanguageClick(lang)}
-                className={`cursor-pointer px-3 py-1 rounded border transition-colors
+                className={`flex justify-center items-center cursor-pointer px-3 py-1 rounded border transition-colors
                   ${
                     lang === language
-                      ? "bg-blue-500 text-white border-blue-500 hover:bg-blue-600"
+                      ? "bg-[#ccd5ae] text-[var(--card-text)] border-[#ccd5ae] hover:bg-[#ccd5ae]/90"
                       : "bg-transparent border-current hover:opacity-80"
                   }`}
                 aria-pressed={lang === language}
@@ -220,15 +221,15 @@ export default function HomePage() {
           </div>
         </div>
         <div className="settings p-4">
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center">
             {themes.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleThemeClick(item.id)}
-                className={`flex items-center gap-2 px-3 py-1 rounded border transition-colors
+                className={`flex justify-center items-center gap-2 px-3 py-1 rounded border transition-colors
                   ${
                     item.id === theme
-                      ? "bg-blue-500 text-white border-blue-500 hover:bg-blue-600"
+                      ? "bg-[#ccd5ae] text-[var(--card-text)] border-[#ccd5ae] hover:bg-[#ccd5ae]/90"
                       : "bg-transparent border-current hover:opacity-80"
                   }`}
                 aria-pressed={item.id === theme}
@@ -239,15 +240,15 @@ export default function HomePage() {
           </div>
         </div>
         <div className="settings p-4">
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => handleCategoryChange(category.id)}
-                className={`cursor-pointer px-4 py-2 rounded border transition-colors
+                className={`flex justify-center items-center cursor-pointer px-4 py-2 rounded border transition-colors
                   ${
                     selectedCategory === category.id
-                      ? "bg-blue-500 text-white border-blue-500 hover:bg-blue-600"
+                      ? "bg-[#ccd5ae] text-[var(--card-text)] border-[#ccd5ae] hover:bg-[#ccd5ae]/90"
                       : "bg-transparent border-current hover:opacity-80"
                   }`}
                 aria-pressed={selectedCategory === category.id}
@@ -259,7 +260,7 @@ export default function HomePage() {
         </div>
         {language !== "عربي" && (
           <div className="settings p-4 flex items-center gap-2 justify-center">
-            <span className="text-sm">
+            <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-transparent text-[var(--card-text)]">
               {uiTranslations.toggleTranslation.show[language]}
             </span>
             <ToggleSwitch
@@ -304,7 +305,10 @@ function AzkarCard({
 
   const getButtonText = useCallback((): string => {
     if (isCompleted) {
-      return uiTranslations.actions.completed[language] || "Completed";
+      // Append the max count on the right side when completed
+      return `${uiTranslations.actions.completed[language] || "Completed"} (${
+        azkar.count
+      })`;
     }
     const tapText = uiTranslations.actions.tap[language] || "Tap";
     return `${tapText} (${counter}/${azkar.count})`;
@@ -362,8 +366,8 @@ function AzkarCard({
           disabled={isCompleted}
           className={`w-full py-4 text-lg font-bold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
             isCompleted
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-green-500 text-white hover:bg-green-600 active:bg-green-700"
+              ? "bg-[#606c38] cursor-not-allowed"
+              : "bg-[#ccd5ae] text-[var(--card-text)] hover:bg-[#ccd5ae]/90 active:bg-[#ccd5ae]/80"
           }`}
           aria-label={`Progress: ${counter} of ${azkar.count}`}
         >
