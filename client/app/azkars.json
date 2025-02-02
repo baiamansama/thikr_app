@@ -29,6 +29,13 @@
         "français": "Afficher la traduction",
         "español": "Mostrar traducción"
       }
+    },
+    "virtues": {
+      "عربي": "الفضائل",
+      "english": "Virtues",
+      "кыргыз": "Пазилети",
+      "français": "Vertus",
+      "español": "Virtudes"
     }
   },
   "themes": [
@@ -190,7 +197,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من قالها حين يصبح أجير من الجن حتى يمسى ومن قالها حين يمسى أجير من الجن حتى يصبح",
+            "translations": {
+              "english": "Whoever says it in the morning will be protected from the jinn until the evening, and whoever says it in the evening will be protected from the jinn until the morning.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -239,7 +253,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).",
+            "translations": {
+              "english": "Whoever recites it in the morning and evening, it will suffice them against everything (Surah Al-Ikhlas and Al-Mu'awwidhatain).",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -307,9 +328,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_4",
@@ -386,9 +405,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_5",
@@ -451,9 +468,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_6",
@@ -476,9 +491,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_7",
@@ -542,7 +555,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من قالها موقنا بها حين يمسى ومات من ليلته دخل الجنة وكذلك حين يصبح.",
+            "translations": {
+              "english": "Whoever says it with certainty in the evening and dies that night will enter Paradise, and the same applies if they say it in the morning.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -591,7 +611,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من قالها أعتقه الله من النار.",
+            "translations": {
+              "english": "Whoever says it, Allah will free them from the Fire.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -624,7 +651,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من قالها حين يصبح أدى شكر يومه.",
+            "translations": {
+              "english": "Whoever says it in the morning has fulfilled the gratitude for their day.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -696,9 +730,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_11",
@@ -714,7 +746,15 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من قالها كفاه الله ما أهمه من أمر الدنيا والأخرة.",
+
+            "translations": {
+              "english": "Whoever says it, Allah will suffice them in their concerns regarding the matters of this world and the Hereafter.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -762,9 +802,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_13",
@@ -803,9 +841,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_14",
@@ -821,9 +857,17 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "لم يضره من الله شيء.",
+            "translations": {
+              "english": "Nothing will harm them by Allah's permission.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
+
         {
           "id": "morning_15",
           "count": 3,
@@ -838,7 +882,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من قالها حين يصبح وحين يمسى كان حقا على الله أن يرضيه يوم القيامة.",
+            "translations": {
+              "english": "Whoever says it in the morning and evening, it is guaranteed by Allah to please them on the Day of Judgment.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -878,9 +929,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_17",
@@ -896,7 +945,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "حُطَّتْ خَطَايَاهُ وَإِنْ كَانَتْ مِثْلَ زَبَدِ الْبَحْرِ. لَمْ يَأْتِ أَحَدٌ يَوْمَ الْقِيَامَةِ بِأَفْضَلَ مِمَّا جَاءَ بِهِ إِلَّا أَحَدٌ قَالَ مِثْلَ مَا قَالَ أَوْ زَادَ عَلَيْهِ.",
+            "translations": {
+              "english": "His sins will be forgiven, even if they were as numerous as the foam of the sea. On the Day of Judgment, no one will come with better deeds than what he brought, except for someone who said the same or did more than what he said.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -928,9 +984,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_19",
@@ -954,7 +1008,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "كانت له عدل عشر رقاب، وكتبت له مئة حسنة، ومحيت عنه مئة سيئة، وكانت له حرزا من الشيطان.",
+            "translations": {
+              "english": "It would be equivalent to the reward of freeing ten slaves, one hundred good deeds would be written for him, one hundred bad deeds would be erased, and it would serve as a protection from the devil.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -994,9 +1055,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_21",
@@ -1027,9 +1086,7 @@
               }
             }
           ],
-          "virtues": {
-            "lines": []
-          }
+          "virtues": {}
         },
         {
           "id": "morning_22",
@@ -1045,7 +1102,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "من صلى على حين يصبح وحين يمسى ادركته شفاعتى يوم القيامة.",
+            "translations": {
+              "english": "Whoever sends blessings upon me in the morning and evening will receive my intercession on the Day of Judgment.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         },
         {
@@ -1062,7 +1126,14 @@
             }
           ],
           "virtues": {
-            "lines": []
+            "id": 1,
+            "arabic": "مائة حسنة، ومُحيت عنه مائة سيئة، وكانت له حرزاً من الشيطان حتى يمسى.",
+            "translations": {
+              "english": "One hundred good deeds will be written for him, one hundred bad deeds will be erased, and it will serve as a protection from the devil until the evening.",
+              "кыргыз": "",
+              "français": "",
+              "español": ""
+            }
           }
         }
       ]

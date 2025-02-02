@@ -23,6 +23,7 @@ interface IUITranslations {
   toggleTranslation: {
     show: Translation;
   };
+  virtues: Translation;
 }
 
 interface ITheme {
@@ -30,14 +31,16 @@ interface ITheme {
   translations: Translation;
 }
 
+interface IVirtues {
+  id?: number;
+  arabic?: string;
+  translations?: Translation;
+}
+
 interface IAzkarLine {
   lineNumber: number;
   arabic: string;
   translations: Translation;
-}
-
-interface IVirtues {
-  lines: IAzkarLine[];
 }
 
 export interface IAzkarEntry {
@@ -313,6 +316,27 @@ function AzkarCard({
     return `${tapText} (${counter}/${azkar.count})`;
   }, [isCompleted, uiTranslations, language, counter, azkar.count]);
 
+  const virtuesLabel = useMemo(() => {
+    let label = uiTranslations.virtues[language] ?? "";
+    if (label.trim() === "") {
+      label = uiTranslations.virtues["عربي"] ?? "";
+    }
+    return label.trim();
+  }, [uiTranslations, language]);
+
+  const virtueText = useMemo(() => {
+    if (!azkar.virtues || Object.keys(azkar.virtues).length === 0) return "";
+    if (language === "عربي") {
+      return azkar.virtues.arabic?.trim() || "";
+    }
+    const translation = azkar.virtues.translations?.[language] || "";
+    return translation.trim() !== ""
+      ? translation
+      : azkar.virtues.arabic?.trim() || "";
+  }, [azkar.virtues, language]);
+
+  const shouldRenderVirtues = virtuesLabel !== "" && virtueText !== "";
+
   return (
     <div className="card p-4 rounded shadow transition-colors">
       <div className="mb-4">
@@ -327,36 +351,30 @@ function AzkarCard({
             </p>
             {language !== "عربي" && showTranslation && (
               <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
-                {line.translations[language] || ""}
+                {line.translations[language] !== ""
+                  ? line.translations[language]
+                  : line.arabic}
               </p>
             )}
           </div>
         ))}
       </div>
-      {azkar.virtues.lines.length > 0 && (
+      {shouldRenderVirtues && (
         <div className="mb-4">
           <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Virtues:
+            {virtuesLabel}
           </p>
-          {azkar.virtues.lines.map((line) => (
-            <div key={line.lineNumber} className="mb-1">
-              <p
-                className="text-sm text-right content-arabic"
-                lang="ar"
-                dir="rtl"
-              >
-                {line.arabic}
-              </p>
-              {language !== "عربي" && (
-                <p
-                  className="text-sm mt-1 text-[var(--translation-text)]"
-                  dir="ltr"
-                >
-                  {line.translations[language] || ""}
-                </p>
-              )}
-            </div>
-          ))}
+          <p
+            className={
+              language === "عربي"
+                ? "text-sm text-right content-arabic"
+                : "text-sm mt-1 text-[var(--translation-text)]"
+            }
+            lang={language === "عربي" ? "ar" : undefined}
+            dir={language === "عربي" ? "rtl" : "ltr"}
+          >
+            {virtueText}
+          </p>
         </div>
       )}
       <div className="flex items-center justify-center">
