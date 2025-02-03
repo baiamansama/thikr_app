@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { Description } from "@radix-ui/react-dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
-// -------------------- Types and Interfaces --------------------
 interface Translation {
   [language: string]: string;
 }
@@ -98,7 +98,6 @@ interface IToggleSwitchProps {
   onToggle: () => void;
 }
 
-// -------------------- ToggleSwitch Component --------------------
 const ToggleSwitch: React.FC<IToggleSwitchProps> = ({ enabled, onToggle }) => {
   return (
     <button
@@ -119,7 +118,6 @@ const ToggleSwitch: React.FC<IToggleSwitchProps> = ({ enabled, onToggle }) => {
   );
 };
 
-// -------------------- HomePage Component --------------------
 const LOCAL_STORAGE_KEY = "thikr_db";
 const INITIAL_LANGUAGE = "кыргыз";
 const INITIAL_THEME = "auto";
@@ -205,7 +203,6 @@ export default function HomePage() {
   const getLanguageDisplay = (lang: string): string =>
     lang === "عربي" ? "عربي" : lang;
 
-  // Compute theme only to add a class to the document element so that globals.css applies.
   const computedTheme = useMemo(() => {
     if (theme === "auto") {
       const hour = new Date().getHours();
@@ -214,7 +211,6 @@ export default function HomePage() {
     return theme;
   }, [theme]);
 
-  // Apply theme class to document element for global CSS variables.
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light-theme", "dark-theme", "sepia-theme");
@@ -258,8 +254,7 @@ export default function HomePage() {
               <Description />
             </div>
           </DrawerHeader>
-          <div className="flex flex-col gap-4">
-            {/* Languages */}
+          <div className="flex flex-col">
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {supportedLanguages.map((lang) => (
@@ -278,7 +273,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            {/* Themes */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {themes.map((item) => (
@@ -297,7 +291,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            {/* Categories */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {categories.map((category) => (
@@ -316,7 +309,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            {/* Toggle Translation */}
             {language !== "عربي" && (
               <div className="p-4 flex items-center gap-2 justify-center">
                 <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)]">
@@ -328,7 +320,6 @@ export default function HomePage() {
                 />
               </div>
             )}
-            {/* Clear History */}
             <div className="p-4 flex items-center justify-center">
               <Button variant="outline" onClick={clearHistory}>
                 {uiTranslations.actions.clean_history[language] ||
@@ -337,7 +328,9 @@ export default function HomePage() {
             </div>
           </div>
           <DrawerClose asChild>
-            <Button autoFocus />
+            <VisuallyHidden>
+              <Button autoFocus />
+            </VisuallyHidden>
           </DrawerClose>
         </DrawerContent>
       </Drawer>
@@ -345,7 +338,6 @@ export default function HomePage() {
   );
 }
 
-// -------------------- AzkarCard Component --------------------
 function AzkarCard({
   azkar,
   language,
