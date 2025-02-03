@@ -104,18 +104,16 @@ const ToggleSwitch: React.FC<IToggleSwitchProps> = ({ enabled, onToggle }) => {
     <button
       onClick={onToggle}
       aria-pressed={enabled}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors 
-        border 
-        ${
-          enabled
-            ? "bg-[#606c38] border-[#606c38] dark:bg-[#606c38] dark:border-[#606c38]"
-            : "bg-transparent border-gray-400 dark:border-gray-600"
-        } 
-        focus:outline-none focus:ring-2 focus:ring-offset-2`}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+        enabled
+          ? "bg-[#606c38] border-[#606c38]"
+          : "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+      }`}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform 
-          ${enabled ? "translate-x-6" : "translate-x-1"}`}
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+          enabled ? "translate-x-6" : "translate-x-1"
+        }`}
       />
     </button>
   );
@@ -207,6 +205,7 @@ export default function HomePage() {
   const getLanguageDisplay = (lang: string): string =>
     lang === "عربي" ? "عربي" : lang;
 
+  // Compute theme only to add a class to the document element so that globals.css applies.
   const computedTheme = useMemo(() => {
     if (theme === "auto") {
       const hour = new Date().getHours();
@@ -215,6 +214,7 @@ export default function HomePage() {
     return theme;
   }, [theme]);
 
+  // Apply theme class to document element for global CSS variables.
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light-theme", "dark-theme", "sepia-theme");
@@ -249,28 +249,28 @@ export default function HomePage() {
             ⚙️
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="w-full p-4">
+        <DrawerContent className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]">
           <DrawerHeader>
-            <DrawerHeader className="flex justify-center">
+            <div className="flex justify-center">
               <DrawerTitle className="text-center">
                 {uiTranslations.settings[language] || "Settings"}
               </DrawerTitle>
-              <Description></Description>
-            </DrawerHeader>
+              <Description />
+            </div>
           </DrawerHeader>
           <div className="flex flex-col gap-4">
-            <div className="settings p-4">
+            {/* Languages */}
+            <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {supportedLanguages.map((lang) => (
                   <button
                     key={lang}
                     onClick={() => handleLanguageClick(lang)}
-                    className={`flex justify-center items-center px-3 py-1 rounded border transition-colors
-                      ${
-                        lang === language
-                          ? "bg-[#606c38] text-[var(--card-text)] border-[#606c38] hover:bg-[#606c38]/90"
-                          : "bg-transparent border-current hover:opacity-80"
-                      }`}
+                    className={`flex justify-center items-center px-3 py-1 rounded border transition-colors ${
+                      lang === language
+                        ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                        : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                    }`}
                     aria-pressed={lang === language}
                   >
                     {getLanguageDisplay(lang)}
@@ -278,18 +278,18 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="settings p-4">
+            {/* Themes */}
+            <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {themes.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleThemeClick(item.id)}
-                    className={`flex justify-center items-center gap-2 px-3 py-1 rounded border transition-colors
-                      ${
-                        item.id === theme
-                          ? "bg-[#606c38] text-[var(--card-text)] border-[#606c38] hover:bg-[#606c38]/90"
-                          : "bg-transparent border-current hover:opacity-80"
-                      }`}
+                    className={`flex justify-center items-center gap-2 px-3 py-1 rounded border transition-colors ${
+                      item.id === theme
+                        ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                        : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                    }`}
                     aria-pressed={item.id === theme}
                   >
                     <span>{item.translations[language] || item.id}</span>
@@ -297,18 +297,18 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="settings p-4">
+            {/* Categories */}
+            <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {categories.map((category) => (
                   <button
                     key={category.id}
                     onClick={() => handleCategoryChange(category.id)}
-                    className={`flex justify-center items-center px-4 py-2 rounded border transition-colors
-                      ${
-                        selectedCategory === category.id
-                          ? "bg-[#606c38] text-[var(--card-text)] border-[#606c38] hover:bg-[#606c38]/90"
-                          : "bg-transparent border-current hover:opacity-80"
-                      }`}
+                    className={`flex justify-center items-center px-4 py-2 rounded border transition-colors ${
+                      selectedCategory === category.id
+                        ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                        : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                    }`}
                     aria-pressed={selectedCategory === category.id}
                   >
                     {category.translations[language] || category.id}
@@ -316,9 +316,10 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
+            {/* Toggle Translation */}
             {language !== "عربي" && (
-              <div className="settings p-4 flex items-center gap-2 justify-center">
-                <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-transparent text-[var(--card-text)]">
+              <div className="p-4 flex items-center gap-2 justify-center">
+                <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)]">
                   {uiTranslations.toggleTranslation.show[language]}
                 </span>
                 <ToggleSwitch
@@ -327,7 +328,8 @@ export default function HomePage() {
                 />
               </div>
             )}
-            <div className="settings p-4 flex items-center justify-center">
+            {/* Clear History */}
+            <div className="p-4 flex items-center justify-center">
               <Button variant="outline" onClick={clearHistory}>
                 {uiTranslations.actions.clean_history[language] ||
                   "🗑️ Clear History"}
@@ -335,7 +337,7 @@ export default function HomePage() {
             </div>
           </div>
           <DrawerClose asChild>
-            <Button autoFocus></Button>
+            <Button autoFocus />
           </DrawerClose>
         </DrawerContent>
       </Drawer>
