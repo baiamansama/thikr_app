@@ -35,6 +35,7 @@ interface IUITranslations {
     show: Translation;
   };
   virtues: Translation;
+  settings: Translation;
 }
 
 interface ITheme {
@@ -251,7 +252,11 @@ export default function HomePage() {
         </DrawerTrigger>
         <DrawerContent className="w-full p-4">
           <DrawerHeader>
-            <DrawerTitle>Settings</DrawerTitle>
+            <DrawerHeader className="flex justify-center">
+              <DrawerTitle className="text-center">
+                {uiTranslations.settings[language] || "Settings"}
+              </DrawerTitle>
+            </DrawerHeader>
           </DrawerHeader>
           <div className="flex flex-col gap-4">
             {/* Language Selection */}

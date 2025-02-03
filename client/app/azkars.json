@@ -28,6 +28,13 @@
         "español": "Mashallah"
       }
     },
+    "settings": {
+      "عربي": "الإعدادات",
+      "english": "Settings",
+      "кыргыз": "Орнотуулар",
+      "français": "Paramètres",
+      "español": "Ajustes"
+    },
     "toggleTranslation": {
       "show": {
         "عربي": "عرض الترجمة",
