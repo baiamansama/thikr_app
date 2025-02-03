@@ -8,8 +8,8 @@
     "actions": {
       "clean_history": {
         "عربي": "🗑️ مسح التاريخ",
-        "english": "🗑️ Clear History",
-        "кыргыз": "🗑️ Тарыхты Тазала",
+        "english": "🗑️ Clear history",
+        "кыргыз": "🗑️ Тарыхты тазала",
         "français": "🗑️ Effacer l'historique",
         "español": "🗑️ Limpiar historial"
       },
