@@ -11,6 +11,7 @@ import {
   DrawerClose,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { Description } from "@radix-ui/react-dialog";
 
 // -------------------- Types and Interfaces --------------------
 interface Translation {
@@ -226,7 +227,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Main Content */}
       <div className="container mx-auto px-4 py-6 transition-colors">
         <div className="grid grid-cols-1 gap-4 mt-6">
           {selectedCategoryData.azkars.map((azkar) => (
@@ -243,7 +243,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Settings Drawer moved outside the main container */}
       <Drawer>
         <DrawerTrigger asChild>
           <Button variant="outline" className="fixed bottom-4 right-4 p-2">
@@ -256,10 +255,10 @@ export default function HomePage() {
               <DrawerTitle className="text-center">
                 {uiTranslations.settings[language] || "Settings"}
               </DrawerTitle>
+              <Description></Description>
             </DrawerHeader>
           </DrawerHeader>
           <div className="flex flex-col gap-4">
-            {/* Language Selection */}
             <div className="settings p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {supportedLanguages.map((lang) => (
@@ -279,7 +278,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            {/* Theme Selection */}
             <div className="settings p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {themes.map((item) => (
@@ -299,7 +297,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            {/* Category Selection */}
             <div className="settings p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {categories.map((category) => (
@@ -319,7 +316,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            {/* Translation Toggle (if language is not Arabic) */}
             {language !== "عربي" && (
               <div className="settings p-4 flex items-center gap-2 justify-center">
                 <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-transparent text-[var(--card-text)]">
@@ -331,7 +327,6 @@ export default function HomePage() {
                 />
               </div>
             )}
-            {/* Clear History Button using translation */}
             <div className="settings p-4 flex items-center justify-center">
               <Button variant="outline" onClick={clearHistory}>
                 {uiTranslations.actions.clean_history[language] ||
@@ -340,7 +335,7 @@ export default function HomePage() {
             </div>
           </div>
           <DrawerClose asChild>
-            <div />
+            <Button autoFocus></Button>
           </DrawerClose>
         </DrawerContent>
       </Drawer>
