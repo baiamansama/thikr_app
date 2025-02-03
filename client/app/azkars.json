@@ -6,6 +6,13 @@
   },
   "uiTranslations": {
     "actions": {
+      "clean_history": {
+        "عربي": "🗑️ مسح التاريخ",
+        "english": "🗑️ Clear History",
+        "кыргыз": "🗑️ Тарыхты Тазала",
+        "français": "🗑️ Effacer l'historique",
+        "español": "🗑️ Limpiar historial"
+      },
       "tap": {
         "عربي": "اضغط",
         "english": "Tap",
