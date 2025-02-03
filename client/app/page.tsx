@@ -1,6 +1,13 @@
 "use client";
-
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+  useRef,
+  forwardRef,
+  Ref,
+} from "react";
 import azkarsData from "./azkars.json";
 import {
   Drawer,
@@ -82,7 +89,18 @@ export interface IThikrDB {
   theme: string;
   counters: { [azkarId: string]: number };
   showTranslation: boolean;
+  lastReacCard: string;
 }
+
+const LOCAL_STORAGE_KEY = "thikr_db";
+const INITIAL_DB: IThikrDB = {
+  selectedCategory: "morning",
+  language: "кыргыз",
+  theme: "auto",
+  counters: {},
+  showTranslation: false,
+  lastReacCard: "",
+};
 
 interface IAzkarCardProps {
   azkar: IAzkarEntry;
@@ -92,6 +110,118 @@ interface IAzkarCardProps {
   updateCounter: (azkarId: string, newCount: number) => void;
   showTranslation: boolean;
 }
+
+const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
+  (
+    {
+      azkar,
+      language,
+      uiTranslations,
+      counter,
+      updateCounter,
+      showTranslation,
+    },
+    ref: Ref<HTMLDivElement>
+  ) => {
+    const isCompleted = counter >= azkar.count;
+
+    const handleIncrement = useCallback(() => {
+      if (counter < azkar.count) {
+        updateCounter(azkar.id, counter + 1);
+      }
+    }, [counter, azkar, updateCounter]);
+
+    const getButtonText = useCallback((): string => {
+      if (isCompleted) {
+        return `${uiTranslations.actions.completed[language] || "Completed"} (${
+          azkar.count
+        })`;
+      }
+      const tapText = uiTranslations.actions.tap[language] || "Tap";
+      return `${tapText} (${counter}/${azkar.count})`;
+    }, [isCompleted, uiTranslations, language, counter, azkar.count]);
+
+    const virtuesLabel = useMemo(() => {
+      let label = uiTranslations.virtues[language] ?? "";
+      if (label.trim() === "") {
+        label = uiTranslations.virtues["عربي"] ?? "";
+      }
+      return label.trim();
+    }, [uiTranslations, language]);
+
+    const virtueText = useMemo(() => {
+      if (!azkar.virtues || Object.keys(azkar.virtues).length === 0) return "";
+      if (language === "عربي") {
+        return azkar.virtues.arabic?.trim() || "";
+      }
+      const translation = azkar.virtues.translations?.[language] || "";
+      return translation.trim() !== ""
+        ? translation
+        : azkar.virtues.arabic?.trim() || "";
+    }, [azkar.virtues, language]);
+
+    const shouldRenderVirtues = virtuesLabel !== "" && virtueText !== "";
+
+    return (
+      <div ref={ref} className="card p-4 rounded shadow transition-colors">
+        <div className="mb-4">
+          {azkar.lines.map((line) => (
+            <div key={line.lineNumber} className="mb-2">
+              <p
+                className="text-xl font-bold text-right content-arabic"
+                lang="ar"
+                dir="rtl"
+              >
+                {line.arabic}
+              </p>
+              {language !== "عربي" &&
+                showTranslation &&
+                line.translations[language] !== "" && (
+                  <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
+                    {line.translations[language]}
+                  </p>
+                )}
+            </div>
+          ))}
+        </div>
+        {shouldRenderVirtues && (
+          <div className="mb-4">
+            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+              {virtuesLabel}
+            </p>
+            <p
+              className={
+                language === "عربي"
+                  ? "text-sm text-right content-arabic"
+                  : "text-sm mt-1 text-[var(--translation-text)]"
+              }
+              lang={language === "عربي" ? "ar" : undefined}
+              dir={language === "عربي" ? "rtl" : "ltr"}
+            >
+              {virtueText}
+            </p>
+          </div>
+        )}
+        <div className="flex items-center justify-center">
+          <button
+            onClick={handleIncrement}
+            disabled={isCompleted}
+            className={`w-full py-4 text-lg font-bold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+              isCompleted
+                ? "bg-[#283618] cursor-not-allowed"
+                : "bg-[#606c38] text-[var(--card-text)] hover:bg-[#606c38]/90 active:bg-[#606c38]/80"
+            }`}
+            aria-label={`Progress: ${counter} of ${azkar.count}`}
+          >
+            {getButtonText()}
+          </button>
+        </div>
+      </div>
+    );
+  }
+);
+
+AzkarCard.displayName = "AzkarCard";
 
 interface IToggleSwitchProps {
   enabled: boolean;
@@ -118,33 +248,67 @@ const ToggleSwitch: React.FC<IToggleSwitchProps> = ({ enabled, onToggle }) => {
   );
 };
 
-const LOCAL_STORAGE_KEY = "thikr_db";
-const INITIAL_LANGUAGE = "кыргыз";
-const INITIAL_THEME = "auto";
-
 export default function HomePage() {
   const data: IData = azkarsData;
   const categories = useMemo(() => data.categories, [data]);
-  const defaultCategory = categories.length > 0 ? categories[0].id : "";
+  const [hasMounted, setHasMounted] = useState(false);
+  const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const drawerOpenRef = useRef(drawerOpen);
+  useEffect(() => {
+    drawerOpenRef.current = drawerOpen;
+  }, [drawerOpen]);
+  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const initialDB: IThikrDB = {
-    selectedCategory: defaultCategory,
-    language: INITIAL_LANGUAGE,
-    theme: INITIAL_THEME,
-    counters: {},
-    showTranslation: false,
+  const determineReadingCard = () => {
+    let chosenId: string | null = null;
+    let minDiff = Infinity;
+    Object.entries(cardRefs.current).forEach(([id, el]) => {
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const diff = Math.abs(cardCenter - window.innerHeight / 2);
+        if (diff < minDiff) {
+          minDiff = diff;
+          chosenId = id;
+        }
+      }
+    });
+    return chosenId;
   };
 
-  const [hasMounted, setHasMounted] = useState(false);
-  const [db, setDb] = useState<IThikrDB>(initialDB);
+  useEffect(() => {
+    let timeoutId: number;
+    const handleScroll = () => {
+      clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(() => {
+        if (!drawerOpenRef.current) {
+          const currentId = determineReadingCard();
+          if (currentId) {
+            setDb((prev) => ({ ...prev, lastReacCard: currentId }));
+          }
+        }
+      }, 200);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     setHasMounted(true);
     if (typeof window !== "undefined") {
-      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored) as IThikrDB;
-        setDb(parsed);
+      const storedDB = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (storedDB) {
+        const parsedDB = JSON.parse(storedDB) as IThikrDB;
+        setDb(parsedDB);
+        if (parsedDB.lastReacCard && cardRefs.current[parsedDB.lastReacCard]) {
+          setTimeout(() => {
+            cardRefs.current[parsedDB.lastReacCard]?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }, 100);
+        }
       }
     }
   }, []);
@@ -177,8 +341,28 @@ export default function HomePage() {
   }, []);
 
   const toggleTranslation = useCallback(() => {
-    setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
+    const currentId = determineReadingCard();
+    if (currentId) {
+      setDb((prev) => ({
+        ...prev,
+        lastReacCard: currentId,
+        showTranslation: !prev.showTranslation,
+      }));
+    } else {
+      setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
+    }
   }, []);
+
+  useEffect(() => {
+    if (!drawerOpen && db.lastReacCard && cardRefs.current[db.lastReacCard]) {
+      setTimeout(() => {
+        cardRefs.current[db.lastReacCard]?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 0);
+    }
+  }, [drawerOpen]);
 
   const selectedCategoryData = useMemo(() => {
     return categories.find((cat) => cat.id === selectedCategory);
@@ -234,12 +418,15 @@ export default function HomePage() {
               counter={counters[azkar.id] || 0}
               updateCounter={updateCounter}
               showTranslation={showTranslation}
+              ref={(el) => {
+                cardRefs.current[azkar.id] = el;
+              }}
             />
           ))}
         </div>
       </div>
 
-      <Drawer>
+      <Drawer onOpenChange={(open) => setDrawerOpen(open)}>
         <DrawerTrigger asChild>
           <Button variant="outline" className="fixed bottom-4 right-4 p-2">
             ⚙️
@@ -335,110 +522,5 @@ export default function HomePage() {
         </DrawerContent>
       </Drawer>
     </>
-  );
-}
-
-function AzkarCard({
-  azkar,
-  language,
-  uiTranslations,
-  counter,
-  updateCounter,
-  showTranslation,
-}: IAzkarCardProps) {
-  const isCompleted = counter >= azkar.count;
-
-  const handleIncrement = useCallback(() => {
-    if (counter < azkar.count) {
-      updateCounter(azkar.id, counter + 1);
-    }
-  }, [counter, azkar, updateCounter]);
-
-  const getButtonText = useCallback((): string => {
-    if (isCompleted) {
-      return `${uiTranslations.actions.completed[language] || "Completed"} (${
-        azkar.count
-      })`;
-    }
-    const tapText = uiTranslations.actions.tap[language] || "Tap";
-    return `${tapText} (${counter}/${azkar.count})`;
-  }, [isCompleted, uiTranslations, language, counter, azkar.count]);
-
-  const virtuesLabel = useMemo(() => {
-    let label = uiTranslations.virtues[language] ?? "";
-    if (label.trim() === "") {
-      label = uiTranslations.virtues["عربي"] ?? "";
-    }
-    return label.trim();
-  }, [uiTranslations, language]);
-
-  const virtueText = useMemo(() => {
-    if (!azkar.virtues || Object.keys(azkar.virtues).length === 0) return "";
-    if (language === "عربي") {
-      return azkar.virtues.arabic?.trim() || "";
-    }
-    const translation = azkar.virtues.translations?.[language] || "";
-    return translation.trim() !== ""
-      ? translation
-      : azkar.virtues.arabic?.trim() || "";
-  }, [azkar.virtues, language]);
-
-  const shouldRenderVirtues = virtuesLabel !== "" && virtueText !== "";
-
-  return (
-    <div className="card p-4 rounded shadow transition-colors">
-      <div className="mb-4">
-        {azkar.lines.map((line) => (
-          <div key={line.lineNumber} className="mb-2">
-            <p
-              className="text-xl font-bold text-right content-arabic"
-              lang="ar"
-              dir="rtl"
-            >
-              {line.arabic}
-            </p>
-            {language !== "عربي" &&
-              showTranslation &&
-              line.translations[language] !== "" && (
-                <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
-                  {line.translations[language]}
-                </p>
-              )}
-          </div>
-        ))}
-      </div>
-      {shouldRenderVirtues && (
-        <div className="mb-4">
-          <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-            {virtuesLabel}
-          </p>
-          <p
-            className={
-              language === "عربي"
-                ? "text-sm text-right content-arabic"
-                : "text-sm mt-1 text-[var(--translation-text)]"
-            }
-            lang={language === "عربي" ? "ar" : undefined}
-            dir={language === "عربي" ? "rtl" : "ltr"}
-          >
-            {virtueText}
-          </p>
-        </div>
-      )}
-      <div className="flex items-center justify-center">
-        <button
-          onClick={handleIncrement}
-          disabled={isCompleted}
-          className={`w-full py-4 text-lg font-bold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-            isCompleted
-              ? "bg-[#283618] cursor-not-allowed"
-              : "bg-[#606c38] text-[var(--card-text)] hover:bg-[#606c38]/90 active:bg-[#606c38]/80"
-          }`}
-          aria-label={`Progress: ${counter} of ${azkar.count}`}
-        >
-          {getButtonText()}
-        </button>
-      </div>
-    </div>
   );
 }
