@@ -254,6 +254,7 @@ export default function HomePage() {
   const [hasMounted, setHasMounted] = useState(false);
   const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [clearHistoryClicked, setClearHistoryClicked] = useState(false);
   const drawerOpenRef = useRef(drawerOpen);
   useEffect(() => {
     drawerOpenRef.current = drawerOpen;
@@ -375,6 +376,9 @@ export default function HomePage() {
       newCounters[azkar.id] = 0;
     });
     setDb((prev) => ({ ...prev, counters: newCounters }));
+
+    setClearHistoryClicked(true);
+    setTimeout(() => setClearHistoryClicked(false), 200);
   }, [db.counters, selectedCategoryData]);
 
   const supportedLanguages = useMemo(
@@ -508,7 +512,15 @@ export default function HomePage() {
               </div>
             )}
             <div className="p-4 flex items-center justify-center">
-              <Button variant="outline" onClick={clearHistory}>
+              <Button
+                variant="outline"
+                onClick={clearHistory}
+                className={`transition-colors px-3 py-1 rounded border ${
+                  clearHistoryClicked
+                    ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                    : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                }`}
+              >
                 {uiTranslations.actions.clean_history[language] ||
                   "🗑️ Clear History"}
               </Button>
