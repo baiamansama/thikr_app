@@ -117,7 +117,7 @@
           "azkar_id": "morning_1",
           "lineNumber": "2",
           "count": "1",
-          "arabic": "اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ",
+          "arabic": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ",
           "english": "Allah! There is no god ˹worthy of worship˺ except Him, the Ever-Living, All-Sustaining.",
           "кыргыз": ""
         },
@@ -191,7 +191,7 @@
           "count": "3",
           "arabic": "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
-          "кыргыз": ""
+          "кыргыз": "Мээримдүү жана Ырайымдуу Алланын аты менен"
         },
         {
           "azkar_id": "morning_2",
@@ -227,19 +227,11 @@
         },
         {
           "azkar_id": "morning_3",
-          "lineNumber": "8",
-          "count": "3",
-          "arabic": "",
-          "english": "",
-          "кыргыз": ""
-        },
-        {
-          "azkar_id": "morning_3",
           "lineNumber": "1",
           "count": "3",
           "arabic": "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
-          "кыргыз": ""
+          "кыргыз": "Мээримдүү жана Ырайымдуу Алланын аты менен"
         },
         {
           "azkar_id": "morning_3",
@@ -287,7 +279,7 @@
           "count": "3",
           "arabic": "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
-          "кыргыз": ""
+          "кыргыз": "Мээримдүү жана Ырайымдуу Алланын аты менен"
         },
         {
           "azkar_id": "morning_4",
