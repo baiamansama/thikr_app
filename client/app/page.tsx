@@ -20,6 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Description } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Calendar } from "@/components/ui/calendar";
 
 interface Translation {
   [language: string]: string;
@@ -102,6 +103,7 @@ export interface IThikrDB {
   counters: { [azkarId: string]: number };
   showTranslation: boolean;
   lastReacCard: string;
+  completedDays: { [categoryId: string]: string[] };
 }
 
 const LOCAL_STORAGE_KEY = "thikr_db";
@@ -112,6 +114,7 @@ const INITIAL_DB: IThikrDB = {
   counters: {},
   showTranslation: false,
   lastReacCard: "",
+  completedDays: {},
 };
 
 interface IAzkarCardProps {
@@ -315,6 +318,24 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    const updateCategoryBasedOnTime = () => {
+      const currentHour = new Date().getHours();
+      const newCategory =
+        currentHour >= 4 && currentHour < 16 ? "morning" : "evening";
+      setDb((prevDb) => {
+        if (prevDb.selectedCategory !== newCategory) {
+          return { ...prevDb, selectedCategory: newCategory };
+        }
+        return prevDb;
+      });
+    };
+
+    updateCategoryBasedOnTime();
+    const intervalId = setInterval(updateCategoryBasedOnTime, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
     setHasMounted(true);
     if (typeof window !== "undefined") {
       const storedDB = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -421,6 +442,31 @@ export default function HomePage() {
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
+  useEffect(() => {
+    if (groupedAzkars.length > 0) {
+      const allComplete = groupedAzkars.every(
+        (azkar) => (counters[azkar.id] || 0) >= azkar.count
+      );
+      if (allComplete) {
+        const today = new Date().toISOString().split("T")[0];
+        setDb((prev) => {
+          const categoryCompletedDays =
+            prev.completedDays[selectedCategory] || [];
+          if (!categoryCompletedDays.includes(today)) {
+            return {
+              ...prev,
+              completedDays: {
+                ...prev.completedDays,
+                [selectedCategory]: [...categoryCompletedDays, today],
+              },
+            };
+          }
+          return prev;
+        });
+      }
+    }
+  }, [counters, selectedCategory, groupedAzkars]);
+
   const clearHistory = useCallback(() => {
     if (!selectedCategoryData) return;
     const newCounters = { ...db.counters };
@@ -461,9 +507,27 @@ export default function HomePage() {
     return null;
   }
 
+  const categoryCompletedDays = db.completedDays[selectedCategory] || [];
+
   return (
     <>
       <div className="container mx-auto px-4 py-6 transition-colors">
+        {/* Selected Category Header with Beautiful Styling */}
+        <div className="mb-8">
+          <div className="text-center py-4">
+            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+              {selectedCategoryData.translations[language] ||
+                selectedCategoryData.id}
+            </h1>
+          </div>
+          {/* Shadcn Calendar with Completed Days Marked */}
+          <div className="mx-auto max-w-md">
+            <Calendar
+              selected={categoryCompletedDays.map((date) => new Date(date))}
+            />
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 gap-4 mt-6">
           {groupedAzkars.map((azkar) => {
             const virtue = selectedCategoryData.virtues.find(
