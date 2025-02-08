@@ -2,7 +2,14 @@
   "metadata": {
     "version": "2.0.0",
     "lastUpdated": "2025-02-02",
-    "supportedLanguages": ["عربي", "english", "кыргыз", "français", "español"]
+    "supportedLanguages": [
+      "عربي",
+      "english",
+      "кыргыз",
+      "français",
+      "español",
+      "русский"
+    ]
   },
   "uiTranslations": {
     "actions": {
@@ -10,6 +17,7 @@
         "عربي": "🗑️ مسح التاريخ",
         "english": "🗑️ Clear history",
         "кыргыз": "🗑️ Тарыхты тазала",
+        "русский": "🗑️ Очистить историю",
         "français": "🗑️ Effacer l'historique",
         "español": "🗑️ Limpiar historial"
       },
@@ -17,6 +25,7 @@
         "عربي": "اضغط",
         "english": "Tap",
         "кыргыз": "Бас",
+        "русский": "Нажать",
         "français": "Appuyer",
         "español": "Tocar"
       },
@@ -24,6 +33,7 @@
         "عربي": "ما شاء الله",
         "english": "Mashallah",
         "кыргыз": "Машаллах",
+        "русский": "Машаллах",
         "français": "Masha Allah",
         "español": "Mashallah"
       }
@@ -32,6 +42,7 @@
       "عربي": "الإعدادات",
       "english": "Settings",
       "кыргыз": "Орнотуулар",
+      "русский": "Настройки",
       "français": "Paramètres",
       "español": "Ajustes"
     },
@@ -40,6 +51,7 @@
         "عربي": "عرض الترجمة",
         "english": "Show Translation",
         "кыргыз": "Котормону ач",
+        "русский": "Показать перевод",
         "français": "Afficher la traduction",
         "español": "Mostrar traducción"
       }
@@ -48,6 +60,7 @@
       "عربي": "الفضائل",
       "english": "Virtues",
       "кыргыз": "Пазилети",
+      "русский": "Достоинства",
       "français": "Vertus",
       "español": "Virtudes"
     }
@@ -59,6 +72,7 @@
         "عربي": "تلقائي",
         "english": "Auto",
         "кыргыз": "Авто",
+        "русский": "Авто",
         "français": "Automatique",
         "español": "Automático"
       }
@@ -69,6 +83,7 @@
         "عربي": "فاتح",
         "english": "Light",
         "кыргыз": "Жарык",
+        "русский": "Яркий",
         "français": "Clair",
         "español": "Claro"
       }
@@ -79,6 +94,7 @@
         "عربي": "سبيا",
         "english": "Sepia",
         "кыргыз": "Сепия",
+        "русский": "Сепия",
         "français": "Sépia",
         "español": "Sepia"
       }
@@ -89,6 +105,7 @@
         "عربي": "داكن",
         "english": "Dark",
         "кыргыз": "Караңгы",
+        "русский": "Темный",
         "français": "Sombre",
         "español": "Oscuro"
       }
@@ -101,6 +118,7 @@
         "عربي": "أذكار الصباح",
         "english": "Morning Azkar",
         "кыргыз": "Таңкы зикир",
+        "русский": "Утренный зикр",
         "français": "Azkar du matin",
         "español": "Azkar de la mañana"
       },
@@ -111,14 +129,16 @@
           "count": "1",
           "arabic": "أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ",
           "english": "I seek refuge in Allah from the accursed devil.",
+          "русский": "Я удаляюсь с помощью Господа от проклятого Сатаны. ",
           "кыргыз": ""
         },
         {
           "azkar_id": "morning_1",
           "lineNumber": "2",
           "count": "1",
-          "arabic": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ",
+          "arabic": "ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ",
           "english": "Allah! There is no god ˹worthy of worship˺ except Him, the Ever-Living, All-Sustaining.",
+          "русский": "Аллах (Бог, Господь)… Нет бога, кроме Него, вечно Живого, Сущего.",
           "кыргыз": ""
         },
         {
@@ -127,6 +147,7 @@
           "count": "1",
           "arabic": "لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ",
           "english": "Neither drowsiness nor sleep overtakes Him.",
+          "русский": "Его не постигнут ни дремота, ни сон. ",
           "кыргыз": ""
         },
         {
@@ -135,6 +156,7 @@
           "count": "1",
           "arabic": "لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ",
           "english": "To Him belongs whatever is in the heavens and whatever is on the earth.",
+          "русский": "Ему принадлежит все, что на небесах, и все, что на земле. ",
           "кыргыз": ""
         },
         {
@@ -143,6 +165,7 @@
           "count": "1",
           "arabic": "مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ",
           "english": "Who could possibly intercede with Him without His permission?",
+          "русский": "Кто заступится пред Ним, не иначе как по воле Его?! ",
           "кыргыз": ""
         },
         {
@@ -151,6 +174,7 @@
           "count": "1",
           "arabic": "يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ",
           "english": "He ˹fully˺ knows what is ahead of them and what is behind them.",
+          "русский": "Ему ведомо то, что было, и то, что будет. ",
           "кыргыз": ""
         },
         {
@@ -159,6 +183,7 @@
           "count": "1",
           "arabic": "وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء",
           "english": "But no one can grasp any of His knowledge—except what He wills ˹to reveal˺.",
+          "русский": "Никто не в состоянии постигнуть и частицы из Его знания, кроме как по Его воле.",
           "кыргыз": ""
         },
         {
@@ -167,6 +192,7 @@
           "count": "1",
           "arabic": "وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ",
           "english": "His Seat encompasses the heavens and the earth.",
+          "русский": "Небеса и землю объемлет Его курсий, ",
           "кыргыз": ""
         },
         {
@@ -175,6 +201,7 @@
           "count": "1",
           "arabic": "وَلاَ يَؤُودُهُ حِفْظُهُمَا",
           "english": "And the preservation of both does not tire Him.",
+          "русский": "и не утруждает Его забота о них [обо всем том, что находится в нашей Вселенной и дальше].",
           "кыргыз": ""
         },
         {
@@ -183,14 +210,16 @@
           "count": "1",
           "arabic": "وَهُوَ الْعَلِيُّ الْعَظِيمُ",
           "english": "For He is the Most High, the Greatest.",
+          "русский": "Он — Всевышний [во всех смыслах выше всего и вся], Великий [величие Его не имеет границ]!",
           "кыргыз": ""
         },
         {
           "azkar_id": "morning_2",
           "lineNumber": "1",
           "count": "3",
-          "arabic": "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم",
+          "arabic": "﷽",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
+          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
           "кыргыз": "Мээримдүү жана Ырайымдуу Алланын аты менен"
         },
         {
@@ -199,6 +228,7 @@
           "count": "3",
           "arabic": "قُلْ هُوَ ٱللَّهُ أَحَدٌ",
           "english": "Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺;",
+          "русский": "Скажи: «Он, Аллах (Бог, Господь), — Один [нет иных богов, божеств, помимо Него].",
           "кыргыз": "Айткын: Ал - Алла, Жапжалгыз!"
         },
         {
@@ -207,6 +237,7 @@
           "count": "3",
           "arabic": "ٱللَّهُ ٱلصَّمَدُ",
           "english": "Allah—the Sustainer ˹needed by all˺.",
+          "русский": "Аллах (Бог, Господь) — Вечен [только Он есть Тот, в Котором все до бесконечности будут нуждаться].",
           "кыргыз": "Алла эч нерсеге муктаж эмес!"
         },
         {
@@ -215,6 +246,7 @@
           "count": "3",
           "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
           "english": "He has never had offspring, nor was He born.",
+          "русский": "Не родил и не был рожден.",
           "кыргыз": "Балалуу болгон эмес, туулган да эмес."
         },
         {
@@ -223,14 +255,16 @@
           "count": "3",
           "arabic": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
           "english": "And there is none comparable to Him.”",
+          "русский": "И никто не может равняться с Ним [быть похожим на Него; нет ничего подобного Ему]».",
           "кыргыз": "Ага тең келчү да эч бирөө жок!"
         },
         {
           "azkar_id": "morning_3",
           "lineNumber": "1",
           "count": "3",
-          "arabic": "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم",
+          "arabic": "﷽",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
+          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
           "кыргыз": "Мээримдүү жана Ырайымдуу Алланын аты менен"
         },
         {
@@ -239,6 +273,7 @@
           "count": "3",
           "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ",
           "english": "Say, ˹O Prophet,˺ “I seek refuge in the Lord of the daybreak,",
+          "русский": "Скажи: «Прибегаю я к Господу зари (рассвета) [к Господу всего того, что Им сотворено],",
           "кыргыз": "Айткын: Сактай көр деп жалбарам, таң шооласынын Эгесине:"
         },
         {
@@ -247,6 +282,7 @@
           "count": "3",
           "arabic": "مِن شَرِّ مَا خَلَقَ",
           "english": "from the evil of whatever He has created,",
+          "русский": "удаляясь от зла сотворенного Им [то есть зла, исходящего от Его творений].",
           "кыргыз": "Өзү жараткан бүт макулуктардын жамандыгынан,"
         },
         {
@@ -255,6 +291,7 @@
           "count": "3",
           "arabic": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
           "english": "and from the evil of the night when it grows dark,",
+          "русский": " И [удаляюсь] от зла ночного мрака, когда [ночь] все покрывает темнотой.",
           "кыргыз": "Каптан келген түн караңгысынын жамандыгынан,"
         },
         {
@@ -263,6 +300,7 @@
           "count": "3",
           "arabic": "وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ",
           "english": "and from the evil of those ˹witches casting spells by˺ blowing onto knots,",
+          "русский": "И [удаляюсь] от зла [колдующих] дующих (плюющих) на узлы [проговаривающих при этом свои дьявольские заклинания].",
           "кыргыз": "Түйүндөргө дем салган сыйкырчылардын жамандыгынан,"
         },
         {
@@ -271,14 +309,16 @@
           "count": "3",
           "arabic": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
           "english": "and from the evil of an envier when they envy.”",
+          "русский": "И [удаляюсь, с Твоей, Господи, помощью] от зла завистника, когда тот завидует [черной завистью, желая другому разрушения и уничтожения, лишения благ и благополучия]»",
           "кыргыз": "Жана кызганган кездеги көрө албастын жамандыгынан!"
         },
         {
           "azkar_id": "morning_4",
           "lineNumber": "1",
           "count": "3",
-          "arabic": "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم",
+          "arabic": "﷽",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
+          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
           "кыргыз": "Мээримдүү жана Ырайымдуу Алланын аты менен"
         },
         {
@@ -287,6 +327,7 @@
           "count": "3",
           "arabic": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
           "english": "Say, ˹O Prophet,˺ “I seek refuge in the Lord of humankind,",
+          "русский": "Скажи: «Прибегаю я к Господу людей,",
           "кыргыз": "Айткын: Сактай көр деп жалбарам, адамзаттын Эгесине,"
         },
         {
@@ -295,14 +336,16 @@
           "count": "3",
           "arabic": "مَلِكِ ٱلنَّاسِ",
           "english": "the Master of humankind,",
+          "русский": "Властителю их",
           "кыргыз": "Адамзаттын Падышасына,"
         },
         {
           "azkar_id": "morning_4",
           "lineNumber": "4",
           "count": "3",
-          "arabic": "إِلَٰهِ ٱلنَّاسِ",
+          "arabic": "إِلَـٰهِ ٱلنَّاسِ",
           "english": "the God of humankind,",
+          "русский": "[и] Богу их,",
           "кыргыз": "Адамзаттын Кудайына,"
         },
         {
@@ -311,6 +354,7 @@
           "count": "3",
           "arabic": "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ",
           "english": "from the evil of the lurking whisperer—",
+          "русский": "удаляясь от зла [Сатаны] нашептывающего и отступающего [при упоминании Творца].",
           "кыргыз": "Тымызын азгырган шайтандын жамандыгынан"
         },
         {
@@ -319,6 +363,7 @@
           "count": "3",
           "arabic": "ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ",
           "english": "who whispers into the hearts of humankind—",
+          "русский": "Он (Cатана) нашептывает [вносит смуту, смятение, страхи, сомнения] в сердца [души, умы] людей.",
           "кыргыз": "Адамдардын көңүлдөрүнө тымызын азгырык салган, "
         },
         {
@@ -327,6 +372,7 @@
           "count": "3",
           "arabic": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
           "english": "from among jinn and humankind.”",
+          "русский": "[И прося помощи у Господа, удаляюсь от всего сатанинского, исходящего] от джиннов и людей».",
           "кыргыз": "Жиндерден да, адамдардан да чыккан (шайтандардан)! "
         },
         {
@@ -335,6 +381,7 @@
           "count": "1",
           "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ",
           "english": "We have entered a new day. With it, all dominion is Allah's. Praise is to Allah",
+          "русский": "«Наступило утро, в котором вся власть принадлежит Господу. ",
           "кыргыз": ""
         },
         {
@@ -343,6 +390,7 @@
           "count": "1",
           "arabic": "لاَ إِلَهَ إلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ",
           "english": "None has the right to be worshiped but Allah alone. He has no partner",
+          "русский": "Хвала Ему! Нет бога, кроме Него Одного",
           "кыргыз": ""
         },
         {
@@ -351,6 +399,7 @@
           "count": "1",
           "arabic": "لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
           "english": "To Allah belongs the dominion. To Him is the praise, and He is Able to do all things",
+          "русский": "Власть принадлежит Ему. Хвала принадлежит Ему! Он все может совершить. ",
           "кыргыз": ""
         },
         {
@@ -359,6 +408,7 @@
           "count": "1",
           "arabic": "رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيرَ مَا بَعْدَهُ",
           "english": "My Lord, I ask You for the goodness of this day. I ask for the goodness of the days that come after it",
+          "русский": "О Господь мой! Я прошу у Тебя благо, которое [заключено] в этом дне, и благо в [дне] завтрашнем.",
           "кыргыз": ""
         },
         {
@@ -367,6 +417,7 @@
           "count": "1",
           "arabic": "وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ",
           "english": "I seek refuge in You from the evil of this day. I seek refuge from the evil of the days that come after it",
+          "русский": "Я удаляюсь с Твоей помощью от зла, которое [заключено] в этом дне, и зла, которое может быть в [дне] завтрашнем.",
           "кыргыз": ""
         },
         {
@@ -375,6 +426,7 @@
           "count": "1",
           "arabic": "رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ",
           "english": "My Lord, I seek refuge in You from laziness. I seek refuge from helpless old age",
+          "русский": "О Господь мой! Я удаляюсь с Твоей помощью от лени и зла высокомерия.",
           "кыргыз": ""
         },
         {
@@ -383,6 +435,7 @@
           "count": "1",
           "arabic": "رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي القَـبْرِ",
           "english": "My Lord, I seek refuge in You from the punishment of Hell-fire. I seek refuge from the punishment of the grave",
+          "русский": "О Господь! Я удаляюсь с Твоей помощью от мучений в Аду и мучений в могиле.",
           "кыргыз": ""
         },
         {
@@ -391,6 +444,7 @@
           "count": "3",
           "arabic": "اللّهُـمَّ بِكَ أَصْـبَحْنا وَبِكَ أَمْسَـينا",
           "english": "O Allah, by You we enter the morning and by You we enter the evening",
+          "русский": "«О Аллах! С именем Твоим наступает для нас утро и наступает ночь. ",
           "кыргыз": ""
         },
         {
@@ -399,6 +453,7 @@
           "count": "3",
           "arabic": "وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ النُّـشُور",
           "english": "By You we live and by You we die, and to You is the Final Return",
+          "русский": " С Твоим именем мы оживаем и умираем. И к Тебе — возвращение.",
           "кыргыз": ""
         },
         {
@@ -407,6 +462,7 @@
           "count": "3",
           "arabic": "اللّهـمَّ أَنْتَ رَبِّـي لا إلهَ إلاّ أَنْتَ",
           "english": "O Allah, You are my Lord, there is none worthy of worship but You",
+          "русский": "«О Аллах, Ты — мой Господь! Нет бога, кроме Тебя.",
           "кыргыз": ""
         },
         {
@@ -415,6 +471,7 @@
           "count": "3",
           "arabic": "خَلَقْتَنـي وَأَنا عَبْـدُك",
           "english": "You created me and I am your slave",
+          "русский": "Ты сотворил меня, и я — Твой раб.",
           "кыргыз": ""
         },
         {
@@ -423,6 +480,7 @@
           "count": "3",
           "arabic": "وَأَنا عَلـى عَهْـدِكَ، وَوَعْـدِكَ ما اسْتَـطَعْـت",
           "english": "I keep Your covenant and my pledge to You as far as I am able",
+          "русский": "Я постараюсь оправдать возложенную на меня ответственность, сдержать данное мною слово в меру своих сил и возможностей. ",
           "кыргыз": ""
         },
         {
@@ -431,6 +489,7 @@
           "count": "3",
           "arabic": "أَعـوذُ بِكَ مِنْ شَـرِّ ما صَنَـعْت",
           "english": "I seek refuge in You from the evil of what I have done",
+          "русский": "Я прибегаю к Тебе, удаляясь от всего недоброго, совершенного мною.",
           "кыргыз": ""
         },
         {
@@ -439,6 +498,7 @@
           "count": "3",
           "arabic": "أَبـوءُ لَـكَ بِنِعْـمَتِـكَ عَلَـيَّ",
           "english": "I admit to Your blessings upon me",
+          "русский": "Я признаю те блага, которыми Ты одарил меня, ",
           "кыргыз": ""
         },
         {
@@ -447,6 +507,7 @@
           "count": "3",
           "arabic": "وَأَبـوءُ بِذَنْـبي فَاغْفـِرْ لي",
           "english": "I admit to my misdeeds. Forgive me",
+          "русский": "и признаю свой грех. Прости меня!",
           "кыргыз": ""
         },
         {
@@ -455,6 +516,7 @@
           "count": "3",
           "arabic": "فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ",
           "english": "For there is none who may forgive sins but You",
+          "русский": "Поистине, никто не простит моих ошибок, кроме Тебя».",
           "кыргыз": ""
         },
         {
@@ -463,6 +525,7 @@
           "count": "4",
           "arabic": "اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أَُشْـهِدُك",
           "english": "O Allah, I have entered a new morning and call upon You",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -471,6 +534,7 @@
           "count": "4",
           "arabic": "وَأُشْـهِدُ حَمَلَـةَ عَـرشِـك",
           "english": "I call upon the bearers of Your Throne",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -479,6 +543,7 @@
           "count": "4",
           "arabic": "وَمَلائِكَتِك ، وَجَمـيعَ خَلْـقِك",
           "english": "Your angels and all creation",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -487,6 +552,7 @@
           "count": "4",
           "arabic": "أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْتَ وَحْـدَكَ لا شريكَ لَـك",
           "english": "To bear witness that surely You are Allah, there is none worthy of worship but You alone. You have no partners",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -495,6 +561,7 @@
           "count": "4",
           "arabic": "وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك",
           "english": "And that Muhammad is Your slave and Your Messenger",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -503,6 +570,7 @@
           "count": "1",
           "arabic": "اللّهُـمَّ ما أَصْبَـَحَ بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِكَ",
           "english": "Allah, whatever blessing has been received by me in this morning or anyone of Your creation",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -511,6 +579,7 @@
           "count": "1",
           "arabic": "فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـكَ",
           "english": "is from You alone, You have no partner",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -519,6 +588,7 @@
           "count": "1",
           "arabic": "فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـرُ",
           "english": "All praise is for You and thanks is to You",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -527,6 +597,7 @@
           "count": "3",
           "arabic": "اللّهُـمَّ عافِـني في بَدَنـي",
           "english": "O Allah, make me healthy in my body",
+          "русский": " О Аллах! Дай здравие моему телу.",
           "кыргыз": ""
         },
         {
@@ -535,6 +606,7 @@
           "count": "3",
           "arabic": "اللّهُـمَّ عافِـني في سَمْـعي",
           "english": "O Allah, preserve for me my hearing",
+          "русский": " О Аллах! Дай здравие моему слуху.",
           "кыргыз": ""
         },
         {
@@ -543,6 +615,7 @@
           "count": "3",
           "arabic": "اللّهُـمَّ عافِـني في بَصَـري",
           "english": "O Allah, preserve for me my sight",
+          "русский": "О Аллах! Дай здравие моему зрению.",
           "кыргыз": ""
         },
         {
@@ -551,38 +624,34 @@
           "count": "3",
           "arabic": "لا إلهَ إلاّ اللّه أَنْـتَ",
           "english": "There is none worthy of worship but You",
+          "русский": "Нет бога, кроме Тебя Одного.",
           "кыргыз": ""
         },
         {
-          "azkar_id": "morning_10",
+          "azkar_id": "morning_10-1",
           "lineNumber": "5",
           "count": "3",
-          "arabic": "اللّهُـمَّ إِنّـي أَعـوذُبِكَ مِنَ الْكُـفرِ",
-          "english": "O Allah, I seek refuge in You from disbelief",
+          "arabic": "اللّهُـمَّ إِنّـي أَعـوذُبِكَ مِنَ الْكُـفرِ وَالفَـقْرِ",
+          "english": "O Allah, I seek refuge in You from disbelief and poverty",
+          "русский": "«О Аллах! Я удаляюсь с Твоей помощью от неверия и бедности.",
           "кыргыз": ""
         },
         {
-          "azkar_id": "morning_10",
-          "lineNumber": "6",
-          "count": "3",
-          "arabic": "وَالفَـقْرِ",
-          "english": "and poverty",
-          "кыргыз": ""
-        },
-        {
-          "azkar_id": "morning_10",
+          "azkar_id": "morning_10-1",
           "lineNumber": "7",
           "count": "3",
           "arabic": "وَأَعـوذُ بِكَ مِنْ عذابِ القَـبْر",
           "english": "and I seek refuge in You from the punishment of the grave",
+          "русский": "Я удаляюсь с Твоей помощью от мучений в могиле.",
           "кыргыз": ""
         },
         {
-          "azkar_id": "morning_10",
+          "azkar_id": "morning_10-1",
           "lineNumber": "8",
           "count": "3",
           "arabic": "لا إلهَ إلاّ أَنْـتَ",
           "english": "There is none worthy of worship but You",
+          "русский": "Нет бога, кроме Тебя Одного».",
           "кыргыз": ""
         },
         {
@@ -591,6 +660,7 @@
           "count": "7",
           "arabic": "حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم",
           "english": "Allah is sufficient for me. There is none worthy of worship but Him. I have placed my trust in Him. He is Lord of the Majestic Throne",
+          "русский": "«Мне достаточно Всевышнего. Нет бога, кроме Него. На Него я положился, и Он — Господь великого Трона»",
           "кыргыз": ""
         },
         {
@@ -599,6 +669,7 @@
           "count": "1",
           "arabic": "اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة",
           "english": "O Allah, I seek Your forgiveness and Your protection in this world and the next",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -607,6 +678,7 @@
           "count": "1",
           "arabic": "اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي",
           "english": "O Allah, I seek Your forgiveness and Your protection in my religion, in my worldly affairs, in my family, and in my wealth",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -615,6 +687,7 @@
           "count": "1",
           "arabic": "اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي",
           "english": "O Allah, conceal my secrets and preserve me from anguish",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -623,6 +696,7 @@
           "count": "1",
           "arabic": "اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي",
           "english": "O Allah, guard me from what is in front of me and behind me, from my left and from my right",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -631,6 +705,7 @@
           "count": "1",
           "arabic": "وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي",
           "english": "and from above me. I seek refuge in Your Greatness from being struck down from beneath me",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -639,6 +714,7 @@
           "count": "1",
           "arabic": "اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه",
           "english": "O Allah, Knower of the unseen and the evident, Maker of the heavens and the earth, Lord of everything and its Possessor",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -647,6 +723,7 @@
           "count": "1",
           "arabic": "أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْت",
           "english": "I bear witness that there is none worthy of worship but You",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -655,6 +732,7 @@
           "count": "1",
           "arabic": "أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِـرْكِه",
           "english": "I seek refuge in You from the evil of my soul, and from the evil of Satan and his helpers",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -663,6 +741,7 @@
           "count": "1",
           "arabic": "وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم",
           "english": "(I seek refuge in You) from bringing evil upon my soul and from harming any Muslim",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -671,6 +750,7 @@
           "count": "3",
           "arabic": "بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم",
           "english": "In the Name of Allah, Who with His Name nothing can cause harm in the earth nor in the heavens, and He is the All-Hearing, the All-Knowing",
+          "русский": "«Начинаю [свой день] с именем Господа. Того, с именем Которого ничто ни на Земле, ни на небесах не может [мне] навредить. Он — Всеслышащий, Всезнающий»",
           "кыргыз": ""
         },
         {
@@ -679,6 +759,7 @@
           "count": "3",
           "arabic": "رَضِيتُ بِاللهِ ربا وَبِالإِسْلَامِ دِينًا وَبُمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمْ نَبياً",
           "english": "I am pleased with Allah as my Lord, with Islam as my religion, and with Muhammad - Peace and Blessings of Allah be upon him – as my Prophet",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -687,6 +768,7 @@
           "count": "3",
           "arabic": "سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه",
           "english": "Glory is to Allah and praise is to Him, by the multitude of His creation",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -695,6 +777,7 @@
           "count": "3",
           "arabic": "وَرِضـا نَفْسِـه",
           "english": "by His Pleasure",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -703,6 +786,7 @@
           "count": "3",
           "arabic": "وَزِنَـةَ عَـرْشِـه",
           "english": "by the weight of His Throne",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -711,6 +795,7 @@
           "count": "3",
           "arabic": "وَمِـدادَ كَلِمـاتِـه",
           "english": "and by the extent of His Words",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -719,6 +804,7 @@
           "count": "100",
           "arabic": "سُبْحـانَ اللهِ وَبِحَمْـدِهِ",
           "english": "Glory is to Allah and praise is to Him.",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -727,6 +813,7 @@
           "count": "3",
           "arabic": "يا حَـيُّ يا قَيّـومُ بِـرَحْمَـتِكِ أَسْتَـغـيث",
           "english": "O Ever-Living One, O Eternal One, by Your mercy I call on You",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -735,6 +822,7 @@
           "count": "3",
           "arabic": "أَصْلِـحْ لي شَـأْنـي كُلَّـهُ",
           "english": "to set right all my affairs",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -743,6 +831,7 @@
           "count": "3",
           "arabic": "وَلا تَكِلـني إِلى نَفْـسي طَـرْفَةَ عَـينٍ.",
           "english": "Do not place me in charge of my soul even for the blinking of an eye",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -751,6 +840,7 @@
           "count": "100",
           "arabic": "لا إلهَ إلاّ اللّهُ وحْـدَهُ لا شَـريكَ لهُ",
           "english": "None has the right to be worshiped but Allah alone, Who has no partner",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -759,6 +849,7 @@
           "count": "100",
           "arabic": "لهُ المُـلْكُ ولهُ الحَمْـدُ، وهُوَ على كُلّ شَيْءٍ قَديرِ",
           "english": "His is the dominion and His is the praise and He is Able to do all things",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -767,6 +858,7 @@
           "count": "3",
           "arabic": "أَصْبَـحْـنا وَأَصْبَـحْ المُـلكُ للهِ رَبِّ العـالَمـين",
           "english": "We have entered a new day and with it all the dominion which belongs to Allah, Lord of all that exists",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -775,6 +867,7 @@
           "count": "3",
           "arabic": "اللّهُـمَّ إِنِّـي أسْـأَلُـكَ خَـيْرَ هـذا الـيَوْم",
           "english": "O Allah, I ask You for the goodness of this day",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -783,6 +876,7 @@
           "count": "3",
           "arabic": "فَـتْحَهُ ، وَنَصْـرَهُ ، وَنـورَهُ وَبَـرَكَتَـهُ ، وَهُـداهُ",
           "english": "its victory, its help, its light, its blessings, and its guidance",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -791,6 +885,7 @@
           "count": "3",
           "arabic": "وَأَعـوذُ بِـكَ مِـنْ شَـرِّ ما فـيهِ وَشَـرِّ ما بَعْـدَه",
           "english": "I seek refuge in You from the evil that is in it, and from the evil that follows it.",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -799,6 +894,7 @@
           "count": "3",
           "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْماً نَافِعاً",
           "english": "O Allah, I ask You for knowledge that is of benefit",
+          "русский": "«О Аллах! Я прошу у Тебя полезного знания.",
           "кыргыз": ""
         },
         {
@@ -807,6 +903,7 @@
           "count": "3",
           "arabic": "وَرِزْقاً طَيِّباً",
           "english": "a good provision",
+          "русский": " И благого рызка (дозволенных средств к проживанию).",
           "кыргыз": ""
         },
         {
@@ -815,6 +912,7 @@
           "count": "3",
           "arabic": "وَعَمَلاً مُتَقَبَّلاً",
           "english": "and deeds that will be accepted",
+          "русский": "И таких дел, которые будут приняты (Тобой)»",
           "кыргыз": ""
         },
         {
@@ -823,6 +921,7 @@
           "count": "10",
           "arabic": "اللَّهُمَّ صَلِّ وَ سَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",
           "english": "O Allah, we ask for Your peace and blessings upon our Prophet Muhammad",
+          "русский": "",
           "кыргыз": ""
         },
         {
@@ -831,6 +930,7 @@
           "count": "100",
           "arabic": "أَسْتَغْفِرُ اللهَ وَأَتُوْبُ إِلَيْهِ",
           "english": "I seek the forgiveness of Allah and repent to Him",
+          "русский": "Прошу у Аллаха прощения и каюсь перед Ним",
           "кыргыз": ""
         }
       ],
@@ -839,73 +939,85 @@
           "azkar_id": "morning_1",
           "arabic": "من قالها حين يصبح أجير من الجن حتى يمسى ومن قالها حين يمسى أجير من الجن حتى يصبح",
           "english": "Whoever says it in the morning will be protected from the jinn until the evening, and whoever says it in the evening will be protected from the jinn until the morning.",
-          "кыргыз": "Ким аны эртең менен жана кечинде окуса, ал бардык нерсеге каршы ага жетиштүү коргоо болот (Аль-Ихлас жана Аль-Му'аввизатайн)"
+          "кыргыз": "Ким аны эртең менен жана кечинде окуса, ал бардык нерсеге каршы ага жетиштүү коргоо болот (Аль-Ихлас жана Аль-Му'аввизатайн)",
+          "русский": ""
         },
         {
           "azkar_id": "morning_2",
           "arabic": "من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).",
           "english": "Whoever recites it in the morning and evening, it will suffice them against everything (Surah Al-Ikhlas and Al-Mu'awwidhatain).",
-          "кыргыз": "Ким таң атканда жана кеч киргенде окуса, аны бардык нерседен коргойт (Ал-Ихлас жана Аль-Муаввизатайн сүрөлөрү)."
+          "кыргыз": "Ким таң атканда жана кеч киргенде окуса, аны бардык нерседен коргойт (Ал-Ихлас жана Аль-Муаввизатайн сүрөлөрү).",
+          "русский": ""
         },
         {
           "azkar_id": "morning_7",
           "arabic": "من قالها موقنا بها حين يمسى ومات من ليلته دخل الجنة وكذلك حين يصبح.",
           "english": "Whoever says it with certainty in the evening and dies that night will enter Paradise, and the same applies if they say it in the morning.",
-          "кыргыз": "Ким кечинде ишеним менен айтса жана ошол түнү каза болсо, ал Жаннатка кирет, эртең менен айтканда да ушундай болот."
+          "кыргыз": "Ким кечинде ишеним менен айтса жана ошол түнү каза болсо, ал Жаннатка кирет, эртең менен айтканда да ушундай болот.",
+          "русский": "Пророк Мухаммад (да благословит его Всевышний и приветствует) сказал: «Кто прочтет эту [молитву] утром [2], будучи убежденным в том, что говорит, и, случись, умрет в течение этого дня до наступления вечера, тот будет одним из обитателей Рая. Кто прочтет эту [молитву] вечером [3], уверенный в том, что произносит, и, случись, умрет до наступления утра, тот будет одним из обитателей Рая» (св. х. имама аль-Бухари)."
         },
         {
           "azkar_id": "morning_8",
           "arabic": "من قالها أعتقه الله من النار.",
           "english": "Whoever says it, Allah will free them from the Fire.",
-          "кыргыз": "Ким айтса, Аллах аны Оттон куткарат."
+          "кыргыз": "Ким айтса, Аллах аны Оттон куткарат.",
+          "русский": ""
         },
         {
           "azkar_id": "morning_9",
           "arabic": "من قالها حين يصبح أدى شكر يومه.",
           "english": "Whoever says it in the morning has fulfilled the gratitude for their day.",
-          "кыргыз": "Ким аны таң эрте айтса, ал күнкү шүгүрүн келтирген болот."
+          "кыргыз": "Ким аны таң эрте айтса, ал күнкү шүгүрүн келтирген болот.",
+          "русский": ""
         },
         {
           "azkar_id": "morning_11",
           "arabic": "من قالها كفاه الله ما أهمه من أمر الدنيا والأخرة.",
           "english": "Whoever says it, Allah will suffice them in their concerns regarding the matters of this world and the Hereafter.",
-          "кыргыз": "Ким аны айтса, Аллах аны ушул дүйнө жана Акыреттеги маселелеринде коргойт."
+          "кыргыз": "Ким аны айтса, Аллах аны ушул дүйнө жана Акыреттеги маселелеринде коргойт.",
+          "русский": "Пророк Мухаммад (да благословит его Господь и приветствует) сообщил: «Кто произнесет эту [молитву] семь раз утром и семь раз вечером, тому Всевышнего будет достаточно для разрешения любой проблемы» (св. х. Абу Дауда)."
         },
         {
           "azkar_id": "morning_14",
           "arabic": "لم يضره من الله شيء.",
           "english": "Nothing will harm them by Allah's permission.",
-          "кыргыз": "Аллахтын каалоосу менен аларга эч кандай зыян келбейт"
+          "кыргыз": "Аллахтын каалоосу менен аларга эч кандай зыян келбейт",
+          "русский": ""
         },
         {
           "azkar_id": "morning_15",
           "arabic": "من قالها حين يصبح وحين يمسى كان حقا على الله أن يرضيه يوم القيامة.",
           "english": "Whoever says it in the morning and evening, it is guaranteed by Allah to please them on the Day of Judgment.",
-          "кыргыз": "Ким эртең менен жана кечинде айтса, Аллах аны Кыямат күнү ыраазы кылууну Өзү кепилдейт. "
+          "кыргыз": "Ким эртең менен жана кечинде айтса, Аллах аны Кыямат күнү ыраазы кылууну Өзү кепилдейт. ",
+          "русский": ""
         },
         {
           "azkar_id": "morning_17",
           "arabic": "حُطَّتْ خَطَايَاهُ وَإِنْ كَانَتْ مِثْلَ زَبَدِ الْبَحْرِ. لَمْ يَأْتِ أَحَدٌ يَوْمَ الْقِيَامَةِ بِأَفْضَلَ مِمَّا جَاءَ بِهِ إِلَّا أَحَدٌ قَالَ مِثْلَ مَا قَالَ أَوْ زَادَ عَلَيْهِ.",
           "english": "His sins will be forgiven, even if they were as numerous as the foam of the sea. On the Day of Judgment, no one will come with better deeds than what he brought, except for someone who said the same or did more than what he said.",
-          "кыргыз": "Күнөөлөрү деңиздин көбүгүндөй көп болсо дагы, Аллах аны кечирет.  Кыямат күнү андан өткөн жакшы амал менен эч ким келбейт, ким ошону айтып же андан көп кылгандардан башка."
+          "кыргыз": "Күнөөлөрү деңиздин көбүгүндөй көп болсо дагы, Аллах аны кечирет.  Кыямат күнү андан өткөн жакшы амал менен эч ким келбейт, ким ошону айтып же андан көп кылгандардан башка.",
+          "русский": ""
         },
         {
           "azkar_id": "morning_19",
           "arabic": "كانت له عدل عشر رقاب، وكتبت له مئة حسنة، ومحيت عنه مئة سيئة، وكانت له حرزا من الشيطان.",
           "english": "It would be equivalent to the reward of freeing ten slaves, one hundred good deeds would be written for him, one hundred bad deeds would be erased, and it would serve as a protection from the devil.",
-          "кыргыз": "Он кулду азат кылгандай соопко ээ болот. Ага жүз жакшы амал жазылат, жүз жаман амалы өчүрүлөт жана шайтандан сактануу кызматын аткарат."
+          "кыргыз": "Он кулду азат кылгандай соопко ээ болот. Ага жүз жакшы амал жазылат, жүз жаман амалы өчүрүлөт жана шайтандан сактануу кызматын аткарат.",
+          "русский": ""
         },
         {
           "azkar_id": "morning_22",
           "arabic": "من صلى على حين يصبح وحين يمسى ادركته شفاعتى يوم القيامة.",
           "english": "Whoever sends blessings upon me in the morning and evening will receive my intercession on the Day of Judgment.",
-          "кыргыз": "Эртең менен жана кечинде ким мага салават айтса, Кыямат күнү мен ага шапаатчы болом."
+          "кыргыз": "Эртең менен жана кечинде ким мага салават айтса, Кыямат күнү мен ага шапаатчы болом.",
+          "русский": ""
         },
         {
           "azkar_id": "morning_23",
           "arabic": "مائة حسنة، ومُحيت عنه مائة سيئة، وكانت له حرزاً من الشيطان حتى يمسى.",
           "english": "One hundred good deeds will be written for him, one hundred bad deeds will be erased, and it will serve as a protection from the devil until the evening.",
-          "кыргыз": "Жүз жакшы амал жазылат, жүз жаман амал өчүрүлөт жана кечке чейин шайтандан сактайт."
+          "кыргыз": "Жүз жакшы амал жазылат, жүз жаман амал өчүрүлөт жана кечке чейин шайтандан сактайт.",
+          "русский": ""
         }
       ]
     }

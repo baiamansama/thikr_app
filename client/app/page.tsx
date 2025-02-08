@@ -56,6 +56,7 @@ interface IVirtues {
   arabic: string;
   english: string;
   кыргыз: string;
+  русский: string;
   français?: string;
   español?: string;
 }
@@ -82,6 +83,7 @@ interface ICategory {
     arabic: string;
     english: string;
     кыргыз: string;
+    русский: string;
   }[];
   virtues: IVirtues[];
 }
@@ -171,6 +173,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       else if (language === "кыргыз") translation = virtue.кыргыз || "";
       else if (language === "français") translation = virtue["français"] || "";
       else if (language === "español") translation = virtue["español"] || "";
+      else if (language === "русский") translation = virtue["русский"] || "";
       return translation.trim() !== ""
         ? translation
         : virtue.arabic?.trim() || "";
@@ -358,35 +361,28 @@ export default function HomePage() {
   }, []);
 
   const toggleTranslation = useCallback(() => {
-    setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
+    const currentId = determineReadingCard();
+    if (currentId) {
+      setDb((prev) => ({
+        ...prev,
+        lastReacCard: currentId,
+        showTranslation: !prev.showTranslation,
+      }));
+    } else {
+      setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
+    }
   }, []);
 
-  const prevDrawerOpenRef = useRef(drawerOpen);
   useEffect(() => {
-    if (
-      prevDrawerOpenRef.current === true &&
-      drawerOpen === false &&
-      db.lastReacCard &&
-      cardRefs.current[db.lastReacCard]
-    ) {
-      cardRefs.current[db.lastReacCard]?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-    prevDrawerOpenRef.current = drawerOpen;
-  }, [drawerOpen, db.lastReacCard]);
-
-  useEffect(() => {
-    if (db.lastReacCard && cardRefs.current[db.lastReacCard]) {
+    if (!drawerOpen && db.lastReacCard && cardRefs.current[db.lastReacCard]) {
       setTimeout(() => {
         cardRefs.current[db.lastReacCard]?.scrollIntoView({
           behavior: "smooth",
-          block: "start",
+          block: "center",
         });
-      }, 100);
+      }, 0);
     }
-  }, [language, showTranslation]);
+  }, [drawerOpen]);
 
   const selectedCategoryData = useMemo(() => {
     return categories.find((cat) => cat.id === selectedCategory);
@@ -412,6 +408,7 @@ export default function HomePage() {
           translations: {
             english: raw.english || "",
             кыргыз: raw.кыргыз || "",
+            русский: raw.русский || "",
             français: "",
             español: "",
           },
