@@ -52,9 +52,12 @@ interface ITheme {
 }
 
 interface IVirtues {
-  id?: number;
-  arabic?: string;
-  translations?: Translation;
+  azkar_id: string;
+  arabic: string;
+  english: string;
+  кыргыз: string;
+  français?: string;
+  español?: string;
 }
 
 interface IAzkarLine {
@@ -67,13 +70,20 @@ export interface IAzkarEntry {
   id: string;
   count: number;
   lines: IAzkarLine[];
-  virtues: IVirtues;
 }
 
 interface ICategory {
   id: string;
   translations: Translation;
-  azkars: IAzkarEntry[];
+  azkars: {
+    azkar_id: string;
+    lineNumber: string;
+    count: string;
+    arabic: string;
+    english: string;
+    кыргыз: string;
+  }[];
+  virtues: IVirtues[];
 }
 
 interface IData {
@@ -109,6 +119,7 @@ interface IAzkarCardProps {
   counter: number;
   updateCounter: (azkarId: string, newCount: number) => void;
   showTranslation: boolean;
+  virtue?: IVirtues;
 }
 
 const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
@@ -120,6 +131,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       counter,
       updateCounter,
       showTranslation,
+      virtue,
     },
     ref: Ref<HTMLDivElement>
   ) => {
@@ -150,15 +162,19 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     }, [uiTranslations, language]);
 
     const virtueText = useMemo(() => {
-      if (!azkar.virtues || Object.keys(azkar.virtues).length === 0) return "";
+      if (!virtue) return "";
       if (language === "عربي") {
-        return azkar.virtues.arabic?.trim() || "";
+        return virtue.arabic?.trim() || "";
       }
-      const translation = azkar.virtues.translations?.[language] || "";
+      let translation = "";
+      if (language === "english") translation = virtue.english || "";
+      else if (language === "кыргыз") translation = virtue.кыргыз || "";
+      else if (language === "français") translation = virtue["français"] || "";
+      else if (language === "español") translation = virtue["español"] || "";
       return translation.trim() !== ""
         ? translation
-        : azkar.virtues.arabic?.trim() || "";
-    }, [azkar.virtues, language]);
+        : virtue.arabic?.trim() || "";
+    }, [virtue, language]);
 
     const shouldRenderVirtues = virtuesLabel !== "" && virtueText !== "";
 
@@ -342,44 +358,83 @@ export default function HomePage() {
   }, []);
 
   const toggleTranslation = useCallback(() => {
-    const currentId = determineReadingCard();
-    if (currentId) {
-      setDb((prev) => ({
-        ...prev,
-        lastReacCard: currentId,
-        showTranslation: !prev.showTranslation,
-      }));
-    } else {
-      setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
-    }
+    setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
   }, []);
 
+  const prevDrawerOpenRef = useRef(drawerOpen);
   useEffect(() => {
-    if (!drawerOpen && db.lastReacCard && cardRefs.current[db.lastReacCard]) {
+    if (
+      prevDrawerOpenRef.current === true &&
+      drawerOpen === false &&
+      db.lastReacCard &&
+      cardRefs.current[db.lastReacCard]
+    ) {
+      cardRefs.current[db.lastReacCard]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+    prevDrawerOpenRef.current = drawerOpen;
+  }, [drawerOpen, db.lastReacCard]);
+
+  useEffect(() => {
+    if (db.lastReacCard && cardRefs.current[db.lastReacCard]) {
       setTimeout(() => {
         cardRefs.current[db.lastReacCard]?.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-      }, 0);
+      }, 100);
     }
-  }, [drawerOpen]);
+  }, [language, showTranslation]);
 
   const selectedCategoryData = useMemo(() => {
     return categories.find((cat) => cat.id === selectedCategory);
   }, [categories, selectedCategory]);
 
+  const groupedAzkars = useMemo(() => {
+    if (!selectedCategoryData) return [];
+    const groups = new Map<string, IAzkarEntry>();
+    selectedCategoryData.azkars.forEach((raw) => {
+      const id = raw.azkar_id;
+      if (!groups.has(id)) {
+        groups.set(id, {
+          id,
+          count: Number(raw.count),
+          lines: [],
+        });
+      }
+      const entry = groups.get(id);
+      if (entry) {
+        entry.lines.push({
+          lineNumber: Number(raw.lineNumber),
+          arabic: raw.arabic,
+          translations: {
+            english: raw.english || "",
+            кыргыз: raw.кыргыз || "",
+            français: "",
+            español: "",
+          },
+        });
+      }
+    });
+    for (const entry of groups.values()) {
+      entry.lines.sort((a, b) => a.lineNumber - b.lineNumber);
+    }
+    return Array.from(groups.values());
+  }, [selectedCategoryData]);
+
   const clearHistory = useCallback(() => {
     if (!selectedCategoryData) return;
     const newCounters = { ...db.counters };
-    selectedCategoryData.azkars.forEach((azkar) => {
+    groupedAzkars.forEach((azkar) => {
       newCounters[azkar.id] = 0;
     });
     setDb((prev) => ({ ...prev, counters: newCounters }));
 
     setClearHistoryClicked(true);
     setTimeout(() => setClearHistoryClicked(false), 200);
-  }, [db.counters, selectedCategoryData]);
+  }, [db.counters, selectedCategoryData, groupedAzkars]);
 
   const supportedLanguages = useMemo(
     () => data.metadata.supportedLanguages,
@@ -413,20 +468,26 @@ export default function HomePage() {
     <>
       <div className="container mx-auto px-4 py-6 transition-colors">
         <div className="grid grid-cols-1 gap-4 mt-6">
-          {selectedCategoryData.azkars.map((azkar) => (
-            <AzkarCard
-              key={azkar.id}
-              azkar={azkar}
-              language={language}
-              uiTranslations={uiTranslations}
-              counter={counters[azkar.id] || 0}
-              updateCounter={updateCounter}
-              showTranslation={showTranslation}
-              ref={(el) => {
-                cardRefs.current[azkar.id] = el;
-              }}
-            />
-          ))}
+          {groupedAzkars.map((azkar) => {
+            const virtue = selectedCategoryData.virtues.find(
+              (v) => v.azkar_id === azkar.id
+            );
+            return (
+              <AzkarCard
+                key={azkar.id}
+                azkar={azkar}
+                language={language}
+                uiTranslations={uiTranslations}
+                counter={counters[azkar.id] || 0}
+                updateCounter={updateCounter}
+                showTranslation={showTranslation}
+                virtue={virtue}
+                ref={(el) => {
+                  cardRefs.current[azkar.id] = el;
+                }}
+              />
+            );
+          })}
         </div>
       </div>
 
