@@ -5,10 +5,9 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  forwardRef,
-  Ref,
 } from "react";
 import azkarsData from "./azkars.json";
+import AzkarCard from "./../components/AzkarCard";
 import {
   Drawer,
   DrawerTrigger,
@@ -20,7 +19,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Description } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-// Removed Calendar import
 
 interface Translation {
   [language: string]: string;
@@ -103,7 +101,6 @@ export interface IThikrDB {
   counters: { [azkarId: string]: number };
   showTranslation: boolean;
   lastReacCard: string;
-  // removed completedDays property
 }
 
 const LOCAL_STORAGE_KEY = "thikr_db";
@@ -114,159 +111,6 @@ const INITIAL_DB: IThikrDB = {
   counters: {},
   showTranslation: false,
   lastReacCard: "",
-};
-
-interface IAzkarCardProps {
-  azkar: IAzkarEntry;
-  language: string;
-  uiTranslations: IUITranslations;
-  counter: number;
-  updateCounter: (azkarId: string, newCount: number) => void;
-  showTranslation: boolean;
-  virtue?: IVirtues;
-}
-
-const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
-  (
-    {
-      azkar,
-      language,
-      uiTranslations,
-      counter,
-      updateCounter,
-      showTranslation,
-      virtue,
-    },
-    ref: Ref<HTMLDivElement>
-  ) => {
-    const isCompleted = counter >= azkar.count;
-
-    const handleIncrement = useCallback(() => {
-      if (counter < azkar.count) {
-        updateCounter(azkar.id, counter + 1);
-      }
-    }, [counter, azkar, updateCounter]);
-
-    const getButtonText = useCallback((): string => {
-      if (isCompleted) {
-        return `${uiTranslations.actions.completed[language] || "Completed"} (${
-          azkar.count
-        })`;
-      }
-      const tapText = uiTranslations.actions.tap[language] || "Tap";
-      return `${tapText} (${counter}/${azkar.count})`;
-    }, [isCompleted, uiTranslations, language, counter, azkar.count]);
-
-    const virtuesLabel = useMemo(() => {
-      let label = uiTranslations.virtues[language] ?? "";
-      if (label.trim() === "") {
-        label = uiTranslations.virtues["عربي"] ?? "";
-      }
-      return label.trim();
-    }, [uiTranslations, language]);
-
-    const virtueText = useMemo(() => {
-      if (!virtue) return "";
-      if (language === "عربي") {
-        return virtue.arabic?.trim() || "";
-      }
-      let translation = "";
-      if (language === "english") translation = virtue.english || "";
-      else if (language === "кыргыз") translation = virtue.кыргыз || "";
-      else if (language === "français") translation = virtue["français"] || "";
-      else if (language === "español") translation = virtue["español"] || "";
-      else if (language === "русский") translation = virtue["русский"] || "";
-      return translation.trim() !== ""
-        ? translation
-        : virtue.arabic?.trim() || "";
-    }, [virtue, language]);
-
-    const shouldRenderVirtues = virtuesLabel !== "" && virtueText !== "";
-
-    return (
-      <div ref={ref} className="card p-4 rounded shadow transition-colors">
-        <div className="mb-4">
-          {azkar.lines.map((line) => (
-            <div key={line.lineNumber} className="mb-2">
-              <p
-                className="text-xl font-bold text-right content-arabic"
-                lang="ar"
-                dir="rtl"
-              >
-                {line.arabic}
-              </p>
-              {language !== "عربي" &&
-                showTranslation &&
-                line.translations[language] !== "" && (
-                  <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
-                    {line.translations[language]}
-                  </p>
-                )}
-            </div>
-          ))}
-        </div>
-        {shouldRenderVirtues && (
-          <div className="mb-4">
-            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-              {virtuesLabel}
-            </p>
-            <p
-              className={
-                language === "عربي"
-                  ? "text-sm text-right content-arabic"
-                  : "text-sm mt-1 text-[var(--translation-text)]"
-              }
-              lang={language === "عربي" ? "ar" : undefined}
-              dir={language === "عربي" ? "rtl" : "ltr"}
-            >
-              {virtueText}
-            </p>
-          </div>
-        )}
-        <div className="flex items-center justify-center">
-          <button
-            onClick={handleIncrement}
-            disabled={isCompleted}
-            className={`w-full py-4 text-lg font-bold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-              isCompleted
-                ? "bg-[#283618] cursor-not-allowed"
-                : "bg-[#606c38] text-[var(--card-text)] hover:bg-[#606c38]/90 active:bg-[#606c38]/80"
-            }`}
-            aria-label={`Progress: ${counter} of ${azkar.count}`}
-          >
-            {getButtonText()}
-          </button>
-        </div>
-      </div>
-    );
-  }
-);
-
-AzkarCard.displayName = "AzkarCard";
-
-interface IToggleSwitchProps {
-  enabled: boolean;
-  onToggle: () => void;
-}
-
-const ToggleSwitch: React.FC<IToggleSwitchProps> = ({ enabled, onToggle }) => {
-  return (
-    <button
-      onClick={onToggle}
-      aria-pressed={enabled}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-        enabled
-          ? "bg-[#606c38] border-[#606c38]"
-          : "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-      }`}
-    >
-      <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-          enabled ? "translate-x-6" : "translate-x-1"
-        }`}
-      />
-    </button>
-  );
 };
 
 export default function HomePage() {
@@ -404,7 +248,6 @@ export default function HomePage() {
     }
   }, [drawerOpen]);
 
-  // Compute the effective theme. When theme is "auto", choose based on time.
   const computedTheme = useMemo(() => {
     if (theme === "auto") {
       const hour = new Date().getHours();
@@ -413,7 +256,6 @@ export default function HomePage() {
     return theme;
   }, [theme]);
 
-  // Apply the computed theme to the root element.
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light-theme", "dark-theme", "sepia-theme");
@@ -464,16 +306,13 @@ export default function HomePage() {
   return (
     <>
       <div className="container mx-auto px-4 py-6 transition-colors">
-        {/* Selected Category Header with Beautiful Styling */}
         <div className="mb-8">
           <div className="text-center py-4">
-            {/* Updated to use CSS variable for text color */}
             <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
               {selectedCategoryData.translations[language] ||
                 selectedCategoryData.id}
             </h1>
           </div>
-          {/* Calendar component removed */}
         </div>
 
         <div className="grid grid-cols-1 gap-4 mt-6">
@@ -614,3 +453,26 @@ export default function HomePage() {
     </>
   );
 }
+
+const ToggleSwitch: React.FC<{ enabled: boolean; onToggle: () => void }> = ({
+  enabled,
+  onToggle,
+}) => {
+  return (
+    <button
+      onClick={onToggle}
+      aria-pressed={enabled}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+        enabled
+          ? "bg-[#606c38] border-[#606c38]"
+          : "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+      }`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+          enabled ? "translate-x-6" : "translate-x-1"
+        }`}
+      />
+    </button>
+  );
+};
