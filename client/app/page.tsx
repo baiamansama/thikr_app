@@ -20,7 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Description } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Calendar } from "@/components/ui/calendar";
+// Removed Calendar import
 
 interface Translation {
   [language: string]: string;
@@ -103,7 +103,7 @@ export interface IThikrDB {
   counters: { [azkarId: string]: number };
   showTranslation: boolean;
   lastReacCard: string;
-  completedDays: { [categoryId: string]: string[] };
+  // removed completedDays property
 }
 
 const LOCAL_STORAGE_KEY = "thikr_db";
@@ -114,7 +114,7 @@ const INITIAL_DB: IThikrDB = {
   counters: {},
   showTranslation: false,
   lastReacCard: "",
-  completedDays: {},
+  // removed completedDays
 };
 
 interface IAzkarCardProps {
@@ -442,72 +442,9 @@ export default function HomePage() {
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
-  useEffect(() => {
-    if (groupedAzkars.length > 0) {
-      const allComplete = groupedAzkars.every(
-        (azkar) => (counters[azkar.id] || 0) >= azkar.count
-      );
-      if (allComplete) {
-        const today = new Date().toISOString().split("T")[0];
-        setDb((prev) => {
-          const categoryCompletedDays =
-            prev.completedDays[selectedCategory] || [];
-          if (!categoryCompletedDays.includes(today)) {
-            return {
-              ...prev,
-              completedDays: {
-                ...prev.completedDays,
-                [selectedCategory]: [...categoryCompletedDays, today],
-              },
-            };
-          }
-          return prev;
-        });
-      }
-    }
-  }, [counters, selectedCategory, groupedAzkars]);
-
-  const clearHistory = useCallback(() => {
-    if (!selectedCategoryData) return;
-    const newCounters = { ...db.counters };
-    groupedAzkars.forEach((azkar) => {
-      newCounters[azkar.id] = 0;
-    });
-    setDb((prev) => ({ ...prev, counters: newCounters }));
-
-    setClearHistoryClicked(true);
-    setTimeout(() => setClearHistoryClicked(false), 200);
-  }, [db.counters, selectedCategoryData, groupedAzkars]);
-
-  const supportedLanguages = useMemo(
-    () => data.metadata.supportedLanguages,
-    [data]
-  );
-  const uiTranslations = useMemo(() => data.uiTranslations, [data]);
-  const themes = useMemo(() => data.themes, [data]);
-
-  const getLanguageDisplay = (lang: string): string =>
-    lang === "عربي" ? "عربي" : lang;
-
-  const computedTheme = useMemo(() => {
-    if (theme === "auto") {
-      const hour = new Date().getHours();
-      return hour >= 6 && hour < 18 ? "light" : "dark";
-    }
-    return theme;
-  }, [theme]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove("light-theme", "dark-theme", "sepia-theme");
-    root.classList.add(`${computedTheme}-theme`);
-  }, [computedTheme]);
-
   if (!hasMounted || !selectedCategoryData) {
     return null;
   }
-
-  const categoryCompletedDays = db.completedDays[selectedCategory] || [];
 
   return (
     <>
@@ -520,12 +457,7 @@ export default function HomePage() {
                 selectedCategoryData.id}
             </h1>
           </div>
-          {/* Shadcn Calendar with Completed Days Marked */}
-          <div className="mx-auto max-w-md">
-            <Calendar
-              selected={categoryCompletedDays.map((date) => new Date(date))}
-            />
-          </div>
+          {/* Calendar component removed */}
         </div>
 
         <div className="grid grid-cols-1 gap-4 mt-6">
@@ -538,7 +470,7 @@ export default function HomePage() {
                 key={azkar.id}
                 azkar={azkar}
                 language={language}
-                uiTranslations={uiTranslations}
+                uiTranslations={data.uiTranslations}
                 counter={counters[azkar.id] || 0}
                 updateCounter={updateCounter}
                 showTranslation={showTranslation}
@@ -562,7 +494,7 @@ export default function HomePage() {
           <DrawerHeader>
             <div className="flex justify-center">
               <DrawerTitle className="text-center">
-                {uiTranslations.settings[language] || "Settings"}
+                {data.uiTranslations.settings[language] || "Settings"}
               </DrawerTitle>
               <Description />
             </div>
@@ -570,7 +502,7 @@ export default function HomePage() {
           <div className="flex flex-col">
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
-                {supportedLanguages.map((lang) => (
+                {data.metadata.supportedLanguages.map((lang) => (
                   <button
                     key={lang}
                     onClick={() => handleLanguageClick(lang)}
@@ -581,14 +513,14 @@ export default function HomePage() {
                     }`}
                     aria-pressed={lang === language}
                   >
-                    {getLanguageDisplay(lang)}
+                    {lang === "عربي" ? "عربي" : lang}
                   </button>
                 ))}
               </div>
             </div>
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
-                {themes.map((item) => (
+                {data.themes.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleThemeClick(item.id)}
@@ -625,7 +557,7 @@ export default function HomePage() {
             {language !== "عربي" && (
               <div className="p-4 flex items-center gap-2 justify-center">
                 <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)]">
-                  {uiTranslations.toggleTranslation.show[language]}
+                  {data.uiTranslations.toggleTranslation.show[language]}
                 </span>
                 <ToggleSwitch
                   enabled={showTranslation}
@@ -636,14 +568,22 @@ export default function HomePage() {
             <div className="p-4 flex items-center justify-center">
               <Button
                 variant="outline"
-                onClick={clearHistory}
+                onClick={() => {
+                  const newCounters = { ...db.counters };
+                  groupedAzkars.forEach((azkar) => {
+                    newCounters[azkar.id] = 0;
+                  });
+                  setDb((prev) => ({ ...prev, counters: newCounters }));
+                  setClearHistoryClicked(true);
+                  setTimeout(() => setClearHistoryClicked(false), 200);
+                }}
                 className={`transition-colors px-3 py-1 rounded border ${
                   clearHistoryClicked
                     ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
                     : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
                 }`}
               >
-                {uiTranslations.actions.clean_history[language] ||
+                {data.uiTranslations.actions.clean_history[language] ||
                   "🗑️ Clear History"}
               </Button>
             </div>
