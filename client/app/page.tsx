@@ -114,7 +114,6 @@ const INITIAL_DB: IThikrDB = {
   counters: {},
   showTranslation: false,
   lastReacCard: "",
-  // removed completedDays
 };
 
 interface IAzkarCardProps {
@@ -405,6 +404,22 @@ export default function HomePage() {
     }
   }, [drawerOpen]);
 
+  // Compute the effective theme. When theme is "auto", choose based on time.
+  const computedTheme = useMemo(() => {
+    if (theme === "auto") {
+      const hour = new Date().getHours();
+      return hour >= 6 && hour < 18 ? "light" : "dark";
+    }
+    return theme;
+  }, [theme]);
+
+  // Apply the computed theme to the root element.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("light-theme", "dark-theme", "sepia-theme");
+    root.classList.add(`${computedTheme}-theme`);
+  }, [computedTheme]);
+
   const selectedCategoryData = useMemo(() => {
     return categories.find((cat) => cat.id === selectedCategory);
   }, [categories, selectedCategory]);
@@ -452,7 +467,8 @@ export default function HomePage() {
         {/* Selected Category Header with Beautiful Styling */}
         <div className="mb-8">
           <div className="text-center py-4">
-            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+            {/* Updated to use CSS variable for text color */}
+            <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
               {selectedCategoryData.translations[language] ||
                 selectedCategoryData.id}
             </h1>
