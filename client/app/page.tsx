@@ -1,4 +1,5 @@
 "use client";
+
 import React, {
   useState,
   useMemo,
@@ -19,6 +20,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Description } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+
+/* =====================
+   Interfaces & Types
+===================== */
 
 interface Translation {
   [language: string]: string;
@@ -64,6 +69,7 @@ interface IAzkarLine {
   lineNumber: number;
   arabic: string;
   translations: Translation;
+  timestamp?: number;
 }
 
 export interface IAzkarEntry {
@@ -83,6 +89,7 @@ interface ICategory {
     english: string;
     кыргыз: string;
     русский: string;
+    timestamp?: string;
   }[];
   virtues: IVirtues[];
 }
@@ -103,6 +110,10 @@ export interface IThikrDB {
   lastReacCard: string;
 }
 
+/* =====================
+   Constants
+===================== */
+
 const LOCAL_STORAGE_KEY = "thikr_db";
 const INITIAL_DB: IThikrDB = {
   selectedCategory: "morning",
@@ -113,22 +124,36 @@ const INITIAL_DB: IThikrDB = {
   lastReacCard: "",
 };
 
+/* =====================
+   Main Component
+===================== */
+
 export default function HomePage() {
   const data: IData = azkarsData;
   const categories = useMemo(() => data.categories, [data]);
+
+  // Local state variables
   const [hasMounted, setHasMounted] = useState(false);
   const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [clearHistoryClicked, setClearHistoryClicked] = useState(false);
+
+  // Keep track of the current drawer state in a ref
   const drawerOpenRef = useRef(drawerOpen);
   useEffect(() => {
     drawerOpenRef.current = drawerOpen;
   }, [drawerOpen]);
+
+  // References for each Azkar card element
   const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const determineReadingCard = () => {
+  /**
+   * Determines which card is closest to the vertical center of the viewport.
+   */
+  const determineReadingCard = (): string | null => {
     let chosenId: string | null = null;
     let minDiff = Infinity;
+
     Object.entries(cardRefs.current).forEach(([id, el]) => {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -143,6 +168,11 @@ export default function HomePage() {
     return chosenId;
   };
 
+  /* =====================
+     Side Effects
+  ====================== */
+
+  // Update the last read card on scroll (debounced)
   useEffect(() => {
     let timeoutId: number;
     const handleScroll = () => {
@@ -160,17 +190,17 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Update the selected category based on the current time (morning vs evening)
   useEffect(() => {
     const updateCategoryBasedOnTime = () => {
       const currentHour = new Date().getHours();
       const newCategory =
         currentHour >= 4 && currentHour < 16 ? "morning" : "evening";
-      setDb((prevDb) => {
-        if (prevDb.selectedCategory !== newCategory) {
-          return { ...prevDb, selectedCategory: newCategory };
-        }
-        return prevDb;
-      });
+      setDb((prevDb) =>
+        prevDb.selectedCategory !== newCategory
+          ? { ...prevDb, selectedCategory: newCategory }
+          : prevDb
+      );
     };
 
     updateCategoryBasedOnTime();
@@ -178,6 +208,7 @@ export default function HomePage() {
     return () => clearInterval(intervalId);
   }, []);
 
+  // Initialize from localStorage and scroll to the last read card
   useEffect(() => {
     setHasMounted(true);
     if (typeof window !== "undefined") {
@@ -197,13 +228,28 @@ export default function HomePage() {
     }
   }, []);
 
+  // Persist db changes to localStorage (only after mount)
   useEffect(() => {
     if (hasMounted && typeof window !== "undefined") {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(db));
     }
   }, [db, hasMounted]);
 
-  const { language, selectedCategory, theme, counters, showTranslation } = db;
+  // When the drawer closes, scroll to the last read card (if available)
+  useEffect(() => {
+    if (!drawerOpen && db.lastReacCard && cardRefs.current[db.lastReacCard]) {
+      setTimeout(() => {
+        cardRefs.current[db.lastReacCard]?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 0);
+    }
+  }, [drawerOpen, db.lastReacCard]);
+
+  /* =====================
+     Event Handlers
+  ====================== */
 
   const handleLanguageClick = useCallback((lang: string) => {
     setDb((prev) => ({ ...prev, language: lang }));
@@ -226,28 +272,20 @@ export default function HomePage() {
 
   const toggleTranslation = useCallback(() => {
     const currentId = determineReadingCard();
-    if (currentId) {
-      setDb((prev) => ({
-        ...prev,
-        lastReacCard: currentId,
-        showTranslation: !prev.showTranslation,
-      }));
-    } else {
-      setDb((prev) => ({ ...prev, showTranslation: !prev.showTranslation }));
-    }
+    setDb((prev) => ({
+      ...prev,
+      lastReacCard: currentId || prev.lastReacCard,
+      showTranslation: !prev.showTranslation,
+    }));
   }, []);
 
-  useEffect(() => {
-    if (!drawerOpen && db.lastReacCard && cardRefs.current[db.lastReacCard]) {
-      setTimeout(() => {
-        cardRefs.current[db.lastReacCard]?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }, 0);
-    }
-  }, [drawerOpen]);
+  /* =====================
+     Derived / Computed Values
+  ====================== */
 
+  const { language, selectedCategory, theme, counters, showTranslation } = db;
+
+  // Auto-detect theme based on time if "auto" is selected
   const computedTheme = useMemo(() => {
     if (theme === "auto") {
       const hour = new Date().getHours();
@@ -256,27 +294,27 @@ export default function HomePage() {
     return theme;
   }, [theme]);
 
+  // Update the root element class for theming
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light-theme", "dark-theme", "sepia-theme");
     root.classList.add(`${computedTheme}-theme`);
   }, [computedTheme]);
 
+  // Find the selected category data from the categories list
   const selectedCategoryData = useMemo(() => {
     return categories.find((cat) => cat.id === selectedCategory);
   }, [categories, selectedCategory]);
 
+  // Group raw azkars data into entries by azkar_id with sorted lines
   const groupedAzkars = useMemo(() => {
     if (!selectedCategoryData) return [];
     const groups = new Map<string, IAzkarEntry>();
+
     selectedCategoryData.azkars.forEach((raw) => {
       const id = raw.azkar_id;
       if (!groups.has(id)) {
-        groups.set(id, {
-          id,
-          count: Number(raw.count),
-          lines: [],
-        });
+        groups.set(id, { id, count: Number(raw.count), lines: [] });
       }
       const entry = groups.get(id);
       if (entry) {
@@ -290,32 +328,38 @@ export default function HomePage() {
             français: "",
             español: "",
           },
+          timestamp: raw.timestamp ? Number(raw.timestamp) : undefined,
         });
       }
     });
+
+    // Ensure each entry's lines are in order
     for (const entry of groups.values()) {
       entry.lines.sort((a, b) => a.lineNumber - b.lineNumber);
     }
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
-  if (!hasMounted || !selectedCategoryData) {
-    return null;
-  }
+  // Do not render until we are mounted and have valid category data
+  if (!hasMounted || !selectedCategoryData) return null;
+
+  /* =====================
+     Render JSX
+  ====================== */
 
   return (
     <>
       <div className="container mx-auto px-4 py-6 transition-colors">
-        <div className="mb-8">
-          <div className="text-center py-4">
-            <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
-              {selectedCategoryData.translations[language] ||
-                selectedCategoryData.id}
-            </h1>
-          </div>
-        </div>
+        {/* Page Header */}
+        <header className="mb-8 text-center py-4">
+          <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
+            {selectedCategoryData.translations[language] ||
+              selectedCategoryData.id}
+          </h1>
+        </header>
 
-        <div className="grid grid-cols-1 gap-4 mt-6">
+        {/* Azkar Cards */}
+        <section className="grid grid-cols-1 gap-4 mt-6">
           {groupedAzkars.map((azkar) => {
             const virtue = selectedCategoryData.virtues.find(
               (v) => v.azkar_id === azkar.id
@@ -330,19 +374,21 @@ export default function HomePage() {
                 updateCounter={updateCounter}
                 showTranslation={showTranslation}
                 virtue={virtue}
+                audioSrc={`/audio/${azkar.id}.mp3`}
                 ref={(el) => {
                   cardRefs.current[azkar.id] = el;
                 }}
               />
             );
           })}
-        </div>
+        </section>
       </div>
 
+      {/* Settings Drawer */}
       <Drawer onOpenChange={(open) => setDrawerOpen(open)}>
         <DrawerTrigger asChild>
-          <Button variant="outline" className="fixed bottom-4 right-4 p-2">
-            ⚙️
+          <Button variant="outline" className="fixed bottom-4 right-4 p-2 z-50">
+            <img src="/settingsIcon.svg" alt="Settings" className="w-6 h-6" />
           </Button>
         </DrawerTrigger>
         <DrawerContent className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]">
@@ -354,7 +400,9 @@ export default function HomePage() {
               <Description />
             </div>
           </DrawerHeader>
+
           <div className="flex flex-col">
+            {/* Language Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {data.metadata.supportedLanguages.map((lang) => (
@@ -373,6 +421,8 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
+
+            {/* Theme Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {data.themes.map((item) => (
@@ -391,6 +441,8 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
+
+            {/* Category Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {categories.map((category) => (
@@ -409,6 +461,8 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
+
+            {/* Toggle Translation (if not Arabic) */}
             {language !== "عربي" && (
               <div className="p-4 flex items-center gap-2 justify-center">
                 <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)]">
@@ -420,6 +474,8 @@ export default function HomePage() {
                 />
               </div>
             )}
+
+            {/* Clear History Button */}
             <div className="p-4 flex items-center justify-center">
               <Button
                 variant="outline"
@@ -443,6 +499,8 @@ export default function HomePage() {
               </Button>
             </div>
           </div>
+
+          {/* Hidden close button for accessibility */}
           <DrawerClose asChild>
             <VisuallyHidden>
               <Button autoFocus />
@@ -453,6 +511,10 @@ export default function HomePage() {
     </>
   );
 }
+
+/* =====================
+   ToggleSwitch Component
+===================== */
 
 const ToggleSwitch: React.FC<{ enabled: boolean; onToggle: () => void }> = ({
   enabled,
@@ -476,3 +538,5 @@ const ToggleSwitch: React.FC<{ enabled: boolean; onToggle: () => void }> = ({
     </button>
   );
 };
+
+export { ToggleSwitch };
