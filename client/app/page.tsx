@@ -340,6 +340,33 @@ export default function HomePage() {
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
+  /* =====================
+   ToggleSwitch Component
+===================== */
+
+  const ToggleSwitch: React.FC<{
+    enabled: boolean;
+    onToggle: () => void;
+  }> = ({ enabled, onToggle }) => {
+    return (
+      <button
+        onClick={onToggle}
+        aria-pressed={enabled}
+        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+          enabled
+            ? "bg-[#606c38] border-[#606c38]"
+            : "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+        }`}
+      >
+        <span
+          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+            enabled ? "translate-x-6" : "translate-x-1"
+          }`}
+        />
+      </button>
+    );
+  };
+
   // Do not render until we are mounted and have valid category data
   if (!hasMounted || !selectedCategoryData) return null;
 
@@ -511,30 +538,3 @@ export default function HomePage() {
     </>
   );
 }
-
-/* =====================
-   ToggleSwitch Component
-===================== */
-
-export const ToggleSwitch: React.FC<{
-  enabled: boolean;
-  onToggle: () => void;
-}> = ({ enabled, onToggle }) => {
-  return (
-    <button
-      onClick={onToggle}
-      aria-pressed={enabled}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-        enabled
-          ? "bg-[#606c38] border-[#606c38]"
-          : "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-      }`}
-    >
-      <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-          enabled ? "translate-x-6" : "translate-x-1"
-        }`}
-      />
-    </button>
-  );
-};
