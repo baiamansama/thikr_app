@@ -55,6 +55,11 @@ interface ITheme {
   translations: Translation;
 }
 
+interface AudioState {
+  currentlyPlayingId: string | null;
+  availableAudios: Set<string>;
+}
+
 interface IVirtues {
   azkar_id: string;
   arabic: string;
@@ -137,9 +142,22 @@ export default function HomePage() {
   const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [clearHistoryClicked, setClearHistoryClicked] = useState(false);
+  const [audioState, setAudioState] = useState<AudioState>({
+    currentlyPlayingId: null,
+    availableAudios: new Set<string>(),
+  });
+  const isMounted = useRef(false);
 
   // Keep track of the current drawer state in a ref
   const drawerOpenRef = useRef(drawerOpen);
+
+  const handleAudioStateChange = useCallback((azkarId: string | null) => {
+    setAudioState((prev) => ({
+      ...prev,
+      currentlyPlayingId: azkarId,
+    }));
+  }, []);
+
   useEffect(() => {
     drawerOpenRef.current = drawerOpen;
   }, [drawerOpen]);
@@ -340,6 +358,43 @@ export default function HomePage() {
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
+  // Check which audio files are available
+  useEffect(() => {
+    isMounted.current = true;
+
+    const checkAudioAvailability = async (azkarId: string) => {
+      try {
+        const response = await fetch(`/audio/${azkarId}.mp3`, {
+          method: "HEAD",
+        });
+        if (response.ok && isMounted.current) {
+          setAudioState((prev) => ({
+            ...prev,
+            availableAudios: new Set([...prev.availableAudios, azkarId]),
+          }));
+        }
+      } catch (error) {
+        console.error(`Audio file check failed for ${azkarId}:`, error);
+      }
+    };
+
+    // Check audio availability for all azkars
+    groupedAzkars.forEach((azkar) => {
+      checkAudioAvailability(azkar.id);
+    });
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [groupedAzkars]);
+
+  useEffect(() => {
+    setAudioState((prev) => ({
+      ...prev,
+      currentlyPlayingId: null,
+    }));
+  }, [selectedCategory]);
+
   /* =====================
    ToggleSwitch Component
 ===================== */
@@ -391,6 +446,8 @@ export default function HomePage() {
             const virtue = selectedCategoryData.virtues.find(
               (v) => v.azkar_id === azkar.id
             );
+            const hasAudio = audioState.availableAudios.has(azkar.id);
+            const isPlaying = audioState.currentlyPlayingId === azkar.id;
             return (
               <AzkarCard
                 key={azkar.id}
@@ -401,7 +458,11 @@ export default function HomePage() {
                 updateCounter={updateCounter}
                 showTranslation={showTranslation}
                 virtue={virtue}
-                audioSrc={`/audio/${azkar.id}.mp3`}
+                audioSrc={hasAudio ? `/audio/${azkar.id}.mp3` : undefined}
+                isCurrentlyPlaying={isPlaying}
+                onAudioStateChange={(playing) =>
+                  handleAudioStateChange(playing ? azkar.id : null)
+                }
                 ref={(el) => {
                   cardRefs.current[azkar.id] = el;
                 }}

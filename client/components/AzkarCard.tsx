@@ -54,7 +54,6 @@ export interface IVirtues {
   français?: string;
   español?: string;
 }
-
 export interface IAzkarCardProps {
   azkar: IAzkarEntry;
   language: string;
@@ -64,6 +63,8 @@ export interface IAzkarCardProps {
   showTranslation: boolean;
   virtue?: IVirtues;
   audioSrc?: string;
+  isCurrentlyPlaying?: boolean;
+  onAudioStateChange?: (playing: boolean) => void;
 }
 
 // =============================================================================
@@ -87,11 +88,8 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     // -------------------------------------------------------------------------
     // Local State & Refs
     // -------------------------------------------------------------------------
-    // Copy status state
     const [copied, setCopied] = useState(false);
-
-    // Audio & playback states
-    const audioRef = useRef<HTMLAudioElement>(null);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [playbackRate, setPlaybackRate] = useState(1);
     const [isRepeat, setIsRepeat] = useState(false);
@@ -100,11 +98,11 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       null
     );
     const [showFixedPlayer, setShowFixedPlayer] = useState(false);
+    const [audioError, setAudioError] = useState(false);
 
-    // Check if the azkar has been completed
     const isCompleted = counter >= azkar.count;
+    const hasAudio = Boolean(audioSrc);
 
-    // Pre-calculate available timestamps from azkar lines for skipping
     const timestamps = useMemo(() => {
       return azkar.lines
         .map((line) => line.timestamp)
@@ -113,12 +111,36 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     }, [azkar.lines]);
 
     // -------------------------------------------------------------------------
+    // Audio Setup & Error Handling
+    // -------------------------------------------------------------------------
+    useEffect(() => {
+      if (!hasAudio) return;
+
+      const audio = new Audio(audioSrc);
+      audioRef.current = audio;
+
+      const handleError = (e: ErrorEvent) => {
+        console.error("Audio error:", e);
+        setAudioError(true);
+        setIsPlaying(false);
+        setShowFixedPlayer(false);
+      };
+
+      audio.addEventListener("error", handleError);
+
+      return () => {
+        audio.removeEventListener("error", handleError);
+        audio.pause();
+        audioRef.current = null;
+      };
+    }, [audioSrc, hasAudio]);
+
+    // -------------------------------------------------------------------------
     // Audio Event Handlers
     // -------------------------------------------------------------------------
-    // Update the current time during playback
     useEffect(() => {
       const audioEl = audioRef.current;
-      if (!audioEl) return;
+      if (!audioEl || !hasAudio) return;
 
       const handleTimeUpdate = () => {
         setCurrentTime(audioEl.currentTime);
@@ -128,19 +150,19 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       return () => {
         audioEl.removeEventListener("timeupdate", handleTimeUpdate);
       };
-    }, []);
+    }, [hasAudio]);
 
-    // Handle audio "ended" event to either repeat or stop playback
     useEffect(() => {
       const audioEl = audioRef.current;
-      if (!audioEl) return;
+      if (!audioEl || !hasAudio) return;
 
       const handleEnded = () => {
         if (isRepeat) {
           audioEl.currentTime = 0;
-          audioEl
-            .play()
-            .catch((err) => console.error("Audio replay error:", err));
+          audioEl.play().catch((err) => {
+            console.error("Audio replay error:", err);
+            setAudioError(true);
+          });
         } else {
           setIsPlaying(false);
         }
@@ -150,27 +172,27 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       return () => {
         audioEl.removeEventListener("ended", handleEnded);
       };
-    }, [isRepeat]);
+    }, [isRepeat, hasAudio]);
 
     // -------------------------------------------------------------------------
     // Audio Control Handlers
     // -------------------------------------------------------------------------
-    // Toggle play/pause state
     const handlePlayPause = useCallback(() => {
-      if (!audioRef.current) return;
+      if (!audioRef.current || !hasAudio || audioError) return;
+
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
       } else {
-        audioRef.current
-          .play()
-          .catch((err) => console.error("Audio play error:", err));
+        audioRef.current.play().catch((err) => {
+          console.error("Audio play error:", err);
+          setAudioError(true);
+        });
         setIsPlaying(true);
         setShowFixedPlayer(true);
       }
-    }, [isPlaying]);
+    }, [isPlaying, hasAudio, audioError]);
 
-    // Close the fixed audio player
     const handleClosePlayer = useCallback(() => {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -452,7 +474,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
               )}
             </button>
 
-            {audioSrc && (
+            {hasAudio && !audioError && (
               <button
                 onClick={handlePlayPause}
                 aria-label="Play/Pause"
@@ -492,7 +514,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         </div>
 
         {/* -------------------- Fixed Audio Player --------------------- */}
-        {showFixedPlayer && (
+        {showFixedPlayer && hasAudio && !audioError && (
           <div className="fixed bottom-0 left-0 right-0 bg-[var(--card-bg)] border-t border-[var(--card-border)] p-4 pb-16 z-40">
             <div className="container mx-auto flex items-center justify-between">
               <div className="flex items-center justify-center gap-4">
