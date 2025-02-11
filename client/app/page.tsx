@@ -516,10 +516,10 @@ export default function HomePage() {
    ToggleSwitch Component
 ===================== */
 
-const ToggleSwitch: React.FC<{ enabled: boolean; onToggle: () => void }> = ({
-  enabled,
-  onToggle,
-}) => {
+export const ToggleSwitch: React.FC<{
+  enabled: boolean;
+  onToggle: () => void;
+}> = ({ enabled, onToggle }) => {
   return (
     <button
       onClick={onToggle}
@@ -538,5 +538,3 @@ const ToggleSwitch: React.FC<{ enabled: boolean; onToggle: () => void }> = ({
     </button>
   );
 };
-
-export { ToggleSwitch };
