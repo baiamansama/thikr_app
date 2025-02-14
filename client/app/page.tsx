@@ -111,8 +111,6 @@ export interface IThikrDB {
   language: string;
   theme: string;
   counters: { [azkarId: string]: number };
-  showTranslation: boolean;
-  lastReacCard: string;
 }
 
 /* =====================
@@ -125,8 +123,6 @@ const INITIAL_DB: IThikrDB = {
   language: "кыргыз",
   theme: "auto",
   counters: {},
-  showTranslation: false,
-  lastReacCard: "",
 };
 
 /* =====================
@@ -162,51 +158,9 @@ export default function HomePage() {
     drawerOpenRef.current = drawerOpen;
   }, [drawerOpen]);
 
-  // References for each Azkar card element
-  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-
-  /**
-   * Determines which card is closest to the vertical center of the viewport.
-   */
-  const determineReadingCard = (): string | null => {
-    let chosenId: string | null = null;
-    let minDiff = Infinity;
-
-    Object.entries(cardRefs.current).forEach(([id, el]) => {
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        const cardCenter = rect.top + rect.height / 2;
-        const diff = Math.abs(cardCenter - window.innerHeight / 2);
-        if (diff < minDiff) {
-          minDiff = diff;
-          chosenId = id;
-        }
-      }
-    });
-    return chosenId;
-  };
-
   /* =====================
      Side Effects
   ====================== */
-
-  // Update the last read card on scroll (debounced)
-  useEffect(() => {
-    let timeoutId: number;
-    const handleScroll = () => {
-      clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(() => {
-        if (!drawerOpenRef.current) {
-          const currentId = determineReadingCard();
-          if (currentId) {
-            setDb((prev) => ({ ...prev, lastReacCard: currentId }));
-          }
-        }
-      }, 200);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Update the selected category based on the current time (morning vs evening)
   useEffect(() => {
@@ -226,7 +180,7 @@ export default function HomePage() {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Initialize from localStorage and scroll to the last read card
+  // Initialize from localStorage
   useEffect(() => {
     setHasMounted(true);
     if (typeof window !== "undefined") {
@@ -234,14 +188,6 @@ export default function HomePage() {
       if (storedDB) {
         const parsedDB = JSON.parse(storedDB) as IThikrDB;
         setDb(parsedDB);
-        if (parsedDB.lastReacCard && cardRefs.current[parsedDB.lastReacCard]) {
-          setTimeout(() => {
-            cardRefs.current[parsedDB.lastReacCard]?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }, 100);
-        }
       }
     }
   }, []);
@@ -252,18 +198,6 @@ export default function HomePage() {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(db));
     }
   }, [db, hasMounted]);
-
-  // When the drawer closes, scroll to the last read card (if available)
-  useEffect(() => {
-    if (!drawerOpen && db.lastReacCard && cardRefs.current[db.lastReacCard]) {
-      setTimeout(() => {
-        cardRefs.current[db.lastReacCard]?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }, 0);
-    }
-  }, [drawerOpen, db.lastReacCard]);
 
   /* =====================
      Event Handlers
@@ -288,20 +222,11 @@ export default function HomePage() {
     }));
   }, []);
 
-  const toggleTranslation = useCallback(() => {
-    const currentId = determineReadingCard();
-    setDb((prev) => ({
-      ...prev,
-      lastReacCard: currentId || prev.lastReacCard,
-      showTranslation: !prev.showTranslation,
-    }));
-  }, []);
-
   /* =====================
      Derived / Computed Values
   ====================== */
 
-  const { language, selectedCategory, theme, counters, showTranslation } = db;
+  const { language, selectedCategory, theme, counters } = db;
 
   // Auto-detect theme based on time if "auto" is selected
   const computedTheme = useMemo(() => {
@@ -395,33 +320,6 @@ export default function HomePage() {
     }));
   }, [selectedCategory]);
 
-  /* =====================
-   ToggleSwitch Component
-===================== */
-
-  const ToggleSwitch: React.FC<{
-    enabled: boolean;
-    onToggle: () => void;
-  }> = ({ enabled, onToggle }) => {
-    return (
-      <button
-        onClick={onToggle}
-        aria-pressed={enabled}
-        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-          enabled
-            ? "bg-[#606c38] border-[#606c38]"
-            : "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-        }`}
-      >
-        <span
-          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-            enabled ? "translate-x-6" : "translate-x-1"
-          }`}
-        />
-      </button>
-    );
-  };
-
   // Do not render until we are mounted and have valid category data
   if (!hasMounted || !selectedCategoryData) return null;
 
@@ -456,16 +354,12 @@ export default function HomePage() {
                 uiTranslations={data.uiTranslations}
                 counter={counters[azkar.id] || 0}
                 updateCounter={updateCounter}
-                showTranslation={showTranslation}
                 virtue={virtue}
                 audioSrc={hasAudio ? `/audio/${azkar.id}.mp3` : undefined}
                 isCurrentlyPlaying={isPlaying}
                 onAudioStateChange={(playing) =>
                   handleAudioStateChange(playing ? azkar.id : null)
                 }
-                ref={(el) => {
-                  cardRefs.current[azkar.id] = el;
-                }}
               />
             );
           })}
@@ -475,8 +369,11 @@ export default function HomePage() {
       {/* Settings Drawer */}
       <Drawer onOpenChange={(open) => setDrawerOpen(open)}>
         <DrawerTrigger asChild>
-          <Button variant="outline" className="fixed bottom-4 right-4 p-2 z-50">
-            <img src="/settingsIcon.svg" alt="Settings" className="w-6 h-6" />
+          <Button
+            variant="outline"
+            className="fixed bottom-4 right-4 p-2 z-50 bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
+          >
+            <span className="material-icons-round text-2xl">settings</span>
           </Button>
         </DrawerTrigger>
         <DrawerContent className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]">
@@ -549,19 +446,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-
-            {/* Toggle Translation (if not Arabic) */}
-            {language !== "عربي" && (
-              <div className="p-4 flex items-center gap-2 justify-center">
-                <span className="flex justify-center items-center cursor-default px-3 py-1 transition-colors bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)]">
-                  {data.uiTranslations.toggleTranslation.show[language]}
-                </span>
-                <ToggleSwitch
-                  enabled={showTranslation}
-                  onToggle={toggleTranslation}
-                />
-              </div>
-            )}
 
             {/* Clear History Button */}
             <div className="p-4 flex items-center justify-center">

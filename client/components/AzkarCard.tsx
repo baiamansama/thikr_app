@@ -54,13 +54,13 @@ export interface IVirtues {
   français?: string;
   español?: string;
 }
+
 export interface IAzkarCardProps {
   azkar: IAzkarEntry;
   language: string;
   uiTranslations: IUITranslations;
   counter: number;
   updateCounter: (azkarId: string, newCount: number) => void;
-  showTranslation: boolean;
   virtue?: IVirtues;
   audioSrc?: string;
   isCurrentlyPlaying?: boolean;
@@ -79,7 +79,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       uiTranslations,
       counter,
       updateCounter,
-      showTranslation,
       virtue,
       audioSrc,
     },
@@ -89,6 +88,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     // Local State & Refs
     // -------------------------------------------------------------------------
     const [copied, setCopied] = useState(false);
+    const [showTranslation, setShowTranslation] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [playbackRate, setPlaybackRate] = useState(1);
@@ -226,11 +226,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       setTimeout(() => setIsSkipping(null), 200);
 
       const current = audioRef.current.currentTime;
-      // Find the closest previous timestamp (subtract a small buffer)
       const previousTimestamp = [...timestamps]
         .reverse()
         .find((ts) => ts < current - 0.5);
-
       audioRef.current.currentTime =
         previousTimestamp !== undefined ? previousTimestamp : 0;
     }, [timestamps]);
@@ -252,14 +250,12 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     // -------------------------------------------------------------------------
     // Counter and Text Handlers
     // -------------------------------------------------------------------------
-    // Increment counter if not completed
     const handleIncrement = useCallback(() => {
       if (counter < azkar.count) {
         updateCounter(azkar.id, counter + 1);
       }
     }, [counter, azkar, updateCounter]);
 
-    // Generate the button text based on progress and translation
     const getButtonText = useCallback((): string => {
       if (isCompleted) {
         return `${uiTranslations.actions.completed[language] || "Completed"} (${
@@ -270,7 +266,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       return `${tapText} (${counter}/${azkar.count})`;
     }, [isCompleted, uiTranslations, language, counter, azkar.count]);
 
-    // Build the virtues label based on the selected language (fallback to Arabic)
     const virtuesLabel = useMemo(() => {
       let label = uiTranslations.virtues[language] ?? "";
       if (label.trim() === "") {
@@ -279,7 +274,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       return label.trim();
     }, [uiTranslations, language]);
 
-    // Select the virtue text based on the chosen language
     const virtueText = useMemo(() => {
       if (!virtue) return "";
       if (language === "عربي") {
@@ -298,7 +292,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
 
     const shouldRenderVirtues = virtuesLabel !== "" && virtueText !== "";
 
-    // Build the full card text for copy/share actions
     const getCardText = useCallback(() => {
       let text = azkar.lines
         .map((line) => {
@@ -322,7 +315,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       return text;
     }, [azkar, showTranslation, language, virtue, virtueText, virtuesLabel]);
 
-    // Copy card text to clipboard
     const handleCopy = useCallback(() => {
       const cardText = getCardText();
       navigator.clipboard
@@ -334,7 +326,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         .catch((err) => console.error("Failed to copy text: ", err));
     }, [getCardText]);
 
-    // Share card text using the Web Share API (if available)
     const handleShare = useCallback(() => {
       const cardText = getCardText();
       if (navigator.share) {
@@ -356,9 +347,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     // -------------------------------------------------------------------------
     // Styling Classes (for consistency)
     // -------------------------------------------------------------------------
-    const iconClassNames =
-      "w-8 h-8 card-text dark:filter dark:brightness-0 dark:invert";
-
+    const iconClassNames = "w-8 h-8 text-[var(--card-text)]";
     const buttonClassNames = "p-2 flex items-center justify-center";
 
     // =============================================================================
@@ -452,25 +441,30 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             </button>
           </div>
 
-          {/* Action Buttons: Copy, Audio, Share */}
+          {/* Action Buttons: Translation, Copy, Audio, Share */}
           <div className="flex items-center justify-center mt-4 gap-4">
+            <button
+              onClick={() => setShowTranslation((prev) => !prev)}
+              aria-label="Toggle Translation"
+            >
+              <span className={`material-icons-round ${iconClassNames}`}>
+                translate
+              </span>
+            </button>
+
             <button
               onClick={handleCopy}
               aria-label="Copy"
               className={buttonClassNames}
             >
               {copied ? (
-                <img
-                  src="/copySuccessIcon.svg"
-                  alt="Copied Icon"
-                  className={iconClassNames}
-                />
+                <span className={`material-icons-round ${iconClassNames}`}>
+                  check
+                </span>
               ) : (
-                <img
-                  src="/copyIcon.svg"
-                  alt="Copy Icon"
-                  className={iconClassNames}
-                />
+                <span className={`material-icons-round ${iconClassNames}`}>
+                  content_copy
+                </span>
               )}
             </button>
 
@@ -481,17 +475,13 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                 className={buttonClassNames}
               >
                 {isPlaying ? (
-                  <img
-                    src="/pauseIcon.svg"
-                    alt="Pause Icon"
-                    className={iconClassNames}
-                  />
+                  <span className={`material-icons-round ${iconClassNames}`}>
+                    pause
+                  </span>
                 ) : (
-                  <img
-                    src="/playIcon.svg"
-                    alt="Play Icon"
-                    className={iconClassNames}
-                  />
+                  <span className={`material-icons-round ${iconClassNames}`}>
+                    play_arrow
+                  </span>
                 )}
               </button>
             )}
@@ -501,11 +491,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
               aria-label="Share"
               className={buttonClassNames}
             >
-              <img
-                src="/shareIcon.svg"
-                alt="Share Icon"
-                className={iconClassNames}
-              />
+              <span className={`material-icons-round ${iconClassNames}`}>
+                share
+              </span>
             </button>
           </div>
 
@@ -525,11 +513,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                     isSkipping === "backward" ? "scale-90" : ""
                   }`}
                 >
-                  <img
-                    src="/skipBackwardIcon.svg"
-                    alt="Skip Backward Icon"
-                    className={iconClassNames}
-                  />
+                  <span className={`material-icons-round ${iconClassNames}`}>
+                    skip_previous
+                  </span>
                 </button>
 
                 <button
@@ -538,17 +524,13 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                   className={buttonClassNames}
                 >
                   {isPlaying ? (
-                    <img
-                      src="/pauseIcon.svg"
-                      alt="Pause Icon"
-                      className={iconClassNames}
-                    />
+                    <span className={`material-icons-round ${iconClassNames}`}>
+                      pause
+                    </span>
                   ) : (
-                    <img
-                      src="/playIcon.svg"
-                      alt="Play Icon"
-                      className={iconClassNames}
-                    />
+                    <span className={`material-icons-round ${iconClassNames}`}>
+                      play_arrow
+                    </span>
                   )}
                 </button>
 
@@ -559,11 +541,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                     isSkipping === "forward" ? "scale-90" : ""
                   }`}
                 >
-                  <img
-                    src="/skipForwardIcon.svg"
-                    alt="Skip Forward Icon"
-                    className={iconClassNames}
-                  />
+                  <span className={`material-icons-round ${iconClassNames}`}>
+                    skip_next
+                  </span>
                 </button>
 
                 <button
@@ -571,7 +551,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                   aria-label="Speed"
                   className={`${buttonClassNames} min-w-[48px]`}
                 >
-                  <span className="text-base font-medium">{playbackRate}x</span>
+                  <span className="text-base font-medium text-[var(--card-text)]">
+                    {playbackRate}x
+                  </span>
                 </button>
 
                 <button
@@ -579,18 +561,18 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                   aria-label="Repeat"
                   className={buttonClassNames}
                 >
-                  <img
-                    src="/repeatIcon.svg"
-                    alt="Repeat Icon"
-                    className={`${iconClassNames} transition-opacity ${
-                      isRepeat ? "opacity-100" : "opacity-50"
+                  <span
+                    className={`material-icons-round ${iconClassNames} transition-opacity ${
+                      isRepeat ? "opacity-100" : "opacity-100"
                     }`}
                     style={
                       isRepeat
                         ? { filter: "brightness(1.2) contrast(1.2)" }
                         : undefined
                     }
-                  />
+                  >
+                    {isRepeat ? "repeat_on" : "repeat"}
+                  </span>
                 </button>
               </div>
 
@@ -599,11 +581,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                 aria-label="Close Player"
                 className={buttonClassNames}
               >
-                <img
-                  src="/closeIcon.svg"
-                  alt="Close Icon"
-                  className={iconClassNames}
-                />
+                <span className={`material-icons-round ${iconClassNames}`}>
+                  close
+                </span>
               </button>
             </div>
           </div>
