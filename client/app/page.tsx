@@ -25,34 +25,22 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
    Interfaces & Types
 ===================== */
 
+interface IUIItem {
+  Key: string;
+  Arabic: string;
+  English: string;
+  Türkçe: string;
+  Kyrgyz: string;
+  Russian: string;
+}
+
 interface Translation {
   [language: string]: string;
 }
 
-interface IMetadata {
-  version: string;
-  lastUpdated: string;
-  supportedLanguages: string[];
-}
-
-interface IUIActions {
-  clean_history: Translation;
-  tap: Translation;
-  completed: Translation;
-}
-
-interface IUITranslations {
-  actions: IUIActions;
-  toggleTranslation: {
-    show: Translation;
-  };
-  virtues: Translation;
-  settings: Translation;
-}
-
-interface ITheme {
+interface IThemeItem {
   id: string;
-  translations: Translation;
+  label: string;
 }
 
 interface AudioState {
@@ -100,9 +88,7 @@ interface ICategory {
 }
 
 interface IData {
-  metadata: IMetadata;
-  uiTranslations: IUITranslations;
-  themes: ITheme[];
+  ui: IUIItem[];
   categories: ICategory[];
 }
 
@@ -112,6 +98,28 @@ export interface IThikrDB {
   theme: string;
   counters: { [azkarId: string]: number };
 }
+
+/* =====================
+   Helper Functions for UI Translations
+===================== */
+
+// Map language input to the proper key in the UI items.
+const mapLanguage = (lang: string) => {
+  const normalized = lang.toLowerCase();
+  if (normalized === "عربي" || normalized === "arabic") return "Arabic";
+  if (normalized === "english") return "English";
+  if (normalized === "türkçe" || normalized === "turkish") return "Türkçe";
+  if (normalized === "кыргыз" || normalized === "kyrgyz") return "Kyrgyz";
+  if (normalized === "русский" || normalized === "russian") return "Russian";
+  return "English";
+};
+
+// Return the proper translation for the given key from the ui array.
+const getTranslation = (data: IData, key: string, language: string) => {
+  const langKey = mapLanguage(language);
+  const uiItem = data.ui.find((item) => item.Key === key);
+  return uiItem ? uiItem[langKey] || "" : key;
+};
 
 /* =====================
    Constants
@@ -125,6 +133,9 @@ const INITIAL_DB: IThikrDB = {
   counters: {},
 };
 
+// Supported languages array (hard-coded)
+const supportedLanguages = ["عربي", "English", "Türkçe", "Kyrgyz", "Russian"];
+
 /* =====================
    Main Component
 ===================== */
@@ -133,9 +144,25 @@ export default function HomePage() {
   const data: IData = azkarsData;
   const categories = useMemo(() => data.categories, [data]);
 
+  // Declare db state before using it in themeItems
+  const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
+
+  // Extract theme items from the UI array using the current db language.
+  const themeItems: IThemeItem[] = useMemo(() => {
+    const themeKeys = [
+      "themes_auto",
+      "themes_light",
+      "themes_sepia",
+      "themes_dark",
+    ];
+    return themeKeys.map((key) => ({
+      id: key.replace("themes_", ""), // "auto", "light", "sepia", "dark"
+      label: getTranslation(data, key, db.language),
+    }));
+  }, [data, db.language]);
+
   // Local state variables
   const [hasMounted, setHasMounted] = useState(false);
-  const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [clearHistoryClicked, setClearHistoryClicked] = useState(false);
   const [audioState, setAudioState] = useState<AudioState>({
@@ -143,8 +170,6 @@ export default function HomePage() {
     availableAudios: new Set<string>(),
   });
   const isMounted = useRef(false);
-
-  // Keep track of the current drawer state in a ref
   const drawerOpenRef = useRef(drawerOpen);
 
   const handleAudioStateChange = useCallback((azkarId: string | null) => {
@@ -162,7 +187,7 @@ export default function HomePage() {
      Side Effects
   ====================== */
 
-  // Update the selected category based on the current time (morning vs evening)
+  // Update the selected category based on current time (morning vs evening)
   useEffect(() => {
     const updateCategoryBasedOnTime = () => {
       const currentHour = new Date().getHours();
@@ -228,6 +253,23 @@ export default function HomePage() {
 
   const { language, selectedCategory, theme, counters } = db;
 
+  // Compute UI translations from the current db structure.
+  const computedUITranslations = useMemo(
+    () => ({
+      actions: {
+        clean_history: getTranslation(data, "clean_history", language),
+      },
+      tap: getTranslation(data, "tap", language),
+      completed: getTranslation(data, "completed", language),
+      toggleTranslation: {
+        show: getTranslation(data, "toggleTranslation_show", language),
+      },
+      virtues: getTranslation(data, "virtues", language),
+      settings: getTranslation(data, "settings", language),
+    }),
+    [data, language]
+  );
+
   // Auto-detect theme based on time if "auto" is selected
   const computedTheme = useMemo(() => {
     if (theme === "auto") {
@@ -276,7 +318,7 @@ export default function HomePage() {
       }
     });
 
-    // Ensure each entry's lines are in order
+    // Ensure each entry's lines are sorted
     for (const entry of groups.values()) {
       entry.lines.sort((a, b) => a.lineNumber - b.lineNumber);
     }
@@ -303,7 +345,6 @@ export default function HomePage() {
       }
     };
 
-    // Check audio availability for all azkars
     groupedAzkars.forEach((azkar) => {
       checkAudioAvailability(azkar.id);
     });
@@ -320,7 +361,6 @@ export default function HomePage() {
     }));
   }, [selectedCategory]);
 
-  // Do not render until we are mounted and have valid category data
   if (!hasMounted || !selectedCategoryData) return null;
 
   /* =====================
@@ -351,7 +391,7 @@ export default function HomePage() {
                 key={azkar.id}
                 azkar={azkar}
                 language={language}
-                uiTranslations={data.uiTranslations}
+                uiTranslations={computedUITranslations}
                 counter={counters[azkar.id] || 0}
                 updateCounter={updateCounter}
                 virtue={virtue}
@@ -380,7 +420,7 @@ export default function HomePage() {
           <DrawerHeader>
             <div className="flex justify-center">
               <DrawerTitle className="text-center">
-                {data.uiTranslations.settings[language] || "Settings"}
+                {computedUITranslations.settings || "Settings"}
               </DrawerTitle>
               <Description />
             </div>
@@ -390,7 +430,7 @@ export default function HomePage() {
             {/* Language Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
-                {data.metadata.supportedLanguages.map((lang) => (
+                {supportedLanguages.map((lang) => (
                   <button
                     key={lang}
                     onClick={() => handleLanguageClick(lang)}
@@ -410,7 +450,7 @@ export default function HomePage() {
             {/* Theme Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
-                {data.themes.map((item) => (
+                {themeItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleThemeClick(item.id)}
@@ -421,7 +461,7 @@ export default function HomePage() {
                     }`}
                     aria-pressed={item.id === theme}
                   >
-                    <span>{item.translations[language] || item.id}</span>
+                    <span>{item.label}</span>
                   </button>
                 ))}
               </div>
@@ -466,13 +506,12 @@ export default function HomePage() {
                     : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
                 }`}
               >
-                {data.uiTranslations.actions.clean_history[language] ||
+                {computedUITranslations.actions.clean_history ||
                   "🗑️ Clear History"}
               </Button>
             </div>
           </div>
 
-          {/* Hidden close button for accessibility */}
           <DrawerClose asChild>
             <VisuallyHidden>
               <Button autoFocus />
