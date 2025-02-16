@@ -100,10 +100,10 @@ export interface IThikrDB {
 }
 
 /* =====================
-   Helper Functions for UI Translations
+   Helper Functions for Translations
 ===================== */
 
-// Map language input to the proper key in the UI items.
+// Maps the language for UI items.
 const mapLanguage = (lang: string) => {
   const normalized = lang.toLowerCase();
   if (normalized === "عربي" || normalized === "arabic") return "Arabic";
@@ -114,11 +114,31 @@ const mapLanguage = (lang: string) => {
   return "English";
 };
 
-// Return the proper translation for the given key from the ui array.
+// Returns the UI translation from the ui array.
 const getTranslation = (data: IData, key: string, language: string) => {
   const langKey = mapLanguage(language);
   const uiItem = data.ui.find((item) => item.Key === key);
   return uiItem ? uiItem[langKey] || "" : key;
+};
+
+// Maps the language for category translations.
+const mapCategoryLanguage = (lang: string): string => {
+  const normalized = lang.toLowerCase();
+  if (normalized === "عربي" || normalized === "arabic") return "عربي";
+  if (normalized === "english") return "english";
+  if (normalized === "türkçe" || normalized === "turkish") return "türkçe";
+  if (normalized === "кыргыз" || normalized === "kyrgyz") return "кыргыз";
+  if (normalized === "русский" || normalized === "russian") return "русский";
+  return "english";
+};
+
+// Returns the proper category translation.
+const getCategoryTranslation = (
+  category: ICategory,
+  language: string
+): string => {
+  const key = mapCategoryLanguage(language);
+  return category.translations[key] || category.id;
 };
 
 /* =====================
@@ -373,8 +393,7 @@ export default function HomePage() {
         {/* Page Header */}
         <header className="mb-8 text-center py-4">
           <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
-            {selectedCategoryData.translations[language] ||
-              selectedCategoryData.id}
+            {getCategoryTranslation(selectedCategoryData, language)}
           </h1>
         </header>
 
@@ -481,7 +500,7 @@ export default function HomePage() {
                     }`}
                     aria-pressed={selectedCategory === category.id}
                   >
-                    {category.translations[language] || category.id}
+                    {getCategoryTranslation(category, language)}
                   </button>
                 ))}
               </div>
