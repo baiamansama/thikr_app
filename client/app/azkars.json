@@ -1,84 +1,114 @@
 {
-  "ui": [
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2025-02-02",
+    "supportedLanguages": [
+      "عربي",
+      "english",
+      "кыргыз",
+      "français",
+      "español",
+      "русский"
+    ]
+  },
+  "uiTranslations": {
+    "actions": {
+      "clean_history": {
+        "عربي": "🗑️ مسح التاريخ",
+        "english": "🗑️ Clear history",
+        "кыргыз": "🗑️ Тарыхты тазала",
+        "русский": "🗑️ Очистить историю",
+        "français": "🗑️ Effacer l'historique",
+        "español": "🗑️ Limpiar historial"
+      },
+      "tap": {
+        "عربي": "اضغط",
+        "english": "Tap",
+        "кыргыз": "Бас",
+        "русский": "Нажать",
+        "français": "Appuyer",
+        "español": "Tocar"
+      },
+      "completed": {
+        "عربي": "ما شاء الله",
+        "english": "Mashallah",
+        "кыргыз": "Машаллах",
+        "русский": "Машаллах",
+        "français": "Masha Allah",
+        "español": "Mashallah"
+      }
+    },
+    "settings": {
+      "عربي": "الإعدادات",
+      "english": "Settings",
+      "кыргыз": "Орнотуулар",
+      "русский": "Настройки",
+      "français": "Paramètres",
+      "español": "Ajustes"
+    },
+    "toggleTranslation": {
+      "show": {
+        "عربي": "عرض الترجمة",
+        "english": "Show Translation",
+        "кыргыз": "Котормону ач",
+        "русский": "Показать перевод",
+        "français": "Afficher la traduction",
+        "español": "Mostrar traducción"
+      }
+    },
+    "virtues": {
+      "عربي": "الفضائل",
+      "english": "Virtues",
+      "кыргыз": "Пазилети",
+      "русский": "Достоинства",
+      "français": "Vertus",
+      "español": "Virtudes"
+    }
+  },
+  "themes": [
     {
-      "Key": "clean_history",
-      "Arabic": "🗑️ مسح التاريخ",
-      "English": "🗑️ Clear history",
-      "Türkçe": "🗑️ Geçmişi temizle",
-      "Kyrgyz": "🗑️ Тарыхты тазала",
-      "Russian": "🗑️ Очистить историю"
+      "id": "auto",
+      "translations": {
+        "عربي": "تلقائي",
+        "english": "Auto",
+        "кыргыз": "Авто",
+        "русский": "Авто",
+        "français": "Automatique",
+        "español": "Automático"
+      }
     },
     {
-      "Key": "tap",
-      "Arabic": "اضغط",
-      "English": "Tap",
-      "Türkçe": "Dokun",
-      "Kyrgyz": "Бас",
-      "Russian": "Нажать"
+      "id": "light",
+      "translations": {
+        "عربي": "فاتح",
+        "english": "Light",
+        "кыргыз": "Жарык",
+        "русский": "Яркий",
+        "français": "Clair",
+        "español": "Claro"
+      }
     },
     {
-      "Key": "completed",
-      "Arabic": "ما شاء الله",
-      "English": "Mashallah",
-      "Türkçe": "Maşallah",
-      "Kyrgyz": "Машаллах",
-      "Russian": "Машаллах"
+      "id": "sepia",
+      "translations": {
+        "عربي": "سبيا",
+        "english": "Sepia",
+        "кыргыз": "Сепия",
+        "русский": "Сепия",
+        "français": "Sépia",
+        "español": "Sepia"
+      }
     },
     {
-      "Key": "settings",
-      "Arabic": "الإعدادات",
-      "English": "Settings",
-      "Türkçe": "Ayarlar",
-      "Kyrgyz": "Орнотуулар",
-      "Russian": "Настройки"
-    },
-    {
-      "Key": "toggleTranslation_show",
-      "Arabic": "عرض الترجمة",
-      "English": "Show Translation",
-      "Türkçe": "Çeviriyi göster",
-      "Kyrgyz": "Котормону ач",
-      "Russian": "Показать перевод"
-    },
-    {
-      "Key": "virtues",
-      "Arabic": "الفضائل",
-      "English": "Virtues",
-      "Türkçe": "Erdemler",
-      "Kyrgyz": "Пазилети",
-      "Russian": "Достоинства"
-    },
-    {
-      "Key": "themes_auto",
-      "Arabic": "تلقائي",
-      "English": "Auto",
-      "Türkçe": "Otomatik",
-      "Kyrgyz": "Авто",
-      "Russian": "Авто"
-    },
-    {
-      "Key": "themes_light",
-      "Arabic": "فاتح",
-      "English": "Light",
-      "Türkçe": "Açık",
-      "Kyrgyz": "Жарык",
-      "Russian": "Яркий"
-    },
-    {
-      "Key": "themes_sepia",
-      "Arabic": "سبيا",
-      "English": "Sepia",
-      "Türkçe": "Sepya",
-      "Kyrgyz": "Сепия",
-      "Russian": "Сепия"
-    },
-    {
-      "Key": "themes_dark",
-      "Arabic": "داكن",
-      "English": "Dark",
-      "Türkçe": "Koyu",
-      "Kyrgyz": "Караңгы",
-      "Russian": "Темный"
+      "id": "dark",
+      "translations": {
+        "عربي": "داكن",
+        "english": "Dark",
+        "кыргыз": "Караңгы",
+        "русский": "Темный",
+        "français": "Sombre",
+        "español": "Oscuro"
+      }
     }
   ],
   "categories": [

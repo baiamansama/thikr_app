@@ -30,15 +30,19 @@ export interface IAzkarEntry {
   lines: IAzkarLine[];
 }
 
-// New simplified UI Translations interface based on the new db structure
+interface IUIActions {
+  clean_history: Translation;
+  tap: Translation;
+  completed: Translation;
+}
+
 export interface IUITranslations {
-  tap: string;
-  completed: string;
+  actions: IUIActions;
   toggleTranslation: {
-    show: string;
+    show: Translation;
   };
-  virtues: string;
-  settings: string;
+  virtues: Translation;
+  settings: Translation;
 }
 
 export interface IVirtues {
@@ -77,7 +81,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       updateCounter,
       virtue,
       audioSrc,
-      onAudioStateChange,
     },
     ref: Ref<HTMLDivElement>
   ) => {
@@ -162,7 +165,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           });
         } else {
           setIsPlaying(false);
-          if (onAudioStateChange) onAudioStateChange(false);
         }
       };
 
@@ -170,7 +172,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       return () => {
         audioEl.removeEventListener("ended", handleEnded);
       };
-    }, [isRepeat, hasAudio, onAudioStateChange]);
+    }, [isRepeat, hasAudio]);
 
     // -------------------------------------------------------------------------
     // Audio Control Handlers
@@ -181,7 +183,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
-        if (onAudioStateChange) onAudioStateChange(false);
       } else {
         audioRef.current.play().catch((err) => {
           console.error("Audio play error:", err);
@@ -189,9 +190,8 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         });
         setIsPlaying(true);
         setShowFixedPlayer(true);
-        if (onAudioStateChange) onAudioStateChange(true);
       }
-    }, [isPlaying, hasAudio, audioError, onAudioStateChange]);
+    }, [isPlaying, hasAudio, audioError]);
 
     const handleClosePlayer = useCallback(() => {
       if (audioRef.current) {
@@ -199,8 +199,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
       setIsPlaying(false);
       setShowFixedPlayer(false);
-      if (onAudioStateChange) onAudioStateChange(false);
-    }, [onAudioStateChange]);
+    }, []);
 
     // Cycle through playback speeds: 1x -> 1.5x -> 2x -> 1x ...
     const handleSpeedChange = useCallback(() => {
@@ -259,14 +258,21 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
 
     const getButtonText = useCallback((): string => {
       if (isCompleted) {
-        return `${uiTranslations.completed} (${azkar.count})`;
+        return `${uiTranslations.actions.completed[language] || "Completed"} (${
+          azkar.count
+        })`;
       }
-      return `${uiTranslations.tap} (${counter}/${azkar.count})`;
-    }, [isCompleted, uiTranslations, counter, azkar.count]);
+      const tapText = uiTranslations.actions.tap[language] || "Tap";
+      return `${tapText} (${counter}/${azkar.count})`;
+    }, [isCompleted, uiTranslations, language, counter, azkar.count]);
 
     const virtuesLabel = useMemo(() => {
-      return uiTranslations.virtues.trim();
-    }, [uiTranslations]);
+      let label = uiTranslations.virtues[language] ?? "";
+      if (label.trim() === "") {
+        label = uiTranslations.virtues["عربي"] ?? "";
+      }
+      return label.trim();
+    }, [uiTranslations, language]);
 
     const virtueText = useMemo(() => {
       if (!virtue) return "";
@@ -339,7 +345,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     }, [getCardText]);
 
     // -------------------------------------------------------------------------
-    // Styling Classes
+    // Styling Classes (for consistency)
     // -------------------------------------------------------------------------
     const iconClassNames = "w-8 h-8 text-[var(--card-text)]";
     const buttonClassNames = "p-2 flex items-center justify-center";
