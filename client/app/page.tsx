@@ -160,24 +160,6 @@ export default function HomePage() {
      Side Effects
   ====================== */
 
-  // Update the selected category based on the current time (morning vs evening)
-  useEffect(() => {
-    const updateCategoryBasedOnTime = () => {
-      const currentHour = new Date().getHours();
-      const newCategory =
-        currentHour >= 4 && currentHour < 16 ? "morning" : "evening";
-      setDb((prevDb) =>
-        prevDb.selectedCategory !== newCategory
-          ? { ...prevDb, selectedCategory: newCategory }
-          : prevDb
-      );
-    };
-
-    updateCategoryBasedOnTime();
-    const intervalId = setInterval(updateCategoryBasedOnTime, 60000);
-    return () => clearInterval(intervalId);
-  }, []);
-
   // Initialize from localStorage
   useEffect(() => {
     setHasMounted(true);

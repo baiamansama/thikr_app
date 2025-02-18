@@ -111,6 +111,22 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     }, [azkar.lines]);
 
     // -------------------------------------------------------------------------
+    // Completion Effect: Vibration + Islamic Confetti
+    // -------------------------------------------------------------------------
+    // useRef to ensure the effect triggers only once when completed.
+    const hasCompletedEffectTriggered = useRef(false);
+    useEffect(() => {
+      if (isCompleted && !hasCompletedEffectTriggered.current) {
+        hasCompletedEffectTriggered.current = true;
+
+        // Trigger device vibration (if supported)
+        if (navigator.vibrate) {
+          navigator.vibrate([200, 100, 200]); // vibrate pattern: vibrate 200ms, pause 100ms, vibrate 200ms
+        }
+      }
+    }, [isCompleted]);
+
+    // -------------------------------------------------------------------------
     // Audio Setup & Error Handling
     // -------------------------------------------------------------------------
     useEffect(() => {
