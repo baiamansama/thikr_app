@@ -87,7 +87,7 @@ interface ICategory {
   azkars: {
     azkar_id: string;
     lineNumber: string;
-    count: string;
+    count?: string;
     arabic: string;
     english: string;
     кыргыз: string;
@@ -356,6 +356,7 @@ export default function HomePage() {
                 onAudioStateChange={(playing) =>
                   handleAudioStateChange(playing ? azkar.id : null)
                 }
+                selectedCategory={selectedCategory} // Pass selectedCategory as prop
               />
             );
           })}

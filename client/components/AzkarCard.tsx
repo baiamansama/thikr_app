@@ -63,6 +63,7 @@ export interface IAzkarCardProps {
   audioSrc?: string;
   isCurrentlyPlaying?: boolean;
   onAudioStateChange?: (playing: boolean) => void;
+  selectedCategory: string; // Added selectedCategory prop
 }
 
 // =============================================================================
@@ -79,6 +80,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       updateCounter,
       virtue,
       audioSrc,
+      selectedCategory,
     },
     ref: Ref<HTMLDivElement>
   ) => {
@@ -422,21 +424,22 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           )}
 
           {/* Counter Button */}
-          <div className="flex items-center justify-center">
-            <button
-              onClick={handleIncrement}
-              disabled={isCompleted}
-              className={`w-full py-4 text-lg font-bold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                isCompleted
-                  ? "bg-[#283618] cursor-not-allowed"
-                  : "bg-[#606c38] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[#606c38]/90 active:bg-[#606c38]/80"
-              }`}
-              aria-label={`Progress: ${counter} of ${azkar.count}`}
-            >
-              {getButtonText()}
-            </button>
-          </div>
-
+          {selectedCategory !== "surahs" && (
+            <div className="flex items-center justify-center">
+              <button
+                onClick={handleIncrement}
+                disabled={isCompleted}
+                className={`w-full py-4 text-lg font-bold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                  isCompleted
+                    ? "bg-[#283618] cursor-not-allowed"
+                    : "bg-[#606c38] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[#606c38]/90 active:bg-[#606c38]/80"
+                }`}
+                aria-label={`Progress: ${counter} of ${azkar.count}`}
+              >
+                {getButtonText()}
+              </button>
+            </div>
+          )}
           {/* Action Buttons: Translation, Copy, Audio, Share */}
           <div className="flex items-center justify-center mt-4 gap-4">
             <button
