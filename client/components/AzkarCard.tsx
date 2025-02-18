@@ -51,8 +51,6 @@ export interface IVirtues {
   english: string;
   кыргыз: string;
   русский: string;
-  français?: string;
-  español?: string;
 }
 
 export interface IAzkarCardProps {
@@ -282,8 +280,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       let translation = "";
       if (language === "english") translation = virtue.english || "";
       else if (language === "кыргыз") translation = virtue.кыргыз || "";
-      else if (language === "français") translation = virtue["français"] || "";
-      else if (language === "español") translation = virtue["español"] || "";
       else if (language === "русский") translation = virtue["русский"] || "";
       return translation.trim() !== ""
         ? translation

@@ -66,8 +66,6 @@ interface IVirtues {
   english: string;
   кыргыз: string;
   русский: string;
-  français?: string;
-  español?: string;
 }
 
 interface IAzkarLine {
@@ -268,8 +266,6 @@ export default function HomePage() {
             english: raw.english || "",
             кыргыз: raw.кыргыз || "",
             русский: raw.русский || "",
-            français: "",
-            español: "",
           },
           timestamp: raw.timestamp ? Number(raw.timestamp) : undefined,
         });
