@@ -43,9 +43,6 @@ interface IUIActions {
 
 interface IUITranslations {
   actions: IUIActions;
-  toggleTranslation: {
-    show: Translation;
-  };
   virtues: Translation;
   settings: Translation;
 }
