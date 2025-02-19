@@ -145,6 +145,9 @@ export default function HomePage() {
   // Keep track of the current drawer state in a ref
   const drawerOpenRef = useRef(drawerOpen);
 
+  // Create an array of refs for each card so we can scroll into view.
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const handleAudioStateChange = useCallback((azkarId: string | null) => {
     setAudioState((prev) => ({
       ...prev,
@@ -318,31 +321,69 @@ export default function HomePage() {
 
         {/* Azkar Cards */}
         <section className="grid grid-cols-1 gap-4 mt-6">
-          {groupedAzkars.map((azkar) => {
+          {groupedAzkars.map((azkar, index) => {
             const virtue = selectedCategoryData.virtues.find(
               (v) => v.azkar_id === azkar.id
             );
             const hasAudio = audioState.availableAudios.has(azkar.id);
             const isPlaying = audioState.currentlyPlayingId === azkar.id;
             return (
-              <AzkarCard
+              // Wrap each card in a div with a ref so we can scroll to it later.
+              <div
                 key={azkar.id}
-                azkar={azkar}
-                language={language}
-                uiTranslations={data.uiTranslations}
-                counter={counters[azkar.id] || 0}
-                updateCounter={updateCounter}
-                virtue={virtue}
-                audioSrc={hasAudio ? `/audio/${azkar.id}.mp3` : undefined}
-                isCurrentlyPlaying={isPlaying}
-                onAudioStateChange={(playing) =>
-                  handleAudioStateChange(playing ? azkar.id : null)
-                }
-                selectedCategory={selectedCategory} // Pass selectedCategory as prop
-              />
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
+              >
+                <AzkarCard
+                  azkar={azkar}
+                  language={language}
+                  uiTranslations={data.uiTranslations}
+                  counter={counters[azkar.id] || 0}
+                  updateCounter={updateCounter}
+                  virtue={virtue}
+                  audioSrc={hasAudio ? `/audio/${azkar.id}.mp3` : undefined}
+                  isCurrentlyPlaying={isPlaying}
+                  onAudioStateChange={(playing) =>
+                    handleAudioStateChange(playing ? azkar.id : null)
+                  }
+                  selectedCategory={selectedCategory} // Pass selectedCategory as prop
+                />
+              </div>
             );
           })}
         </section>
+      </div>
+
+      {/* Bottom Navigation Squares with Progress Fill */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[var(--card-bg)] p-2 shadow-inner">
+        <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
+          {groupedAzkars.map((azkar, index) => {
+            const currentCount = counters[azkar.id] || 0;
+            const progress = Math.min(currentCount / azkar.count, 1); // fraction from 0 to 1
+
+            return (
+              <button
+                key={azkar.id}
+                onClick={() =>
+                  cardRefs.current[index]?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="relative w-10 h-10 flex-shrink-0 border rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200"
+              >
+                {/* Progress Fill Background */}
+                <div
+                  className="absolute left-0 top-0 h-full bg-[#606c38] transition-all duration-200"
+                  style={{ width: `${progress * 100}%` }}
+                />
+                {/* Number Label */}
+                <span className="relative z-10">{index + 1}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Settings Drawer */}
