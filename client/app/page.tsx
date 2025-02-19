@@ -388,7 +388,7 @@ export default function HomePage() {
         <DrawerTrigger asChild>
           <Button
             variant="outline"
-            className="fixed bottom-4 right-4 p-2 z-50 bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
+            className="fixed top-4 right-4 p-2 z-50 bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
           >
             <span className="material-icons-round text-2xl">settings</span>
           </Button>
