@@ -267,7 +267,7 @@ export default function HomePage() {
 
     const checkAudioAvailability = async (azkarId: string) => {
       try {
-        const response = await fetch(`/audio/${azkarId}.mp3`, {
+        const response = await fetch(`/audio/${azkarId}.m4a`, {
           method: "HEAD",
         });
         if (response.ok && isMounted.current) {
@@ -339,7 +339,7 @@ export default function HomePage() {
                   counter={counters[azkar.id] || 0}
                   updateCounter={updateCounter}
                   virtue={virtue}
-                  audioSrc={hasAudio ? `/audio/${azkar.id}.mp3` : undefined}
+                  audioSrc={hasAudio ? `/audio/${azkar.id}.m4a` : undefined}
                   isCurrentlyPlaying={isPlaying}
                   onAudioStateChange={(playing) =>
                     handleAudioStateChange(playing ? azkar.id : null)
