@@ -353,7 +353,7 @@ export default function HomePage() {
       </div>
 
       {/* Bottom Navigation Squares with Progress Fill */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[var(--card-bg)] p-2 shadow-inner">
+      <div className="fixed bottom-0 left-0 right-0 bg-transparent p-2 shadow-inner">
         <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
           {groupedAzkars.map((azkar, index) => {
             const currentCount = counters[azkar.id] || 0;
@@ -376,7 +376,9 @@ export default function HomePage() {
                   style={{ width: `${progress * 100}%` }}
                 />
                 {/* Number Label */}
-                <span className="relative z-10">{index + 1}</span>
+                <span className="relative z-10 text-[var(--card-text)]">
+                  {index + 1}
+                </span>
               </button>
             );
           })}
@@ -388,7 +390,7 @@ export default function HomePage() {
         <DrawerTrigger asChild>
           <Button
             variant="outline"
-            className="fixed top-4 right-4 p-2 z-50 bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
+            className="fixed top-4 right-4 p-2 z-50 bg-transparent border-[var(--card-border)] text-[var(--card-text)]"
           >
             <span className="material-icons-round text-2xl">settings</span>
           </Button>
