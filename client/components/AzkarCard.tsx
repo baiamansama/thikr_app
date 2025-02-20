@@ -108,6 +108,18 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         .sort((a, b) => a - b);
     }, [azkar.lines]);
 
+    // Mapping playback rate to Material icon names
+    const speedIconMapping: { [key: number]: string } = {
+      1: "1x",
+      1.5: "1.5x",
+      2: "2x",
+    };
+
+    // Define a standard icon class and a special one for repeat to reduce its size
+    const iconClassNames = "w-8 h-8 text-[var(--card-text)]";
+    const repeatIconClassNames = "w-6 h-6 text-[var(--card-text)]";
+    const buttonClassNames = "p-2 flex items-center justify-center";
+
     // -------------------------------------------------------------------------
     // Completion Effect: Vibration + Islamic Confetti
     // -------------------------------------------------------------------------
@@ -332,12 +344,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
     }, [getCardText]);
 
-    // -------------------------------------------------------------------------
-    // Styling Classes
-    // -------------------------------------------------------------------------
-    const iconClassNames = "w-8 h-8 text-[var(--card-text)]";
-    const buttonClassNames = "p-2 flex items-center justify-center";
-
     // =============================================================================
     // Render
     // =============================================================================
@@ -506,8 +512,8 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                 </span>
               </button>
 
-              {/* Player Controls */}
-              <div className="flex items-center justify-between">
+              {/* Player Controls - centered */}
+              <div className="flex justify-center">
                 <div className="flex items-center gap-4">
                   <button
                     onClick={handleRepeatToggle}
@@ -515,7 +521,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                     className={buttonClassNames}
                   >
                     <span
-                      className={`material-icons-round ${iconClassNames} transition-opacity`}
+                      className={`material-icons-round ${repeatIconClassNames} transition-opacity`}
                       style={
                         isRepeat
                           ? { filter: "brightness(1.2) contrast(1.2)" }
@@ -571,12 +577,11 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                     aria-label="Speed"
                     className={`${buttonClassNames} min-w-[48px]`}
                   >
-                    <span className="text-base font-medium text-[var(--card-text)]">
-                      {playbackRate}x
-                    </span>
+                    <div className="speed-box">
+                      {speedIconMapping[playbackRate]}{" "}
+                    </div>
                   </button>
                 </div>
-                {/* You can remove the old close button from here if not needed */}
               </div>
             </CardContent>
           </Card>
