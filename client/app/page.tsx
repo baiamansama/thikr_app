@@ -352,7 +352,7 @@ export default function HomePage() {
       </div>
 
       <div
-        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner z-20 ${
+        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner z-20  ${
           computedTheme === "light"
             ? "bg-[#ffffff]"
             : computedTheme === "dark"
