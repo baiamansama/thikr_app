@@ -352,20 +352,19 @@ export default function HomePage() {
         </section>
       </div>
 
-      {/* Bottom Navigation Squares with Progress Fill */}
       <div
         className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner ${
           computedTheme === "light"
-            ? "#ffffff"
+            ? "bg-[#ffffff]"
             : computedTheme === "dark"
-            ? "#0a0a0a"
-            : "#f4ecd8"
+            ? "bg-[#0a0a0a]"
+            : "bg-[#f4ecd8]"
         }`}
       >
         <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
           {groupedAzkars.map((azkar, index) => {
             const currentCount = counters[azkar.id] || 0;
-            const progress = Math.min(currentCount / azkar.count, 1); // fraction from 0 to 1
+            const progress = Math.min(currentCount / azkar.count, 1);
 
             return (
               <button
@@ -376,7 +375,7 @@ export default function HomePage() {
                     block: "start",
                   })
                 }
-                className="relative w-10 h-10 flex-shrink-0 border rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200"
+                className="relative w-10 h-10 flex-shrink-0 border border-[var(--card-text)] rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200"
               >
                 {/* Progress Fill Background */}
                 <div
