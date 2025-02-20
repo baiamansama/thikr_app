@@ -353,7 +353,15 @@ export default function HomePage() {
       </div>
 
       {/* Bottom Navigation Squares with Progress Fill */}
-      <div className="fixed bottom-0 left-0 right-0 bg-transparent p-2 shadow-inner">
+      <div
+        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner ${
+          computedTheme === "light"
+            ? "bg-white"
+            : computedTheme === "dark"
+            ? "bg-gray-900"
+            : "bg-yellow-100"
+        }`}
+      >
         <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
           {groupedAzkars.map((azkar, index) => {
             const currentCount = counters[azkar.id] || 0;
