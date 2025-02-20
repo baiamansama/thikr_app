@@ -388,7 +388,7 @@ export default function HomePage() {
                 <span
                   className={`relative z-10 ${
                     isFavorite
-                      ? "material-icons-round text-xl"
+                      ? "material-icons-round text-[var(--card-text)] text-xl" // Changed to use --card-text
                       : "text-[var(--card-text)]"
                   }`}
                 >
