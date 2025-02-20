@@ -356,10 +356,10 @@ export default function HomePage() {
       <div
         className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner ${
           computedTheme === "light"
-            ? "bg-white"
+            ? "#ffffff"
             : computedTheme === "dark"
-            ? "bg-gray-900"
-            : "bg-yellow-100"
+            ? "#0a0a0a"
+            : "#f4ecd8"
         }`}
       >
         <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
