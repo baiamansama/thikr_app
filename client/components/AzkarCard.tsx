@@ -8,6 +8,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
+import { Card, CardContent } from "@/components/ui/card"; // Using shadcn's Card
 
 // =============================================================================
 // Type Definitions
@@ -110,15 +111,12 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     // -------------------------------------------------------------------------
     // Completion Effect: Vibration + Islamic Confetti
     // -------------------------------------------------------------------------
-    // useRef to ensure the effect triggers only once when completed.
     const hasCompletedEffectTriggered = useRef(false);
     useEffect(() => {
       if (isCompleted && !hasCompletedEffectTriggered.current) {
         hasCompletedEffectTriggered.current = true;
-
-        // Trigger device vibration (if supported)
         if (navigator.vibrate) {
-          navigator.vibrate([200, 100, 200]); // vibrate pattern: vibrate 200ms, pause 100ms, vibrate 200ms
+          navigator.vibrate([200, 100, 200]);
         }
       }
     }, [isCompleted]);
@@ -128,19 +126,15 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     // -------------------------------------------------------------------------
     useEffect(() => {
       if (!hasAudio) return;
-
       const audio = new Audio(audioSrc);
       audioRef.current = audio;
-
       const handleError = (e: ErrorEvent) => {
         console.error("Audio error:", e);
         setAudioError(true);
         setIsPlaying(false);
         setShowFixedPlayer(false);
       };
-
       audio.addEventListener("error", handleError);
-
       return () => {
         audio.removeEventListener("error", handleError);
         audio.pause();
@@ -154,11 +148,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     useEffect(() => {
       const audioEl = audioRef.current;
       if (!audioEl || !hasAudio) return;
-
       const handleTimeUpdate = () => {
         setCurrentTime(audioEl.currentTime);
       };
-
       audioEl.addEventListener("timeupdate", handleTimeUpdate);
       return () => {
         audioEl.removeEventListener("timeupdate", handleTimeUpdate);
@@ -168,7 +160,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     useEffect(() => {
       const audioEl = audioRef.current;
       if (!audioEl || !hasAudio) return;
-
       const handleEnded = () => {
         if (isRepeat) {
           audioEl.currentTime = 0;
@@ -180,7 +171,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           setIsPlaying(false);
         }
       };
-
       audioEl.addEventListener("ended", handleEnded);
       return () => {
         audioEl.removeEventListener("ended", handleEnded);
@@ -192,7 +182,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     // -------------------------------------------------------------------------
     const handlePlayPause = useCallback(() => {
       if (!audioRef.current || !hasAudio || audioError) return;
-
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
@@ -206,15 +195,10 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
     }, [isPlaying, hasAudio, audioError]);
 
-    const handleClosePlayer = useCallback(() => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-      setIsPlaying(false);
+    const handleHidePlayer = useCallback(() => {
       setShowFixedPlayer(false);
     }, []);
 
-    // Cycle through playback speeds: 1x -> 1.5x -> 2x -> 1x ...
     const handleSpeedChange = useCallback(() => {
       let newRate = playbackRate;
       if (playbackRate === 1) newRate = 1.5;
@@ -226,18 +210,14 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
     }, [playbackRate]);
 
-    // Toggle repeat mode on/off
     const handleRepeatToggle = useCallback(() => {
       setIsRepeat((prev) => !prev);
     }, []);
 
-    // Skip backward to the previous timestamp (with a small buffer)
     const handleSkipBackward = useCallback(() => {
       if (!audioRef.current || timestamps.length === 0) return;
-
       setIsSkipping("backward");
       setTimeout(() => setIsSkipping(null), 200);
-
       const current = audioRef.current.currentTime;
       const previousTimestamp = [...timestamps]
         .reverse()
@@ -246,13 +226,10 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         previousTimestamp !== undefined ? previousTimestamp : 0;
     }, [timestamps]);
 
-    // Skip forward to the next timestamp (with a small buffer)
     const handleSkipForward = useCallback(() => {
       if (!audioRef.current || timestamps.length === 0) return;
-
       setIsSkipping("forward");
       setTimeout(() => setIsSkipping(null), 200);
-
       const current = audioRef.current.currentTime;
       const nextTimestamp = timestamps.find((ts) => ts > current + 0.5);
       if (nextTimestamp !== undefined) {
@@ -356,7 +333,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     }, [getCardText]);
 
     // -------------------------------------------------------------------------
-    // Styling Classes (for consistency)
+    // Styling Classes
     // -------------------------------------------------------------------------
     const iconClassNames = "w-8 h-8 text-[var(--card-text)]";
     const buttonClassNames = "p-2 flex items-center justify-center";
@@ -453,6 +430,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
               </button>
             </div>
           )}
+
           {/* Action Buttons: Translation, Copy, Audio, Share */}
           <div className="flex items-center justify-center mt-4 gap-4">
             <button
@@ -513,92 +491,95 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           <audio ref={audioRef} src={audioSrc} />
         </div>
 
-        {/* -------------------- Fixed Audio Player --------------------- */}
+        {/* -------------------- Floating Audio Player --------------------- */}
         {showFixedPlayer && hasAudio && !audioError && (
-          <div className="fixed bottom-0 left-0 right-0 bg-[var(--card-bg)] border-t border-[var(--card-border)] p-4 pb-16 z-40">
-            <div className="container mx-auto flex items-center justify-between">
-              <div className="flex items-center justify-center gap-4">
-                <button
-                  onClick={handleSkipBackward}
-                  aria-label="Skip Backward"
-                  className={`${buttonClassNames} ${
-                    isSkipping === "backward" ? "scale-90" : ""
-                  }`}
-                >
-                  <span className={`material-icons-round ${iconClassNames}`}>
-                    skip_previous
-                  </span>
-                </button>
-
-                <button
-                  onClick={handlePlayPause}
-                  aria-label="Play/Pause"
-                  className={buttonClassNames}
-                >
-                  {isPlaying ? (
-                    <span className={`material-icons-round ${iconClassNames}`}>
-                      pause
-                    </span>
-                  ) : (
-                    <span className={`material-icons-round ${iconClassNames}`}>
-                      play_arrow
-                    </span>
-                  )}
-                </button>
-
-                <button
-                  onClick={handleSkipForward}
-                  aria-label="Skip Forward"
-                  className={`${buttonClassNames} ${
-                    isSkipping === "forward" ? "scale-90" : ""
-                  }`}
-                >
-                  <span className={`material-icons-round ${iconClassNames}`}>
-                    skip_next
-                  </span>
-                </button>
-
-                <button
-                  onClick={handleSpeedChange}
-                  aria-label="Speed"
-                  className={`${buttonClassNames} min-w-[48px]`}
-                >
-                  <span className="text-base font-medium text-[var(--card-text)]">
-                    {playbackRate}x
-                  </span>
-                </button>
-
-                <button
-                  onClick={handleRepeatToggle}
-                  aria-label="Repeat"
-                  className={buttonClassNames}
-                >
-                  <span
-                    className={`material-icons-round ${iconClassNames} transition-opacity ${
-                      isRepeat ? "opacity-100" : "opacity-100"
-                    }`}
-                    style={
-                      isRepeat
-                        ? { filter: "brightness(1.2) contrast(1.2)" }
-                        : undefined
-                    }
-                  >
-                    {isRepeat ? "repeat_on" : "repeat"}
-                  </span>
-                </button>
-              </div>
-
+          <Card className="fixed bottom-5 left-4 right-4 z-50 rounded-xl shadow-xl bg-[#669bbc] dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+            <CardContent className="p-4 relative">
+              {/* Remove Button Positioned Top Right */}
               <button
-                onClick={handleClosePlayer}
-                aria-label="Close Player"
-                className={buttonClassNames}
+                onClick={handleHidePlayer}
+                aria-label="Hide Player"
+                className="absolute top-2 right-1"
               >
                 <span className={`material-icons-round ${iconClassNames}`}>
-                  close
+                  remove
                 </span>
               </button>
-            </div>
-          </div>
+
+              {/* Player Controls */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={handleRepeatToggle}
+                    aria-label="Repeat"
+                    className={buttonClassNames}
+                  >
+                    <span
+                      className={`material-icons-round ${iconClassNames} transition-opacity`}
+                      style={
+                        isRepeat
+                          ? { filter: "brightness(1.2) contrast(1.2)" }
+                          : undefined
+                      }
+                    >
+                      {isRepeat ? "repeat_on" : "repeat"}
+                    </span>
+                  </button>
+                  <button
+                    onClick={handleSkipBackward}
+                    aria-label="Skip Backward"
+                    className={`${buttonClassNames} ${
+                      isSkipping === "backward" ? "scale-90" : ""
+                    }`}
+                  >
+                    <span className={`material-icons-round ${iconClassNames}`}>
+                      skip_previous
+                    </span>
+                  </button>
+                  <button
+                    onClick={handlePlayPause}
+                    aria-label="Play/Pause"
+                    className={buttonClassNames}
+                  >
+                    {isPlaying ? (
+                      <span
+                        className={`material-icons-round ${iconClassNames}`}
+                      >
+                        pause
+                      </span>
+                    ) : (
+                      <span
+                        className={`material-icons-round ${iconClassNames}`}
+                      >
+                        play_arrow
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    onClick={handleSkipForward}
+                    aria-label="Skip Forward"
+                    className={`${buttonClassNames} ${
+                      isSkipping === "forward" ? "scale-90" : ""
+                    }`}
+                  >
+                    <span className={`material-icons-round ${iconClassNames}`}>
+                      skip_next
+                    </span>
+                  </button>
+                  <button
+                    onClick={handleSpeedChange}
+                    aria-label="Speed"
+                    className={`${buttonClassNames} min-w-[48px]`}
+                  >
+                    <span className="text-base font-medium text-[var(--card-text)]">
+                      {playbackRate}x
+                    </span>
+                  </button>
+                </div>
+                {/* You can remove the old close button from here if not needed */}
+              </div>
+            </CardContent>
+          </Card>
         )}
       </>
     );
