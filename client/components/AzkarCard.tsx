@@ -1,4 +1,5 @@
 "use client";
+
 import React, {
   useCallback,
   useMemo,
@@ -8,11 +9,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
-import { Card, CardContent } from "@/components/ui/card"; // Using shadcn's Card
-
-// =============================================================================
-// Type Definitions
-// =============================================================================
+import { Card, CardContent } from "@/components/ui/card";
 
 interface Translation {
   [language: string]: string;
@@ -61,12 +58,10 @@ export interface IAzkarCardProps {
   audioSrc?: string;
   isCurrentlyPlaying?: boolean;
   onAudioStateChange?: (playing: boolean) => void;
-  selectedCategory: string; // Added selectedCategory prop
+  selectedCategory: string;
+  isFavorite: boolean;
+  toggleFavorite: (azkarId: string) => void;
 }
-
-// =============================================================================
-// AzkarCard Component
-// =============================================================================
 
 const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
   (
@@ -79,12 +74,11 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       virtue,
       audioSrc,
       selectedCategory,
+      isFavorite,
+      toggleFavorite,
     },
     ref: Ref<HTMLDivElement>
   ) => {
-    // -------------------------------------------------------------------------
-    // Local State & Refs
-    // -------------------------------------------------------------------------
     const [copied, setCopied] = useState(false);
     const [showTranslation, setShowTranslation] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -108,21 +102,31 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         .sort((a, b) => a - b);
     }, [azkar.lines]);
 
-    // Mapping playback rate to Material icon names
     const speedIconMapping: { [key: number]: string } = {
       1: "1x",
       1.5: "1.5x",
       2: "2x",
     };
 
-    // Define a standard icon class and a special one for repeat to reduce its size
     const iconClassNames = "w-8 h-8 text-[var(--card-text)]";
     const repeatIconClassNames = "w-6 h-6 text-[var(--card-text)]";
     const buttonClassNames = "p-2 flex items-center justify-center";
 
-    // -------------------------------------------------------------------------
-    // Completion Effect: Vibration + Islamic Confetti
-    // -------------------------------------------------------------------------
+    const favoriteIcon = useMemo(() => {
+      if (isFavorite) {
+        return selectedCategory === "morning"
+          ? "favorite"
+          : selectedCategory === "evening"
+          ? "favorite"
+          : "bookmark";
+      }
+      return selectedCategory === "morning"
+        ? "favorite_border"
+        : selectedCategory === "evening"
+        ? "favorite_border"
+        : "bookmark_border";
+    }, [isFavorite, selectedCategory]);
+
     const hasCompletedEffectTriggered = useRef(false);
     useEffect(() => {
       if (isCompleted && !hasCompletedEffectTriggered.current) {
@@ -133,14 +137,11 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
     }, [isCompleted]);
 
-    // -------------------------------------------------------------------------
-    // Audio Setup & Error Handling
-    // -------------------------------------------------------------------------
     useEffect(() => {
       if (!hasAudio) return;
       const audio = new Audio(audioSrc);
       audioRef.current = audio;
-      const handleError = (e: ErrorEvent) => {
+      const handleError = (e: Event) => {
         console.error("Audio error:", e);
         setAudioError(true);
         setIsPlaying(false);
@@ -154,9 +155,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       };
     }, [audioSrc, hasAudio]);
 
-    // -------------------------------------------------------------------------
-    // Audio Event Handlers
-    // -------------------------------------------------------------------------
     useEffect(() => {
       const audioEl = audioRef.current;
       if (!audioEl || !hasAudio) return;
@@ -189,9 +187,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       };
     }, [isRepeat, hasAudio]);
 
-    // -------------------------------------------------------------------------
-    // Audio Control Handlers
-    // -------------------------------------------------------------------------
     const handlePlayPause = useCallback(() => {
       if (!audioRef.current || !hasAudio || audioError) return;
       if (isPlaying) {
@@ -249,9 +244,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
     }, [timestamps]);
 
-    // -------------------------------------------------------------------------
-    // Counter and Text Handlers
-    // -------------------------------------------------------------------------
     const handleIncrement = useCallback(() => {
       if (counter < azkar.count) {
         updateCounter(azkar.id, counter + 1);
@@ -344,18 +336,22 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
     }, [getCardText]);
 
-    // =============================================================================
-    // Render
-    // =============================================================================
+    const handleFavoriteClick = useCallback(
+      (e: React.MouseEvent) => {
+        e.preventDefault(); // Ensure no default behavior causes scrolling
+        e.stopPropagation(); // Prevent event bubbling
+        toggleFavorite(azkar.id);
+      },
+      [azkar.id, toggleFavorite]
+    );
+
     return (
       <>
-        {/* ------------------------- Main Card ------------------------- */}
         <div
           ref={ref}
-          className="card p-4 rounded shadow transition-colors border-2 mb-16"
+          className="card p-4 rounded shadow transition-colors border-2 mb-20 relative"
           style={{ borderColor: "var(--card-text)" }}
         >
-          {/* Azkar Lines */}
           <div className="mb-4">
             {azkar.lines.map((line) => {
               const isRead =
@@ -399,7 +395,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             })}
           </div>
 
-          {/* Virtues Section */}
           {shouldRenderVirtues && (
             <div className="mb-4">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
@@ -419,7 +414,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             </div>
           )}
 
-          {/* Counter Button */}
           {selectedCategory !== "surahs" && (
             <div className="flex items-center justify-center">
               <button
@@ -437,7 +431,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             </div>
           )}
 
-          {/* Action Buttons: Translation, Copy, Audio, Share */}
           <div className="flex items-center justify-center mt-4 gap-4">
             <button
               onClick={() => setShowTranslation((prev) => !prev)}
@@ -491,17 +484,30 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                 share
               </span>
             </button>
+
+            {/* Modified Favorite Button */}
+            <button
+              onClick={handleFavoriteClick}
+              aria-label={
+                isFavorite ? "Remove from favorites" : "Add to favorites"
+              }
+              className={buttonClassNames}
+            >
+              <span
+                className={`material-icons-round ${iconClassNames}`}
+                style={{ color: isFavorite ? "#ef233c" : "inherit" }}
+              >
+                {favoriteIcon}
+              </span>
+            </button>
           </div>
 
-          {/* Hidden Audio Element */}
           <audio ref={audioRef} src={audioSrc} />
         </div>
 
-        {/* -------------------- Floating Audio Player --------------------- */}
         {showFixedPlayer && hasAudio && !audioError && (
           <Card className="fixed bottom-5 left-4 right-4 z-50 rounded-xl shadow-xl bg-[#669bbc] dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <CardContent className="p-4 relative">
-              {/* Remove Button Positioned Top Right */}
               <button
                 onClick={handleHidePlayer}
                 aria-label="Hide Player"
@@ -512,7 +518,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                 </span>
               </button>
 
-              {/* Player Controls - centered */}
               <div className="flex justify-center">
                 <div className="flex items-center gap-4">
                   <button

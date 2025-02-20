@@ -21,10 +21,6 @@ import { Button } from "@/components/ui/button";
 import { Description } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
-/* =====================
-   Interfaces & Types
-===================== */
-
 interface Translation {
   [language: string]: string;
 }
@@ -106,11 +102,8 @@ export interface IThikrDB {
   language: string;
   theme: string;
   counters: { [azkarId: string]: number };
+  favorites: { [categoryId: string]: Set<string> };
 }
-
-/* =====================
-   Constants
-===================== */
 
 const LOCAL_STORAGE_KEY = "thikr_db";
 const INITIAL_DB: IThikrDB = {
@@ -118,17 +111,13 @@ const INITIAL_DB: IThikrDB = {
   language: "кыргыз",
   theme: "auto",
   counters: {},
+  favorites: {},
 };
-
-/* =====================
-   Main Component
-===================== */
 
 export default function HomePage() {
   const data: IData = azkarsData;
   const categories = useMemo(() => data.categories, [data]);
 
-  // Local state variables
   const [hasMounted, setHasMounted] = useState(false);
   const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -139,10 +128,7 @@ export default function HomePage() {
   });
   const isMounted = useRef(false);
 
-  // Keep track of the current drawer state in a ref
   const drawerOpenRef = useRef(drawerOpen);
-
-  // Create an array of refs for each card so we can scroll into view.
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleAudioStateChange = useCallback((azkarId: string | null) => {
@@ -156,32 +142,35 @@ export default function HomePage() {
     drawerOpenRef.current = drawerOpen;
   }, [drawerOpen]);
 
-  /* =====================
-     Side Effects
-  ====================== */
-
-  // Initialize from localStorage
   useEffect(() => {
     setHasMounted(true);
     if (typeof window !== "undefined") {
       const storedDB = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (storedDB) {
         const parsedDB = JSON.parse(storedDB) as IThikrDB;
-        setDb(parsedDB);
+        const favorites = parsedDB.favorites || {};
+        Object.keys(favorites).forEach((key) => {
+          favorites[key] = new Set(favorites[key]);
+        });
+        setDb({ ...parsedDB, favorites });
       }
     }
   }, []);
 
-  // Persist db changes to localStorage (only after mount)
   useEffect(() => {
     if (hasMounted && typeof window !== "undefined") {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(db));
+      const storableDb = {
+        ...db,
+        favorites: Object.fromEntries(
+          Object.entries(db.favorites).map(([key, value]) => [
+            key,
+            Array.from(value),
+          ])
+        ),
+      };
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(storableDb));
     }
   }, [db, hasMounted]);
-
-  /* =====================
-     Event Handlers
-  ====================== */
 
   const handleLanguageClick = useCallback((lang: string) => {
     setDb((prev) => ({ ...prev, language: lang }));
@@ -202,13 +191,28 @@ export default function HomePage() {
     }));
   }, []);
 
-  /* =====================
-     Derived / Computed Values
-  ====================== */
+  const toggleFavorite = useCallback((azkarId: string) => {
+    setDb((prev) => {
+      const categoryFavorites =
+        prev.favorites[prev.selectedCategory] || new Set<string>();
+      const newFavorites = new Set(categoryFavorites);
+      if (newFavorites.has(azkarId)) {
+        newFavorites.delete(azkarId);
+      } else {
+        newFavorites.add(azkarId);
+      }
+      return {
+        ...prev,
+        favorites: {
+          ...prev.favorites,
+          [prev.selectedCategory]: newFavorites,
+        },
+      };
+    });
+  }, []);
 
-  const { language, selectedCategory, theme, counters } = db;
+  const { language, selectedCategory, theme, counters, favorites } = db;
 
-  // Auto-detect theme based on time if "auto" is selected
   const computedTheme = useMemo(() => {
     if (theme === "auto") {
       const hour = new Date().getHours();
@@ -217,19 +221,16 @@ export default function HomePage() {
     return theme;
   }, [theme]);
 
-  // Update the root element class for theming
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light-theme", "dark-theme", "sepia-theme");
     root.classList.add(`${computedTheme}-theme`);
   }, [computedTheme]);
 
-  // Find the selected category data from the categories list
   const selectedCategoryData = useMemo(() => {
     return categories.find((cat) => cat.id === selectedCategory);
   }, [categories, selectedCategory]);
 
-  // Group raw azkars data into entries by azkar_id with sorted lines
   const groupedAzkars = useMemo(() => {
     if (!selectedCategoryData) return [];
     const groups = new Map<string, IAzkarEntry>();
@@ -254,14 +255,14 @@ export default function HomePage() {
       }
     });
 
-    // Ensure each entry's lines are in order
     for (const entry of groups.values()) {
       entry.lines.sort((a, b) => a.lineNumber - b.lineNumber);
     }
+
+    // No sorting by favorites
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
-  // Check which audio files are available
   useEffect(() => {
     isMounted.current = true;
 
@@ -281,7 +282,6 @@ export default function HomePage() {
       }
     };
 
-    // Check audio availability for all azkars
     groupedAzkars.forEach((azkar) => {
       checkAudioAvailability(azkar.id);
     });
@@ -298,62 +298,61 @@ export default function HomePage() {
     }));
   }, [selectedCategory]);
 
-  // Do not render until we are mounted and have valid category data
   if (!hasMounted || !selectedCategoryData) return null;
-
-  /* =====================
-     Render JSX
-  ====================== */
 
   return (
     <>
       <div className="container mx-auto px-4 py-6 transition-colors">
-        {/* Page Header */}
-        <header className="mb-8 text-center py-4">
-          <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
-            {selectedCategoryData.translations[language] ||
-              selectedCategoryData.id}
-          </h1>
-        </header>
-
-        {/* Azkar Cards */}
-        <section className="grid grid-cols-1 gap-4 mt-6">
-          {groupedAzkars.map((azkar, index) => {
-            const virtue = selectedCategoryData.virtues.find(
-              (v) => v.azkar_id === azkar.id
-            );
-            const hasAudio = audioState.availableAudios.has(azkar.id);
-            const isPlaying = audioState.currentlyPlayingId === azkar.id;
-            return (
-              // Wrap each card in a div with a ref so we can scroll to it later.
-              <div
-                key={azkar.id}
-                ref={(el) => {
-                  cardRefs.current[index] = el;
-                }}
-              >
-                <AzkarCard
-                  azkar={azkar}
-                  language={language}
-                  uiTranslations={data.uiTranslations}
-                  counter={counters[azkar.id] || 0}
-                  updateCounter={updateCounter}
-                  virtue={virtue}
-                  audioSrc={hasAudio ? `/audio/${azkar.id}.m4a` : undefined}
-                  isCurrentlyPlaying={isPlaying}
-                  onAudioStateChange={(playing) =>
-                    handleAudioStateChange(playing ? azkar.id : null)
-                  }
-                  selectedCategory={selectedCategory} // Pass selectedCategory as prop
-                />
-              </div>
-            );
-          })}
-        </section>
+        <div style={{ paddingBottom: "120px" }}>
+          <header className="mb-8 text-center py-4">
+            <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
+              {selectedCategoryData.translations[language] ||
+                selectedCategoryData.id}
+            </h1>
+          </header>
+          <section className="grid grid-cols-1 gap-6 mt-6">
+            {groupedAzkars.map((azkar, index) => {
+              const virtue = selectedCategoryData.virtues.find(
+                (v) => v.azkar_id === azkar.id
+              );
+              const hasAudio = audioState.availableAudios.has(azkar.id);
+              const isPlaying = audioState.currentlyPlayingId === azkar.id;
+              const isFavorite = (favorites[selectedCategory] || new Set()).has(
+                azkar.id
+              );
+              return (
+                <div
+                  key={azkar.id}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
+                  className="relative z-10"
+                >
+                  <AzkarCard
+                    azkar={azkar}
+                    language={language}
+                    uiTranslations={data.uiTranslations}
+                    counter={counters[azkar.id] || 0}
+                    updateCounter={updateCounter}
+                    virtue={virtue}
+                    audioSrc={hasAudio ? `/audio/${azkar.id}.m4a` : undefined}
+                    isCurrentlyPlaying={isPlaying}
+                    onAudioStateChange={(playing) =>
+                      handleAudioStateChange(playing ? azkar.id : null)
+                    }
+                    selectedCategory={selectedCategory}
+                    isFavorite={isFavorite}
+                    toggleFavorite={toggleFavorite}
+                  />
+                </div>
+              );
+            })}
+          </section>
+        </div>
       </div>
 
       <div
-        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner ${
+        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner z-20 ${
           computedTheme === "light"
             ? "bg-[#ffffff]"
             : computedTheme === "dark"
@@ -365,6 +364,9 @@ export default function HomePage() {
           {groupedAzkars.map((azkar, index) => {
             const currentCount = counters[azkar.id] || 0;
             const progress = Math.min(currentCount / azkar.count, 1);
+            const isFavorite = (favorites[selectedCategory] || new Set()).has(
+              azkar.id
+            );
 
             return (
               <button
@@ -377,14 +379,24 @@ export default function HomePage() {
                 }
                 className="relative w-10 h-10 flex-shrink-0 border border-[var(--card-text)] rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200"
               >
-                {/* Progress Fill Background */}
                 <div
-                  className="absolute left-0 top-0 h-full bg-[#606c38] transition-all duration-200"
+                  className={`absolute left-0 top-0 h-full transition-all duration-200 ${
+                    isFavorite ? "bg-[#ef233c]" : "bg-[#606c38]"
+                  }`}
                   style={{ width: `${progress * 100}%` }}
                 />
-                {/* Number Label */}
-                <span className="relative z-10 text-[var(--card-text)]">
-                  {index + 1}
+                <span
+                  className={`relative z-10 ${
+                    isFavorite
+                      ? "material-icons-round text-xl"
+                      : "text-[var(--card-text)]"
+                  }`}
+                >
+                  {isFavorite
+                    ? progress === 1
+                      ? "favorite"
+                      : "favorite_border"
+                    : index + 1}
                 </span>
               </button>
             );
@@ -392,7 +404,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Settings Drawer */}
       <Drawer onOpenChange={(open) => setDrawerOpen(open)}>
         <DrawerTrigger asChild>
           <Button
@@ -413,7 +424,6 @@ export default function HomePage() {
           </DrawerHeader>
 
           <div className="flex flex-col">
-            {/* Language Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {data.metadata.supportedLanguages.map((lang) => (
@@ -433,7 +443,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Theme Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {data.themes.map((item) => (
@@ -453,7 +462,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Category Selector */}
             <div className="p-4">
               <div className="flex flex-wrap gap-4 justify-center">
                 {categories.map((category) => (
@@ -473,32 +481,33 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Clear History Button */}
-            <div className="p-4 flex items-center justify-center">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  const newCounters = { ...db.counters };
-                  groupedAzkars.forEach((azkar) => {
-                    newCounters[azkar.id] = 0;
-                  });
-                  setDb((prev) => ({ ...prev, counters: newCounters }));
-                  setClearHistoryClicked(true);
-                  setTimeout(() => setClearHistoryClicked(false), 200);
-                }}
-                className={`transition-colors px-3 py-1 rounded border ${
-                  clearHistoryClicked
-                    ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                    : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-                }`}
-              >
-                {data.uiTranslations.actions.clean_history[language] ||
-                  "🗑️ Clear History"}
-              </Button>
-            </div>
+            {(selectedCategory === "morning" ||
+              selectedCategory === "evening") && (
+              <div className="p-4 flex items-center justify-center">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    const newCounters = { ...db.counters };
+                    groupedAzkars.forEach((azkar) => {
+                      newCounters[azkar.id] = 0;
+                    });
+                    setDb((prev) => ({ ...prev, counters: newCounters }));
+                    setClearHistoryClicked(true);
+                    setTimeout(() => setClearHistoryClicked(false), 200);
+                  }}
+                  className={`transition-colors px-3 py-1 rounded border ${
+                    clearHistoryClicked
+                      ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                      : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                  }`}
+                >
+                  {data.uiTranslations.actions.clean_history[language] ||
+                    "🗑️ Clear History"}
+                </Button>
+              </div>
+            )}
           </div>
 
-          {/* Hidden close button for accessibility */}
           <DrawerClose asChild>
             <VisuallyHidden>
               <Button autoFocus />
