@@ -158,10 +158,6 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    drawerOpenRef.current = drawerOpen;
-  }, [drawerOpen]);
-
-  useEffect(() => {
     setHasMounted(true);
     if (typeof window !== "undefined") {
       const storedDB = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -172,9 +168,16 @@ export default function HomePage() {
           favorites[key] = new Set(favorites[key]);
         });
         setDb({ ...parsedDB, favorites });
+      } else {
+        // First visit: Open the drawer
+        setDrawerOpen(true);
       }
     }
   }, []);
+
+  useEffect(() => {
+    drawerOpenRef.current = drawerOpen;
+  }, [drawerOpen]);
 
   useEffect(() => {
     if (hasMounted && typeof window !== "undefined") {
