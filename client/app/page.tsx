@@ -18,6 +18,11 @@ import {
   DrawerClose,
   DrawerDescription,
 } from "@/components/ui/drawer";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
@@ -128,7 +133,7 @@ export default function HomePage() {
     availableAudios: new Set<string>(),
     currentLineIndex: -1,
   });
-  const [playerDrawerOpen, setPlayerDrawerOpen] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const isMounted = useRef(false);
   const drawerOpenRef = useRef(drawerOpen);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -184,6 +189,15 @@ export default function HomePage() {
     }
   }, [db, hasMounted]);
 
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
   const handleLanguageClick = useCallback((lang: string) => {
     setDb((prev) => ({ ...prev, language: lang }));
   }, []);
@@ -201,6 +215,7 @@ export default function HomePage() {
         currentlyPlayingId: null,
         currentLineIndex: -1,
       }));
+      setIsAudioPlaying(false);
     }
   }, []);
 
@@ -327,7 +342,7 @@ export default function HomePage() {
               currentlyPlayingId: null,
               currentLineIndex: -1,
             }));
-            setPlayerDrawerOpen(false);
+            setIsAudioPlaying(false);
           }
         });
       }
@@ -338,6 +353,8 @@ export default function HomePage() {
         currentLineIndex: control.isPlaying ? 0 : -1,
       }));
 
+      setIsAudioPlaying(control.isPlaying);
+
       if (control.isPlaying) {
         audioRef.current
           .play()
@@ -346,7 +363,7 @@ export default function HomePage() {
         audioRef.current.pause();
       }
     },
-    [playbackRate, isRepeat, groupedAzkars]
+    [groupedAzkars, playbackRate, isRepeat]
   );
 
   const handleSkip = useCallback(
@@ -412,14 +429,10 @@ export default function HomePage() {
       currentlyPlayingId: null,
       currentLineIndex: -1,
     }));
+    setIsAudioPlaying(false);
   }, [selectedCategory]);
 
   if (!hasMounted || !selectedCategoryData) return null;
-
-  const currentCardIndex = groupedAzkars.findIndex(
-    (azkar) => azkar.id === audioState.currentlyPlayingId
-  );
-  const totalCards = groupedAzkars.length;
 
   return (
     <>
@@ -431,18 +444,65 @@ export default function HomePage() {
                 selectedCategoryData.id}
             </h1>
             <div className="fixed top-4 right-4 flex gap-2 z-50">
-              {audioState.currentlyPlayingId && (
-                <Button
-                  variant="outline"
-                  onClick={() => setPlayerDrawerOpen(true)}
-                  className={`p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)] relative overflow-hidden ${
-                    audioState.currentlyPlayingId ? "animate-pulse" : ""
-                  }`}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={`p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)] relative overflow-hidden ${
+                      isAudioPlaying && audioState.currentlyPlayingId
+                        ? "animate-pulse"
+                        : ""
+                    }`}
+                    disabled={!audioState.availableAudios.size}
+                  >
+                    <span className="material-icons-round text-2xl">radio</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-80 bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
+                  align="end"
                 >
-                  <span className="material-icons-round text-2xl">radio</span>
-                  <div className="absolute inset-0 bg-[var(--card-text)] opacity-10 animate-pulse" />
-                </Button>
-              )}
+                  {audioState.currentlyPlayingId ? (
+                    <div className="w-full">
+                      <AzkarCard
+                        azkar={
+                          groupedAzkars.find(
+                            (a) => a.id === audioState.currentlyPlayingId
+                          )!
+                        }
+                        language={language}
+                        uiTranslations={data.uiTranslations}
+                        counter={counters[audioState.currentlyPlayingId] || 0}
+                        updateCounter={updateCounter}
+                        virtue={selectedCategoryData?.virtues.find(
+                          (v) => v.azkar_id === audioState.currentlyPlayingId
+                        )}
+                        audioSrc={`/audio/${audioState.currentlyPlayingId}.m4a`}
+                        isCurrentlyPlaying={isAudioPlaying}
+                        currentLineIndex={audioState.currentLineIndex}
+                        onAudioControl={handleAudioControl}
+                        playbackRate={playbackRate}
+                        isRepeat={isRepeat}
+                        onSpeedChange={handleSpeedChange}
+                        onRepeatToggle={handleRepeatToggle}
+                        onSkip={handleSkip}
+                        selectedCategory={selectedCategory}
+                        isFavorite={
+                          favorites[selectedCategory]?.has(
+                            audioState.currentlyPlayingId
+                          ) || false
+                        }
+                        toggleFavorite={toggleFavorite}
+                        isPlayerDrawer={true}
+                      />
+                    </div>
+                  ) : (
+                    <div className="p-4 text-center">
+                      <p></p>
+                    </div>
+                  )}
+                </PopoverContent>
+              </Popover>
               <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
                 <DrawerTrigger asChild>
                   <Button
@@ -671,54 +731,6 @@ export default function HomePage() {
           })}
         </div>
       </div>
-
-      <Drawer open={playerDrawerOpen} onOpenChange={setPlayerDrawerOpen}>
-        <DrawerContent className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)] rounded-t-[10px] shadow-lg">
-          <DrawerHeader>
-            <DrawerTitle className="text-center">
-              {currentCardIndex >= 0
-                ? `${currentCardIndex + 1} / ${totalCards}`
-                : "Audio Player"}
-            </DrawerTitle>
-            <DrawerDescription className="sr-only">
-              Audio player controls for the current Azkar
-            </DrawerDescription>
-          </DrawerHeader>
-          {groupedAzkars.map((azkar) =>
-            audioState.currentlyPlayingId === azkar.id ? (
-              <AzkarCard
-                key={azkar.id}
-                azkar={azkar}
-                language={language}
-                uiTranslations={data.uiTranslations}
-                counter={counters[azkar.id] || 0}
-                updateCounter={updateCounter}
-                virtue={selectedCategoryData.virtues.find(
-                  (v) => v.azkar_id === azkar.id
-                )}
-                audioSrc={`/audio/${azkar.id}.m4a`}
-                isCurrentlyPlaying={audioState.currentlyPlayingId === azkar.id}
-                currentLineIndex={audioState.currentLineIndex}
-                onAudioControl={handleAudioControl}
-                playbackRate={playbackRate}
-                isRepeat={isRepeat}
-                onSpeedChange={handleSpeedChange}
-                onRepeatToggle={handleRepeatToggle}
-                onSkip={handleSkip}
-                selectedCategory={selectedCategory}
-                isFavorite={favorites[selectedCategory]?.has(azkar.id) || false}
-                toggleFavorite={toggleFavorite}
-                isPlayerDrawer={true}
-              />
-            ) : null
-          )}
-          <DrawerClose asChild>
-            <VisuallyHidden>
-              <Button autoFocus />
-            </VisuallyHidden>
-          </DrawerClose>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 }
