@@ -55,6 +55,7 @@ interface ITheme {
 
 interface AudioState {
   currentlyPlayingId: string | null;
+  lastPlayedId: string | null;
   availableAudios: Set<string>;
   currentLineIndex: number;
 }
@@ -130,6 +131,7 @@ export default function HomePage() {
   const [clearHistoryClicked, setClearHistoryClicked] = useState(false);
   const [audioState, setAudioState] = useState<AudioState>({
     currentlyPlayingId: null,
+    lastPlayedId: null,
     availableAudios: new Set<string>(),
     currentLineIndex: -1,
   });
@@ -350,6 +352,7 @@ export default function HomePage() {
       setAudioState((prev) => ({
         ...prev,
         currentlyPlayingId: control.isPlaying ? control.azkarId : null,
+        lastPlayedId: control.isPlaying ? control.azkarId : prev.lastPlayedId,
         currentLineIndex: control.isPlaying ? 0 : -1,
       }));
 
@@ -453,55 +456,85 @@ export default function HomePage() {
                         ? "animate-pulse"
                         : ""
                     }`}
-                    disabled={!audioState.availableAudios.size}
+                    disabled={!audioState.lastPlayedId}
                   >
                     <span className="material-icons-round text-2xl">radio</span>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent
-                  className="w-80 bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  align="end"
-                >
-                  {audioState.currentlyPlayingId ? (
-                    <div className="w-full">
-                      <AzkarCard
-                        azkar={
-                          groupedAzkars.find(
-                            (a) => a.id === audioState.currentlyPlayingId
-                          )!
-                        }
-                        language={language}
-                        uiTranslations={data.uiTranslations}
-                        counter={counters[audioState.currentlyPlayingId] || 0}
-                        updateCounter={updateCounter}
-                        virtue={selectedCategoryData?.virtues.find(
-                          (v) => v.azkar_id === audioState.currentlyPlayingId
-                        )}
-                        audioSrc={`/audio/${audioState.currentlyPlayingId}.m4a`}
-                        isCurrentlyPlaying={isAudioPlaying}
-                        currentLineIndex={audioState.currentLineIndex}
-                        onAudioControl={handleAudioControl}
-                        playbackRate={playbackRate}
-                        isRepeat={isRepeat}
-                        onSpeedChange={handleSpeedChange}
-                        onRepeatToggle={handleRepeatToggle}
-                        onSkip={handleSkip}
-                        selectedCategory={selectedCategory}
-                        isFavorite={
-                          favorites[selectedCategory]?.has(
-                            audioState.currentlyPlayingId
-                          ) || false
-                        }
-                        toggleFavorite={toggleFavorite}
-                        isPlayerDrawer={true}
-                      />
+                {audioState.lastPlayedId && (
+                  <PopoverContent
+                    className="w-64 bg-[var(--card-bg)]/80 backdrop-blur-md border-[var(--card-border)]/50 text-[var(--card-text)] rounded-xl shadow-lg p-3"
+                    align="end"
+                  >
+                    <div className="flex flex-col gap-2">
+                      {/* Compact Controls */}
+                      <div className="flex items-center justify-between gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="p-1 hover:bg-[var(--card-bg)]/50 rounded-full"
+                          onClick={() => handleSkip("backward")}
+                        >
+                          <span className="material-icons-round text-lg">
+                            skip_previous
+                          </span>
+                        </Button>
+
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="p-2 bg-[var(--card-bg)]/50 hover:bg-[var(--card-bg)]/70 rounded-full"
+                          onClick={() =>
+                            handleAudioControl({
+                              azkarId: audioState.lastPlayedId!,
+                              isPlaying: !isAudioPlaying,
+                              audioSrc: `/audio/${audioState.lastPlayedId}.m4a`,
+                            })
+                          }
+                        >
+                          <span className="material-icons-round text-xl">
+                            {isAudioPlaying ? "pause" : "play_arrow"}
+                          </span>
+                        </Button>
+
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="p-1 hover:bg-[var(--card-bg)]/50 rounded-full"
+                          onClick={() => handleSkip("forward")}
+                        >
+                          <span className="material-icons-round text-lg">
+                            skip_next
+                          </span>
+                        </Button>
+                      </div>
+
+                      {/* Speed and Repeat Controls */}
+                      <div className="flex justify-between text-xs">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="p-1 hover:bg-[var(--card-bg)]/50 rounded-full"
+                          onClick={handleSpeedChange}
+                        >
+                          {playbackRate}x
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className={`p-1 hover:bg-[var(--card-bg)]/50 rounded-full ${
+                            isRepeat ? "text-[#606c38]" : ""
+                          }`}
+                          onClick={handleRepeatToggle}
+                        >
+                          <span className="material-icons-round text-lg">
+                            repeat
+                          </span>
+                        </Button>
+                      </div>
                     </div>
-                  ) : (
-                    <div className="p-4 text-center">
-                      <p></p>
-                    </div>
-                  )}
-                </PopoverContent>
+                  </PopoverContent>
+                )}
               </Popover>
               <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
                 <DrawerTrigger asChild>
@@ -655,7 +688,7 @@ export default function HomePage() {
                     virtue={virtue}
                     audioSrc={hasAudio ? `/audio/${azkar.id}.m4a` : undefined}
                     isCurrentlyPlaying={
-                      audioState.currentlyPlayingId === azkar.id
+                      audioState.currentlyPlayingId! === azkar.id
                     }
                     currentLineIndex={
                       audioState.currentlyPlayingId === azkar.id
