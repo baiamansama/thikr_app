@@ -1,14 +1,6 @@
 "use client";
 
-import React, {
-  useCallback,
-  useMemo,
-  forwardRef,
-  Ref,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
+import React, { useCallback, useMemo, forwardRef, Ref, useState } from "react";
 
 interface Translation {
   [language: string]: string;
@@ -47,11 +39,6 @@ export interface IVirtues {
   русский: string;
 }
 
-interface AudioControl {
-  azkarId: string;
-  isPlaying: boolean;
-}
-
 export interface IAzkarCardProps {
   azkar: IAzkarEntry;
   language: string;
@@ -61,7 +48,17 @@ export interface IAzkarCardProps {
   virtue?: IVirtues;
   audioSrc?: string;
   isCurrentlyPlaying?: boolean;
-  onAudioControl?: (control: AudioControl) => void;
+  currentLineIndex?: number;
+  onAudioControl?: (control: {
+    azkarId: string;
+    isPlaying: boolean;
+    audioSrc?: string;
+  }) => void;
+  playbackRate?: number;
+  isRepeat?: boolean;
+  onSpeedChange?: () => void;
+  onRepeatToggle?: () => void;
+  onSkip?: (direction: "forward" | "backward") => void;
   selectedCategory: string;
   isFavorite: boolean;
   toggleFavorite: (azkarId: string) => void;
@@ -78,8 +75,14 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       updateCounter,
       virtue,
       audioSrc,
-      isCurrentlyPlaying,
+      isCurrentlyPlaying = false,
+      currentLineIndex = -1,
       onAudioControl,
+      playbackRate = 1,
+      isRepeat = false,
+      onSpeedChange,
+      onRepeatToggle,
+      onSkip,
       selectedCategory,
       isFavorite,
       toggleFavorite,
@@ -89,25 +92,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
   ) => {
     const [copied, setCopied] = useState(false);
     const [showTranslation, setShowTranslation] = useState(false);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-    const [isPlaying, setIsPlaying] = useState(isCurrentlyPlaying || false);
-    const [playbackRate, setPlaybackRate] = useState(1);
-    const [isRepeat, setIsRepeat] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [isSkipping, setIsSkipping] = useState<"forward" | "backward" | null>(
-      null
-    );
-    const [audioError, setAudioError] = useState(false);
 
     const isCompleted = counter >= azkar.count;
     const hasAudio = Boolean(audioSrc);
-
-    const timestamps = useMemo(() => {
-      return azkar.lines
-        .map((line) => line.timestamp)
-        .filter((ts): ts is number => ts !== undefined)
-        .sort((a, b) => a - b);
-    }, [azkar.lines]);
 
     const speedIconMapping: { [key: number]: string } = {
       1: "1x",
@@ -134,128 +121,28 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         : "bookmark_border";
     }, [isFavorite, selectedCategory]);
 
-    const hasCompletedEffectTriggered = useRef(false);
-    useEffect(() => {
-      if (isCompleted && !hasCompletedEffectTriggered.current) {
-        hasCompletedEffectTriggered.current = true;
-        if (navigator.vibrate) {
-          navigator.vibrate([200, 100, 200]);
-        }
-      }
-    }, [isCompleted]);
-
-    useEffect(() => {
-      if (!hasAudio) return;
-      const audio = new Audio(audioSrc);
-      audioRef.current = audio;
-      audio.playbackRate = playbackRate;
-      const handleError = (e: Event) => {
-        console.error("Audio error:", e);
-        setAudioError(true);
-        setIsPlaying(false);
-      };
-      audio.addEventListener("error", handleError);
-      if (isCurrentlyPlaying) {
-        audio.play().catch(handleError);
-        setIsPlaying(true);
-      }
-      return () => {
-        audio.removeEventListener("error", handleError);
-        audio.pause();
-        audioRef.current = null;
-      };
-    }, [audioSrc, hasAudio, isCurrentlyPlaying]);
-
-    useEffect(() => {
-      const audioEl = audioRef.current;
-      if (!audioEl || !hasAudio) return;
-      const handleTimeUpdate = () => {
-        setCurrentTime(audioEl.currentTime);
-      };
-      audioEl.addEventListener("timeupdate", handleTimeUpdate);
-      return () => {
-        audioEl.removeEventListener("timeupdate", handleTimeUpdate);
-      };
-    }, [hasAudio]);
-
-    useEffect(() => {
-      const audioEl = audioRef.current;
-      if (!audioEl || !hasAudio) return;
-      const handleEnded = () => {
-        if (isRepeat) {
-          audioEl.currentTime = 0;
-          audioEl.play().catch((err) => {
-            console.error("Audio replay error:", err);
-            setAudioError(true);
-          });
-        } else {
-          setIsPlaying(false);
-          onAudioControl?.({ azkarId: azkar.id, isPlaying: false });
-        }
-      };
-      audioEl.addEventListener("ended", handleEnded);
-      return () => {
-        audioEl.removeEventListener("ended", handleEnded);
-      };
-    }, [isRepeat, hasAudio, azkar.id, onAudioControl]);
-
     const handlePlayPause = useCallback(() => {
-      if (!audioRef.current || !hasAudio || audioError) return;
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-        onAudioControl?.({ azkarId: azkar.id, isPlaying: false });
-      } else {
-        audioRef.current.play().catch((err) => {
-          console.error("Audio play error:", err);
-          setAudioError(true);
-        });
-        setIsPlaying(true);
-        onAudioControl?.({ azkarId: azkar.id, isPlaying: true });
-      }
-    }, [isPlaying, hasAudio, audioError, azkar.id, onAudioControl]);
+      if (!audioSrc) return;
+      onAudioControl?.({
+        azkarId: azkar.id,
+        isPlaying: !isCurrentlyPlaying,
+        audioSrc,
+      });
+    }, [audioSrc, isCurrentlyPlaying, azkar.id, onAudioControl]);
 
-    const handleSpeedChange = useCallback(() => {
-      let newRate = playbackRate;
-      if (playbackRate === 1) newRate = 1.5;
-      else if (playbackRate === 1.5) newRate = 2;
-      else newRate = 1;
-      setPlaybackRate(newRate);
-      if (audioRef.current) {
-        audioRef.current.playbackRate = newRate;
-      }
-    }, [playbackRate]);
-
-    const handleRepeatToggle = useCallback(() => {
-      setIsRepeat((prev) => !prev);
-    }, []);
-
-    const handleSkipBackward = useCallback(() => {
-      if (!audioRef.current || timestamps.length === 0) return;
-      setIsSkipping("backward");
-      setTimeout(() => setIsSkipping(null), 200);
-      const current = audioRef.current.currentTime;
-      const previousTimestamp = [...timestamps]
-        .reverse()
-        .find((ts) => ts < current - 0.5);
-      audioRef.current.currentTime =
-        previousTimestamp !== undefined ? previousTimestamp : 0;
-    }, [timestamps]);
-
-    const handleSkipForward = useCallback(() => {
-      if (!audioRef.current || timestamps.length === 0) return;
-      setIsSkipping("forward");
-      setTimeout(() => setIsSkipping(null), 200);
-      const current = audioRef.current.currentTime;
-      const nextTimestamp = timestamps.find((ts) => ts > current + 0.5);
-      if (nextTimestamp !== undefined) {
-        audioRef.current.currentTime = nextTimestamp;
-      }
-    }, [timestamps]);
+    const handleSkipBackward = useCallback(
+      () => onSkip?.("backward"),
+      [onSkip]
+    );
+    const handleSkipForward = useCallback(() => onSkip?.("forward"), [onSkip]);
 
     const handleIncrement = useCallback(() => {
       if (counter < azkar.count) {
-        updateCounter(azkar.id, counter + 1);
+        const newCounter = counter + 1;
+        updateCounter(azkar.id, newCounter);
+        if (newCounter === azkar.count && navigator.vibrate) {
+          navigator.vibrate([200, 100, 200]);
+        }
       }
     }, [counter, azkar, updateCounter]);
 
@@ -356,69 +243,60 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
 
     if (isPlayerDrawer) {
       return (
-        <div className="flex flex-col items-center gap-4 p-4">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={handleRepeatToggle}
-              aria-label="Repeat"
-              className={buttonClassNames}
-            >
-              <span
-                className={`material-icons-round ${repeatIconClassNames} transition-opacity`}
-                style={
-                  isRepeat
-                    ? { filter: "brightness(1.2) contrast(1.2)" }
-                    : undefined
-                }
-              >
-                {isRepeat ? "repeat_on" : "repeat"}
-              </span>
-            </button>
-            <button
-              onClick={handleSkipBackward}
-              aria-label="Skip Backward"
-              className={`${buttonClassNames} ${
-                isSkipping === "backward" ? "scale-90" : ""
+        <div className="flex items-center justify-center gap-4 p-4">
+          <button
+            onClick={onRepeatToggle}
+            aria-label="Repeat"
+            className={buttonClassNames}
+          >
+            <span
+              className={`material-icons-round ${repeatIconClassNames} ${
+                isRepeat ? "text-green-500" : ""
               }`}
             >
+              {isRepeat ? "repeat_on" : "repeat"}
+            </span>
+          </button>
+          <button
+            onClick={handleSkipBackward}
+            aria-label="Skip Backward"
+            className={buttonClassNames}
+          >
+            <span className={`material-icons-round ${iconClassNames}`}>
+              skip_previous
+            </span>
+          </button>
+          <button
+            onClick={handlePlayPause}
+            aria-label="Play/Pause"
+            className={buttonClassNames}
+          >
+            {isCurrentlyPlaying ? (
               <span className={`material-icons-round ${iconClassNames}`}>
-                skip_previous
+                pause
               </span>
-            </button>
-            <button
-              onClick={handlePlayPause}
-              aria-label="Play/Pause"
-              className={buttonClassNames}
-            >
-              {isPlaying ? (
-                <span className={`material-icons-round ${iconClassNames}`}>
-                  pause
-                </span>
-              ) : (
-                <span className={`material-icons-round ${iconClassNames}`}>
-                  play_arrow
-                </span>
-              )}
-            </button>
-            <button
-              onClick={handleSkipForward}
-              aria-label="Skip Forward"
-              className={`${buttonClassNames} ${
-                isSkipping === "forward" ? "scale-90" : ""
-              }`}
-            >
+            ) : (
               <span className={`material-icons-round ${iconClassNames}`}>
-                skip_next
+                play_arrow
               </span>
-            </button>
-            <button
-              onClick={handleSpeedChange}
-              aria-label="Speed"
-              className={`${buttonClassNames} min-w-[48px]`}
-            >
-              <div className="speed-box">{speedIconMapping[playbackRate]}</div>
-            </button>
-          </div>
+            )}
+          </button>
+          <button
+            onClick={handleSkipForward}
+            aria-label="Skip Forward"
+            className={buttonClassNames}
+          >
+            <span className={`material-icons-round ${iconClassNames}`}>
+              skip_next
+            </span>
+          </button>
+          <button
+            onClick={onSpeedChange}
+            aria-label="Speed"
+            className={`${buttonClassNames} min-w-[48px]`}
+          >
+            <div className="speed-box">{speedIconMapping[playbackRate]}</div>
+          </button>
         </div>
       );
     }
@@ -430,46 +308,31 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         style={{ borderColor: "var(--card-text)" }}
       >
         <div className="mb-4">
-          {azkar.lines.map((line) => {
-            const isRead =
-              audioSrc &&
-              isPlaying &&
-              line.timestamp !== undefined &&
-              line.timestamp <= currentTime;
-            return (
-              <div key={line.lineNumber} className="mb-2">
-                <p
-                  className={`text-xl font-bold text-right content-arabic ${
-                    audioSrc && isPlaying
-                      ? `transition-opacity duration-300 ${
-                          isRead ? "opacity-100" : "opacity-40"
-                        }`
-                      : ""
-                  }`}
-                  lang="ar"
-                  dir="rtl"
-                >
-                  {line.arabic}
-                </p>
-                {language !== "عربي" &&
-                  showTranslation &&
-                  line.translations[language] && (
-                    <p
-                      className={`mt-1 text-[var(--translation-text)] ${
-                        audioSrc && isPlaying
-                          ? `transition-opacity duration-300 ${
-                              isRead ? "opacity-100" : "opacity-40"
-                            }`
-                          : ""
-                      }`}
-                      dir="ltr"
-                    >
-                      {line.translations[language]}
-                    </p>
-                  )}
-              </div>
-            );
-          })}
+          {azkar.lines.map((line, index) => (
+            <div
+              key={line.lineNumber}
+              className={`mb-2 p-2 rounded transition-colors ${
+                isCurrentlyPlaying && currentLineIndex === index
+                  ? "bg-[#606c38]/20 border border-[#606c38]"
+                  : ""
+              }`}
+            >
+              <p
+                className="text-xl font-bold text-right content-arabic"
+                lang="ar"
+                dir="rtl"
+              >
+                {line.arabic}
+              </p>
+              {language !== "عربي" &&
+                showTranslation &&
+                line.translations[language] && (
+                  <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
+                    {line.translations[language]}
+                  </p>
+                )}
+            </div>
+          ))}
         </div>
 
         {shouldRenderVirtues && (
@@ -534,13 +397,13 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             )}
           </button>
 
-          {hasAudio && !audioError && (
+          {hasAudio && (
             <button
               onClick={handlePlayPause}
               aria-label="Play/Pause"
               className={buttonClassNames}
             >
-              {isPlaying ? (
+              {isCurrentlyPlaying ? (
                 <span className={`material-icons-round ${iconClassNames}`}>
                   pause
                 </span>
@@ -577,8 +440,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             </span>
           </button>
         </div>
-
-        <audio ref={audioRef} src={audioSrc} />
       </div>
     );
   }
