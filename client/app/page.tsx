@@ -142,6 +142,8 @@ export default function HomePage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isRepeat, setIsRepeat] = useState(false);
+  const timeUpdateListener = useRef<(() => void) | null>(null);
+  const endedListener = useRef<(() => void) | null>(null);
 
   const handleSpeedChange = useCallback(() => {
     const newRate = playbackRate === 1 ? 1.5 : playbackRate === 1.5 ? 2 : 1;
@@ -197,6 +199,15 @@ export default function HomePage() {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+        if (timeUpdateListener.current) {
+          audioRef.current.removeEventListener(
+            "timeupdate",
+            timeUpdateListener.current
+          );
+        }
+        if (endedListener.current) {
+          audioRef.current.removeEventListener("ended", endedListener.current);
+        }
         audioRef.current = null;
       }
     };
@@ -306,8 +317,18 @@ export default function HomePage() {
       if (!control.audioSrc) return;
 
       let preservedTime = 0;
+      const preservedLineIndex = audioState.currentLineIndex;
       if (audioRef.current) {
         preservedTime = audioRef.current.currentTime;
+        if (timeUpdateListener.current) {
+          audioRef.current.removeEventListener(
+            "timeupdate",
+            timeUpdateListener.current
+          );
+        }
+        if (endedListener.current) {
+          audioRef.current.removeEventListener("ended", endedListener.current);
+        }
       }
 
       const isNewAudio = audioState.currentlyPlayingId !== control.azkarId;
@@ -318,59 +339,48 @@ export default function HomePage() {
         }
         audioRef.current = new Audio(control.audioSrc);
         audioRef.current.playbackRate = playbackRate;
-        // Reset repeat when switching to a new audio
         audioRef.current.loop = isNewAudio ? false : isRepeat;
-        if (isNewAudio) setIsRepeat(false);
 
-        audioRef.current.addEventListener("timeupdate", () => {
+        const timeUpdateHandler = () => {
           const currentTime = audioRef.current!.currentTime;
           const azkar = groupedAzkars.find((a) => a.id === control.azkarId);
-          if (azkar && azkar.lines.length > 0) {
-            let lineIndex = 0;
-            if (
-              azkar.lines[0].timestamp === undefined ||
-              currentTime < azkar.lines[0].timestamp
-            ) {
-              lineIndex = 0;
-            } else {
-              lineIndex = azkar.lines.findIndex(
-                (line, idx) =>
-                  line.timestamp !== undefined &&
-                  currentTime >= line.timestamp &&
-                  (idx === azkar.lines.length - 1 ||
-                    (azkar.lines[idx + 1].timestamp !== undefined &&
-                      currentTime <
-                        (azkar.lines[idx + 1]?.timestamp ?? Infinity)))
+          if (azkar?.lines) {
+            let lineIndex = azkar.lines.findIndex((line, idx) => {
+              const nextLine = azkar.lines[idx + 1];
+              const lineEnd = nextLine?.timestamp ?? Infinity;
+              return (
+                currentTime >= (line.timestamp || 0) && currentTime < lineEnd
               );
-            }
-            setAudioState((prev) => ({
-              ...prev,
-              currentLineIndex: lineIndex >= 0 ? lineIndex : 0,
-            }));
+            });
+            lineIndex = lineIndex === -1 ? 0 : lineIndex;
+            setAudioState((prev) => ({ ...prev, currentLineIndex: lineIndex }));
           }
-        });
+        };
 
-        audioRef.current.addEventListener("ended", () => {
+        const endedHandler = () => {
           if (!isRepeat) {
             setAudioState((prev) => ({
               ...prev,
               currentlyPlayingId: null,
-              currentLineIndex: prev.currentLineIndex,
             }));
             setIsAudioPlaying(false);
           }
-        });
+        };
+
+        timeUpdateListener.current = timeUpdateHandler;
+        endedListener.current = endedHandler;
+
+        audioRef.current.addEventListener("timeupdate", timeUpdateHandler);
+        audioRef.current.addEventListener("ended", endedHandler);
       }
 
-      setAudioState((prev) => {
-        return {
-          ...prev,
-          currentlyPlayingId: control.isPlaying ? control.azkarId : null,
-          lastPlayedId: control.azkarId,
-          currentLineIndex:
-            isNewAudio && control.isPlaying ? 0 : prev.currentLineIndex,
-        };
-      });
+      setAudioState((prev) => ({
+        ...prev,
+        currentlyPlayingId: control.isPlaying ? control.azkarId : null,
+        lastPlayedId: control.azkarId,
+        currentLineIndex:
+          isNewAudio && control.isPlaying ? 0 : preservedLineIndex,
+      }));
 
       setIsAudioPlaying(control.isPlaying);
 
@@ -382,22 +392,11 @@ export default function HomePage() {
           .play()
           .catch((err) => console.error("Audio play error:", err));
       } else {
-        audioRef.current.pause();
+        audioRef.current?.pause();
       }
     },
-    [groupedAzkars, playbackRate, isRepeat]
+    [groupedAzkars, playbackRate, isRepeat, audioState.currentLineIndex]
   );
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    setAudioState((prev) => ({
-      ...prev,
-      currentlyPlayingId: null,
-    }));
-    setIsAudioPlaying(false);
-  }, [selectedCategory]);
 
   const handleSkip = useCallback(
     (direction: "forward" | "backward") => {
@@ -483,7 +482,7 @@ export default function HomePage() {
                     variant="outline"
                     className={`p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)] relative overflow-hidden ${
                       isAudioPlaying && audioState.currentlyPlayingId
-                        ? "animate-pulse"
+                        ? "animate-pulse bg-[#606c38]/50 shadow-lg shadow-[#606c38]/30"
                         : ""
                     }`}
                     disabled={!audioState.lastPlayedId}
@@ -734,10 +733,10 @@ export default function HomePage() {
                     virtue={virtue}
                     audioSrc={hasAudio ? `/audio/${azkar.id}.m4a` : undefined}
                     isCurrentlyPlaying={
-                      audioState.currentlyPlayingId! === azkar.id
+                      audioState.currentlyPlayingId === azkar.id
                     }
                     currentLineIndex={
-                      audioState.currentlyPlayingId === azkar.id
+                      audioState.lastPlayedId === azkar.id
                         ? audioState.currentLineIndex
                         : -1
                     }

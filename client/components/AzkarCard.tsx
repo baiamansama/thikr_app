@@ -312,13 +312,13 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             <div
               key={line.lineNumber}
               className={`mb-2 p-2 rounded transition-colors ${
-                isCurrentlyPlaying && currentLineIndex === index
-                  ? "bg-[#606c38]/20 border border-[#606c38]"
+                currentLineIndex === index
+                  ? "bg-[#606c38]/20 border border-[#606c38] shadow-inner"
                   : ""
               }`}
             >
               <p
-                className="text-xl font-bold text-right content-arabic"
+                className="text-2xl leading-relaxed text-right quran-font"
                 lang="ar"
                 dir="rtl"
               >
@@ -327,7 +327,10 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
               {language !== "عربي" &&
                 showTranslation &&
                 line.translations[language] && (
-                  <p className="mt-1 text-[var(--translation-text)]" dir="ltr">
+                  <p
+                    className="mt-2 text-[var(--translation-text)] text-base"
+                    dir="ltr"
+                  >
                     {line.translations[language]}
                   </p>
                 )}
@@ -343,7 +346,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             <p
               className={
                 language === "عربي"
-                  ? "text-sm text-right content-arabic"
+                  ? "text-base text-right quran-font mt-2"
                   : "text-sm mt-1 text-[var(--translation-text)]"
               }
               lang={language === "عربي" ? "ar" : undefined}
