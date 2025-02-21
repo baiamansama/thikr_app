@@ -53,6 +53,11 @@ interface AudioState {
   availableAudios: Set<string>;
 }
 
+interface AudioControl {
+  azkarId: string;
+  isPlaying: boolean;
+}
+
 interface IVirtues {
   azkar_id: string;
   arabic: string;
@@ -126,16 +131,19 @@ export default function HomePage() {
     currentlyPlayingId: null,
     availableAudios: new Set<string>(),
   });
+  const [playerDrawerOpen, setPlayerDrawerOpen] = useState(false);
   const isMounted = useRef(false);
-
   const drawerOpenRef = useRef(drawerOpen);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const handleAudioStateChange = useCallback((azkarId: string | null) => {
+  const handleAudioControl = useCallback((control: AudioControl) => {
     setAudioState((prev) => ({
       ...prev,
-      currentlyPlayingId: azkarId,
+      currentlyPlayingId: control.isPlaying ? control.azkarId : null,
     }));
+    if (!control.isPlaying) {
+      setPlayerDrawerOpen(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -259,7 +267,6 @@ export default function HomePage() {
       entry.lines.sort((a, b) => a.lineNumber - b.lineNumber);
     }
 
-    // No sorting by favorites
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
@@ -304,11 +311,28 @@ export default function HomePage() {
     <>
       <div className="container mx-auto px-4 py-6 transition-colors">
         <div style={{ paddingBottom: "120px" }}>
-          <header className="mb-8 text-center py-4">
+          <header className="mb-8 text-center py-4 relative">
             <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
               {selectedCategoryData.translations[language] ||
                 selectedCategoryData.id}
             </h1>
+            <div className="absolute top-4 right-4 flex gap-2">
+              {audioState.currentlyPlayingId && (
+                <Button
+                  variant="outline"
+                  onClick={() => setPlayerDrawerOpen(true)}
+                  className={`p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)] relative overflow-hidden ${
+                    audioState.currentlyPlayingId ? "animate-pulse" : ""
+                  }`}
+                >
+                  <span className="material-icons-round text-2xl">
+                    play_arrow
+                  </span>
+                  <div className="absolute inset-0 bg-[var(--card-text)] opacity-10 animate-pulse" />
+                </Button>
+              )}
+              {/* Settings Drawer Trigger moved inside its Drawer */}
+            </div>
           </header>
           <section className="grid grid-cols-1 gap-6 mt-6">
             {groupedAzkars.map((azkar, index) => {
@@ -337,9 +361,7 @@ export default function HomePage() {
                     virtue={virtue}
                     audioSrc={hasAudio ? `/audio/${azkar.id}.m4a` : undefined}
                     isCurrentlyPlaying={isPlaying}
-                    onAudioStateChange={(playing) =>
-                      handleAudioStateChange(playing ? azkar.id : null)
-                    }
+                    onAudioControl={handleAudioControl}
                     selectedCategory={selectedCategory}
                     isFavorite={isFavorite}
                     toggleFavorite={toggleFavorite}
@@ -352,7 +374,7 @@ export default function HomePage() {
       </div>
 
       <div
-        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner z-20  ${
+        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner z-20 ${
           computedTheme === "light"
             ? "bg-[#ffffff]"
             : computedTheme === "dark"
@@ -388,7 +410,7 @@ export default function HomePage() {
                 <span
                   className={`relative z-10 ${
                     isFavorite
-                      ? "material-icons-round text-[var(--card-text)] text-xl" // Changed to use --card-text
+                      ? "material-icons-round text-[var(--card-text)] text-xl"
                       : "text-[var(--card-text)]"
                   }`}
                 >
@@ -404,7 +426,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      <Drawer onOpenChange={(open) => setDrawerOpen(open)}>
+      {/* Settings Drawer */}
+      <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
         <DrawerTrigger asChild>
           <Button
             variant="outline"
@@ -508,6 +531,42 @@ export default function HomePage() {
             )}
           </div>
 
+          <DrawerClose asChild>
+            <VisuallyHidden>
+              <Button autoFocus />
+            </VisuallyHidden>
+          </DrawerClose>
+        </DrawerContent>
+      </Drawer>
+
+      {/* Player Drawer */}
+      <Drawer open={playerDrawerOpen} onOpenChange={setPlayerDrawerOpen}>
+        <DrawerContent className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]">
+          <DrawerHeader>
+            <DrawerTitle className="text-center">Audio Player</DrawerTitle>
+          </DrawerHeader>
+          {groupedAzkars.map((azkar) =>
+            audioState.currentlyPlayingId === azkar.id ? (
+              <AzkarCard
+                key={azkar.id}
+                azkar={azkar}
+                language={language}
+                uiTranslations={data.uiTranslations}
+                counter={counters[azkar.id] || 0}
+                updateCounter={updateCounter}
+                virtue={selectedCategoryData.virtues.find(
+                  (v) => v.azkar_id === azkar.id
+                )}
+                audioSrc={`/audio/${azkar.id}.m4a`}
+                isCurrentlyPlaying={true}
+                onAudioControl={handleAudioControl}
+                selectedCategory={selectedCategory}
+                isFavorite={favorites[selectedCategory]?.has(azkar.id) || false}
+                toggleFavorite={toggleFavorite}
+                isPlayerDrawer={true}
+              />
+            ) : null
+          )}
           <DrawerClose asChild>
             <VisuallyHidden>
               <Button autoFocus />
