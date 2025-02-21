@@ -169,7 +169,6 @@ export default function HomePage() {
         });
         setDb({ ...parsedDB, favorites });
       } else {
-        // First visit: Open the drawer
         setDrawerOpen(true);
       }
     }
@@ -306,11 +305,22 @@ export default function HomePage() {
     (control: { azkarId: string; isPlaying: boolean; audioSrc?: string }) => {
       if (!control.audioSrc) return;
 
+      let preservedTime = 0;
+      if (audioRef.current) {
+        preservedTime = audioRef.current.currentTime;
+      }
+
+      const isNewAudio = audioState.currentlyPlayingId !== control.azkarId;
+
       if (!audioRef.current || audioRef.current.src !== control.audioSrc) {
-        if (audioRef.current) audioRef.current.pause();
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
         audioRef.current = new Audio(control.audioSrc);
         audioRef.current.playbackRate = playbackRate;
-        audioRef.current.loop = isRepeat;
+        // Reset repeat when switching to a new audio
+        audioRef.current.loop = isNewAudio ? false : isRepeat;
+        if (isNewAudio) setIsRepeat(false);
 
         audioRef.current.addEventListener("timeupdate", () => {
           const currentTime = audioRef.current!.currentTime;
@@ -345,23 +355,29 @@ export default function HomePage() {
             setAudioState((prev) => ({
               ...prev,
               currentlyPlayingId: null,
-              currentLineIndex: -1,
+              currentLineIndex: prev.currentLineIndex,
             }));
             setIsAudioPlaying(false);
           }
         });
       }
 
-      setAudioState((prev) => ({
-        ...prev,
-        currentlyPlayingId: control.isPlaying ? control.azkarId : null,
-        lastPlayedId: control.isPlaying ? control.azkarId : prev.lastPlayedId,
-        currentLineIndex: control.isPlaying ? 0 : -1,
-      }));
+      setAudioState((prev) => {
+        return {
+          ...prev,
+          currentlyPlayingId: control.isPlaying ? control.azkarId : null,
+          lastPlayedId: control.azkarId,
+          currentLineIndex:
+            isNewAudio && control.isPlaying ? 0 : prev.currentLineIndex,
+        };
+      });
 
       setIsAudioPlaying(control.isPlaying);
 
       if (control.isPlaying) {
+        if (audioRef.current.src === control.audioSrc && preservedTime > 0) {
+          audioRef.current.currentTime = preservedTime;
+        }
         audioRef.current
           .play()
           .catch((err) => console.error("Audio play error:", err));
@@ -371,6 +387,17 @@ export default function HomePage() {
     },
     [groupedAzkars, playbackRate, isRepeat]
   );
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    setAudioState((prev) => ({
+      ...prev,
+      currentlyPlayingId: null,
+    }));
+    setIsAudioPlaying(false);
+  }, [selectedCategory]);
 
   const handleSkip = useCallback(
     (direction: "forward" | "backward") => {
@@ -470,12 +497,15 @@ export default function HomePage() {
                     align="end"
                   >
                     <div className="flex flex-col gap-2">
-                      {/* Compact Controls */}
                       <div className="flex items-center justify-between gap-2">
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="p-1 hover:bg-[var(--card-bg)]/50 rounded-full"
+                          className={`p-1 rounded-full transition-colors ${
+                            audioState.currentlyPlayingId
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                          }`}
                           onClick={() => handleSkip("backward")}
                         >
                           <span className="material-icons-round text-lg">
@@ -486,7 +516,11 @@ export default function HomePage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="p-2 bg-[var(--card-bg)]/50 hover:bg-[var(--card-bg)]/70 rounded-full"
+                          className={`p-2 rounded-full transition-colors ${
+                            isAudioPlaying
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                          }`}
                           onClick={() =>
                             handleAudioControl({
                               azkarId: audioState.lastPlayedId!,
@@ -503,7 +537,11 @@ export default function HomePage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="p-1 hover:bg-[var(--card-bg)]/50 rounded-full"
+                          className={`p-1 rounded-full transition-colors ${
+                            audioState.currentlyPlayingId
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                          }`}
                           onClick={() => handleSkip("forward")}
                         >
                           <span className="material-icons-round text-lg">
@@ -512,12 +550,15 @@ export default function HomePage() {
                         </Button>
                       </div>
 
-                      {/* Speed and Repeat Controls */}
                       <div className="flex justify-between text-xs">
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="p-1 hover:bg-[var(--card-bg)]/50 rounded-full"
+                          className={`p-1 rounded-full transition-colors ${
+                            playbackRate !== 1
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                          }`}
                           onClick={handleSpeedChange}
                         >
                           {playbackRate}x
@@ -525,8 +566,10 @@ export default function HomePage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className={`p-1 hover:bg-[var(--card-bg)]/50 rounded-full ${
-                            isRepeat ? "text-[#606c38]" : ""
+                          className={`p-1 rounded-full transition-colors ${
+                            isRepeat
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
                           }`}
                           onClick={handleRepeatToggle}
                         >
