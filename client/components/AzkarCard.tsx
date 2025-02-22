@@ -272,7 +272,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           {showTranslation && language !== "عربي" ? (
             azkar.lines.map((line, index) => (
               <div
-                key={`${azkar.id}-${line.lineNumber}`} // Unique key using azkar.id and lineNumber
+                key={`${azkar.id}-${line.lineNumber}-${index}`} // Added index
                 className={`p-2 rounded transition-colors ${
                   currentLineIndex === index ? "combined-text-highlight" : ""
                 }`}
@@ -304,7 +304,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             >
               {azkar.lines.map((line, index) => (
                 <span
-                  key={`${azkar.id}-${line.lineNumber}`} // Unique key using azkar.id and lineNumber
+                  key={`${azkar.id}-${line.lineNumber}-${index}`} // Added index
                   className={`${
                     isCurrentlyPlaying && currentLineIndex === index
                       ? "combined-text-highlight"
