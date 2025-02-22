@@ -12,6 +12,7 @@ interface IAzkarLine {
   translations: Translation;
   timestamp?: number;
   transcription_cyrillic?: string;
+  transcription_latin?: string;
 }
 
 export interface IAzkarEntry {
@@ -97,9 +98,13 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     const isCompleted = counter >= azkar.count;
     const hasAudio = Boolean(audioSrc);
     const isRussianOrKyrgyz = language === "русский" || language === "кыргыз";
+    const isEnglish = language === "english";
+
     const hasTranscription = azkar.lines.some(
       (line) =>
-        line.transcription_cyrillic && line.transcription_cyrillic.trim() !== ""
+        (line.transcription_cyrillic &&
+          line.transcription_cyrillic.trim() !== "") ||
+        (line.transcription_latin && line.transcription_latin.trim() !== "")
     );
 
     const speedIconMapping: { [key: number]: string } = {
@@ -113,19 +118,8 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     const buttonClassNames = "p-2 flex items-center justify-center";
 
     const favoriteIcon = useMemo(() => {
-      if (isFavorite) {
-        return selectedCategory === "morning"
-          ? "favorite"
-          : selectedCategory === "evening"
-          ? "favorite"
-          : "bookmark";
-      }
-      return selectedCategory === "morning"
-        ? "favorite_border"
-        : selectedCategory === "evening"
-        ? "favorite_border"
-        : "bookmark_border";
-    }, [isFavorite, selectedCategory]);
+      return isFavorite ? "favorite" : "favorite_border";
+    }, [isFavorite]);
 
     const handlePlayPause = useCallback(() => {
       if (!audioSrc) return;
@@ -193,6 +187,19 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         toggleFavorite(azkar.id);
       },
       [azkar.id, toggleFavorite]
+    );
+
+    const getTranscriptionText = useCallback(
+      (line: IAzkarLine) => {
+        if (isEnglish && line.transcription_latin) {
+          return line.transcription_latin;
+        }
+        if (isRussianOrKyrgyz && line.transcription_cyrillic) {
+          return line.transcription_cyrillic;
+        }
+        return line.arabic;
+      },
+      [isEnglish, isRussianOrKyrgyz]
     );
 
     if (isPlayerDrawer) {
@@ -265,21 +272,19 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           {showTranslation && language !== "عربي" ? (
             azkar.lines.map((line, index) => (
               <div
-                key={line.lineNumber}
+                key={`${azkar.id}-${line.lineNumber}`} // Unique key using azkar.id and lineNumber
                 className={`p-2 rounded transition-colors ${
                   currentLineIndex === index ? "combined-text-highlight" : ""
                 }`}
               >
                 <p
-                  className="text-2xl text-right quran-font leading-tight"
-                  lang="ar"
+                  className={`text-xl text-right quran-font leading-tight ${
+                    showTranscription ? "text-[var(--translation-text)]" : ""
+                  }`}
+                  lang={showTranscription ? undefined : "ar"}
                   dir="rtl"
                 >
-                  {isRussianOrKyrgyz &&
-                  showTranscription &&
-                  line.transcription_cyrillic
-                    ? line.transcription_cyrillic
-                    : line.arabic}
+                  {showTranscription ? getTranscriptionText(line) : line.arabic}
                 </p>
                 {line.translations[language] && (
                   <p
@@ -294,23 +299,19 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           ) : (
             <div
               className="text-2xl quran-font leading-tight text-right"
-              lang="ar"
+              lang={showTranscription ? undefined : "ar"}
               dir="rtl"
             >
               {azkar.lines.map((line, index) => (
                 <span
-                  key={line.lineNumber}
+                  key={`${azkar.id}-${line.lineNumber}`} // Unique key using azkar.id and lineNumber
                   className={`${
                     isCurrentlyPlaying && currentLineIndex === index
                       ? "combined-text-highlight"
                       : ""
-                  }`}
+                  } ${showTranscription ? "text-xl" : ""}`}
                 >
-                  {isRussianOrKyrgyz &&
-                  showTranscription &&
-                  line.transcription_cyrillic
-                    ? line.transcription_cyrillic
-                    : line.arabic}
+                  {showTranscription ? getTranscriptionText(line) : line.arabic}
                   {index < azkar.lines.length - 1 && " "}
                 </span>
               ))}
@@ -370,17 +371,15 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             </button>
           )}
 
-          {isRussianOrKyrgyz && hasTranscription && (
+          {(isRussianOrKyrgyz || isEnglish) && hasTranscription && (
             <button
               onClick={() => setShowTranscription((prev) => !prev)}
               aria-label="Toggle Transcription"
             >
-              <span
-                className={`material-icons-round ${iconClassNames} ${
-                  showTranscription ? "text-[#606c38]" : ""
-                }`}
-              >
-                {showTranscription ? "closed_caption" : "closed_caption_off"}
+              <span className={`material-icons-round ${iconClassNames}`}>
+                {showTranscription
+                  ? "closed_caption"
+                  : "closed_caption_disabled"}
               </span>
             </button>
           )}
