@@ -74,6 +74,7 @@ interface IAzkarLine {
   translations: Translation;
   timestamp?: number;
   transcription_cyrillic?: string;
+  transcription_latin?: string;
 }
 
 export interface IAzkarEntry {
@@ -95,6 +96,7 @@ interface ICategory {
     русский: string;
     timestamp?: string;
     transcription_cyrillic?: string;
+    transcription_latin?: string;
   }[];
   virtues: IVirtues[];
 }
@@ -307,6 +309,7 @@ export default function HomePage() {
           },
           timestamp: raw.timestamp ? Number(raw.timestamp) : undefined,
           transcription_cyrillic: raw.transcription_cyrillic || "",
+          transcription_latin: raw.transcription_latin || "",
         });
       }
     });

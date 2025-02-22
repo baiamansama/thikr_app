@@ -312,6 +312,9 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                   } ${showTranscription ? "text-xl" : ""}`}
                 >
                   {showTranscription ? getTranscriptionText(line) : line.arabic}
+                  {showTranscription && index < azkar.lines.length - 1
+                    ? ","
+                    : ""}
                   {index < azkar.lines.length - 1 && " "}
                 </span>
               ))}
