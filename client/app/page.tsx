@@ -73,6 +73,7 @@ interface IAzkarLine {
   arabic: string;
   translations: Translation;
   timestamp?: number;
+  transcription_cyrillic?: string;
 }
 
 export interface IAzkarEntry {
@@ -93,6 +94,7 @@ interface ICategory {
     кыргыз: string;
     русский: string;
     timestamp?: string;
+    transcription_cyrillic?: string;
   }[];
   virtues: IVirtues[];
 }
@@ -304,6 +306,7 @@ export default function HomePage() {
             русский: raw.русский || "",
           },
           timestamp: raw.timestamp ? Number(raw.timestamp) : undefined,
+          transcription_cyrillic: raw.transcription_cyrillic || "",
         });
       }
     });
@@ -543,7 +546,7 @@ export default function HomePage() {
                           className={`p-1 rounded-full transition-colors relative ${
                             skipFeedback === "forward"
                               ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
-                              : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
+                              : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(---card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                           }`}
                           onClick={() => handleSkip("forward")}
                         >

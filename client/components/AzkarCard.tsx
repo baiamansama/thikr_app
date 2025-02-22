@@ -11,6 +11,7 @@ interface IAzkarLine {
   arabic: string;
   translations: Translation;
   timestamp?: number;
+  transcription_cyrillic?: string;
 }
 
 export interface IAzkarEntry {
@@ -90,11 +91,16 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     },
     ref: Ref<HTMLDivElement>
   ) => {
-    const [copied, setCopied] = useState(false);
     const [showTranslation, setShowTranslation] = useState(false);
+    const [showTranscription, setShowTranscription] = useState(false);
 
     const isCompleted = counter >= azkar.count;
     const hasAudio = Boolean(audioSrc);
+    const isRussianOrKyrgyz = language === "русский" || language === "кыргыз";
+    const hasTranscription = azkar.lines.some(
+      (line) =>
+        line.transcription_cyrillic && line.transcription_cyrillic.trim() !== ""
+    );
 
     const speedIconMapping: { [key: number]: string } = {
       1: "1x",
@@ -179,58 +185,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     }, [virtue, language]);
 
     const shouldRenderVirtues = virtuesLabel !== "" && virtueText !== "";
-
-    const getCardText = useCallback(() => {
-      let text = azkar.lines
-        .map((line) => {
-          let lineText = line.arabic;
-          if (
-            showTranslation &&
-            language !== "عربي" &&
-            line.translations[language]
-          ) {
-            lineText += "\n" + line.translations[language];
-          }
-          return lineText;
-        })
-        .join("\n\n");
-
-      if (virtue && virtueText.trim() !== "") {
-        const label = virtuesLabel !== "" ? virtuesLabel : "Virtues";
-        text += "\n\n" + label + ":\n" + virtueText;
-      }
-      text += "\n\nhttps://thikrapp.vercel.app/";
-      return text;
-    }, [azkar, showTranslation, language, virtue, virtueText, virtuesLabel]);
-
-    const handleCopy = useCallback(() => {
-      const cardText = getCardText();
-      navigator.clipboard
-        .writeText(cardText)
-        .then(() => {
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2000);
-        })
-        .catch((err) => console.error("Failed to copy text: ", err));
-    }, [getCardText]);
-
-    const handleShare = useCallback(() => {
-      const cardText = getCardText();
-      if (navigator.share) {
-        navigator
-          .share({
-            title: "Azkar",
-            text: cardText,
-          })
-          .catch((err) => {
-            if (err.name !== "AbortError") {
-              console.error("Share failed:", err);
-            }
-          });
-      } else {
-        alert("Share is not supported in this browser.");
-      }
-    }, [getCardText]);
 
     const handleFavoriteClick = useCallback(
       (e: React.MouseEvent) => {
@@ -321,7 +275,11 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                   lang="ar"
                   dir="rtl"
                 >
-                  {line.arabic}
+                  {isRussianOrKyrgyz &&
+                  showTranscription &&
+                  line.transcription_cyrillic
+                    ? line.transcription_cyrillic
+                    : line.arabic}
                 </p>
                 {line.translations[language] && (
                   <p
@@ -348,9 +306,12 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                       : ""
                   }`}
                 >
-                  {line.arabic}
+                  {isRussianOrKyrgyz &&
+                  showTranscription &&
+                  line.transcription_cyrillic
+                    ? line.transcription_cyrillic
+                    : line.arabic}
                   {index < azkar.lines.length - 1 && " "}
-                  {/* Add space between lines */}
                 </span>
               ))}
             </div>
@@ -409,21 +370,20 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             </button>
           )}
 
-          <button
-            onClick={handleCopy}
-            aria-label="Copy"
-            className={buttonClassNames}
-          >
-            {copied ? (
-              <span className={`material-icons-round ${iconClassNames}`}>
-                check
+          {isRussianOrKyrgyz && hasTranscription && (
+            <button
+              onClick={() => setShowTranscription((prev) => !prev)}
+              aria-label="Toggle Transcription"
+            >
+              <span
+                className={`material-icons-round ${iconClassNames} ${
+                  showTranscription ? "text-[#606c38]" : ""
+                }`}
+              >
+                {showTranscription ? "closed_caption" : "closed_caption_off"}
               </span>
-            ) : (
-              <span className={`material-icons-round ${iconClassNames}`}>
-                content_copy
-              </span>
-            )}
-          </button>
+            </button>
+          )}
 
           {hasAudio && (
             <button
@@ -444,7 +404,21 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           )}
 
           <button
-            onClick={handleShare}
+            onClick={() => {
+              if (navigator.share) {
+                navigator
+                  .share({
+                    title: "Azkar",
+                    text: azkar.lines.map((line) => line.arabic).join("\n\n"),
+                    url: "https://thikrapp.vercel.app/",
+                  })
+                  .catch((err) => {
+                    if (err.name !== "AbortError") {
+                      console.error("Share failed:", err);
+                    }
+                  });
+              }
+            }}
             aria-label="Share"
             className={buttonClassNames}
           >
