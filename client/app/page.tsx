@@ -439,7 +439,8 @@ export default function HomePage() {
 
     const checkAudioAvailability = async (azkarId: string) => {
       try {
-        const response = await fetch(`/audio/${azkarId}.m4a`, {
+        const fileExtension = selectedCategory === "surahs" ? "mp3" : "m4a";
+        const response = await fetch(`/audio/${azkarId}.${fileExtension}`, {
           method: "HEAD",
         });
         if (response.ok && isMounted.current) {
@@ -460,7 +461,7 @@ export default function HomePage() {
     return () => {
       isMounted.current = false;
     };
-  }, [groupedAzkars]);
+  }, [groupedAzkars, selectedCategory]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -532,7 +533,9 @@ export default function HomePage() {
                             handleAudioControl({
                               azkarId: audioState.lastPlayedId!,
                               isPlaying: !isAudioPlaying,
-                              audioSrc: `/audio/${audioState.lastPlayedId}.m4a`,
+                              audioSrc: `/audio/${audioState.lastPlayedId}.${
+                                selectedCategory === "surahs" ? "mp3" : "m4a"
+                              }`,
                             })
                           }
                         >
@@ -721,6 +724,12 @@ export default function HomePage() {
               const isFavorite = (favorites[selectedCategory] || new Set()).has(
                 azkar.id
               );
+              const audioSrc = hasAudio
+                ? `/audio/${azkar.id}.${
+                    selectedCategory === "surahs" ? "mp3" : "m4a"
+                  }`
+                : undefined;
+
               return (
                 <div
                   key={azkar.id}
@@ -736,7 +745,7 @@ export default function HomePage() {
                     counter={counters[azkar.id] || 0}
                     updateCounter={updateCounter}
                     virtue={virtue}
-                    audioSrc={hasAudio ? `/audio/${azkar.id}.m4a` : undefined}
+                    audioSrc={audioSrc}
                     isCurrentlyPlaying={
                       audioState.currentlyPlayingId === azkar.id
                     }
