@@ -142,6 +142,9 @@ export default function HomePage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isRepeat, setIsRepeat] = useState(false);
+  const [skipFeedback, setSkipFeedback] = useState<
+    "forward" | "backward" | null
+  >(null);
   const timeUpdateListener = useRef<(() => void) | null>(null);
   const endedListener = useRef<(() => void) | null>(null);
 
@@ -419,7 +422,11 @@ export default function HomePage() {
           timestamps.find((ts) => ts > current + 0.5) ||
           timestamps[timestamps.length - 1];
       }
-      if (newTime !== undefined) audioRef.current.currentTime = newTime;
+      if (newTime !== undefined) {
+        audioRef.current.currentTime = newTime;
+        setSkipFeedback(direction);
+        setTimeout(() => setSkipFeedback(null), 1000);
+      }
     },
     [audioState.currentlyPlayingId, groupedAzkars]
   );
@@ -498,27 +505,25 @@ export default function HomePage() {
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center justify-between gap-2">
                         <Button
-                          variant="ghost"
                           size="sm"
-                          className={`p-1 rounded-full transition-colors ${
-                            audioState.currentlyPlayingId
-                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                          className={`p-1 rounded-full transition-colors relative ${
+                            skipFeedback === "backward"
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                              : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                           }`}
                           onClick={() => handleSkip("backward")}
                         >
-                          <span className="material-icons-round text-lg">
+                          <span className="material-icons-round text-lg text-[var(--card-text)]">
                             skip_previous
                           </span>
                         </Button>
 
                         <Button
-                          variant="ghost"
                           size="sm"
                           className={`p-2 rounded-full transition-colors ${
                             isAudioPlaying
-                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                              : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                           }`}
                           onClick={() =>
                             handleAudioControl({
@@ -528,22 +533,21 @@ export default function HomePage() {
                             })
                           }
                         >
-                          <span className="material-icons-round text-xl">
+                          <span className="material-icons-round text-xl text-[var(--card-text)]">
                             {isAudioPlaying ? "pause" : "play_arrow"}
                           </span>
                         </Button>
 
                         <Button
-                          variant="ghost"
                           size="sm"
-                          className={`p-1 rounded-full transition-colors ${
-                            audioState.currentlyPlayingId
-                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                          className={`p-1 rounded-full transition-colors relative ${
+                            skipFeedback === "forward"
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                              : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                           }`}
                           onClick={() => handleSkip("forward")}
                         >
-                          <span className="material-icons-round text-lg">
+                          <span className="material-icons-round text-lg text-[var(--card-text)]">
                             skip_next
                           </span>
                         </Button>
@@ -551,28 +555,26 @@ export default function HomePage() {
 
                       <div className="flex justify-between text-xs">
                         <Button
-                          variant="ghost"
                           size="sm"
-                          className={`p-1 rounded-full transition-colors ${
+                          className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
                             playbackRate !== 1
-                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                              : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                           }`}
                           onClick={handleSpeedChange}
                         >
                           {playbackRate}x
                         </Button>
                         <Button
-                          variant="ghost"
                           size="sm"
-                          className={`p-1 rounded-full transition-colors ${
+                          className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
                             isRepeat
-                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                              : "bg-[var(--card-bg)]/50 text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                              ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                              : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                           }`}
                           onClick={handleRepeatToggle}
                         >
-                          <span className="material-icons-round text-lg">
+                          <span className="material-icons-round text-lg text-[var(--card-text)]">
                             repeat
                           </span>
                         </Button>
