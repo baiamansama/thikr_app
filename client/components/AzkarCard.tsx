@@ -336,26 +336,26 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
               </div>
             ))
           ) : (
-            <p
-              className="text-2xl quran-font leading-tight"
-              style={{ width: "fit-content", marginLeft: "auto" }}
+            <div
+              className="text-2xl quran-font leading-tight text-right"
               lang="ar"
               dir="rtl"
             >
               {azkar.lines.map((line, index) => (
                 <span
                   key={line.lineNumber}
-                  className={
-                    currentLineIndex === index
-                      ? "bg-[#606c38]/20 inline-block w-full"
-                      : "inline-block w-full"
-                  }
+                  className={`${
+                    isCurrentlyPlaying && currentLineIndex === index
+                      ? "combined-text-highlight"
+                      : ""
+                  }`}
                 >
                   {line.arabic}
-                  {index < azkar.lines.length - 1 && <br />}
+                  {index < azkar.lines.length - 1 && " "}
+                  {/* Add space between lines */}
                 </span>
               ))}
-            </p>
+            </div>
           )}
         </div>
 
