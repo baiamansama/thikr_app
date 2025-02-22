@@ -312,14 +312,12 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
             azkar.lines.map((line, index) => (
               <div
                 key={line.lineNumber}
-                className={`p-2 rounded transition-colors mb-4 ${
-                  currentLineIndex === index
-                    ? "bg-[#606c38]/20 border border-[#606c38] shadow-inner"
-                    : ""
+                className={`p-2 rounded transition-colors ${
+                  currentLineIndex === index ? "combined-text-highlight" : ""
                 }`}
               >
                 <p
-                  className="text-2xl text-right quran-font"
+                  className="text-2xl text-right quran-font leading-tight"
                   lang="ar"
                   dir="rtl"
                 >
@@ -327,7 +325,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                 </p>
                 {line.translations[language] && (
                   <p
-                    className="mt-2 text-[var(--translation-text)] text-base"
+                    className="mt-1 text-[var(--translation-text)] text-base leading-tight"
                     dir="ltr"
                   >
                     {line.translations[language]}
