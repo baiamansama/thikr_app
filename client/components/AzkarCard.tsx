@@ -308,25 +308,24 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         style={{ borderColor: "var(--card-text)" }}
       >
         <div className="mb-4">
-          {azkar.lines.map((line, index) => (
-            <div
-              key={line.lineNumber}
-              className={`mb-2 p-2 rounded transition-colors ${
-                currentLineIndex === index
-                  ? "bg-[#606c38]/20 border border-[#606c38] shadow-inner"
-                  : ""
-              }`}
-            >
-              <p
-                className="text-2xl leading-relaxed text-right quran-font"
-                lang="ar"
-                dir="rtl"
+          {showTranslation && language !== "عربي" ? (
+            azkar.lines.map((line, index) => (
+              <div
+                key={line.lineNumber}
+                className={`p-2 rounded transition-colors mb-4 ${
+                  currentLineIndex === index
+                    ? "bg-[#606c38]/20 border border-[#606c38] shadow-inner"
+                    : ""
+                }`}
               >
-                {line.arabic}
-              </p>
-              {language !== "عربي" &&
-                showTranslation &&
-                line.translations[language] && (
+                <p
+                  className="text-2xl text-right quran-font"
+                  lang="ar"
+                  dir="rtl"
+                >
+                  {line.arabic}
+                </p>
+                {line.translations[language] && (
                   <p
                     className="mt-2 text-[var(--translation-text)] text-base"
                     dir="ltr"
@@ -334,23 +333,49 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
                     {line.translations[language]}
                   </p>
                 )}
-            </div>
-          ))}
+              </div>
+            ))
+          ) : (
+            <p
+              className="text-2xl quran-font leading-tight"
+              style={{ width: "fit-content", marginLeft: "auto" }}
+              lang="ar"
+              dir="rtl"
+            >
+              {azkar.lines.map((line, index) => (
+                <span
+                  key={line.lineNumber}
+                  className={
+                    currentLineIndex === index
+                      ? "bg-[#606c38]/20 inline-block w-full"
+                      : "inline-block w-full"
+                  }
+                >
+                  {line.arabic}
+                  {index < azkar.lines.length - 1 && <br />}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
 
         {shouldRenderVirtues && (
-          <div className="mb-4">
+          <div
+            className={`mb-4 ${
+              language === "عربي" ? "text-right" : "text-left"
+            }`}
+            dir={language === "عربي" ? "rtl" : "ltr"}
+          >
             <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               {virtuesLabel}
             </p>
             <p
               className={
                 language === "عربي"
-                  ? "text-base text-right quran-font mt-2"
+                  ? "text-base quran-font mt-2"
                   : "text-sm mt-1 text-[var(--translation-text)]"
               }
               lang={language === "عربي" ? "ar" : undefined}
-              dir={language === "عربي" ? "rtl" : "ltr"}
             >
               {virtueText}
             </p>
@@ -375,14 +400,16 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         )}
 
         <div className="flex items-center justify-center mt-4 gap-4">
-          <button
-            onClick={() => setShowTranslation((prev) => !prev)}
-            aria-label="Toggle Translation"
-          >
-            <span className={`material-icons-round ${iconClassNames}`}>
-              translate
-            </span>
-          </button>
+          {language !== "عربي" && (
+            <button
+              onClick={() => setShowTranslation((prev) => !prev)}
+              aria-label="Toggle Translation"
+            >
+              <span className={`material-icons-round ${iconClassNames}`}>
+                translate
+              </span>
+            </button>
+          )}
 
           <button
             onClick={handleCopy}
