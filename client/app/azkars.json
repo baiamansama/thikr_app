@@ -1267,6 +1267,222 @@
       ]
     },
     {
+      "id": "duas",
+      "translations": {
+        "عربي": "ضروري",
+        "english": "Essential",
+        "кыргыз": "Зарыл",
+        "русский": "Необходимый"
+      },
+      "azkars": [
+        {
+          "azkar_id": "dua_after_azan",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "0",
+          "arabic": "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ،",
+          "русский": "«О Аллах, Господь этого совершенного призыва и начинающейся молитвы!x",
+          "english": "O Allah, Lord of this perfect call and the prayer to be offered, grant Muhammad the privilege (of interceding) and also the eminence, and resurrect him to the praised position that you have promised),'",
+          "кыргыз": "Аллахым, мына бул кемчиликсиз чакырыктын жана башталуучу намаздын Ээси! ",
+          "transcription_latin": "Allāhumma rabba hādhihi ad-da'wati at-tāmmati wa aṣ-ṣalāti al-qā'imati",
+          "transcription_cyrillic": "Аллоҳумма робба ҳаазиҳид-да'ватит-тааммати вас-солаатил-қоа'имати"
+        },
+        {
+          "azkar_id": "dua_after_azan",
+          "count": "0",
+          "lineNumber": "2",
+          "timestamp": "0",
+          "arabic": "آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ.",
+          "русский": " Дай пророку Мухаммаду «аль-васийля» и достоинство. Предоставь ему обещанное высокое положение.",
+          "english": " grant Muhammad the privilege (of interceding) and also the eminence, and resurrect him to the praised position that you have promised",
+          "кыргыз": "Мухаммедге ˹шапаат кылуу˺ даражасын жана бийик мартабаны бере көр. Аны Өзүң убада кылган даңктуу макамга көтөрө көр.",
+          "transcription_latin": "Āti Muḥammadan al-wasīlata wa al-faḍīlata, Wa ab'athhu maqāman maḥmūdan alladhī wa'adtahu",
+          "transcription_cyrillic": "Аати Мухаммаданил-васиилата вал-фадиилата, Ваб'асҳу мақоман махмуудан-иллазии ва'адтаҳу"
+        },
+        {
+          "azkar_id": "start_prayer",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "0",
+          "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلَهَ غَيْرُكَ.",
+          "русский": "«О Аллах, Ты далек от всех недостатков, и я восхваляю Тебя. Бесконечно присутствие имени Твоего во всём, высоко величие Твое, и кроме Тебя мы никому не поклоняемся»",
+          "english": "Glory and praise be to You, O Allah. Blessed be Your name and exalted be Your majesty, there is none worthy of worship except You.",
+          "кыргыз": "Аллахым, Сен ˹бардык кемчиликтерден˺ Аруусуң, Сага мактоолор айтамын! Сенин Ысымың берекелүү, Сенин даражаң бийик, Сенден башка сыйынууга татыктуу зат жок.",
+          "transcription_latin": "Subḥānaka allāhumma wa biḥamdika wa tabāraka ismuka wa ta'ālā jadduka wa lā ilāha ghayruka",
+          "transcription_cyrillic": "Субханака аллоҳумма ва бихамдика ва табаарака исмука ва та'аалаа жаддука ва лаа илааҳа ғойрука"
+        },
+        {
+          "azkar_id": "ruku_tasbih",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "0",
+          "arabic": "سُبْحَانَ رَبِّيَ الْعَظِيمِ.",
+          "русский": "«Хвала Великому Господу моему»",
+          "english": "Glory be to my Lord, the Most Great.",
+          "кыргыз": "Улуу Жаратканым ˹бардык кемчиликтерден˺ Аруу",
+          "transcription_latin": "Subḥāna rabbiya al-'aẓīm",
+          "transcription_cyrillic": "Субхаана роббийал-'азиим"
+        },
+        {
+          "azkar_id": "itidal_tasmi",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "0",
+          "arabic": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ.",
+          "русский": "«Слышит Всевышний того, кто восхваляет Его»",
+          "english": "Allah hears whoever praises Him.",
+          "кыргыз": "Алла Өзүн даңктагандардын дубасын кабыл кылат",
+          "transcription_latin": "Sami'a allāhu liman ḥamidah",
+          "transcription_cyrillic": "Сами'аллоҳу лиман хамидаҳ"
+        },
+        {
+          "azkar_id": "itidal_tahmid",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "",
+          "arabic": "رَبَّنَا لَكَ الْحَمْدُ.",
+          "русский": "«Господь наш, лишь Тебе хвала»",
+          "english": "Our Lord, to You is the praise.",
+          "кыргыз": "Эй Жаратканыбыз, бардык мактоо жалгыз Сага таандык",
+          "transcription_latin": "Rabbanā laka al-ḥamd",
+          "transcription_cyrillic": "Роббанаа лакал-хамд"
+        },
+        {
+          "azkar_id": "sujud_tasbih",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "0",
+          "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَى.",
+          "русский": "«Хвала Господу моему, Который превыше всего»",
+          "english": "Glory be to my Lord, the Most High.",
+          "кыргыз": "Улуу Жаратканым ˹бардык кемчиликтерден˺ Аруу",
+          "transcription_latin": "Subḥāna rabbiya al-a'lā",
+          "transcription_cyrillic": "Субхаана роббийал-а'лаа"
+        },
+        {
+          "azkar_id": "tashahhud",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "0",
+          "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ،",
+          "русский": "«Приветствия, молитвы и все благие дела принадлежат только Всевышнему. ",
+          "english": "All greetings are for Allah, and prayers and good things.",
+          "кыргыз": "Бардык урмат-сый, намаздар жана жакшылыктар Аллага таандык",
+          "transcription_latin": "At-taḥiyyātu lillāhi wa aṣ-ṣalawātu wa aṭ-ṭayyibāt",
+          "transcription_cyrillic": "Ат-тахиййаату лиллааҳи вас-солаваату ват-тоййибаат"
+        },
+        {
+          "azkar_id": "tashahhud",
+          "count": "0",
+          "lineNumber": "2",
+          "timestamp": "0",
+          "arabic": "السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ،",
+          "русский": "Мир тебе, о Пророк, милость Божья и Его благословение.",
+          "english": "Peace be upon you, O Prophet, and the mercy of Allah and His blessings.",
+          "кыргыз": "Сизге салам болсун, эй Пайгамбар, Алланын ырайымы жана берекеси болсун",
+          "transcription_latin": "As-salāmu 'alayka ayyuha an-nabiyyu wa raḥmatullāhi wa barakātuh",
+          "transcription_cyrillic": "Ас-салааму 'алайка аййуҳан-набиййу ва рохматуллоҳи ва баракаатуҳ"
+        },
+        {
+          "azkar_id": "tashahhud",
+          "count": "0",
+          "lineNumber": "3",
+          "timestamp": "0",
+          "arabic": "السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ،",
+          "русский": "Мир нам и благочестивым рабам Всевышнего. ",
+          "english": "Peace be upon us and upon the righteous servants of Allah.",
+          "кыргыз": "Бизге жана Алланын салих пенделерине салам болсун",
+          "transcription_latin": "As-salāmu 'alaynā wa 'alā 'ibādi-llāhi aṣ-ṣāliḥīn",
+          "transcription_cyrillic": "Ас-салааму 'алайнаа ва 'алаа 'ибаадиллааҳис-солихиин"
+        },
+        {
+          "azkar_id": "tashahhud",
+          "count": "0",
+          "lineNumber": "4",
+          "timestamp": "0",
+          "arabic": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ.",
+          "русский": "Я свидетельствую, что нет бога, кроме Аллаха, и свидетельствую, что Мухаммад – раб Его и Посланник»",
+          "english": "I bear witness that there is no god except Allah, and I bear witness that Muhammad is His servant and Messenger.",
+          "кыргыз": "Мен күбөлүк берем: Алладан башка сыйынууга татыктуу зат жок, жана күбөлүк берем: Мухаммед Анын кулу жана элчиси",
+          "transcription_latin": "Ashhadu an lā ilāha illā-llāhu wa ashhadu anna muḥammadan 'abduhu wa rasūluh",
+          "transcription_cyrillic": "Ашҳаду ан лаа илааҳа иллаллоҳу ва ашҳаду анна мухаммадан 'абдуҳу ва росуулуҳ"
+        },
+        {
+          "azkar_id": "salawat",
+          "count": "0",
+          "lineNumber": "1",
+          "timestamp": "0",
+          "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ،",
+          "русский": "«О Аллах! Благослови Мухаммада и род его,",
+          "english": "O Allah, send blessings upon our master Muhammad and upon the family of our master Muhammad.",
+          "кыргыз": "Аллахым! Мухаммед мырзабызга жана анын үй-бүлөсүнө ырайым кыл",
+          "transcription_latin": "Allāhumma ṣalli 'alā sayyidinā muḥammadin wa 'alā āli sayyidinā muḥammad",
+          "transcription_cyrillic": "Аллоҳумма солли 'алаа саййидинаа мухаммадин ва 'алаа аали саййидинаа мухаммад"
+        },
+        {
+          "azkar_id": "salawat",
+          "count": "0",
+          "lineNumber": "2",
+          "timestamp": "0",
+          "arabic": "كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ، وَعَلَى آلِ إِبْرَاهِيمَ،",
+          "русский": "как Ты благословил Ибрахима (Авраама) и род его.",
+          "english": "Just as You sent blessings upon our master Abraham and upon the family of our master Abraham.",
+          "кыргыз": "Ибрахим мырзабызга жана анын үй-бүлөсүнө ырайым кылганың сыяктуу",
+          "transcription_latin": "Kamā ṣallayta 'alā sayyidinā ibrāhīma wa 'alā āli sayyidinā ibrāhīm",
+          "transcription_cyrillic": "Камаа соллайта 'алаа саййидинаа иброҳима ва 'алаа аали саййидинаа иброҳим"
+        },
+        {
+          "azkar_id": "salawat",
+          "count": "0",
+          "lineNumber": "3",
+          "timestamp": "",
+          "arabic": "إِنَّكَ حَمِيدٌ مَجِيدٌ،",
+          "русский": "Поистине, Ты – Восхваляемый, Прославляемый»",
+          "english": "Indeed, You are Praiseworthy and Glorious.",
+          "кыргыз": "Чындыгында, Сен Мактоого татыктуусуң, Улуусуң",
+          "transcription_latin": "Innaka ḥamīdun majīd",
+          "transcription_cyrillic": "Иннака хамиидун мажиид"
+        },
+        {
+          "azkar_id": "salawat",
+          "count": "0",
+          "lineNumber": "4",
+          "timestamp": "0",
+          "arabic": "اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ،",
+          "русский": "И ниспошли благословение Мухаммаду и роду его,",
+          "english": "And send blessings upon our master Muhammad and upon the family of our master Muhammad.",
+          "кыргыз": "Мухаммед мырзабызга жана анын үй-бүлөсүнө береке бер",
+          "transcription_latin": "Wa bārik 'alā sayyidinā muḥammadin wa 'alā āli sayyidinā muḥammad",
+          "transcription_cyrillic": "Ва баарик 'алаа саййидинаа мухаммадин ва 'алаа аали саййидинаа мухаммад"
+        },
+        {
+          "azkar_id": "salawat",
+          "count": "0",
+          "lineNumber": "5",
+          "timestamp": "0",
+          "arabic": "كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ،",
+          "русский": "как Ты ниспослал благословение Ибрахиму (Аврааму) и роду его во всех мирах.",
+          "english": "Just as You sent blessings upon our master Abraham and upon the family of our master Abraham in the worlds.",
+          "кыргыз": "Ибрахим мырзабызга жана анын үй-бүлөсүнө бардык ааламдарда береке бергениң сыяктуу",
+          "transcription_latin": "Kamā bārakta 'alā sayyidinā ibrāhīma wa 'alā āli sayyidinā ibrāhīma fī al-'ālamīn",
+          "transcription_cyrillic": "Камаа баарокта 'алаа саййидинаа иброҳима ва 'алаа аали саййидинаа иброҳима фил-'ааламиин"
+        },
+        {
+          "azkar_id": "salawat",
+          "count": "0",
+          "lineNumber": "6",
+          "timestamp": "0",
+          "arabic": "إِنَّكَ حَمِيدٌ مَجِيدُ.",
+          "русский": "Поистине, Ты – Восхваляемый, Прославляемый»",
+          "english": "Indeed, You are Praiseworthy and Glorious.",
+          "кыргыз": "Чындыгында, Сен Мактоого татыктуусуң, Улуусуң",
+          "transcription_latin": "Innaka ḥamīdun majīd",
+          "transcription_cyrillic": "Иннака хамиидун мажиид"
+        }
+      ],
+      "virtues": []
+    },
+    {
       "id": "surahs",
       "translations": {
         "عربي": "سُوَر‬",

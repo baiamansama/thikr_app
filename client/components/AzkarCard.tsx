@@ -95,7 +95,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     const [showTranslation, setShowTranslation] = useState(false);
     const [showTranscription, setShowTranscription] = useState(false);
 
-    const isCompleted = counter >= azkar.count;
+    const isCompleted = counter >= azkar.count && selectedCategory !== "duas";
     const hasAudio = Boolean(audioSrc);
     const isRussianOrKyrgyz = language === "русский" || language === "кыргыз";
     const isEnglish = language === "english";
@@ -137,6 +137,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     const handleSkipForward = useCallback(() => onSkip?.("forward"), [onSkip]);
 
     const handleIncrement = useCallback(() => {
+      if (selectedCategory === "duas") return;
       if (counter < azkar.count) {
         const newCounter = counter + 1;
         updateCounter(azkar.id, newCounter);
@@ -144,9 +145,10 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           navigator.vibrate([200, 100, 200]);
         }
       }
-    }, [counter, azkar, updateCounter]);
+    }, [counter, azkar, updateCounter, selectedCategory]);
 
     const getButtonText = useCallback((): string => {
+      if (selectedCategory === "duas") return "";
       if (isCompleted) {
         return `${uiTranslations.actions.completed[language] || "Completed"} (${
           azkar.count
@@ -154,7 +156,14 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       }
       const tapText = uiTranslations.actions.tap[language] || "Tap";
       return `${tapText} (${counter}/${azkar.count})`;
-    }, [isCompleted, uiTranslations, language, counter, azkar.count]);
+    }, [
+      isCompleted,
+      uiTranslations,
+      language,
+      counter,
+      azkar.count,
+      selectedCategory,
+    ]);
 
     const virtuesLabel = useMemo(() => {
       let label = uiTranslations.virtues[language] ?? "";
@@ -265,10 +274,10 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
     return (
       <div
         ref={ref}
-        className="card p-4 rounded shadow transition-colors border-2 mb-20 relative"
+        className="card py-4 px-0 rounded shadow transition-colors border-2 mb-20 relative w-full"
         style={{ borderColor: "var(--card-text)" }}
       >
-        <div className="mb-4">
+        <div className="mb-4 px-4">
           {showTranslation && language !== "عربي" ? (
             azkar.lines.map((line, index) => (
               <div
@@ -322,7 +331,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
 
         {shouldRenderVirtues && (
           <div
-            className={`mb-4 ${
+            className={`mb-4 px-4 ${
               language === "عربي" ? "text-right" : "text-left"
             }`}
             dir={language === "عربي" ? "rtl" : "ltr"}
@@ -343,8 +352,8 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           </div>
         )}
 
-        {selectedCategory !== "surahs" && (
-          <div className="flex items-center justify-center">
+        {selectedCategory !== "surahs" && selectedCategory !== "duas" && (
+          <div className="flex items-center justify-center px-4">
             <button
               onClick={handleIncrement}
               disabled={isCompleted}
@@ -360,7 +369,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           </div>
         )}
 
-        <div className="flex items-center justify-center mt-4 gap-4">
+        <div className="flex items-center justify-center mt-4 gap-4 px-4">
           {language !== "عربي" && (
             <button
               onClick={() => setShowTranslation((prev) => !prev)}

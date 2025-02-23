@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import azkarsData from "./azkars.json";
 import surah_namesData from "./surah_names.json";
+import periodsData from "./periods.json";
 import AzkarCard from "./../components/AzkarCard";
 import {
   Drawer,
@@ -102,6 +103,14 @@ interface ICategory {
   virtues: IVirtues[];
 }
 
+interface IPeriod {
+  text_id: string;
+  русский: string;
+  english: string;
+  кыргыз: string;
+  arabic: string;
+}
+
 interface IData {
   metadata: IMetadata;
   uiTranslations: IUITranslations;
@@ -129,6 +138,7 @@ const INITIAL_DB: IThikrDB = {
 export default function HomePage() {
   const data: IData = azkarsData;
   const surahs = surah_namesData;
+  const periods: IPeriod[] = periodsData;
   const categories = useMemo(() => data.categories, [data]);
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -298,7 +308,11 @@ export default function HomePage() {
     selectedCategoryData.azkars.forEach((raw) => {
       const id = raw.azkar_id;
       if (!groups.has(id)) {
-        groups.set(id, { id, count: Number(raw.count), lines: [] });
+        groups.set(id, {
+          id,
+          count: selectedCategory === "duas" ? 1 : Number(raw.count) || 1,
+          lines: [],
+        });
       }
       const entry = groups.get(id);
       if (entry) {
@@ -322,7 +336,7 @@ export default function HomePage() {
     }
 
     return Array.from(groups.values());
-  }, [selectedCategoryData]);
+  }, [selectedCategoryData, selectedCategory]);
 
   const handleAudioControl = useCallback(
     (control: { azkarId: string; isPlaying: boolean; audioSrc?: string }) => {
@@ -503,7 +517,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="container mx-auto px-4 py-6 transition-colors">
+      <div className="container mx-auto px-0 py-6 transition-colors">
         <div style={{ paddingBottom: "120px" }}>
           <header className="mb-8 text-center py-4 relative">
             <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
@@ -556,6 +570,10 @@ export default function HomePage() {
                 selectedCategory === "surahs"
                   ? surahs.find((s) => s.surah_id === azkar.id)
                   : null;
+              const period_info =
+                selectedCategory === "duas" && periods[index]
+                  ? periods[index]
+                  : null;
 
               return (
                 <div
@@ -563,11 +581,11 @@ export default function HomePage() {
                   ref={(el) => {
                     cardRefs.current[index] = el;
                   }}
-                  className="relative z-10"
+                  className="relative z-10 w-full mx-0"
                 >
                   {surah_names && selectedCategory === "surahs" && (
                     <h2
-                      className="text-2xl font-semibold text-[var(--card-text)] mb-2"
+                      className="text-2xl font-semibold text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2"
                       style={{
                         fontFamily:
                           language === "عربي"
@@ -581,11 +599,29 @@ export default function HomePage() {
                         surah_names.arabic}
                     </h2>
                   )}
+                  {period_info && selectedCategory === "duas" && (
+                    <h2
+                      className="text-xl font-medium text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2 bg-[var(--card-bg)]/80 rounded-t-md"
+                      style={{
+                        fontFamily:
+                          language === "عربي"
+                            ? "'Scheherazade', serif"
+                            : "inherit",
+                        direction: language === "عربي" ? "rtl" : "ltr",
+                        textAlign: language === "عربي" ? "right" : "left",
+                      }}
+                    >
+                      {period_info[language as keyof typeof period_info] ||
+                        period_info.arabic}
+                    </h2>
+                  )}
                   <AzkarCard
                     azkar={azkar}
                     language={language}
                     uiTranslations={data.uiTranslations}
-                    counter={counters[azkar.id] || 0}
+                    counter={
+                      selectedCategory === "duas" ? 0 : counters[azkar.id] || 0
+                    }
                     updateCounter={updateCounter}
                     virtue={virtue}
                     audioSrc={audioSrc}
@@ -677,7 +713,7 @@ export default function HomePage() {
                     className={`p-1 rounded-full transition-colors relative ${
                       skipFeedback === "forward"
                         ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
-                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(---card-bg)]/70 focus:bg-[var(--card-bg)]/70"
+                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(---card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                     }`}
                     onClick={() => handleSkip("forward")}
                   >
@@ -818,7 +854,10 @@ export default function HomePage() {
         <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
           {groupedAzkars.map((azkar, index) => {
             const currentCount = counters[azkar.id] || 0;
-            const progress = Math.min(currentCount / azkar.count, 1);
+            const progress =
+              selectedCategory === "duas"
+                ? 0
+                : Math.min(currentCount / azkar.count, 1);
             const isFavorite = (favorites[selectedCategory] || new Set()).has(
               azkar.id
             );
