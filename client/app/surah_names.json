@@ -1,0 +1,79 @@
+[
+  {
+    "surah_id": "surah_1",
+    "arabic": "سورة الفاتحة",
+    "русский": "Сура Аль-Фатиха",
+    "english": "Surah Al-Fatiha (The Opening)",
+    "кыргыз": "Сүрө Аль-Фатиха (Ачылыш)"
+  },
+  {
+    "surah_id": "surah_2",
+    "arabic": "سورة الإخلاص",
+    "русский": "Сура Аль-Ихляс",
+    "english": "Surah Al-Ikhlas (The Sincerity)",
+    "кыргыз": "Сүрө Аль-Ихлас (Чын ыкластуулук)"
+  },
+  {
+    "surah_id": "surah_3",
+    "arabic": "سورة الفلق",
+    "русский": "Сура Аль-Фаляк",
+    "english": "Surah Al-Falaq (The Daybreak)",
+    "кыргыз": "Сүрө Аль-Фаляк (Таң шоокуму)"
+  },
+  {
+    "surah_id": "surah_4",
+    "arabic": "سورة الناس",
+    "русский": "Сура Ан-Нас",
+    "english": "Surah An-Nas (Mankind)",
+    "кыргыз": "Сүрө Ан-Нас (Адамзат)"
+  },
+  {
+    "surah_id": "surah_5",
+    "arabic": "سورة المسد",
+    "русский": "Сура Аль-Масад",
+    "english": "Surah Al-Masad (The Palm Fiber)",
+    "кыргыз": "Сүрө Аль-Масад (Пальма буласы)"
+  },
+  {
+    "surah_id": "surah_6",
+    "arabic": "سورة النصر",
+    "русский": "Сура Ан-Наср",
+    "english": "Surah An-Nasr (The Divine Support)",
+    "кыргыз": "Сүрө Ан-Наср (Кудайлык колдоо)"
+  },
+  {
+    "surah_id": "surah_7",
+    "arabic": "سورة الكافرون",
+    "русский": "Сура Аль-Кафирун",
+    "english": "Surah Al-Kafirun (The Disbelievers)",
+    "кыргыз": "Сүрө Аль-Кафирун (Каапырлар)"
+  },
+  {
+    "surah_id": "surah_8",
+    "arabic": "سورة الكوثر",
+    "русский": "Сура Аль-Каусар",
+    "english": "Surah Al-Kawthar (The Abundance)",
+    "кыргыз": "Сүрө Аль-Каусар (Молчулук)"
+  },
+  {
+    "surah_id": "surah_9",
+    "arabic": "سورة الماعون",
+    "русский": "Сура Аль-Маун",
+    "english": "Surah Al-Ma'un (The Small kindnesses)",
+    "кыргыз": "Сүрө Аль-Маун (Кичинекей боорукердиктер)"
+  },
+  {
+    "surah_id": "surah_10",
+    "arabic": "سورة قريش",
+    "русский": "Сура Курайш",
+    "english": "Surah Quraysh",
+    "кыргыз": "Сүрө Курайш"
+  },
+  {
+    "surah_id": "surah_11",
+    "arabic": "سورة الفيل",
+    "русский": "Сура Аль-Филь",
+    "english": "Surah Al-Fil (The Elephant)",
+    "кыргыз": "Сүрө Аль-Филь (Пил)"
+  }
+]

@@ -8,6 +8,7 @@ import React, {
   useRef,
 } from "react";
 import azkarsData from "./azkars.json";
+import surah_namesData from "./surah_names.json"; // Import the surahs.json file
 import AzkarCard from "./../components/AzkarCard";
 import {
   Drawer,
@@ -26,6 +27,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
+// Interface definitions remain the same as in your original code
 interface Translation {
   [language: string]: string;
 }
@@ -127,6 +129,7 @@ const INITIAL_DB: IThikrDB = {
 
 export default function HomePage() {
   const data: IData = azkarsData;
+  const surahs = surah_namesData;
   const categories = useMemo(() => data.categories, [data]);
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -152,6 +155,7 @@ export default function HomePage() {
   const timeUpdateListener = useRef<(() => void) | null>(null);
   const endedListener = useRef<(() => void) | null>(null);
 
+  // Rest of your useEffect and handler functions remain unchanged
   const handleSpeedChange = useCallback(() => {
     const newRate = playbackRate === 1 ? 1.5 : playbackRate === 1.5 ? 2 : 1;
     setPlaybackRate(newRate);
@@ -733,6 +737,12 @@ export default function HomePage() {
                   }`
                 : undefined;
 
+              // Find the matching Surah from surahs.json based on azkar.id
+              const surah_names =
+                selectedCategory === "surahs"
+                  ? surahs.find((s) => s.surah_id === azkar.id)
+                  : null;
+
               return (
                 <div
                   key={azkar.id}
@@ -741,6 +751,22 @@ export default function HomePage() {
                   }}
                   className="relative z-10"
                 >
+                  {surah_names && selectedCategory === "surahs" && (
+                    <h2
+                      className="text-2xl font-semibold text-[var(--card-text)] mb-2"
+                      style={{
+                        fontFamily:
+                          language === "عربي"
+                            ? "'Scheherazade', serif"
+                            : "inherit",
+                        direction: language === "عربي" ? "rtl" : "ltr",
+                        textAlign: language === "عربي" ? "right" : "left",
+                      }}
+                    >
+                      {surah_names[language as keyof typeof surah_names] ||
+                        surah_names.arabic}
+                    </h2>
+                  )}
                   <AzkarCard
                     azkar={azkar}
                     language={language}
