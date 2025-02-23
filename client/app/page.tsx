@@ -510,6 +510,32 @@ export default function HomePage() {
               {selectedCategoryData.translations[language] ||
                 selectedCategoryData.id}
             </h1>
+            {(selectedCategory === "morning" ||
+              selectedCategory === "evening") && (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  const newCounters = { ...db.counters };
+                  groupedAzkars.forEach((azkar) => {
+                    newCounters[azkar.id] = 0;
+                  });
+                  setDb((prev) => ({
+                    ...prev,
+                    counters: newCounters,
+                  }));
+                  setClearHistoryClicked(true);
+                  setTimeout(() => setClearHistoryClicked(false), 200);
+                }}
+                className={`mt-5 transition-colors px-3 py-1 rounded border ${
+                  clearHistoryClicked
+                    ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                    : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                }`}
+              >
+                {data.uiTranslations.actions.clean_history[language] ||
+                  "🗑️ Clear History"}
+              </Button>
+            )}
           </header>
           <section className="grid grid-cols-1 gap-6 mt-6">
             {groupedAzkars.map((azkar, index) => {
@@ -769,35 +795,6 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-
-              {(selectedCategory === "morning" ||
-                selectedCategory === "evening") && (
-                <div className="p-4 flex items-center justify-center">
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      const newCounters = { ...db.counters };
-                      groupedAzkars.forEach((azkar) => {
-                        newCounters[azkar.id] = 0;
-                      });
-                      setDb((prev) => ({
-                        ...prev,
-                        counters: newCounters,
-                      }));
-                      setClearHistoryClicked(true);
-                      setTimeout(() => setClearHistoryClicked(false), 200);
-                    }}
-                    className={`transition-colors px-3 py-1 rounded border ${
-                      clearHistoryClicked
-                        ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                        : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-                    }`}
-                  >
-                    {data.uiTranslations.actions.clean_history[language] ||
-                      "🗑️ Clear History"}
-                  </Button>
-                </div>
-              )}
             </div>
 
             <DrawerClose asChild>
