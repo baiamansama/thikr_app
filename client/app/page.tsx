@@ -146,6 +146,7 @@ export default function HomePage() {
   const drawerOpenRef = useRef(drawerOpen);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioAzkarIdRef = useRef<string | null>(null);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isRepeat, setIsRepeat] = useState(false);
   const [skipFeedback, setSkipFeedback] = useState<
@@ -329,6 +330,7 @@ export default function HomePage() {
 
       let preservedTime = 0;
       const preservedLineIndex = audioState.currentLineIndex;
+
       if (audioRef.current) {
         preservedTime = audioRef.current.currentTime;
         if (timeUpdateListener.current) {
@@ -342,31 +344,37 @@ export default function HomePage() {
         }
       }
 
-      const isNewAudio = audioState.currentlyPlayingId !== control.azkarId;
+      const isNewAudio =
+        !audioRef.current || audioAzkarIdRef.current !== control.azkarId;
 
-      if (!audioRef.current || audioRef.current.src !== control.audioSrc) {
+      const timeUpdateHandler = () => {
+        if (!audioRef.current) return;
+        const currentTime = audioRef.current.currentTime;
+        const azkar = groupedAzkars.find((a) => a.id === control.azkarId);
+        if (azkar?.lines) {
+          let lineIndex = azkar.lines.findIndex((line, idx) => {
+            const nextLine = azkar.lines[idx + 1];
+            const lineEnd = nextLine?.timestamp ?? Infinity;
+            return (
+              currentTime >= (line.timestamp || 0) && currentTime < lineEnd
+            );
+          });
+          lineIndex = lineIndex === -1 ? 0 : lineIndex;
+          setAudioState((prev) => ({
+            ...prev,
+            currentLineIndex: lineIndex,
+          }));
+        }
+      };
+
+      if (isNewAudio) {
         if (audioRef.current) {
           audioRef.current.pause();
         }
         audioRef.current = new Audio(control.audioSrc);
+        audioAzkarIdRef.current = control.azkarId;
         audioRef.current.playbackRate = playbackRate;
-        audioRef.current.loop = isNewAudio ? false : isRepeat;
-
-        const timeUpdateHandler = () => {
-          const currentTime = audioRef.current!.currentTime;
-          const azkar = groupedAzkars.find((a) => a.id === control.azkarId);
-          if (azkar?.lines) {
-            let lineIndex = azkar.lines.findIndex((line, idx) => {
-              const nextLine = azkar.lines[idx + 1];
-              const lineEnd = nextLine?.timestamp ?? Infinity;
-              return (
-                currentTime >= (line.timestamp || 0) && currentTime < lineEnd
-              );
-            });
-            lineIndex = lineIndex === -1 ? 0 : lineIndex;
-            setAudioState((prev) => ({ ...prev, currentLineIndex: lineIndex }));
-          }
-        };
+        audioRef.current.loop = isRepeat;
 
         const endedHandler = () => {
           if (!isRepeat) {
@@ -383,6 +391,13 @@ export default function HomePage() {
 
         audioRef.current.addEventListener("timeupdate", timeUpdateHandler);
         audioRef.current.addEventListener("ended", endedHandler);
+      } else {
+        if (audioRef.current && timeUpdateListener.current) {
+          audioRef.current.addEventListener(
+            "timeupdate",
+            timeUpdateListener.current
+          );
+        }
       }
 
       setAudioState((prev) => ({
@@ -392,18 +407,22 @@ export default function HomePage() {
         currentLineIndex:
           isNewAudio && control.isPlaying ? 0 : preservedLineIndex,
       }));
-
       setIsAudioPlaying(control.isPlaying);
 
       if (control.isPlaying) {
-        if (audioRef.current.src === control.audioSrc && preservedTime > 0) {
+        if (!isNewAudio && preservedTime > 0 && audioRef.current) {
           audioRef.current.currentTime = preservedTime;
         }
-        audioRef.current
-          .play()
-          .catch((err) => console.error("Audio play error:", err));
+        if (audioRef.current) {
+          audioRef.current
+            .play()
+            .catch((err) => console.error("Audio play error:", err));
+        }
       } else {
-        audioRef.current?.pause();
+        if (audioRef.current) {
+          audioRef.current.pause();
+          timeUpdateHandler();
+        }
       }
     },
     [groupedAzkars, playbackRate, isRepeat, audioState.currentLineIndex]
