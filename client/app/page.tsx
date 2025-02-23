@@ -10,7 +10,6 @@ import React, {
 import azkarsData from "./azkars.json";
 import surah_namesData from "./surah_names.json";
 import AzkarCard from "./../components/AzkarCard";
-import Challenge from "./../components/Challenge";
 import {
   Drawer,
   DrawerTrigger,
@@ -131,6 +130,7 @@ export default function HomePage() {
   const data: IData = azkarsData;
   const surahs = surah_namesData;
   const categories = useMemo(() => data.categories, [data]);
+
   const [hasMounted, setHasMounted] = useState(false);
   const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -152,6 +152,8 @@ export default function HomePage() {
   const [skipFeedback, setSkipFeedback] = useState<
     "forward" | "backward" | null
   >(null);
+  const timeUpdateListener = useRef<(() => void) | null>(null);
+  const endedListener = useRef<(() => void) | null>(null);
 
   const handleSpeedChange = useCallback(() => {
     const newRate = playbackRate === 1 ? 1.5 : playbackRate === 1.5 ? 2 : 1;
@@ -207,6 +209,15 @@ export default function HomePage() {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+        if (timeUpdateListener.current) {
+          audioRef.current.removeEventListener(
+            "timeupdate",
+            timeUpdateListener.current
+          );
+        }
+        if (endedListener.current) {
+          audioRef.current.removeEventListener("ended", endedListener.current);
+        }
         audioRef.current = null;
       }
     };
@@ -252,7 +263,10 @@ export default function HomePage() {
       }
       return {
         ...prev,
-        favorites: { ...prev.favorites, [prev.selectedCategory]: newFavorites },
+        favorites: {
+          ...prev.favorites,
+          [prev.selectedCategory]: newFavorites,
+        },
       };
     });
   }, []);
@@ -310,40 +324,6 @@ export default function HomePage() {
     return Array.from(groups.values());
   }, [selectedCategoryData]);
 
-  const groupedSurahsForChallenge = useMemo(() => {
-    const surahsCategory = categories.find((cat) => cat.id === "surahs");
-    if (!surahsCategory) return [];
-    const groups = new Map<string, IAzkarEntry>();
-
-    surahsCategory.azkars.forEach((raw) => {
-      const id = raw.azkar_id;
-      if (!groups.has(id)) {
-        groups.set(id, { id, count: Number(raw.count || 1), lines: [] });
-      }
-      const entry = groups.get(id);
-      if (entry) {
-        entry.lines.push({
-          lineNumber: Number(raw.lineNumber),
-          arabic: raw.arabic,
-          translations: {
-            english: raw.english || "",
-            кыргыз: raw.кыргыз || "",
-            русский: raw.русский || "",
-          },
-          timestamp: raw.timestamp ? Number(raw.timestamp) : undefined,
-          transcription_cyrillic: raw.transcription_cyrillic || "",
-          transcription_latin: raw.transcription_latin || "",
-        });
-      }
-    });
-
-    for (const entry of groups.values()) {
-      entry.lines.sort((a, b) => a.lineNumber - b.lineNumber);
-    }
-
-    return Array.from(groups.values());
-  }, [categories]);
-
   const handleAudioControl = useCallback(
     (control: { azkarId: string; isPlaying: boolean; audioSrc?: string }) => {
       if (!control.audioSrc) return;
@@ -353,24 +333,71 @@ export default function HomePage() {
 
       if (audioRef.current) {
         preservedTime = audioRef.current.currentTime;
+        if (timeUpdateListener.current) {
+          audioRef.current.removeEventListener(
+            "timeupdate",
+            timeUpdateListener.current
+          );
+        }
+        if (endedListener.current) {
+          audioRef.current.removeEventListener("ended", endedListener.current);
+        }
       }
 
       const isNewAudio =
         !audioRef.current || audioAzkarIdRef.current !== control.azkarId;
 
+      const timeUpdateHandler = () => {
+        if (!audioRef.current) return;
+        const currentTime = audioRef.current.currentTime;
+        const azkar = groupedAzkars.find((a) => a.id === control.azkarId);
+        if (azkar?.lines) {
+          let lineIndex = azkar.lines.findIndex((line, idx) => {
+            const nextLine = azkar.lines[idx + 1];
+            const lineEnd = nextLine?.timestamp ?? Infinity;
+            return (
+              currentTime >= (line.timestamp || 0) && currentTime < lineEnd
+            );
+          });
+          lineIndex = lineIndex === -1 ? 0 : lineIndex;
+          setAudioState((prev) => ({
+            ...prev,
+            currentLineIndex: lineIndex,
+          }));
+        }
+      };
+
       if (isNewAudio) {
-        if (audioRef.current) audioRef.current.pause();
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
         audioRef.current = new Audio(control.audioSrc);
         audioAzkarIdRef.current = control.azkarId;
         audioRef.current.playbackRate = playbackRate;
         audioRef.current.loop = isRepeat;
 
-        audioRef.current.addEventListener("ended", () => {
+        const endedHandler = () => {
           if (!isRepeat) {
-            setAudioState((prev) => ({ ...prev, currentlyPlayingId: null }));
+            setAudioState((prev) => ({
+              ...prev,
+              currentlyPlayingId: null,
+            }));
             setIsAudioPlaying(false);
           }
-        });
+        };
+
+        timeUpdateListener.current = timeUpdateHandler;
+        endedListener.current = endedHandler;
+
+        audioRef.current.addEventListener("timeupdate", timeUpdateHandler);
+        audioRef.current.addEventListener("ended", endedHandler);
+      } else {
+        if (audioRef.current && timeUpdateListener.current) {
+          audioRef.current.addEventListener(
+            "timeupdate",
+            timeUpdateListener.current
+          );
+        }
       }
 
       setAudioState((prev) => ({
@@ -392,7 +419,10 @@ export default function HomePage() {
             .catch((err) => console.error("Audio play error:", err));
         }
       } else {
-        if (audioRef.current) audioRef.current.pause();
+        if (audioRef.current) {
+          audioRef.current.pause();
+          timeUpdateHandler();
+        }
       }
     },
     [groupedAzkars, playbackRate, isRepeat, audioState.currentLineIndex]
@@ -457,11 +487,19 @@ export default function HomePage() {
     };
   }, [groupedAzkars, selectedCategory]);
 
-  if (
-    !hasMounted ||
-    (!selectedCategoryData && selectedCategory !== "challenge")
-  )
-    return null;
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    setAudioState((prev) => ({
+      ...prev,
+      currentlyPlayingId: null,
+      currentLineIndex: -1,
+    }));
+    setIsAudioPlaying(false);
+  }, [selectedCategory]);
+
+  if (!hasMounted || !selectedCategoryData) return null;
 
   return (
     <>
@@ -469,118 +507,84 @@ export default function HomePage() {
         <div style={{ paddingBottom: "120px" }}>
           <header className="mb-8 text-center py-4 relative">
             <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
-              {selectedCategory === "challenge"
-                ? "Challenge"
-                : selectedCategoryData?.translations[language] ||
-                  selectedCategoryData?.id}
+              {selectedCategoryData.translations[language] ||
+                selectedCategoryData.id}
             </h1>
-            {(selectedCategory === "morning" ||
-              selectedCategory === "evening") && (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  const newCounters = { ...db.counters };
-                  groupedAzkars.forEach((azkar) => {
-                    newCounters[azkar.id] = 0;
-                  });
-                  setDb((prev) => ({ ...prev, counters: newCounters }));
-                  setClearHistoryClicked(true);
-                  setTimeout(() => setClearHistoryClicked(false), 200);
-                }}
-                className={`mt-4 transition-colors px-3 py-1 rounded border ${
-                  clearHistoryClicked
-                    ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                    : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-                }`}
-              >
-                {data.uiTranslations.actions.clean_history[language] ||
-                  "🗑️ Clear History"}
-              </Button>
-            )}
           </header>
-          {selectedCategory === "challenge" ? (
-            <Challenge
-              surahs={groupedSurahsForChallenge}
-              language={language}
-              surahNames={surahs}
-              onClose={() => handleCategoryChange("surahs")}
-            />
-          ) : (
-            <section className="grid grid-cols-1 gap-6 mt-6">
-              {groupedAzkars.map((azkar, index) => {
-                const virtue = selectedCategoryData?.virtues.find(
-                  (v) => v.azkar_id === azkar.id
-                );
-                const hasAudio = audioState.availableAudios.has(azkar.id);
-                const isFavorite = (
-                  favorites[selectedCategory] || new Set()
-                ).has(azkar.id);
-                const audioSrc = hasAudio
-                  ? `/audio/${azkar.id}.${
-                      selectedCategory === "surahs" ? "mp3" : "m4a"
-                    }`
-                  : undefined;
+          <section className="grid grid-cols-1 gap-6 mt-6">
+            {groupedAzkars.map((azkar, index) => {
+              const virtue = selectedCategoryData.virtues.find(
+                (v) => v.azkar_id === azkar.id
+              );
+              const hasAudio = audioState.availableAudios.has(azkar.id);
+              const isFavorite = (favorites[selectedCategory] || new Set()).has(
+                azkar.id
+              );
+              const audioSrc = hasAudio
+                ? `/audio/${azkar.id}.${
+                    selectedCategory === "surahs" ? "mp3" : "m4a"
+                  }`
+                : undefined;
 
-                const surah_names =
-                  selectedCategory === "surahs"
-                    ? surahs.find((s) => s.surah_id === azkar.id)
-                    : null;
+              const surah_names =
+                selectedCategory === "surahs"
+                  ? surahs.find((s) => s.surah_id === azkar.id)
+                  : null;
 
-                return (
-                  <div
-                    key={azkar.id}
-                    ref={(el) => {
-                      cardRefs.current[index] = el;
-                    }}
-                    className="relative z-10"
-                  >
-                    {surah_names && selectedCategory === "surahs" && (
-                      <h2
-                        className="text-2xl font-semibold text-[var(--card-text)] mb-2"
-                        style={{
-                          fontFamily:
-                            language === "عربي"
-                              ? "'Scheherazade', serif"
-                              : "inherit",
-                          direction: language === "عربي" ? "rtl" : "ltr",
-                          textAlign: language === "عربي" ? "right" : "left",
-                        }}
-                      >
-                        {surah_names[language as keyof typeof surah_names] ||
-                          surah_names.arabic}
-                      </h2>
-                    )}
-                    <AzkarCard
-                      azkar={azkar}
-                      language={language}
-                      uiTranslations={data.uiTranslations}
-                      counter={counters[azkar.id] || 0}
-                      updateCounter={updateCounter}
-                      virtue={virtue}
-                      audioSrc={audioSrc}
-                      isCurrentlyPlaying={
-                        audioState.currentlyPlayingId === azkar.id
-                      }
-                      currentLineIndex={
-                        audioState.lastPlayedId === azkar.id
-                          ? audioState.currentLineIndex
-                          : -1
-                      }
-                      onAudioControl={handleAudioControl}
-                      playbackRate={playbackRate}
-                      isRepeat={isRepeat}
-                      onSpeedChange={handleSpeedChange}
-                      onRepeatToggle={handleRepeatToggle}
-                      onSkip={handleSkip}
-                      selectedCategory={selectedCategory}
-                      isFavorite={isFavorite}
-                      toggleFavorite={toggleFavorite}
-                    />
-                  </div>
-                );
-              })}
-            </section>
-          )}
+              return (
+                <div
+                  key={azkar.id}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
+                  className="relative z-10"
+                >
+                  {surah_names && selectedCategory === "surahs" && (
+                    <h2
+                      className="text-2xl font-semibold text-[var(--card-text)] mb-2"
+                      style={{
+                        fontFamily:
+                          language === "عربي"
+                            ? "'Scheherazade', serif"
+                            : "inherit",
+                        direction: language === "عربي" ? "rtl" : "ltr",
+                        textAlign: language === "عربي" ? "right" : "left",
+                      }}
+                    >
+                      {surah_names[language as keyof typeof surah_names] ||
+                        surah_names.arabic}
+                    </h2>
+                  )}
+                  <AzkarCard
+                    azkar={azkar}
+                    language={language}
+                    uiTranslations={data.uiTranslations}
+                    counter={counters[azkar.id] || 0}
+                    updateCounter={updateCounter}
+                    virtue={virtue}
+                    audioSrc={audioSrc}
+                    isCurrentlyPlaying={
+                      audioState.currentlyPlayingId === azkar.id
+                    }
+                    currentLineIndex={
+                      audioState.lastPlayedId === azkar.id
+                        ? audioState.currentLineIndex
+                        : -1
+                    }
+                    onAudioControl={handleAudioControl}
+                    playbackRate={playbackRate}
+                    isRepeat={isRepeat}
+                    onSpeedChange={handleSpeedChange}
+                    onRepeatToggle={handleRepeatToggle}
+                    onSkip={handleSkip}
+                    selectedCategory={selectedCategory}
+                    isFavorite={isFavorite}
+                    toggleFavorite={toggleFavorite}
+                  />
+                </div>
+              );
+            })}
+          </section>
         </div>
       </div>
 
@@ -610,8 +614,8 @@ export default function HomePage() {
                     size="sm"
                     className={`p-1 rounded-full transition-colors relative ${
                       skipFeedback === "backward"
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                     }`}
                     onClick={() => handleSkip("backward")}
                   >
@@ -624,8 +628,8 @@ export default function HomePage() {
                     size="sm"
                     className={`p-2 rounded-full transition-colors ${
                       isAudioPlaying
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                     }`}
                     onClick={() =>
                       handleAudioControl({
@@ -646,8 +650,8 @@ export default function HomePage() {
                     size="sm"
                     className={`p-1 rounded-full transition-colors relative ${
                       skipFeedback === "forward"
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70"
+                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(---card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                     }`}
                     onClick={() => handleSkip("forward")}
                   >
@@ -662,8 +666,8 @@ export default function HomePage() {
                     size="sm"
                     className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
                       playbackRate !== 1
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                        : "bg-transparent hover:bg-[var(--card-bg)]/70"
+                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                        : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                     }`}
                     onClick={handleSpeedChange}
                   >
@@ -673,8 +677,8 @@ export default function HomePage() {
                     size="sm"
                     className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
                       isRepeat
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90"
-                        : "bg-transparent hover:bg-[var(--card-bg)]/70"
+                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                        : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
                     }`}
                     onClick={handleRepeatToggle}
                   >
@@ -749,13 +753,7 @@ export default function HomePage() {
 
               <div className="p-4">
                 <div className="flex flex-wrap gap-4 justify-center">
-                  {[
-                    ...categories,
-                    {
-                      id: "challenge",
-                      translations: { [language]: "Challenge" },
-                    },
-                  ].map((category) => (
+                  {categories.map((category) => (
                     <button
                       key={category.id}
                       onClick={() => handleCategoryChange(category.id)}
@@ -771,6 +769,35 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
+
+              {(selectedCategory === "morning" ||
+                selectedCategory === "evening") && (
+                <div className="p-4 flex items-center justify-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      const newCounters = { ...db.counters };
+                      groupedAzkars.forEach((azkar) => {
+                        newCounters[azkar.id] = 0;
+                      });
+                      setDb((prev) => ({
+                        ...prev,
+                        counters: newCounters,
+                      }));
+                      setClearHistoryClicked(true);
+                      setTimeout(() => setClearHistoryClicked(false), 200);
+                    }}
+                    className={`transition-colors px-3 py-1 rounded border ${
+                      clearHistoryClicked
+                        ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                        : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                    }`}
+                  >
+                    {data.uiTranslations.actions.clean_history[language] ||
+                      "🗑️ Clear History"}
+                  </Button>
+                </div>
+              )}
             </div>
 
             <DrawerClose asChild>
@@ -792,47 +819,46 @@ export default function HomePage() {
         }`}
       >
         <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
-          {selectedCategory !== "challenge" &&
-            groupedAzkars.map((azkar, index) => {
-              const currentCount = counters[azkar.id] || 0;
-              const progress = Math.min(currentCount / azkar.count, 1);
-              const isFavorite = (favorites[selectedCategory] || new Set()).has(
-                azkar.id
-              );
+          {groupedAzkars.map((azkar, index) => {
+            const currentCount = counters[azkar.id] || 0;
+            const progress = Math.min(currentCount / azkar.count, 1);
+            const isFavorite = (favorites[selectedCategory] || new Set()).has(
+              azkar.id
+            );
 
-              return (
+            return (
+              <button
+                key={azkar.id}
+                onClick={() =>
+                  cardRefs.current[index]?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="relative w-10 h-10 flex-shrink-0 border border-[var(--card-text)] rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200"
+              >
                 <div
-                  key={azkar.id}
-                  onClick={() =>
-                    cardRefs.current[index]?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    })
-                  }
-                  className="relative w-10 h-10 flex-shrink-0 border border-[var(--card-text)] rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200 cursor-pointer"
+                  className={`absolute left-0 top-0 h-full transition-all duration-200 ${
+                    isFavorite ? "bg-[#ef233c]" : "bg-[#606c38]"
+                  }`}
+                  style={{ width: `${progress * 100}%` }}
+                />
+                <span
+                  className={`relative z-10 ${
+                    isFavorite
+                      ? "material-icons-round text-[var(--card-text)] text-xl"
+                      : "text-[var(--card-text)]"
+                  }`}
                 >
-                  <div
-                    className={`absolute left-0 top-0 h-full transition-all duration-200 ${
-                      isFavorite ? "bg-[#ef233c]" : "bg-[#606c38]"
-                    }`}
-                    style={{ width: `${progress * 100}%` }}
-                  />
-                  <span
-                    className={`relative z-10 ${
-                      isFavorite
-                        ? "material-icons-round text-[var(--card-text)] text-xl"
-                        : "text-[var(--card-text)]"
-                    }`}
-                  >
-                    {isFavorite
-                      ? progress === 1
-                        ? "favorite"
-                        : "favorite_border"
-                      : index + 1}
-                  </span>
-                </div>
-              );
-            })}
+                  {isFavorite
+                    ? progress === 1
+                      ? "favorite"
+                      : "favorite_border"
+                    : index + 1}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </>
