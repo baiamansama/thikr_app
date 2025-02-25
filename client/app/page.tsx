@@ -10,7 +10,7 @@ import React, {
 import azkarsData from "./azkars.json";
 import surah_namesData from "./surah_names.json";
 import periodsData from "./periods.json";
-import infoData from "./info.json"; // Import the info.json file
+import infoData from "./info.json";
 import AzkarCard from "./../components/AzkarCard";
 import {
   Drawer,
@@ -31,7 +31,7 @@ import {
   DialogTrigger,
   DialogContent,
   DialogHeader,
-  DialogDescription,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
@@ -155,7 +155,7 @@ export default function HomePage() {
   const data: IData = azkarsData;
   const surahs = surah_namesData;
   const periods: IPeriod[] = periodsData;
-  const info: IInfo[] = infoData; // Type the info.json data
+  const info: IInfo[] = infoData;
   const categories = useMemo(() => data.categories, [data]);
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -532,7 +532,6 @@ export default function HomePage() {
 
   if (!hasMounted || !selectedCategoryData) return null;
 
-  // Find the info for the selected category
   const categoryInfo = info.find((item) => item.category === selectedCategory);
 
   return (
@@ -550,33 +549,26 @@ export default function HomePage() {
                   <DialogTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                      className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80 rounded-full"
                     >
                       <span className="material-icons-round text-2xl">info</span>
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] max-w-md">
+                  <DialogContent className="w-[90%] max-w-lg bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] rounded-xl shadow-lg p-4">
                     <DialogHeader>
-                      <DialogDescription className="sr-only">
-                        Information about {selectedCategory}
-                      </DialogDescription>
+                      <DialogTitle className="text-lg font-semibold text-center">
+                        {selectedCategoryData.translations[language] ||
+                          selectedCategoryData.id}
+                      </DialogTitle>
                     </DialogHeader>
                     <div
-                      className="space-y-4 text-sm"
+                      className="text-sm leading-relaxed whitespace-pre-wrap"
                       dir={language === "عربي" ? "rtl" : "ltr"}
                     >
-                      {language === "عربي" && (
-                        <p className="whitespace-pre-wrap">{categoryInfo.arabic}</p>
-                      )}
-                      {language === "english" && (
-                        <p className="whitespace-pre-wrap">{categoryInfo.english}</p>
-                      )}
-                      {language === "русский" && (
-                        <p className="whitespace-pre-wrap">{categoryInfo.русский}</p>
-                      )}
-                      {language === "кыргыз" && (
-                        <p className="whitespace-pre-wrap">{categoryInfo.кыргыз}</p>
-                      )}
+                      {language === "عربي" && categoryInfo.arabic}
+                      {language === "english" && categoryInfo.english}
+                      {language === "русский" && categoryInfo.русский}
+                      {language === "кыргыз" && categoryInfo.кыргыз}
                     </div>
                   </DialogContent>
                 </Dialog>
