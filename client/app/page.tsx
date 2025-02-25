@@ -10,6 +10,7 @@ import React, {
 import azkarsData from "./azkars.json";
 import surah_namesData from "./surah_names.json";
 import periodsData from "./periods.json";
+import infoData from "./info.json"; // Import the info.json file
 import AzkarCard from "./../components/AzkarCard";
 import {
   Drawer,
@@ -25,6 +26,13 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
@@ -111,6 +119,14 @@ interface IPeriod {
   arabic: string;
 }
 
+interface IInfo {
+  category: string;
+  arabic: string;
+  english: string;
+  русский: string;
+  кыргыз: string;
+}
+
 interface IData {
   metadata: IMetadata;
   uiTranslations: IUITranslations;
@@ -139,6 +155,7 @@ export default function HomePage() {
   const data: IData = azkarsData;
   const surahs = surah_namesData;
   const periods: IPeriod[] = periodsData;
+  const info: IInfo[] = infoData; // Type the info.json data
   const categories = useMemo(() => data.categories, [data]);
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -515,15 +532,56 @@ export default function HomePage() {
 
   if (!hasMounted || !selectedCategoryData) return null;
 
+  // Find the info for the selected category
+  const categoryInfo = info.find((item) => item.category === selectedCategory);
+
   return (
     <>
       <div className="container mx-auto px-0 py-6 transition-colors">
         <div style={{ paddingBottom: "120px" }}>
           <header className="mb-8 text-center py-4 relative">
-            <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
-              {selectedCategoryData.translations[language] ||
-                selectedCategoryData.id}
-            </h1>
+            <div className="flex items-center justify-center relative">
+              <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
+                {selectedCategoryData.translations[language] ||
+                  selectedCategoryData.id}
+              </h1>
+              {categoryInfo && (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                    >
+                      <span className="material-icons-round text-2xl">info</span>
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] max-w-md">
+                    <DialogHeader>
+                      <DialogDescription className="sr-only">
+                        Information about {selectedCategory}
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div
+                      className="space-y-4 text-sm"
+                      dir={language === "عربي" ? "rtl" : "ltr"}
+                    >
+                      {language === "عربي" && (
+                        <p className="whitespace-pre-wrap">{categoryInfo.arabic}</p>
+                      )}
+                      {language === "english" && (
+                        <p className="whitespace-pre-wrap">{categoryInfo.english}</p>
+                      )}
+                      {language === "русский" && (
+                        <p className="whitespace-pre-wrap">{categoryInfo.русский}</p>
+                      )}
+                      {language === "кыргыз" && (
+                        <p className="whitespace-pre-wrap">{categoryInfo.кыргыз}</p>
+                      )}
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              )}
+            </div>
             {(selectedCategory === "morning" ||
               selectedCategory === "evening") && (
               <Button
