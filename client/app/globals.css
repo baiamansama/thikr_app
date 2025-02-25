@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Define Uthmanic Script HAFS font */
 @font-face {
   font-family: "Uthmanic Script HAFS";
   src: url("/fonts/UthmanicHafs1_Ver09.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap; /* Improves performance by allowing text to render while font loads */
+  font-display: swap;
 }
 
 :root {
@@ -72,7 +71,7 @@ body {
 .quran-font {
   font-family: "Uthmanic Script HAFS", sans-serif;
   font-weight: normal;
-  line-height: 2; /* Mimics the spacious layout of King Fahd Complex */
+  line-height: 2;
   color: var(--card-text);
 }
 
@@ -152,8 +151,6 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-
 
 @layer base {
   * {

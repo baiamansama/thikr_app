@@ -586,14 +586,7 @@ export default function HomePage() {
                   {surah_names && selectedCategory === "surahs" && (
                     <h2
                       className="text-2xl font-semibold text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2"
-                      style={{
-                        fontFamily:
-                          language === "عربي"
-                            ? "'Scheherazade', serif"
-                            : "inherit",
-                        direction: language === "عربي" ? "rtl" : "ltr",
-                        textAlign: language === "عربي" ? "right" : "left",
-                      }}
+                      dir={language === "عربي" ? "rtl" : "ltr"}
                     >
                       {surah_names[language as keyof typeof surah_names] ||
                         surah_names.arabic}
@@ -602,14 +595,7 @@ export default function HomePage() {
                   {period_info && selectedCategory === "duas" && (
                     <h2
                       className="text-xl font-medium text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2 bg-[var(--card-bg)]/80 rounded-t-md"
-                      style={{
-                        fontFamily:
-                          language === "عربي"
-                            ? "'Scheherazade', serif"
-                            : "inherit",
-                        direction: language === "عربي" ? "rtl" : "ltr",
-                        textAlign: language === "عربي" ? "right" : "left",
-                      }}
+                      dir={language === "عربي" ? "rtl" : "ltr"}
                     >
                       {period_info[language as keyof typeof period_info] ||
                         period_info.arabic}
@@ -762,7 +748,10 @@ export default function HomePage() {
               <span className="material-icons-round text-2xl">settings</span>
             </Button>
           </DrawerTrigger>
-          <DrawerContent className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]">
+          <DrawerContent
+            className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]"
+            dir={language === "عربي" ? "rtl" : "ltr"}
+          >
             <DrawerHeader>
               <div className="flex justify-center">
                 <DrawerTitle className="text-center">
@@ -773,7 +762,6 @@ export default function HomePage() {
                 </DrawerDescription>
               </div>
             </DrawerHeader>
-
             <div className="flex flex-col">
               <div className="p-4">
                 <div className="flex flex-wrap gap-4 justify-center">
@@ -832,7 +820,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
             <DrawerClose asChild>
               <VisuallyHidden>
                 <Button autoFocus />
