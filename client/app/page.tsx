@@ -621,8 +621,8 @@ export default function HomePage() {
                   ? surahs.find((s) => s.surah_id === azkar.id)
                   : null;
               const period_info =
-                selectedCategory === "duas" && periods[index]
-                  ? periods[index]
+                selectedCategory === "duas" && periods.find(period => period.text_id === azkar.id)
+                  ? periods.find(period => period.text_id === azkar.id)
                   : null;
 
               return (
