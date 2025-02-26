@@ -176,9 +176,9 @@ export default function HomePage() {
   const audioAzkarIdRef = useRef<string | null>(null);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isRepeat, setIsRepeat] = useState(false);
-  const [skipFeedback, setSkipFeedback] = useState<
-    "forward" | "backward" | null
-  >(null);
+  const [skipFeedback, setSkipFeedback] = useState<"forward" | "backward" | null>(
+    null
+  );
   const timeUpdateListener = useRef<(() => void) | null>(null);
   const endedListener = useRef<(() => void) | null>(null);
 
@@ -269,6 +269,8 @@ export default function HomePage() {
       }));
       setIsAudioPlaying(false);
     }
+    // Scroll to top when category changes
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const updateCounter = useCallback((azkarId: string, newCount: number) => {
@@ -540,7 +542,10 @@ export default function HomePage() {
         <div style={{ paddingBottom: "120px" }}>
           <header className="mb-8 text-center py-4 relative">
             <div className="flex items-center justify-center relative">
-              <h1 className="text-4xl font-extrabold text-[var(--card-text)]">
+              <h1
+                className="text-4xl font-extrabold text-[var(--card-text)]"
+                dir={language === "عربي" ? "rtl" : "ltr"}
+              >
                 {selectedCategoryData.translations[language] ||
                   selectedCategoryData.id}
               </h1>
@@ -549,7 +554,7 @@ export default function HomePage() {
                   <DialogTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80 rounded-full"
+                      className="absolute right-2 top-1/2 transform -translate-y-2/3 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80 rounded-full"
                     >
                       <span className="material-icons-round text-2xl">info</span>
                     </Button>
