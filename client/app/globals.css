@@ -40,7 +40,7 @@
   --foreground: #5b4636;
   --card-bg: #fef8e7;
   --card-text: #5b4636;
-  --card-border: #e2cfcf;
+  --card-border: #5b4636;
   --translation-text: #5b4636;
 }
 
@@ -146,15 +146,6 @@ body {
 @layer base {
   * {
     @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
