@@ -176,9 +176,9 @@ export default function HomePage() {
   const audioAzkarIdRef = useRef<string | null>(null);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isRepeat, setIsRepeat] = useState(false);
-  const [skipFeedback, setSkipFeedback] = useState<"forward" | "backward" | null>(
-    null
-  );
+  const [skipFeedback, setSkipFeedback] = useState<
+    "forward" | "backward" | null
+  >(null);
   const timeUpdateListener = useRef<(() => void) | null>(null);
   const endedListener = useRef<(() => void) | null>(null);
 
@@ -260,17 +260,6 @@ export default function HomePage() {
 
   const handleCategoryChange = useCallback((categoryId: string) => {
     setDb((prev) => ({ ...prev, selectedCategory: categoryId }));
-    if (audioRef.current) {
-      audioRef.current.pause();
-      setAudioState((prev) => ({
-        ...prev,
-        currentlyPlayingId: null,
-        currentLineIndex: -1,
-      }));
-      setIsAudioPlaying(false);
-    }
-    // Scroll to top when category changes
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const updateCounter = useCallback((azkarId: string, newCount: number) => {
@@ -520,16 +509,9 @@ export default function HomePage() {
     };
   }, [groupedAzkars, selectedCategory]);
 
+  // Scroll to top when category changes
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    setAudioState((prev) => ({
-      ...prev,
-      currentlyPlayingId: null,
-      currentLineIndex: -1,
-    }));
-    setIsAudioPlaying(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [selectedCategory]);
 
   if (!hasMounted || !selectedCategoryData) return null;
@@ -556,7 +538,9 @@ export default function HomePage() {
                       variant="ghost"
                       className="absolute right-2 top-1/2 transform -translate-y-2/3 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80 rounded-full"
                     >
-                      <span className="material-icons-round text-2xl">info</span>
+                      <span className="material-icons-round text-2xl">
+                        info
+                      </span>
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="w-[90%] max-w-lg bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] rounded-xl shadow-lg p-4">
@@ -626,8 +610,9 @@ export default function HomePage() {
                   ? surahs.find((s) => s.surah_id === azkar.id)
                   : null;
               const period_info =
-                selectedCategory === "duas" && periods.find(period => period.text_id === azkar.id)
-                  ? periods.find(period => period.text_id === azkar.id)
+                selectedCategory === "duas" &&
+                periods.find((period) => period.text_id === azkar.id)
+                  ? periods.find((period) => period.text_id === azkar.id)
                   : null;
 
               return (
