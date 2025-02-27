@@ -13,20 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Thikr App 📿",
-  description: "A simple Thikr app",
+  title: "зикир & дуба",
+  description: "Мусулманга зарыл болгон зикирлер жана дубалар топтому",
   openGraph: {
-    title: "Thikr App 📿",
-    description: "A simple Thikr app",
+    title: "зикир & дуба",
+    description: "Мусулманга зарыл болгон зикирлер жана дубалар топтому",
     images: [
       {
-        url: "/preview/english.jpeg", // Hardcoded to English preview image
+        url: "/preview/english.png",
         width: 1200,
         height: 630,
         alt: "Thikr App Preview",
       },
     ],
-    locale: "en_US", // Default to English locale; adjust if needed
+    locale: "en_US",
     type: "website",
   },
 };
