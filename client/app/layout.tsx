@@ -12,40 +12,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const getPreviewImage = (lang: string) => {
-  switch (lang) {
-    case "русский":
-      return "/preview/russian.jpeg";
-    case "кыргыз":
-      return "/preview/kyrgyz.jpeg";
-    case "عربي":
-      return "/preview/arabic.jpeg";
-    case "english":
-    default:
-      return "/preview/english.jpeg";
-  }
-};
-
-export const generateMetadata = ({ searchParams }: { searchParams?: { lang?: string } }): Metadata => {
-  const lang = searchParams?.lang || "english";
-  return {
+export const metadata: Metadata = {
+  title: "Thikr App 📿",
+  description: "A simple Thikr app",
+  openGraph: {
     title: "Thikr App 📿",
     description: "A simple Thikr app",
-    openGraph: {
-      title: "Thikr App 📿",
-      description: "A simple Thikr app",
-      images: [
-        {
-          url: getPreviewImage(lang),
-          width: 1200,
-          height: 630,
-          alt: "Thikr App Preview",
-        },
-      ],
-      locale: lang === "русский" ? "ru_RU" : lang === "кыргыз" ? "ky_KG" : lang === "عربي" ? "ar_AR" : "en_US",
-      type: "website",
-    },
-  };
+    images: [
+      {
+        url: "/preview/english.jpeg", // Hardcoded to English preview image
+        width: 1200,
+        height: 630,
+        alt: "Thikr App Preview",
+      },
+    ],
+    locale: "en_US", // Default to English locale; adjust if needed
+    type: "website",
+  },
 };
 
 export default function RootLayout({
