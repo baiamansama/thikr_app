@@ -35,7 +35,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-
+import { Analytics } from "@vercel/analytics/react";
 interface Translation {
   [language: string]: string;
 }
@@ -924,6 +924,7 @@ export default function HomePage() {
           })}
         </div>
       </div>
+      <Analytics />
     </>
   );
 }
