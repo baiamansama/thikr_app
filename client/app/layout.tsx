@@ -14,20 +14,20 @@ const geistMono = Geist_Mono({
 
 const getPreviewImage = (lang: string) => {
   switch (lang) {
-    case "ru":
+    case "русский":
       return "/preview/russian.jpeg";
-    case "ky":
+    case "кыргыз":
       return "/preview/kyrgyz.jpeg";
-    case "ar":
+    case "عربي":
       return "/preview/arabic.jpeg";
-    case "en":
+    case "english":
     default:
       return "/preview/english.jpeg";
   }
 };
 
-export const generateMetadata = ({ params }: { params?: { lang?: string } }): Metadata => {
-  const lang = params?.lang || "en";
+export const generateMetadata = ({ searchParams }: { searchParams?: { lang?: string } }): Metadata => {
+  const lang = searchParams?.lang || "english";
   return {
     title: "Thikr App 📿",
     description: "A simple Thikr app",
@@ -42,7 +42,7 @@ export const generateMetadata = ({ params }: { params?: { lang?: string } }): Me
           alt: "Thikr App Preview",
         },
       ],
-      locale: lang === "ru" ? "ru_RU" : lang === "ky" ? "ky_KG" : lang === "ar" ? "ar_AR" : "en_US",
+      locale: lang === "русский" ? "ru_RU" : lang === "кыргыз" ? "ky_KG" : lang === "عربي" ? "ar_AR" : "en_US",
       type: "website",
     },
   };
@@ -50,12 +50,9 @@ export const generateMetadata = ({ params }: { params?: { lang?: string } }): Me
 
 export default function RootLayout({
   children,
-  params,
-}: Readonly<{ children: React.ReactNode; params?: { lang?: string } }>) {
-  const lang = params?.lang || "en";
-
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang={lang}>
+    <html lang="en">
       <head>
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
