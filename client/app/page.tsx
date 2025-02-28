@@ -577,12 +577,13 @@ export default function HomePage() {
       }
     );
 
-    cardRefs.current.forEach((card) => {
+    const currentCardRefs = cardRefs.current;
+    currentCardRefs.forEach((card) => {
       if (card) observer.observe(card);
     });
 
     return () => {
-      cardRefs.current.forEach((card) => {
+      currentCardRefs.forEach((card) => {
         if (card) observer.unobserve(card);
       });
     };
