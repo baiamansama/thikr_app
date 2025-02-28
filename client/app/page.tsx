@@ -215,6 +215,27 @@ export default function HomePage() {
       }
     }
   }, []);
+  useEffect(() => {
+    const paginationContainer = document.querySelector(".overflow-x-auto");
+    if (!paginationContainer) return;
+
+    const paginationButtons = paginationContainer.querySelectorAll("button");
+    if (paginationButtons.length === 0) return;
+
+    const activeButton = paginationButtons[activeCardIndex];
+    if (!activeButton) return;
+
+    const containerWidth = (paginationContainer as HTMLElement).offsetWidth;
+    const buttonWidth = activeButton.offsetWidth;
+    const buttonPosition = activeButton.offsetLeft;
+
+    const scrollTo = buttonPosition - containerWidth / 2 + buttonWidth / 2;
+
+    paginationContainer.scrollTo({
+      left: Math.max(0, scrollTo),
+      behavior: "smooth",
+    });
+  }, [activeCardIndex]);
 
   useEffect(() => {
     drawerOpenRef.current = drawerOpen;
