@@ -92,10 +92,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
-          "русский": "Я удаляюсь с помощью Господа от проклятого Сатаны. ",
           "english": "I seek refuge in Allah from the accursed devil.",
-          "transcription_latin": "A'ūdhu billāhi mina ash-shayṭāni ar-rajīm",
           "кыргыз": "Куугунтукка учураган шайтандан Аллахка баш калкалаймын.",
+          "русский": "Я удаляюсь с помощью Господа от проклятого Сатаны. ",
+          "transcription_latin": "A'ūdhu billāhi mina ash-shayṭāni ar-rajīm",
           "transcription_cyrillic": "А'узу биллааҳи минаш-шайтонир-рожиим"
         },
         {
@@ -104,10 +104,10 @@
           "timestamp": "5",
           "lineNumber": "2",
           "arabic": "﴿٢٥٥﴾ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ",
-          "русский": "Аллах (Бог, Господь)… Нет бога, кроме Него, вечно Живого, Сущего.",
           "english": "Allah! There is no god ˹worthy of worship˺ except Him, the Ever-Living, All-Sustaining.",
-          "transcription_latin": "Allāhu lā ilāha illā huwa al-ḥayyu al-qayyūm",
           "кыргыз": "Аллах – Андан башка сыйынууга татыктуу кудай жок. Ал – Түбөлүк Тирүү, Түбөлүк Өкүмдар.",
+          "русский": "Аллах (Бог, Господь)… Нет бога, кроме Него, вечно Живого, Сущего.",
+          "transcription_latin": "Allāhu lā ilāha illā huwa al-ḥayyu al-qayyūm",
           "transcription_cyrillic": "Аллоҳу лаа илааҳа иллаа ҳувал-ҳаййул-қоййум"
         },
         {
@@ -116,10 +116,10 @@
           "timestamp": "11",
           "lineNumber": "3",
           "arabic": "لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ",
-          "русский": "Его не постигнут ни дремота, ни сон. ",
           "english": "Neither drowsiness nor sleep overtakes Him.",
-          "transcription_latin": "Lā ta'khudhuhu sinatun wa lā nawm",
           "кыргыз": "Аны көз илинүү да, уйку да баспайт.",
+          "русский": "Его не постигнут ни дремота, ни сон. ",
+          "transcription_latin": "Lā ta'khudhuhu sinatun wa lā nawm",
           "transcription_cyrillic": "Лаа та'хузуҳу синатув ва лаа наум"
         },
         {
@@ -128,10 +128,10 @@
           "timestamp": "15",
           "lineNumber": "4",
           "arabic": "لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ ",
-          "русский": "Ему принадлежит все, что на небесах, и все, что на земле. ",
           "english": "To Him belongs whatever is in the heavens and whatever is on the earth.",
-          "transcription_latin": "Lahu mā fī as-samāwāti wa mā fī al-arḍ",
           "кыргыз": "Асмандардагы жана жердегинин баары Ага таандык.",
+          "русский": "Ему принадлежит все, что на небесах, и все, что на земле. ",
+          "transcription_latin": "Lahu mā fī as-samāwāti wa mā fī al-arḍ",
           "transcription_cyrillic": "Лаҳу маа фис-самāваати ва маа фил-ард"
         },
         {
@@ -140,10 +140,10 @@
           "timestamp": "20",
           "lineNumber": "5",
           "arabic": "مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ",
-          "русский": "Кто заступится пред Ним, не иначе как по воле Его?! ",
           "english": "Who could possibly intercede with Him without His permission?",
-          "transcription_latin": "Man dhā alladhī yashfa'u 'indahu illā bi-idhnih",
           "кыргыз": "Анын уруксатысыз Анын алдында ким шапаат кыла алат?",
+          "русский": "Кто заступится пред Ним, не иначе как по воле Его?! ",
+          "transcription_latin": "Man dhā alladhī yashfa'u 'indahu illā bi-idhnih",
           "transcription_cyrillic": "Ман зал-лазии йашфа'у 'индаҳу иллаа би-изниҳ"
         },
         {
@@ -152,10 +152,10 @@
           "timestamp": "25",
           "lineNumber": "6",
           "arabic": " يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ",
-          "русский": "Ему ведомо то, что было, и то, что будет. ",
           "english": "He ˹fully˺ knows what is ahead of them and what is behind them.",
-          "transcription_latin": "Ya'lamu mā bayna aydīhim wa mā khalfahum",
           "кыргыз": "Ал алардын алдындагыны да, артындагыны да билет.",
+          "русский": "Ему ведомо то, что было, и то, что будет. ",
+          "transcription_latin": "Ya'lamu mā bayna aydīhim wa mā khalfahum",
           "transcription_cyrillic": "Йа'ламу маа байна айдииҳим ва маа холфаҳум"
         },
         {
@@ -164,10 +164,10 @@
           "timestamp": "29",
           "lineNumber": "7",
           "arabic": "وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ",
-          "русский": "Никто не в состоянии постигнуть и частицы из Его знания, кроме как по Его воле.",
           "english": "But no one can grasp any of His knowledge—except what He wills ˹to reveal˺.",
-          "transcription_latin": "Wa lā yuḥīṭūna bi-shay'in min 'ilmihi illā bi-mā shā'",
           "кыргыз": "Анын каалоосунан тыш эч ким Анын илиминин кыпындайын да түшүнө албайт.",
+          "русский": "Никто не в состоянии постигнуть и частицы из Его знания, кроме как по Его воле.",
+          "transcription_latin": "Wa lā yuḥīṭūna bi-shay'in min 'ilmihi illā bi-mā shā'",
           "transcription_cyrillic": "Ва лаа йухиитууна би-шай'им-мин 'илмиҳи иллаа бимаа шаа'"
         },
         {
@@ -176,10 +176,10 @@
           "timestamp": "36",
           "lineNumber": "8",
           "arabic": "وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ",
-          "русский": "Небеса и землю объемлет Его курсий, ",
           "english": "His Seat encompasses the heavens and the earth.",
-          "transcription_latin": "Wasi'a kursiyyuhu as-samāwāti wa al-arḍ",
           "кыргыз": "Анын Тактысы асмандарды жана жерди кучагына алат.",
+          "русский": "Небеса и землю объемлет Его курсий, ",
+          "transcription_latin": "Wasi'a kursiyyuhu as-samāwāti wa al-arḍ",
           "transcription_cyrillic": "Васи'a курсиййуҳус-самāваати вал-ард"
         },
         {
@@ -188,10 +188,10 @@
           "timestamp": "40",
           "lineNumber": "9",
           "arabic": "وَلَا يَئُودُهُ حِفْظُهُمَا ۚ",
-          "русский": "и не утруждает Его забота о них [обо всем том, что находится в нашей Вселенной и дальше].",
           "english": "And the preservation of both does not tire Him.",
-          "transcription_latin": "Wa lā ya'ūduhu ḥifẓuhumā",
           "кыргыз": "Аларды коргоо Ага оор келбейт",
+          "русский": "и не утруждает Его забота о них [обо всем том, что находится в нашей Вселенной и дальше].",
+          "transcription_latin": "Wa lā ya'ūduhu ḥifẓuhumā",
           "transcription_cyrillic": "Ва лаа йауудуҳу хифзуҳумаа"
         },
         {
@@ -200,10 +200,10 @@
           "timestamp": "43",
           "lineNumber": "10",
           "arabic": "وَهُوَ الْعَلِيُّ الْعَظِيمُ",
-          "русский": "Он — Всевышний [во всех смыслах выше всего и вся], Великий [величие Его не имеет границ]!",
           "english": "For He is the Most High, the Greatest.",
-          "transcription_latin": "Wa huwa al-'aliyyu al-'aẓīm",
           "кыргыз": "Ал – Эң Улуу, Эң бииик.",
+          "русский": "Он — Всевышний [во всех смыслах выше всего и вся], Великий [величие Его не имеет границ]!",
+          "transcription_latin": "Wa huwa al-'aliyyu al-'aẓīm",
           "transcription_cyrillic": "Ва ҳувал-'Алиййул-'Азийм"
         },
         {
@@ -212,10 +212,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
-          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
           "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!",
+          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
+          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
           "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим"
         },
         {
@@ -224,10 +224,10 @@
           "timestamp": "5",
           "lineNumber": "2",
           "arabic": "﴿١﴾ قُلْ هُوَ اللَّهُ أَحَدٌ",
-          "русский": "Скажи: «Он, Аллах (Бог, Господь), — Один [нет иных богов, божеств, помимо Него].",
           "english": "Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺;",
-          "transcription_latin": "Qul huwa allāhu aḥad",
           "кыргыз": "Айткын: Ал Алла, Жапжалгыз!",
+          "русский": "Скажи: «Он, Аллах (Бог, Господь), — Один [нет иных богов, божеств, помимо Него].",
+          "transcription_latin": "Qul huwa allāhu aḥad",
           "transcription_cyrillic": "Кул ҳуваллооҳу ахад"
         },
         {
@@ -236,10 +236,10 @@
           "timestamp": "8",
           "lineNumber": "3",
           "arabic": "﴿٢﴾ اللَّهُ الصَّمَدُ",
-          "русский": "Аллах (Бог, Господь) — Вечен [только Он есть Тот, в Котором все до бесконечности будут нуждаться].",
           "english": "Allah—the Sustainer ˹needed by all˺.",
-          "transcription_latin": "Allāhu aṣ-ṣamad",
           "кыргыз": "Алла эч нерсеге муктаж эмес!",
+          "русский": "Аллах (Бог, Господь) — Вечен [только Он есть Тот, в Котором все до бесконечности будут нуждаться].",
+          "transcription_latin": "Allāhu aṣ-ṣamad",
           "transcription_cyrillic": "Аллооҳус-сомад"
         },
         {
@@ -248,10 +248,10 @@
           "timestamp": "11",
           "lineNumber": "4",
           "arabic": "﴿٣﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ",
-          "русский": "Не родил и не был рожден.",
           "english": "He has never had offspring, nor was He born.",
-          "transcription_latin": "Lam yalid wa lam yūlad",
           "кыргыз": "Балалуу болгон эмес, туулган да эмес.",
+          "русский": "Не родил и не был рожден.",
+          "transcription_latin": "Lam yalid wa lam yūlad",
           "transcription_cyrillic": "Лам йалид ва лам йуулад"
         },
         {
@@ -260,10 +260,10 @@
           "timestamp": "14",
           "lineNumber": "5",
           "arabic": "﴿٤﴾ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
-          "русский": "И никто не может равняться с Ним [быть похожим на Него; нет ничего подобного Ему]».",
           "english": "And there is none comparable to Him.”",
-          "transcription_latin": "Wa lam yakun lahu kufuwan aḥad",
           "кыргыз": "Ага тең келчү да эч бирөө жок!",
+          "русский": "И никто не может равняться с Ним [быть похожим на Него; нет ничего подобного Ему]».",
+          "transcription_latin": "Wa lam yakun lahu kufuwan aḥad",
           "transcription_cyrillic": "Ва лам йакул-лаҳу куфуван ахад"
         },
         {
@@ -272,10 +272,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
-          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
           "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!",
+          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
+          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
           "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим"
         },
         {
@@ -284,10 +284,10 @@
           "timestamp": "4",
           "lineNumber": "2",
           "arabic": "﴿١﴾ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
-          "русский": "Скажи: «Прибегаю я к Господу зари (рассвета) [к Господу всего того, что Им сотворено],",
           "english": "Say, ˹O Prophet,˺ “I seek refuge in the Lord of the daybreak,",
-          "transcription_latin": "Qul a'ūdhu bi-rabbi al-falaq",
           "кыргыз": "Айткын: Сактай көр деп жалбарам, таң шооласынын Эгесине:",
+          "русский": "Скажи: «Прибегаю я к Господу зари (рассвета) [к Господу всего того, что Им сотворено],",
+          "transcription_latin": "Qul a'ūdhu bi-rabbi al-falaq",
           "transcription_cyrillic": "Кул а'уузу бироббил-фалақ"
         },
         {
@@ -296,10 +296,10 @@
           "timestamp": "8",
           "lineNumber": "3",
           "arabic": "﴿٢﴾ مِنْ شَرِّ مَا خَلَقَ",
-          "русский": "удаляясь от зла сотворенного Им [то есть зла, исходящего от Его творений].",
           "english": "from the evil of whatever He has created,",
-          "transcription_latin": "Min sharri mā khalaq",
           "кыргыз": "Өзү жараткан бүт макулуктардын жамандыгынан,",
+          "русский": "удаляясь от зла сотворенного Им [то есть зла, исходящего от Его творений].",
+          "transcription_latin": "Min sharri mā khalaq",
           "transcription_cyrillic": "Мин шарри маа холақ"
         },
         {
@@ -308,10 +308,10 @@
           "timestamp": "11",
           "lineNumber": "4",
           "arabic": "﴿٣﴾ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ",
-          "русский": " И [удаляюсь] от зла ночного мрака, когда [ночь] все покрывает темнотой.",
           "english": "and from the evil of the night when it grows dark,",
-          "transcription_latin": "Wa min sharri ghāsiqin idhā waqab",
           "кыргыз": "Каптап келген түн караңгысынын жамандыгынан,",
+          "русский": " И [удаляюсь] от зла ночного мрака, когда [ночь] все покрывает темнотой.",
+          "transcription_latin": "Wa min sharri ghāsiqin idhā waqab",
           "transcription_cyrillic": "Ва мин шарри ғоосиқин изаа вақоб"
         },
         {
@@ -320,10 +320,10 @@
           "timestamp": "16",
           "lineNumber": "5",
           "arabic": "﴿٤﴾ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ",
-          "русский": "И [удаляюсь] от зла [колдующих] дующих (плюющих) на узлы [проговаривающих при этом свои дьявольские заклинания].",
           "english": "and from the evil of those ˹witches casting spells by˺ blowing onto knots,",
-          "transcription_latin": "Wa min sharri an-naffāthāti fī al-'uqad",
           "кыргыз": "Түйүндөргө дем салган сыйкырчылардын жамандыгынан,",
+          "русский": "И [удаляюсь] от зла [колдующих] дующих (плюющих) на узлы [проговаривающих при этом свои дьявольские заклинания].",
+          "transcription_latin": "Wa min sharri an-naffāthāti fī al-'uqad",
           "transcription_cyrillic": "Ва мин шаррин-наффаасаати фил-'уқод"
         },
         {
@@ -332,10 +332,10 @@
           "timestamp": "21",
           "lineNumber": "6",
           "arabic": "﴿٥﴾ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-          "русский": "И [удаляюсь, с Твоей, Господи, помощью] от зла завистника, когда тот завидует [черной завистью, желая другому разрушения и уничтожения, лишения благ и благополучия]»",
           "english": "and from the evil of an envier when they envy.”",
-          "transcription_latin": "Wa min sharri ḥāsidin idhā ḥasad",
           "кыргыз": "Жана кызганган кездеги көрө албастын жамандыгынан!",
+          "русский": "И [удаляюсь, с Твоей, Господи, помощью] от зла завистника, когда тот завидует [черной завистью, желая другому разрушения и уничтожения, лишения благ и благополучия]»",
+          "transcription_latin": "Wa min sharri ḥāsidin idhā ḥasad",
           "transcription_cyrillic": "Ва мин шарри хаасидин изаа хасад"
         },
         {
@@ -344,10 +344,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
-          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
           "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!",
+          "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
+          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
           "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим"
         },
         {
@@ -356,10 +356,10 @@
           "timestamp": "4",
           "lineNumber": "2",
           "arabic": "﴿١﴾ قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
-          "русский": "Скажи: «Прибегаю я к Господу людей,",
           "english": "Say, ˹O Prophet,˺ “I seek refuge in the Lord of humankind,",
-          "transcription_latin": "Qul a'ūdhu bi-rabbi an-nās",
           "кыргыз": "Айткын: Сактай көр деп жалбарам, адамзаттын Эгесине,",
+          "русский": "Скажи: «Прибегаю я к Господу людей,",
+          "transcription_latin": "Qul a'ūdhu bi-rabbi an-nās",
           "transcription_cyrillic": "Кул а'уузу бироббин-наас"
         },
         {
@@ -368,10 +368,10 @@
           "timestamp": "9",
           "lineNumber": "3",
           "arabic": "﴿٢﴾ مَلِكِ النَّاسِ",
-          "русский": "Властителю их",
           "english": "the Master of humankind,",
-          "transcription_latin": "Maliki an-nās",
           "кыргыз": "Адамзаттын Падышасына,",
+          "русский": "Властителю их",
+          "transcription_latin": "Maliki an-nās",
           "transcription_cyrillic": "Маликин-наас"
         },
         {
@@ -380,10 +380,10 @@
           "timestamp": "11",
           "lineNumber": "4",
           "arabic": "﴿٣﴾ إِلَٰهِ النَّاسِ",
-          "русский": "[и] Богу их,",
           "english": "the God of humankind,",
-          "transcription_latin": "Ilāhi an-nās",
           "кыргыз": "Адамзаттын Кудайына,",
+          "русский": "[и] Богу их,",
+          "transcription_latin": "Ilāhi an-nās",
           "transcription_cyrillic": "Илааҳин-наас"
         },
         {
@@ -392,10 +392,10 @@
           "timestamp": "13",
           "lineNumber": "5",
           "arabic": "﴿٤﴾ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
-          "русский": "удаляясь от зла [Сатаны] нашептывающего и отступающего [при упоминании Творца].",
           "english": "from the evil of the lurking whisperer—",
-          "transcription_latin": "Min sharri al-waswāsi al-khannās",
           "кыргыз": "Тымызын азгырган шайтандын жа мандыгынан,",
+          "русский": "удаляясь от зла [Сатаны] нашептывающего и отступающего [при упоминании Творца].",
+          "transcription_latin": "Min sharri al-waswāsi al-khannās",
           "transcription_cyrillic": "Мин шаррил-васваасил-хоннаас"
         },
         {
@@ -404,10 +404,10 @@
           "timestamp": "18",
           "lineNumber": "6",
           "arabic": "﴿٥﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ",
-          "русский": "Он (Cатана) нашептывает [вносит смуту, смятение, страхи, сомнения] в сердца [души, умы] людей.",
           "english": "who whispers into the hearts of humankind—",
-          "transcription_latin": "Alladhī yuwaswisu fī ṣudūri an-nās",
           "кыргыз": "Адамдардын көңүлдөрүнө азгырык салган,",
+          "русский": "Он (Cатана) нашептывает [вносит смуту, смятение, страхи, сомнения] в сердца [души, умы] людей.",
+          "transcription_latin": "Alladhī yuwaswisu fī ṣudūri an-nās",
           "transcription_cyrillic": "Аллазии йувасвису фии судуурин-наас"
         },
         {
@@ -416,10 +416,10 @@
           "timestamp": "23",
           "lineNumber": "7",
           "arabic": "﴿٦﴾ مِنَ الْجِنَّةِ وَالنَّاسِ",
-          "русский": "[И прося помощи у Господа, удаляюсь от всего сатанинского, исходящего] от джиннов и людей».",
           "english": "from among jinn and humankind.”",
-          "transcription_latin": "Mina al-jinnati wa an-nās",
           "кыргыз": "Жиндерден да, адамдардан да чык-кан (шайтандардан)!",
+          "русский": "[И прося помощи у Господа, удаляюсь от всего сатанинского, исходящего] от джиннов и людей».",
+          "transcription_latin": "Mina al-jinnati wa an-nās",
           "transcription_cyrillic": "Минал-жиннати ван-наас"
         },
         {
@@ -428,10 +428,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ،",
-          "русский": "«Наступило утро, в котором вся власть принадлежит Господу. ",
           "english": "We have entered a new day. With it, all dominion is Allah's. Praise is to Allah",
-          "transcription_latin": "Aṣbaḥnā wa aṣbaḥa al-mulku lillāhi wa al-ḥamdu lillāh",
           "кыргыз": "Аллах Таалага таандык мүлк жана мактоолор менен таң атты.",
+          "русский": "«Наступило утро, в котором вся власть принадлежит Господу. ",
+          "transcription_latin": "Aṣbaḥnā wa aṣbaḥa al-mulku lillāhi wa al-ḥamdu lillāh",
           "transcription_cyrillic": "Асбахнаа ва асбахал-мулку лиллааҳи, вал-хамду лиллааҳи"
         },
         {
@@ -440,10 +440,10 @@
           "timestamp": "6",
           "lineNumber": "2",
           "arabic": "لاَ إِلَهَ إلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ،",
-          "русский": "Хвала Ему! Нет бога, кроме Него Одного",
           "english": "None has the right to be worshiped but Allah alone. He has no partner",
-          "transcription_latin": "Lā ilāha illā allāhu waḥdahu lā sharīka lah",
           "кыргыз": "Жалгыз Аллахтан башка ибадатка татыктуу эч ким жок, Анын шериги да жок.",
+          "русский": "Хвала Ему! Нет бога, кроме Него Одного",
+          "transcription_latin": "Lā ilāha illā allāhu waḥdahu lā sharīka lah",
           "transcription_cyrillic": "Лаа илааҳа иллаллооҳу ваҳдаҳу лаа шариика лаҳу"
         },
         {
@@ -452,10 +452,10 @@
           "timestamp": "12",
           "lineNumber": "3",
           "arabic": "لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ،",
-          "русский": "Власть принадлежит Ему. Хвала принадлежит Ему! Он все может совершить. ",
           "english": "To Allah belongs the dominion. To Him is the praise, and He is Able to do all things",
-          "transcription_latin": "Lahu al-mulku wa lahu al-ḥamdu wa huwa 'alā kulli shay'in qadīr",
           "кыргыз": "Мүлк Аныкы, мактоо Аныкы жана Ал бардык нерсеге кудуреттүү.",
+          "русский": "Власть принадлежит Ему. Хвала принадлежит Ему! Он все может совершить. ",
+          "transcription_latin": "Lahu al-mulku wa lahu al-ḥamdu wa huwa 'alā kulli shay'in qadīr",
           "transcription_cyrillic": "Лаҳул-мулку ва лаҳул-хамду ва ҳува 'алаа кулли шай'ин қодиир"
         },
         {
@@ -464,10 +464,10 @@
           "timestamp": "18",
           "lineNumber": "4",
           "arabic": "رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيرَ مَا بَعْدَهُ،",
-          "русский": "О Господь мой! Я прошу у Тебя благо, которое [заключено] в этом дне, и благо в [дне] завтрашнем.",
           "english": "My Lord, I ask You for the goodness of this day. I ask for the goodness of the days that come after it",
-          "transcription_latin": "Rabbi as'aluka khayra mā fī hādhā al-yawmi wa khayra mā ba'dah",
           "кыргыз": "Раббим, Сенден ушул күндүн жана андан кийинки күндөрдүн жакшылыгын тилеймин.",
+          "русский": "О Господь мой! Я прошу у Тебя благо, которое [заключено] в этом дне, и благо в [дне] завтрашнем.",
+          "transcription_latin": "Rabbi as'aluka khayra mā fī hādhā al-yawmi wa khayra mā ba'dah",
           "transcription_cyrillic": "Рабби ас'алука хойра маа фии ҳаазал-йавми ва хойра маа ба'даҳу"
         },
         {
@@ -476,10 +476,10 @@
           "timestamp": "24",
           "lineNumber": "5",
           "arabic": "وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ،",
-          "русский": "Я удаляюсь с Твоей помощью от зла, которое [заключено] в этом дне, и зла, которое может быть в [дне] завтрашнем.",
           "english": "I seek refuge in You from the evil of this day. I seek refuge from the evil of the days that come after it",
-          "transcription_latin": "Wa a'ūdhu bika min sharri mā fī hādhā al-yawmi wa sharri mā ba'dah",
           "кыргыз": "Ушул күндүн жана андан кийинки күндөрдүн жамандыгынан Сенин коргооңо баш калкалаймын.",
+          "русский": "Я удаляюсь с Твоей помощью от зла, которое [заключено] в этом дне, и зла, которое может быть в [дне] завтрашнем.",
+          "transcription_latin": "Wa a'ūdhu bika min sharri mā fī hādhā al-yawmi wa sharri mā ba'dah",
           "transcription_cyrillic": "Ва а'уузу бика мин шарри маа фии ҳаазал-йавми ва шарри маа ба'даҳу"
         },
         {
@@ -488,10 +488,10 @@
           "timestamp": "30",
           "lineNumber": "6",
           "arabic": "رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ،",
-          "русский": "О Господь мой! Я удаляюсь с Твоей помощью от лени и зла высокомерия.",
           "english": "My Lord, I seek refuge in You from laziness. I seek refuge from helpless old age",
-          "transcription_latin": "Rabbi a'ūdhu bika mina al-kasali wa sū'i al-kibar",
           "кыргыз": "Раббим, жалкоолуктан жана текеберликтен Сенин коргооңо баш калкалаймын.",
+          "русский": "О Господь мой! Я удаляюсь с Твоей помощью от лени и зла высокомерия.",
+          "transcription_latin": "Rabbi a'ūdhu bika mina al-kasali wa sū'i al-kibar",
           "transcription_cyrillic": "Рабби а'уузу бика минал-касали ва суу'ил-кибар"
         },
         {
@@ -500,10 +500,10 @@
           "timestamp": "34",
           "lineNumber": "7",
           "arabic": "رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي القَـبْرِ",
-          "русский": "О Господь! Я удаляюсь с Твоей помощью от мучений в Аду и мучений в могиле.",
           "english": "My Lord, I seek refuge in You from the punishment of Hell-fire. I seek refuge from the punishment of the grave",
-          "transcription_latin": "Rabbi a'ūdhu bika min 'adhābin fī an-nāri wa 'adhābin fī al-qabr",
           "кыргыз": "Раббим, Тозок отунун азабынан жана кабыр азабынан Сенин коргооңо баш калкалаймын.",
+          "русский": "О Господь! Я удаляюсь с Твоей помощью от мучений в Аду и мучений в могиле.",
+          "transcription_latin": "Rabbi a'ūdhu bika min 'adhābin fī an-nāri wa 'adhābin fī al-qabr",
           "transcription_cyrillic": "Рабби а'уузу бика мин 'азаабин фин-наари ва 'азаабин фил-қобр"
         },
         {
@@ -512,10 +512,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللّهُـمَّ بِكَ أَصْـبَحْنا وَبِكَ أَمْسَـينا",
-          "русский": "«О Аллах! С именем Твоим наступает для нас утро и наступает ночь. ",
           "english": "O Allah, by You we enter the morning and by You we enter the evening",
-          "transcription_latin": "Allāhumma bika aṣbaḥnā wa bika amsaynā",
           "кыргыз": "Оо, Аллахым! Сенин ысымың менен биз таңды тосуп алабыз жана Сенин ысымың менен биз кечти тосуп алабыз.",
+          "русский": "«О Аллах! С именем Твоим наступает для нас утро и наступает ночь. ",
+          "transcription_latin": "Allāhumma bika aṣbaḥnā wa bika amsaynā",
           "transcription_cyrillic": "Аллооҳумма бика асбахнаа ва бика амсайнаа"
         },
         {
@@ -524,10 +524,10 @@
           "timestamp": "5",
           "lineNumber": "2",
           "arabic": "وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ النُّـشُور",
-          "русский": " С Твоим именем мы оживаем и умираем. И к Тебе — возвращение.",
           "english": "By You we live and by You we die, and to You is the Final Return",
-          "transcription_latin": "Wa bika naḥyā wa bika namūtu wa ilayka an-nushūr",
           "кыргыз": "Сенин ысымың менен биз жашайбыз жана Сенин ысымың менен биз өлүп, Сага кайтып келебиз.",
+          "русский": " С Твоим именем мы оживаем и умираем. И к Тебе — возвращение.",
+          "transcription_latin": "Wa bika naḥyā wa bika namūtu wa ilayka an-nushūr",
           "transcription_cyrillic": "Ва бика нахйаа ва бика намууту ва илайкан-нушуур"
         },
         {
@@ -536,10 +536,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللّهـمَّ أَنْتَ رَبِّـي لا إلهَ إلاّ أَنْتَ،",
-          "русский": "«О Аллах, Ты — мой Господь! Нет бога, кроме Тебя.",
           "english": "O Allah, You are my Lord, there is none worthy of worship but You",
-          "transcription_latin": "Allāhumma anta rabbī lā ilāha illā ant",
           "кыргыз": "Оо, Аллахым, Сен менин Раббимсиң! Сенден башка ибадатка татыктуу эч ким жок.",
+          "русский": "«О Аллах, Ты — мой Господь! Нет бога, кроме Тебя.",
+          "transcription_latin": "Allāhumma anta rabbī lā ilāha illā ant",
           "transcription_cyrillic": "Аллооҳумма анта раббии лаа илааҳа иллаа анта"
         },
         {
@@ -548,10 +548,10 @@
           "timestamp": "7",
           "lineNumber": "2",
           "arabic": "خَلَقْتَنـي وَأَنا عَبْـدُكَ،",
-          "русский": "Ты сотворил меня, и я — Твой раб.",
           "english": "You created me and I am your slave",
-          "transcription_latin": "Khalaqtanī wa anā 'abduk",
           "кыргыз": "Сен мени жараттың жана мен Сенин кулуңмун.",
+          "русский": "Ты сотворил меня, и я — Твой раб.",
+          "transcription_latin": "Khalaqtanī wa anā 'abduk",
           "transcription_cyrillic": "Холақтании ва ана 'абдука"
         },
         {
@@ -560,10 +560,10 @@
           "timestamp": "9",
           "lineNumber": "3",
           "arabic": "وَأَنا عَلـى عَهْـدِكَ، وَوَعْـدِكَ ما اسْتَـطَعْـتُ،",
-          "русский": "Я постараюсь оправдать возложенную на меня ответственность, сдержать данное мною слово в меру своих сил и возможностей. ",
           "english": "I keep Your covenant and my pledge to You as far as I am able",
-          "transcription_latin": "Wa anā 'alā 'ahdika wa wa'dika mā istaṭa't",
           "кыргыз": "Мен мүмкүн болушунча Сага берген убадамды жана сөзүмдү аткарууга аракет кыламын.",
+          "русский": "Я постараюсь оправдать возложенную на меня ответственность, сдержать данное мною слово в меру своих сил и возможностей. ",
+          "transcription_latin": "Wa anā 'alā 'ahdika wa wa'dika mā istaṭa't",
           "transcription_cyrillic": "Ва ана 'алаа 'аҳдика ва ва'дика мастато'ту"
         },
         {
@@ -572,10 +572,10 @@
           "timestamp": "14",
           "lineNumber": "4",
           "arabic": "أَعـوذُ بِكَ مِنْ شَـرِّ ما صَنَـعْتُ،",
-          "русский": "Я прибегаю к Тебе, удаляясь от всего недоброго, совершенного мною.",
           "english": "I seek refuge in You from the evil of what I have done",
-          "transcription_latin": "A'ūdhu bika min sharri mā ṣana't",
           "кыргыз": "Мен кылган иштеримдин жамандыгынан Сенин коргооңо баш калкалаймын.",
+          "русский": "Я прибегаю к Тебе, удаляясь от всего недоброго, совершенного мною.",
+          "transcription_latin": "A'ūdhu bika min sharri mā ṣana't",
           "transcription_cyrillic": "А'узу бика мин шарри маа сона'ту"
         },
         {
@@ -584,10 +584,10 @@
           "timestamp": "18",
           "lineNumber": "5",
           "arabic": "أَبـوءُ لَـكَ بِنِعْـمَتِـكَ عَلَـيَّ،",
-          "русский": "Я признаю те блага, которыми Ты одарил меня, ",
           "english": "I admit to Your blessings upon me",
-          "transcription_latin": "Abū'u laka bi-ni'matika 'alayy",
           "кыргыз": "Мага берген нээматтарыңды моюнга аламын,",
+          "русский": "Я признаю те блага, которыми Ты одарил меня, ",
+          "transcription_latin": "Abū'u laka bi-ni'matika 'alayy",
           "transcription_cyrillic": "Абу'у лака бини'матика 'алаййа"
         },
         {
@@ -596,10 +596,10 @@
           "timestamp": "21",
           "lineNumber": "6",
           "arabic": "وَأَبـوءُ بِذَنْـبي فَاغْفـِرْ لي،",
-          "русский": "и признаю свой грех. Прости меня!",
           "english": "I admit to my misdeeds. Forgive me",
-          "transcription_latin": "Wa abū'u bi-dhanbī fa-ghfir lī",
           "кыргыз": "Күнөөлөрүмдү да моюнга аламын. Мени кечир!",
+          "русский": "и признаю свой грех. Прости меня!",
+          "transcription_latin": "Wa abū'u bi-dhanbī fa-ghfir lī",
           "transcription_cyrillic": "Ва абу'у бизанбии фағфирлии"
         },
         {
@@ -608,10 +608,10 @@
           "timestamp": "24",
           "lineNumber": "7",
           "arabic": "فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ",
-          "русский": "Поистине, никто не простит моих ошибок, кроме Тебя».",
           "english": "For there is none who may forgive sins but You",
-          "transcription_latin": "Fa-innahu lā yaghfiru adh-dhunūba illā ant",
           "кыргыз": "Анткени, Сенден башка эч ким күнөөлөрдү кечире албайт».",
+          "русский": "Поистине, никто не простит моих ошибок, кроме Тебя».",
+          "transcription_latin": "Fa-innahu lā yaghfiru adh-dhunūba illā ant",
           "transcription_cyrillic": "Фа-иннаҳу лаа йағфируз-зунууба иллаа анта"
         },
         {
@@ -620,10 +620,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أَُشْـهِدُكَ،",
-          "русский": "О Аллах, с наступлением нового утра я свидетельствую Тебе.",
           "english": "O Allah, I have entered a new morning and call upon You",
-          "transcription_latin": "Allāhumma innī aṣbaḥtu ushhiduk",
           "кыргыз": "Оо, Аллахым! Таң атты жана мен Сени күбөгө тартамын",
+          "русский": "О Аллах, с наступлением нового утра я свидетельствую Тебе.",
+          "transcription_latin": "Allāhumma innī aṣbaḥtu ushhiduk",
           "transcription_cyrillic": "Аллооҳумма иннии асбахту ушҳидука"
         },
         {
@@ -632,10 +632,10 @@
           "timestamp": "4",
           "lineNumber": "2",
           "arabic": "وَأُشْـهِدُ حَمَلَـةَ عَـرشِـكَ،",
-          "русский": "И возвещаю о носителях Твоего Престола.",
           "english": "I call upon the bearers of Your Throne",
-          "transcription_latin": "Wa ushhidu ḥamalata 'arshik",
           "кыргыз": "жана Тактыңды көтөрүп туруучуларды да,",
+          "русский": "И возвещаю о носителях Твоего Престола.",
+          "transcription_latin": "Wa ushhidu ḥamalata 'arshik",
           "transcription_cyrillic": "Ва ушҳиду ҳамалата 'аршика"
         },
         {
@@ -644,10 +644,10 @@
           "timestamp": "6",
           "lineNumber": "3",
           "arabic": "وَمَلائِكَتِكَ ، وَجَمـيعَ خَلْـقِكَ،",
-          "русский": "И о Твоих ангелах и всём творении Твоём.",
           "english": "Your angels and all creation",
-          "transcription_latin": "Wa malā'ikatika wa jamī'a khalqik",
           "кыргыз": "Периштелериңди жана жараткан нерселериңдин баарын,",
+          "русский": "И о Твоих ангелах и всём творении Твоём.",
+          "transcription_latin": "Wa malā'ikatika wa jamī'a khalqik",
           "transcription_cyrillic": "Ва малаайикатака, Ва жамии'а холқиқа"
         },
         {
@@ -656,10 +656,10 @@
           "timestamp": "10",
           "lineNumber": "4",
           "arabic": "أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْتَ وَحْـدَكَ لا شريكَ لَـكَ،",
-          "русский": "Воистину, Ты – Аллах, нет бога, кроме Тебя; Ты – Единственный, без сотоварищей.",
           "english": "To bear witness that surely You are Allah, there is none worthy of worship but You alone. You have no partners",
-          "transcription_latin": "Annaka anta allāhu lā ilāha illā anta waḥdaka lā sharīka lak",
           "кыргыз": "Чындыгында Сен – Аллахсың, Сенден башка ибадатка татыктуу эч ким жок. Сен жалгызсың жана Сенин шеригиң жок,",
+          "русский": "Воистину, Ты – Аллах, нет бога, кроме Тебя; Ты – Единственный, без сотоварищей.",
+          "transcription_latin": "Annaka anta allāhu lā ilāha illā anta waḥdaka lā sharīka lak",
           "transcription_cyrillic": "Аннака анталлооҳу лаа илааҳа иллаа анта ваҳдака лаа шариика лак"
         },
         {
@@ -668,10 +668,10 @@
           "timestamp": "18",
           "lineNumber": "5",
           "arabic": "وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـكَ",
-          "русский": "И свидетельствую, что Мухаммад – Твой раб и Посланник.",
           "english": "And that Muhammad is Your slave and Your Messenger",
-          "transcription_latin": "Wa anna muḥammadan 'abduka wa rasūluk",
           "кыргыз": "Жана Мухаммед (ага Алланын саламы жана салаваты болсун) Сенин кулуң жана элчиң экенине.",
+          "русский": "И свидетельствую, что Мухаммад – Твой раб и Посланник.",
+          "transcription_latin": "Wa anna muḥammadan 'abduka wa rasūluk",
           "transcription_cyrillic": "Ва анна Мухаммадан 'абдука ва расуулука"
         },
         {
@@ -680,10 +680,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللّهُـمَّ ما أَصْبَـَحَ بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِكَ",
-          "русский": "О Аллах, всё благо, дарованное мне с этим утром или любому из Твоего творения,",
           "english": "Allah, whatever blessing has been received by me in this morning or anyone of Your creation",
-          "transcription_latin": "Allāhumma mā aṣbaḥa bī min ni'matin aw bi-aḥadin min khalqik",
           "кыргыз": "Оо, Аллахым, бул таңда мага же Сенин жаратылышыңдан кимдир бирөөгө жеткен ар бир жакшылык,",
+          "русский": "О Аллах, всё благо, дарованное мне с этим утром или любому из Твоего творения,",
+          "transcription_latin": "Allāhumma mā aṣbaḥa bī min ni'matin aw bi-aḥadin min khalqik",
           "transcription_cyrillic": "Аллооҳумма маа асбаха бии мин ни'матин ау би-ахадин мин холқиқа"
         },
         {
@@ -692,10 +692,10 @@
           "timestamp": "8",
           "lineNumber": "2",
           "arabic": "فَمِـنْكَ وَحْـدَكَ لا شَرِيكَ لَـكَ",
-          "русский": "исходит лишь от Тебя, ибо у Тебя нет сотоварищей.",
           "english": "is from You alone, You have no partner",
-          "transcription_latin": "Fa-minka waḥdaka lā sharīka lak",
           "кыргыз": "Сенден гана, жалгыз Сенден, шеригиң жок.",
+          "русский": "исходит лишь от Тебя, ибо у Тебя нет сотоварищей.",
+          "transcription_latin": "Fa-minka waḥdaka lā sharīka lak",
           "transcription_cyrillic": "Фа минка ваҳдака лаа шариика лак"
         },
         {
@@ -704,10 +704,10 @@
           "timestamp": "11",
           "lineNumber": "3",
           "arabic": "فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـرُ",
-          "русский": "Тебе хвала и благодарность во веки.",
           "english": "All praise is for You and thanks is to You",
-          "transcription_latin": "Fa-laka al-ḥamdu wa laka ash-shukr",
           "кыргыз": "Бардык мактоолор Сага жана шүгүрлөр Сага гана таандык.",
+          "русский": "Тебе хвала и благодарность во веки.",
+          "transcription_latin": "Fa-laka al-ḥamdu wa laka ash-shukr",
           "transcription_cyrillic": "Фа лакал-хамду ва лакаш-шукру"
         },
         {
@@ -716,10 +716,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللَّهُمَّ عَافِنِي فِي بَدَنِي،",
-          "русский": " О Аллах! Дай здравие моему телу.",
           "english": "O Allah, make me healthy in my body",
-          "transcription_latin": "Allāhumma 'āfinī fī badanī",
           "кыргыз": "Оо, Аллахым! Денемди сак-саламат кыл.",
+          "русский": " О Аллах! Дай здравие моему телу.",
+          "transcription_latin": "Allāhumma 'āfinī fī badanī",
           "transcription_cyrillic": "Аллооҳумма 'аафинии фии бадании"
         },
         {
@@ -728,10 +728,10 @@
           "timestamp": "4",
           "lineNumber": "2",
           "arabic": "اللَّهُمَّ عَافِنِي فِي سَمْعِي،",
-          "русский": " О Аллах! Дай здравие моему слуху.",
           "english": "O Allah, preserve for me my hearing",
-          "transcription_latin": "Allāhumma 'āfinī fī sam'ī",
           "кыргыз": "Оо, Аллахым! Кулагымды сак-саламат кыл.",
+          "русский": " О Аллах! Дай здравие моему слуху.",
+          "transcription_latin": "Allāhumma 'āfinī fī sam'ī",
           "transcription_cyrillic": "Аллооҳумма 'аафинии фии сам'ии"
         },
         {
@@ -740,10 +740,10 @@
           "timestamp": "7",
           "lineNumber": "3",
           "arabic": "اللَّهُمَّ عَافِنِي فِي بَصَرِي،",
-          "русский": "О Аллах! Дай здравие моему зрению.",
           "english": "O Allah, preserve for me my sight",
-          "transcription_latin": "Allāhumma 'āfinī fī baṣarī",
           "кыргыз": "Оо, Аллахым! Көзүмдү сак-саламат кыл.",
+          "русский": "О Аллах! Дай здравие моему зрению.",
+          "transcription_latin": "Allāhumma 'āfinī fī baṣarī",
           "transcription_cyrillic": "Аллооҳумма 'аафинии фии басории"
         },
         {
@@ -752,10 +752,10 @@
           "timestamp": "10",
           "lineNumber": "4",
           "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
-          "русский": "Нет бога, кроме Тебя Одного.",
           "english": "There is none worthy of worship but You",
-          "transcription_latin": "Lā ilāha illā ant",
           "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок.",
+          "русский": "Нет бога, кроме Тебя Одного.",
+          "transcription_latin": "Lā ilāha illā ant",
           "transcription_cyrillic": "Лаа илааҳа иллаа анта"
         },
         {
@@ -764,10 +764,10 @@
           "timestamp": "13",
           "lineNumber": "5",
           "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ،",
-          "русский": "«О Аллах! Я удаляюсь с Твоей помощью от неверия и бедности.",
           "english": "O Allah, I seek refuge in You from disbelief and poverty",
-          "transcription_latin": "Allāhumma innī a'ūdhu bika mina al-kufri wa al-faqr",
           "кыргыз": "Оо, Аллахым! Мен Сага каапырчылыктан жана жакырчылыктан сактануу үчүн кайрыламын.",
+          "русский": "«О Аллах! Я удаляюсь с Твоей помощью от неверия и бедности.",
+          "transcription_latin": "Allāhumma innī a'ūdhu bika mina al-kufri wa al-faqr",
           "transcription_cyrillic": "Аллоҳумма инни а'уузу бика минал-куфри вал-фақри"
         },
         {
@@ -776,10 +776,10 @@
           "timestamp": "17",
           "lineNumber": "7",
           "arabic": "وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ،",
-          "русский": "Я удаляюсь с Твоей помощью от мучений в могиле.",
           "english": "and I seek refuge in You from the punishment of the grave",
-          "transcription_latin": "Wa a'ūdhu bika min 'adhābi al-qabr",
           "кыргыз": "Жана мен Сага кабыр азабынан сактануу үчүн кайрыламын.",
+          "русский": "Я удаляюсь с Твоей помощью от мучений в могиле.",
+          "transcription_latin": "Wa a'ūdhu bika min 'adhābi al-qabr",
           "transcription_cyrillic": "Ва а'уузу бика мин 'азабил-қобр"
         },
         {
@@ -788,10 +788,10 @@
           "timestamp": "20",
           "lineNumber": "8",
           "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
-          "русский": "Нет бога, кроме Тебя Одного».",
           "english": "There is none worthy of worship but You",
-          "transcription_latin": "Lā ilāha illā ant",
           "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок.",
+          "русский": "Нет бога, кроме Тебя Одного».",
+          "transcription_latin": "Lā ilāha illā ant",
           "transcription_cyrillic": "Лаа илааҳа иллаа анта"
         },
         {
@@ -800,10 +800,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم",
-          "русский": "«Мне достаточно Всевышнего. Нет бога, кроме Него. На Него я положился, и Он — Господь великого Трона»",
           "english": "Allah is sufficient for me. There is none worthy of worship but Him. I have placed my trust in Him. He is Lord of the Majestic Throne",
-          "transcription_latin": "Ḥasbiya allāhu lā ilāha illā huwa 'alayhi tawakkaltu wa huwa rabbu al-'arshi al-'aẓīm",
           "кыргыз": "Аллах мага жетиштүү. Андан башка сыйынууга татыктуу Кудай жок. Мен Ага таяндым жана Ал — улуу Тактынын Эгеси.",
+          "русский": "«Мне достаточно Всевышнего. Нет бога, кроме Него. На Него я положился, и Он — Господь великого Трона»",
+          "transcription_latin": "Ḥasbiya allāhu lā ilāha illā huwa 'alayhi tawakkaltu wa huwa rabbu al-'arshi al-'aẓīm",
           "transcription_cyrillic": "Ҳасбииаллоҳу лаа илааҳа иллаа ҳува, 'алайҳи таваккалту, Ва ҳува раббул-'аршил-'азийм"
         },
         {
@@ -812,10 +812,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة،",
-          "русский": "О Аллах, даруй мне прощение и благодать как в этом мире, так и в вечности.",
           "english": "O Allah, I seek Your forgiveness and Your protection in this world and the next",
-          "transcription_latin": "Allāhumma innī as'aluka al-'afwa wa al-'āfiyata fī ad-dunyā wa al-ākhirah",
           "кыргыз": "Оо, Аллахым! Мен Сенден дүйнөдө да, акыретте да кечирим жана аманчылык сураймын.",
+          "русский": "О Аллах, даруй мне прощение и благодать как в этом мире, так и в вечности.",
+          "transcription_latin": "Allāhumma innī as'aluka al-'afwa wa al-'āfiyata fī ad-dunyā wa al-ākhirah",
           "transcription_cyrillic": "Аллоҳумма инни ас'алукал- 'афва вал-'аа фииата фид-дунйаа вал-аахира"
         },
         {
@@ -824,10 +824,10 @@
           "timestamp": "8",
           "lineNumber": "2",
           "arabic": "اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي،",
-          "русский": "О Аллах, прошу Тебя даровать мне прощение и благодать в моей вере, в моих мирских делах, семье и имуществе.",
           "english": "O Allah, I seek Your forgiveness and Your protection in my religion, in my worldly affairs, in my family, and in my wealth",
-          "transcription_latin": "Allāhumma innī as'aluka al-'afwa wa al-'āfiyata fī dīnī wa dunyāya wa ahlī wa mālī",
           "кыргыз": "Оо, Аллахым! Мен Сенден динимде, дүйнөмдө, үй-бүлөмдө жана мал-мүлкүмдө кечирим жана аманчылык сураймын.",
+          "русский": "О Аллах, прошу Тебя даровать мне прощение и благодать в моей вере, в моих мирских делах, семье и имуществе.",
+          "transcription_latin": "Allāhumma innī as'aluka al-'afwa wa al-'āfiyata fī dīnī wa dunyāya wa ahlī wa mālī",
           "transcription_cyrillic": "Аллоҳумма инни ас'алукал- 'афва вал-'аа фииата  фии диний ва дунйаайа ва аҳлий ва маалий"
         },
         {
@@ -836,10 +836,10 @@
           "timestamp": "14",
           "lineNumber": "3",
           "arabic": "اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي،",
-          "русский": "О Аллах, сокрой мои недостатки и упрости мои тревоги.",
           "english": "O Allah, conceal my secrets and preserve me from anguish",
-          "transcription_latin": "Allāhumma ustur 'awrātī wa āmin raw'ātī",
           "кыргыз": "Оо, Аллахым! Уяттуу жерлеримди жашырып, коркунучтарымдан аман кыл.",
+          "русский": "О Аллах, сокрой мои недостатки и упрости мои тревоги.",
+          "transcription_latin": "Allāhumma ustur 'awrātī wa āmin raw'ātī",
           "transcription_cyrillic": "Аллоҳумма стур 'авраатий ва аамин равъаатий"
         },
         {
@@ -848,10 +848,10 @@
           "timestamp": "19",
           "lineNumber": "4",
           "arabic": "اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي،",
-          "русский": "О Аллах, храни меня от того, что передо мной и позади, от моей правой и левой стороны.",
           "english": "O Allah, guard me from what is in front of me and behind me, from my left and from my right",
-          "transcription_latin": "Allāhumma iḥfaẓnī min bayni yadayya wa min khalfī wa 'an yamīnī wa 'an shimālī",
           "кыргыз": "Оо, Аллахым! Мени алдымдан, артымдан, оң жагымдан, сол жагымдан сакта.",
+          "русский": "О Аллах, храни меня от того, что передо мной и позади, от моей правой и левой стороны.",
+          "transcription_latin": "Allāhumma iḥfaẓnī min bayni yadayya wa min khalfī wa 'an yamīnī wa 'an shimālī",
           "transcription_cyrillic": "Аллоҳумма хфазний мин байна йадаййа ва мин хол фии ва 'ан йамийний ва 'ан шималий"
         },
         {
@@ -860,10 +860,10 @@
           "timestamp": "27",
           "lineNumber": "5",
           "arabic": "وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي",
-          "русский": "И от того, что надо мной, И прибегаю к Твоей Великолепной мощи, дабы не быть внезапно поверженным снизу.\n",
           "english": "and from above me. I seek refuge in Your Greatness from being struck down from beneath me",
-          "transcription_latin": "Wa min fawqī wa a'ūdhu bi-'aẓamatika an ughtāla min taḥtī",
           "кыргыз": "Жана үстүмөн да, жана Сенин Улуулугуң менен астыман жер жутуп кетүүдөн сактанамын.",
+          "русский": "И от того, что надо мной, И прибегаю к Твоей Великолепной мощи, дабы не быть внезапно поверженным снизу.\n",
+          "transcription_latin": "Wa min fawqī wa a'ūdhu bi-'aẓamatika an ughtāla min taḥtī",
           "transcription_cyrillic": "Ва мин фавқий, ва а'уузу би 'азоматика ан уғтаала мин тахтий"
         },
         {
@@ -872,10 +872,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ،",
-          "русский": "О Аллах, Знающий сокрытое и явное, Творец небес и земли, Господь всего и Владыка его.",
           "english": "O Allah, Knower of the unseen and the evident, Maker of the heavens and the earth, Lord of everything and its Possessor",
-          "transcription_latin": "Allāhumma 'ālima al-ghaybi wa ash-shahādati fāṭira as-samāwāti wa al-arḍi rabba kulli shay'in wa malīkah",
           "кыргыз": "Оо, Аллахым! Кайыпты жана көрүнгөндү Билүүчү, асмандарды жана жерди Жаратуучу, бардык нерсенин Раббиси жана Эгеси!",
+          "русский": "О Аллах, Знающий сокрытое и явное, Творец небес и земли, Господь всего и Владыка его.",
+          "transcription_latin": "Allāhumma 'ālima al-ghaybi wa ash-shahādati fāṭira as-samāwāti wa al-arḍi rabba kulli shay'in wa malīkah",
           "transcription_cyrillic": "Аллоҳумма 'аалимал-ғойби ваш-шаҳаада, фаатирас-самааваати вал-ард, рабба кулли шай'ин ва малийкаҳ"
         },
         {
@@ -884,10 +884,10 @@
           "timestamp": "10",
           "lineNumber": "2",
           "arabic": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ،",
-          "русский": "Свидетельствую, что нет божества, кроме Тебя.",
           "english": "I bear witness that there is none worthy of worship but You",
-          "transcription_latin": "Ashhadu an lā ilāha illā ant",
           "кыргыз": "Мен күбөлүк беремин, Сенден башка ибадатка татыктуу эч ким жок.",
+          "русский": "Свидетельствую, что нет божества, кроме Тебя.",
+          "transcription_latin": "Ashhadu an lā ilāha illā ant",
           "transcription_cyrillic": "Ашҳаду ан лаа илааҳа иллаа анта"
         },
         {
@@ -896,10 +896,10 @@
           "timestamp": "14",
           "lineNumber": "3",
           "arabic": "أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ،",
-          "русский": "Прибегаю к Тебе от зла души моей и от зла шайтана и многобожия его.",
           "english": "I seek refuge in You from the evil of my soul, and from the evil of Satan and his helpers",
-          "transcription_latin": "A'ūdhu bika min sharri nafsī wa min sharri ash-shayṭāni wa shirkih",
           "кыргыз": "Мен Сага өзүмдүн жамандыгыман, шайтандын жамандыгынан жана анын шериктеринен сактануу үчүн кайрыламын.",
+          "русский": "Прибегаю к Тебе от зла души моей и от зла шайтана и многобожия его.",
+          "transcription_latin": "A'ūdhu bika min sharri nafsī wa min sharri ash-shayṭāni wa shirkih",
           "transcription_cyrillic": "А'узу бика мин шарри нафсий ва мин шарриш-шайтони ва ширкиҳи"
         },
         {
@@ -908,10 +908,10 @@
           "timestamp": "19",
           "lineNumber": "4",
           "arabic": "وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",
-          "русский": "и от нанесения вреда душе своей или причинения зла мусульманину.",
           "english": "(I seek refuge in You) from bringing evil upon my soul and from harming any Muslim",
-          "transcription_latin": "Wa an aqtarifa 'alā nafsī sū'an aw ajurrahu ilā muslim",
           "кыргыз": "Жана өзүмө жамандык кылуудан же аны мусулманга жеткирүүдөн (сактанамын).",
+          "русский": "и от нанесения вреда душе своей или причинения зла мусульманину.",
+          "transcription_latin": "Wa an aqtarifa 'alā nafsī sū'an aw ajurrahu ilā muslim",
           "transcription_cyrillic": "Ва ан ақтарифа 'алаа нафсий сууан ав ажурраҳу илаа муслим"
         },
         {
@@ -920,10 +920,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "بِسۡمِ ٱللَّهِ ٱلَّذِي لَا يَضُرُّ مَعَ ٱسۡمِهِۦ شَيۡءٞ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ،",
-          "русский": "С именем Аллаха, с именем Которого ничто не причинит вреда ни на земле, ни на небесах.",
           "english": "In the Name of Allah, Who with His Name nothing can cause harm in the earth nor in the heavens,",
-          "transcription_latin": "Bismi-llāhi alladhī lā yaḍurru ma'a ismihi shay'un fī al-arḍi wa lā fī as-samā'i",
           "кыргыз": "Ысымы менен жерде да, асманда да эч нерсе зыян келтире албаган Аллахтын ысымы менен (баштаймын).",
+          "русский": "С именем Аллаха, с именем Которого ничто не причинит вреда ни на земле, ни на небесах.",
+          "transcription_latin": "Bismi-llāhi alladhī lā yaḍurru ma'a ismihi shay'un fī al-arḍi wa lā fī as-samā'i",
           "transcription_cyrillic": "Бисмиллааҳил-лазий лаа йадурру ма'асмиҳи шай'ун фил-арди ва лаа фис-самаа'"
         },
         {
@@ -932,10 +932,10 @@
           "timestamp": "7",
           "lineNumber": "2",
           "arabic": " وَهـوَ السّمـيعُ العَلـيم",
-          "русский": "Он — Всеслышащий, Всезнающий»",
           "english": "and He is the All-Hearing, the All-Knowing",
-          "transcription_latin": "Wa huwa as-samī'u al-'alīm",
           "кыргыз": "Ал – Угуучу, Билүүчү.",
+          "русский": "Он — Всеслышащий, Всезнающий»",
+          "transcription_latin": "Wa huwa as-samī'u al-'alīm",
           "transcription_cyrillic": "Ва ҳувас-самий'ул-'алийм"
         },
         {
@@ -944,10 +944,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "رَضِيتُ بِاللَّهِ رَبًّا وَبِالإِسْلَامِ دِينًا وَبِمُحَمَّدٍ ﷺ وَنَبِيًّا.",
-          "русский": "Доволен я Аллахом как Господом, Исламом – как религией и Мухаммадом – как пророком.",
           "english": "I am pleased with Allah as my Lord, with Islam as my religion, and with Muhammad - Peace and Blessings of Allah be upon him – as my Prophet",
-          "transcription_latin": "Raḍītu billāhi rabban wa bi-al-islāmi dīnan wa bi-muḥammadin ṣallā allāhu 'alayhi wa sallama nabiyyan",
           "кыргыз": "Раббим катары Аллахка, диним катары Исламга жана пайгамбарым катары Мухаммед(ага Алланын саламы жана салаваты болсун) ыраазымын.",
+          "русский": "Доволен я Аллахом как Господом, Исламом – как религией и Мухаммадом – как пророком.",
+          "transcription_latin": "Raḍītu billāhi rabban wa bi-al-islāmi dīnan wa bi-muḥammadin ṣallā allāhu 'alayhi wa sallama nabiyyan",
           "transcription_cyrillic": "Родийту биллааҳи раббан ва бил-ислаами диинан ва би Мухаммадин соллаллоҳу 'алайҳи ва саллам набиийан"
         },
         {
@@ -956,10 +956,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ،",
-          "русский": "Пречист Аллах и хвала Ему, числом всего Его творения.",
           "english": "Glory is to Allah and praise is to Him, by the multitude of His creation",
-          "transcription_latin": "Subḥāna allāhi wa bi-ḥamdihi 'adada khalqih",
           "кыргыз": "Аллахка мактоолор жана даңктар болсун, жараткан нерселеринин чексиз санындай,",
+          "русский": "Пречист Аллах и хвала Ему, числом всего Его творения.",
+          "transcription_latin": "Subḥāna allāhi wa bi-ḥamdihi 'adada khalqih",
           "transcription_cyrillic": "Субхааналлооҳи ва бихамдиҳи 'адада холқиҳи"
         },
         {
@@ -968,10 +968,10 @@
           "timestamp": "5",
           "lineNumber": "2",
           "arabic": "وَرِضَا نَفْسِهِ،",
-          "русский": "И довольством Его души.",
           "english": "by His Pleasure",
-          "transcription_latin": "Wa riḍā nafsih",
           "кыргыз": "Өзүнүн ыраазылыгындай,",
+          "русский": "И довольством Его души.",
+          "transcription_latin": "Wa riḍā nafsih",
           "transcription_cyrillic": "Ва ридоо нафсиҳи"
         },
         {
@@ -980,10 +980,10 @@
           "timestamp": "7",
           "lineNumber": "3",
           "arabic": "وَزِنَةَ عَرْشِهِ،",
-          "русский": "И весом Трона Его.",
           "english": "by the weight of His Throne",
-          "transcription_latin": "Wa zinata 'arshih",
           "кыргыз": "Тактыңдын салмагындай,",
+          "русский": "И весом Трона Его.",
+          "transcription_latin": "Wa zinata 'arshih",
           "transcription_cyrillic": "Ва зината 'аршиҳи"
         },
         {
@@ -992,10 +992,10 @@
           "timestamp": "8",
           "lineNumber": "4",
           "arabic": "وَمِدَادَ كَلِمَاتِهِ",
-          "русский": "И количеством слов Его.",
           "english": "and by the extent of His Words",
-          "transcription_latin": "Wa midāda kalimātih",
           "кыргыз": "Cөздөрүнүн түгөнгүс сыясындай",
+          "русский": "И количеством слов Его.",
+          "transcription_latin": "Wa midāda kalimātih",
           "transcription_cyrillic": "Ва мидаада калимаатиҳи"
         },
         {
@@ -1004,10 +1004,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "سُبْحَانَ ٱللَّهِ وَبِحَمْدِهِ",
-          "русский": "Пречист Аллах и хвала Ему.",
           "english": "Glory is to Allah and praise is to Him.",
-          "transcription_latin": "Subḥāna allāhi wa bi-ḥamdihi",
           "кыргыз": "Аллахка мактоолор жана даңктар болсун.",
+          "русский": "Пречист Аллах и хвала Ему.",
+          "transcription_latin": "Subḥāna allāhi wa bi-ḥamdihi",
           "transcription_cyrillic": "Субхааналлооҳи ва бихамдиҳи"
         },
         {
@@ -1016,10 +1016,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ،",
-          "русский": "О Живой, о Вечносущий, милостью Твоей я взываю о помощи.",
           "english": "O Ever-Living One, O Eternal One, by Your mercy I call on You",
-          "transcription_latin": "Yā ḥayyu yā qayyūmu bi-raḥmatika astaghīth",
           "кыргыз": "Оо, Түбөлүк Тирүү, Оо, Түбөлүк Туруучу, Сенин мээримиң менен жардам сураймын.",
+          "русский": "О Живой, о Вечносущий, милостью Твоей я взываю о помощи.",
+          "transcription_latin": "Yā ḥayyu yā qayyūmu bi-raḥmatika astaghīth",
           "transcription_cyrillic": "Йаа Ҳаййу, Йаа Қоййуму, би рохматика астағийсу"
         },
         {
@@ -1028,10 +1028,10 @@
           "timestamp": "6",
           "lineNumber": "2",
           "arabic": "أَصْلِحْ لِي شَأْنِي كُلَّهُ،",
-          "русский": "Исправь для меня все дела мои.",
           "english": "to set right all my affairs",
-          "transcription_latin": "Aṣliḥ lī sha'nī kullah",
           "кыргыз": "Менин бардык иштеримди оңдо.",
+          "русский": "Исправь для меня все дела мои.",
+          "transcription_latin": "Aṣliḥ lī sha'nī kullah",
           "transcription_cyrillic": "Аслих лий ша'ний куллаҳу"
         },
         {
@@ -1040,10 +1040,10 @@
           "timestamp": "8",
           "lineNumber": "3",
           "arabic": "وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ",
-          "русский": "И не вверяй меня душе моей ни на мгновение ока.",
           "english": "Do not place me in charge of my soul even for the blinking of an eye",
-          "transcription_latin": "Wa lā takilnī ilā nafsī ṭarfata 'ayn",
           "кыргыз": "Жана мени көз ирмемге да өзүмө таштаба.",
+          "русский": "И не вверяй меня душе моей ни на мгновение ока.",
+          "transcription_latin": "Wa lā takilnī ilā nafsī ṭarfata 'ayn",
           "transcription_cyrillic": "Ва лаа такилний илаа нафсий торфата 'айн"
         },
         {
@@ -1052,10 +1052,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "لاَ إِلَهَ إِلَّا اللَّهُ، وَحْدَهُ لاَ شَرِيكَ لَهُ،",
-          "русский": "Нет божества, кроме Аллаха, Единого, нет у Него сотоварища.",
           "english": "None has the right to be worshiped but Allah alone, Who has no partner",
-          "transcription_latin": "Lā ilāha illā allāhu waḥdahu lā sharīka lah",
           "кыргыз": "Аллахтан башка ибадатка татыктуу эч ким жок, Ал жалгыз, шериги жок.",
+          "русский": "Нет божества, кроме Аллаха, Единого, нет у Него сотоварища.",
+          "transcription_latin": "Lā ilāha illā allāhu waḥdahu lā sharīka lah",
           "transcription_cyrillic": "Лаа илааҳа иллаллооҳу вахдаҳу лаа шариика лаҳ"
         },
         {
@@ -1064,10 +1064,10 @@
           "timestamp": "6",
           "lineNumber": "2",
           "arabic": " لَهُ المُلْكُ وَلَهُ الحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
-          "русский": "Ему принадлежит власть, и Ему хвала, и Он над всякой вещью мощен.",
           "english": "His is the dominion and His is the praise and He is Able to do all things",
-          "transcription_latin": "Lahu al-mulku wa lahu al-ḥamdu wa huwa 'alā kulli shay'in qadīr",
           "кыргыз": "Мүлк Аныкы жана мактоо Аныкы, жана Ал бардык нерсеге кудуреттүү.",
+          "русский": "Ему принадлежит власть, и Ему хвала, и Он над всякой вещью мощен.",
+          "transcription_latin": "Lahu al-mulku wa lahu al-ḥamdu wa huwa 'alā kulli shay'in qadīr",
           "transcription_cyrillic": "Лаҳул-мулку ва лаҳул-хамду ва ҳува 'алаа кулли шай'ин қодиир"
         },
         {
@@ -1076,10 +1076,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ،",
-          "русский": "Наступило для нас утро, и утро власти – Аллаху, Господу миров.",
           "english": "We have entered a new day and with it all the dominion which belongs to Allah, Lord of all that exists",
-          "transcription_latin": "Aṣbaḥnā wa aṣbaḥa al-mulku lillāhi rabbi al-'ālamīn",
           "кыргыз": "Биз таң аттырдык жана бүт ааламдардын Раббиси болгон Аллахка таандык мүлк менен таң атты.",
+          "русский": "Наступило для нас утро, и утро власти – Аллаху, Господу миров.",
+          "transcription_latin": "Aṣbaḥnā wa aṣbaḥa al-mulku lillāhi rabbi al-'ālamīn",
           "transcription_cyrillic": "Асбахнаа ва асбахал-мулку лиллааҳи раббил-'ааламийн"
         },
         {
@@ -1088,10 +1088,10 @@
           "timestamp": "6",
           "lineNumber": "2",
           "arabic": " اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ،",
-          "русский": "О Аллах, поистине, я прошу у Тебя блага этого дня.",
           "english": "O Allah, I ask You for the goodness of this day",
-          "transcription_latin": "Allāhumma innī as'aluka khayra hādhā al-yawm",
           "кыргыз": "Оо, Аллахым! Мен Сенден бул күндүн жакшылыгын сураймын.",
+          "русский": "О Аллах, поистине, я прошу у Тебя блага этого дня.",
+          "transcription_latin": "Allāhumma innī as'aluka khayra hādhā al-yawm",
           "transcription_cyrillic": "Аллооҳумма иннии ас'алука хойра ҳаазал-йавм"
         },
         {
@@ -1100,10 +1100,10 @@
           "timestamp": "10",
           "lineNumber": "3",
           "arabic": " فَتْحَهُ، وَنَصْرَهُ، وَنُورَهُ وَبَرَكَتَهُ، وَهُدَاهُ،",
-          "русский": "Победы его, и помощи его, и света его, и благодати его, и руководства его.",
           "english": "its victory, its help, its light, its blessings, and its guidance",
-          "transcription_latin": "Fatḥahu wa naṣrahu wa nūrahu wa barakatahu wa hudāh",
           "кыргыз": "Жеңишин, жардамын, нурун, берекесин жана туура жолун.",
+          "русский": "Победы его, и помощи его, и света его, и благодати его, и руководства его.",
+          "transcription_latin": "Fatḥahu wa naṣrahu wa nūrahu wa barakatahu wa hudāh",
           "transcription_cyrillic": "Фатхаҳу, ва насроҳу, ва нуураҳу ва баракатаҳу, ва ҳудааҳу"
         },
         {
@@ -1112,10 +1112,10 @@
           "timestamp": "16",
           "lineNumber": "4",
           "arabic": "وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهِ وَشَرِّ مَا بَعْدَهُ",
-          "русский": "И прибегаю к Тебе от зла того, что в нем, и зла того, что после него.",
           "english": "I seek refuge in You from the evil that is in it, and from the evil that follows it.",
-          "transcription_latin": "Wa a'ūdhu bika min sharri mā fīhi wa sharri mā ba'dah",
           "кыргыз": "Жана мен Сенден андагы жамандыктан жана андан кийинки жамандыктан сактанууну сураймын.",
+          "русский": "И прибегаю к Тебе от зла того, что в нем, и зла того, что после него.",
+          "transcription_latin": "Wa a'ūdhu bika min sharri mā fīhi wa sharri mā ba'dah",
           "transcription_cyrillic": "Ва а'уузу бика мин шарри маа  фииҳи ва шарри маа ба'даҳу"
         },
         {
@@ -1124,10 +1124,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْماً نَافِعاً،",
-          "русский": "«О Аллах! Я прошу у Тебя полезного знания.",
           "english": "O Allah, I ask You for knowledge that is of benefit",
-          "transcription_latin": "Allāhumma innī as'aluka 'ilman nāfi'an",
           "кыргыз": "Оо, Аллахым! Мен Сенден пайдалуу илим сураймын.",
+          "русский": "«О Аллах! Я прошу у Тебя полезного знания.",
+          "transcription_latin": "Allāhumma innī as'aluka 'ilman nāfi'an",
           "transcription_cyrillic": "Аллооҳумма иннии ас'алука 'илман наафи'ан"
         },
         {
@@ -1136,10 +1136,10 @@
           "timestamp": "5",
           "lineNumber": "2",
           "arabic": "وَرِزْقاً طَيِّباً،",
-          "русский": " И благого рызка (дозволенных средств к проживанию).",
           "english": "a good provision",
-          "transcription_latin": "Wa rizqan ṭayyiban",
           "кыргыз": "Жана адал ырыскы.",
+          "русский": " И благого рызка (дозволенных средств к проживанию).",
+          "transcription_latin": "Wa rizqan ṭayyiban",
           "transcription_cyrillic": "Ва ризқон тоййибан"
         },
         {
@@ -1148,10 +1148,10 @@
           "timestamp": "7",
           "lineNumber": "3",
           "arabic": "وَعَمَلاً مُتَقَبَّلاً",
-          "русский": "И таких дел, которые будут приняты (Тобой)»",
           "english": "and deeds that will be accepted",
-          "transcription_latin": "Wa 'amalan mutaqabbalan",
           "кыргыз": "Жана кабыл болуучу амалдарды.",
+          "русский": "И таких дел, которые будут приняты (Тобой)»",
+          "transcription_latin": "Wa 'amalan mutaqabbalan",
           "transcription_cyrillic": "Ва 'амалан мутақоббалан"
         },
         {
@@ -1160,10 +1160,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "ٱللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ",
-          "русский": "О Аллах, благослови и приветствуй пророка нашего Мухаммада.",
           "english": "O Allah, we ask for Your peace and blessings upon our Prophet Muhammad",
-          "transcription_latin": "Allāhumma ṣalli wa sallim 'alā nabiyyinā muḥammad",
           "кыргыз": "Аллахым, Пайгамбарыбыз Мухаммедге салам-салаваттарды жолдо.",
+          "русский": "О Аллах, благослови и приветствуй пророка нашего Мухаммада.",
+          "transcription_latin": "Allāhumma ṣalli wa sallim 'alā nabiyyinā muḥammad",
           "transcription_cyrillic": "Аллооҳумма солли ва саллим 'алаа набиийинаа Мухаммад"
         },
         {
@@ -1172,10 +1172,10 @@
           "timestamp": "0",
           "lineNumber": "1",
           "arabic": "أَسْتَغْفِرُ ٱللَّهَ وَأَتُوبُ إِلَيْهِ",
-          "русский": "Прошу у Аллаха прощения и каюсь перед Ним",
           "english": "I seek the forgiveness of Allah and repent to Him",
-          "transcription_latin": "Astaghfiru allāha wa atūbu ilayh",
           "кыргыз": "Аллахтан кечирим сураймын жана Ага тобо кыламын.",
+          "русский": "Прошу у Аллаха прощения и каюсь перед Ним",
+          "transcription_latin": "Astaghfiru allāha wa atūbu ilayh",
           "transcription_cyrillic": "Астағфируллооҳа ва атуубу илайҳи"
         }
       ],
@@ -2331,960 +2331,948 @@
           "count": "1",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "A'ūdhu billāhi mina ash-shayṭāni ar-rajīm",
-          "transcription_cyrillic": "А'уузу биллааҳи минаш-шайтонир-рожиим",
           "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
           "english": "I seek refuge in Allah from the accursed devil.",
+          "кыргыз": "Куугунтукка учураган шайтандан Аллахка баш калкалаймын.",
           "русский": "Я удаляюсь с помощью Господа от проклятого Сатаны. ",
-          "кыргыз": "Куугунтукка учураган шайтандан Аллахка баш калкалаймын."
+          "transcription_latin": "A'ūdhu billāhi mina ash-shayṭāni ar-rajīm",
+          "transcription_cyrillic": "А'уузу биллааҳи минаш-шайтонир-рожиим"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "5",
           "lineNumber": "2",
-          "transcription_latin": "Allāhu lā ilāha illā huwa al-ḥayyu al-qayyūm",
-          "transcription_cyrillic": "Аллоҳу лаа илааҳа иллаа ҳувал-ҳаййул-қоййум",
           "arabic": "﴿٢٥٥﴾ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ",
           "english": "Allah! There is no god ˹worthy of worship˺ except Him, the Ever-Living, All-Sustaining.",
+          "кыргыз": "Аллах – Андан башка сыйынууга татыктуу кудай жок. Ал – Түбөлүк Тирүү, Түбөлүк Өкүмдар.",
           "русский": "Аллах (Бог, Господь)… Нет бога, кроме Него, вечно Живого, Сущего.",
-          "кыргыз": "Аллах – Андан башка сыйынууга татыктуу кудай жок. Ал – Түбөлүк Тирүү, Түбөлүк Өкүмдар."
+          "transcription_latin": "Allāhu lā ilāha illā huwa al-ḥayyu al-qayyūm",
+          "transcription_cyrillic": "Аллоҳу лаа илааҳа иллаа ҳувал-ҳаййул-қоййум"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "11",
           "lineNumber": "3",
-          "transcription_latin": "Lā ta’khudhuhu sinatun wa lā nawm",
-          "transcription_cyrillic": "Лаа та'хузуҳу синатув ва лаа наум",
           "arabic": "لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ",
           "english": "Neither drowsiness nor sleep overtakes Him.",
+          "кыргыз": "Аны көз илинүү да, уйку да баспайт.",
           "русский": "Его не постигнут ни дремота, ни сон. ",
-          "кыргыз": "Аны көз илинүү да, уйку да баспайт."
+          "transcription_latin": "Lā ta’khudhuhu sinatun wa lā nawm",
+          "transcription_cyrillic": "Лаа та'хузуҳу синатув ва лаа наум"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "15",
           "lineNumber": "4",
-          "transcription_latin": "Lahu mā fī as-samāwāti wa mā fī al-arḍ",
-          "transcription_cyrillic": "Лаҳу маа фис-самāваати ва маа фил-ард",
           "arabic": "لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ ",
           "english": "To Him belongs whatever is in the heavens and whatever is on the earth.",
+          "кыргыз": "Асмандардагы жана жердегинин баары Ага таандык.",
           "русский": "Ему принадлежит все, что на небесах, и все, что на земле. ",
-          "кыргыз": "Асмандардагы жана жердегинин баары Ага таандык."
+          "transcription_latin": "Lahu mā fī as-samāwāti wa mā fī al-arḍ",
+          "transcription_cyrillic": "Лаҳу маа фис-самāваати ва маа фил-ард"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "20",
           "lineNumber": "5",
-          "transcription_latin": "Man dhalladhī yashfa'u 'indahu illā bi-idhnih",
-          "transcription_cyrillic": "Ман зал-лазии йашфа'у 'индаҳу иллаа би-изниҳ",
           "arabic": "مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ",
           "english": "Who could possibly intercede with Him without His permission?",
+          "кыргыз": "Анын уруксатысыз Анын алдында ким шапаат кыла алат?",
           "русский": "Кто заступится пред Ним, не иначе как по воле Его?! ",
-          "кыргыз": "Анын уруксатысыз Анын алдында ким шапаат кыла алат?"
+          "transcription_latin": "Man dhalladhī yashfa'u 'indahu illā bi-idhnih",
+          "transcription_cyrillic": "Ман зал-лазии йашфа'у 'индаҳу иллаа би-изниҳ"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "25",
           "lineNumber": "6",
-          "transcription_latin": "Ya'lamu mā bayna aydīhim wa mā khalfahum",
-          "transcription_cyrillic": "Йа'ламу маа байна айдииҳим ва маа холфаҳум",
           "arabic": " يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ",
           "english": "He ˹fully˺ knows what is ahead of them and what is behind them.",
+          "кыргыз": "Ал алардын алдындагыны да, артындагыны да билет.",
           "русский": "Ему ведомо то, что было, и то, что будет. ",
-          "кыргыз": "Ал алардын алдындагыны да, артындагыны да билет."
+          "transcription_latin": "Ya'lamu mā bayna aydīhim wa mā khalfahum",
+          "transcription_cyrillic": "Йа'ламу маа байна айдииҳим ва маа холфаҳум"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "29",
           "lineNumber": "7",
-          "transcription_latin": "Wa lā yuḥīṭūna bishay’in min 'ilmihi illā bimā shā’",
-          "transcription_cyrillic": "Ва лаа йухиитууна би-шай'им-мин 'илмиҳи иллаа бимаа шаа'",
           "arabic": "وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ",
           "english": "But no one can grasp any of His knowledge—except what He wills ˹to reveal˺.",
+          "кыргыз": "Анын каалоосунан тыш эч ким Анын илиминин кыпындайын да түшүнө албайт.",
           "русский": "Никто не в состоянии постигнуть и частицы из Его знания, кроме как по Его воле.",
-          "кыргыз": "Анын каалоосунан тыш эч ким Анын илиминин кыпындайын да түшүнө албайт."
+          "transcription_latin": "Wa lā yuḥīṭūna bishay’in min 'ilmihi illā bimā shā’",
+          "transcription_cyrillic": "Ва лаа йухиитууна би-шай'им-мин 'илмиҳи иллаа бимаа шаа'"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "36",
           "lineNumber": "8",
-          "transcription_latin": "Wasi'a kursiyyuhu as-samāwāti wa al-arḍ",
-          "transcription_cyrillic": "Васи'a курсиййуҳус-самāваати вал-ард",
           "arabic": "وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ",
           "english": "His Seat encompasses the heavens and the earth.",
+          "кыргыз": "Анын Тактысы асмандарды жана жерди кучагына алат.",
           "русский": "Небеса и землю объемлет Его курсий, ",
-          "кыргыз": "Анын Тактысы асмандарды жана жерди кучагына алат."
+          "transcription_latin": "Wasi'a kursiyyuhu as-samāwāti wa al-arḍ",
+          "transcription_cyrillic": "Васи'a курсиййуҳус-самāваати вал-ард"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "40",
           "lineNumber": "9",
-          "transcription_latin": "Wa lā ya'ūduhu ḥifẓuhumā",
-          "transcription_cyrillic": "Ва лаа йауудуҳу хифзуҳумаа",
           "arabic": "وَلَا يَئُودُهُ حِفْظُهُمَا ۚ",
           "english": "And the preservation of both does not tire Him.",
+          "кыргыз": "Аларды коргоо Ага оор келбейт",
           "русский": "и не утруждает Его забота о них [обо всем том, что находится в нашей Вселенной и дальше].",
-          "кыргыз": "Аларды коргоо Ага оор келбейт"
+          "transcription_latin": "Wa lā ya'ūduhu ḥifẓuhumā",
+          "transcription_cyrillic": "Ва лаа йауудуҳу хифзуҳумаа"
         },
         {
           "azkar_id": "morning_1",
           "count": "1",
           "timestamp": "43",
           "lineNumber": "10",
-          "transcription_latin": "Wa huwa al-'aliyyu al-'aẓīm",
-          "transcription_cyrillic": "Ва ҳувал-'Алиййул-'Азийм",
           "arabic": "وَهُوَ الْعَلِيُّ الْعَظِيمُ",
           "english": "For He is the Most High, the Greatest.",
+          "кыргыз": "Ал – Эң Улуу, Эң бииик.",
           "русский": "Он — Всевышний [во всех смыслах выше всего и вся], Великий [величие Его не имеет границ]!",
-          "кыргыз": "Ал – Эң Улуу, Эң бииик."
+          "transcription_latin": "Wa huwa al-'aliyyu al-'aẓīm",
+          "transcription_cyrillic": "Ва ҳувал-'Алиййул-'Азийм"
         },
         {
           "azkar_id": "morning_2",
           "count": "3",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
-          "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим",
           "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
+          "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!",
           "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
-          "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!"
+          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
+          "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим"
         },
         {
           "azkar_id": "morning_2",
           "count": "3",
           "timestamp": "5",
           "lineNumber": "2",
-          "transcription_latin": "Qul huwa allāhu aḥad",
-          "transcription_cyrillic": "Кул ҳуваллооҳу ахад",
           "arabic": "﴿١﴾ قُلْ هُوَ اللَّهُ أَحَدٌ",
           "english": "Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺;",
+          "кыргыз": "Айткын: Ал Алла, Жапжалгыз!",
           "русский": "Скажи: «Он, Аллах (Бог, Господь), — Один [нет иных богов, божеств, помимо Него].",
-          "кыргыз": "Айткын: Ал Алла, Жапжалгыз!"
+          "transcription_latin": "Qul huwa allāhu aḥad",
+          "transcription_cyrillic": "Кул ҳуваллооҳу ахад"
         },
         {
           "azkar_id": "morning_2",
           "count": "3",
           "timestamp": "8",
           "lineNumber": "3",
-          "transcription_latin": "Allāhu aṣ-ṣamad",
-          "transcription_cyrillic": "Аллооҳус-сомад",
           "arabic": "﴿٢﴾ اللَّهُ الصَّمَدُ",
           "english": "Allah—the Sustainer ˹needed by all˺.",
+          "кыргыз": "Алла эч нерсеге муктаж эмес!",
           "русский": "Аллах (Бог, Господь) — Вечен [только Он есть Тот, в Котором все до бесконечности будут нуждаться].",
-          "кыргыз": "Алла эч нерсеге муктаж эмес!"
+          "transcription_latin": "Allāhu aṣ-ṣamad",
+          "transcription_cyrillic": "Аллооҳус-сомад"
         },
         {
           "azkar_id": "morning_2",
           "count": "3",
           "timestamp": "11",
           "lineNumber": "4",
-          "transcription_latin": "Lam yalid wa lam yūlad",
-          "transcription_cyrillic": "Лам йалид ва лам йуулад",
           "arabic": "﴿٣﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ",
           "english": "He has never had offspring, nor was He born.",
+          "кыргыз": "Балалуу болгон эмес, туулган да эмес.",
           "русский": "Не родил и не был рожден.",
-          "кыргыз": "Балалуу болгон эмес, туулган да эмес."
+          "transcription_latin": "Lam yalid wa lam yūlad",
+          "transcription_cyrillic": "Лам йалид ва лам йуулад"
         },
         {
           "azkar_id": "morning_2",
           "count": "3",
           "timestamp": "14",
           "lineNumber": "5",
-          "transcription_latin": "Wa lam yakun lahu kufuwan aḥad",
-          "transcription_cyrillic": "Ва лам йакул-лаҳу куфуван ахад",
           "arabic": "﴿٤﴾ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
           "english": "And there is none comparable to Him.”",
+          "кыргыз": "Ага тең келчү да эч бирөө жок!",
           "русский": "И никто не может равняться с Ним [быть похожим на Него; нет ничего подобного Ему]».",
-          "кыргыз": "Ага тең келчү да эч бирөө жок!"
+          "transcription_latin": "Wa lam yakun lahu kufuwan aḥad",
+          "transcription_cyrillic": "Ва лам йакул-лаҳу куфуван ахад"
         },
         {
           "azkar_id": "morning_3",
           "count": "3",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
-          "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим",
           "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
+          "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!",
           "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
-          "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!"
+          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
+          "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим"
         },
         {
           "azkar_id": "morning_3",
           "count": "3",
           "timestamp": "4",
           "lineNumber": "2",
-          "transcription_latin": "Qul a'ūdhu birabbi al-falaq",
-          "transcription_cyrillic": "Кул а'уузу бироббил-фалақ",
           "arabic": "﴿١﴾ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
           "english": "Say, ˹O Prophet,˺ “I seek refuge in the Lord of the daybreak,",
+          "кыргыз": "Айткын: Сактай көр деп жалбарам, таң шооласынын Эгесине:",
           "русский": "Скажи: «Прибегаю я к Господу зари (рассвета) [к Господу всего того, что Им сотворено],",
-          "кыргыз": "Айткын: Сактай көр деп жалбарам, таң шооласынын Эгесине:"
+          "transcription_latin": "Qul a'ūdhu birabbi al-falaq",
+          "transcription_cyrillic": "Кул а'уузу бироббил-фалақ"
         },
         {
           "azkar_id": "morning_3",
           "count": "3",
           "timestamp": "8",
           "lineNumber": "3",
-          "transcription_latin": "Min sharri mā khalaq",
-          "transcription_cyrillic": "Мин шарри маа холақ",
           "arabic": "﴿٢﴾ مِنْ شَرِّ مَا خَلَقَ",
           "english": "from the evil of whatever He has created,",
+          "кыргыз": "Өзү жараткан бүт макулуктардын жамандыгынан,",
           "русский": "удаляясь от зла сотворенного Им [то есть зла, исходящего от Его творений].",
-          "кыргыз": "Өзү жараткан бүт макулуктардын жамандыгынан,"
+          "transcription_latin": "Min sharri mā khalaq",
+          "transcription_cyrillic": "Мин шарри маа холақ"
         },
         {
           "azkar_id": "morning_3",
           "count": "3",
           "timestamp": "11",
           "lineNumber": "4",
-          "transcription_latin": "Wa min sharri ghāsiqin idhā waqab",
-          "transcription_cyrillic": "Ва мин шарри ғоосиқин изаа вақоб",
           "arabic": "﴿٣﴾ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ",
           "english": "and from the evil of the night when it grows dark,",
+          "кыргыз": "Каптап келген түн караңгысынын жамандыгынан,",
           "русский": " И [удаляюсь] от зла ночного мрака, когда [ночь] все покрывает темнотой.",
-          "кыргыз": "Каптап келген түн караңгысынын жамандыгынан,"
+          "transcription_latin": "Wa min sharri ghāsiqin idhā waqab",
+          "transcription_cyrillic": "Ва мин шарри ғоосиқин изаа вақоб"
         },
         {
           "azkar_id": "morning_3",
           "count": "3",
           "timestamp": "16",
           "lineNumber": "5",
-          "transcription_latin": "Wa min sharri an-naffāthāti fī al-'uqad",
-          "transcription_cyrillic": "Ва мин шаррин-наффаасаати фил-'уқод",
           "arabic": "﴿٤﴾ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ",
           "english": "and from the evil of those ˹witches casting spells by˺ blowing onto knots,",
+          "кыргыз": "Түйүндөргө дем салган сыйкырчылардын жамандыгынан,",
           "русский": "И [удаляюсь] от зла [колдующих] дующих (плюющих) на узлы [проговаривающих при этом свои дьявольские заклинания].",
-          "кыргыз": "Түйүндөргө дем салган сыйкырчылардын жамандыгынан,"
+          "transcription_latin": "Wa min sharri an-naffāthāti fī al-'uqad",
+          "transcription_cyrillic": "Ва мин шаррин-наффаасаати фил-'уқод"
         },
         {
           "azkar_id": "morning_3",
           "count": "3",
           "timestamp": "21",
           "lineNumber": "6",
-          "transcription_latin": "Wa min sharri ḥāsidin idhā ḥasad",
-          "transcription_cyrillic": "Ва мин шарри хаасидин изаа хасад",
           "arabic": "﴿٥﴾ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
           "english": "and from the evil of an envier when they envy.”",
+          "кыргыз": "Жана кызганган кездеги көрө албастын жамандыгынан!",
           "русский": "И [удаляюсь, с Твоей, Господи, помощью] от зла завистника, когда тот завидует [черной завистью, желая другому разрушения и уничтожения, лишения благ и благополучия]»",
-          "кыргыз": "Жана кызганган кездеги көрө албастын жамандыгынан!"
+          "transcription_latin": "Wa min sharri ḥāsidin idhā ḥasad",
+          "transcription_cyrillic": "Ва мин шарри хаасидин изаа хасад"
         },
         {
           "azkar_id": "morning_4",
           "count": "3",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
-          "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим",
           "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
           "english": "In the name of Allah, the Most Compassionate, the Most Merciful.",
+          "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!",
           "русский": "Именем Аллаха [именем Бога, Творца всего сущего, Одного и Единственного для всех и вся], милость Которого вечна и безгранична.",
-          "кыргыз": "Эбегейсиз Мээримдуу, өзгөчө Ырайымдуу Алланын аты менен!"
+          "transcription_latin": "Bismi-llāhi ar-raḥmāni ar-raḥīm",
+          "transcription_cyrillic": "Бисмиллāҳир-Рохмāнир-Рохиим"
         },
         {
           "azkar_id": "morning_4",
           "count": "3",
           "timestamp": "4",
           "lineNumber": "2",
-          "transcription_latin": "Qul a'ūdhu birabbi an-nās",
-          "transcription_cyrillic": "Кул а'уузу бироббин-наас",
           "arabic": "﴿١﴾ قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
           "english": "Say, ˹O Prophet,˺ “I seek refuge in the Lord of humankind,",
+          "кыргыз": "Айткын: Сактай көр деп жалбарам, адамзаттын Эгесине,",
           "русский": "Скажи: «Прибегаю я к Господу людей,",
-          "кыргыз": "Айткын: Сактай көр деп жалбарам, адамзаттын Эгесине,"
+          "transcription_latin": "Qul a'ūdhu birabbi an-nās",
+          "transcription_cyrillic": "Кул а'уузу бироббин-наас"
         },
         {
           "azkar_id": "morning_4",
           "count": "3",
           "timestamp": "9",
           "lineNumber": "3",
-          "transcription_latin": "Maliki an-nās",
-          "transcription_cyrillic": "Маликин-наас",
           "arabic": "﴿٢﴾ مَلِكِ النَّاسِ",
           "english": "the Master of humankind,",
+          "кыргыз": "Адамзаттын Падышасына,",
           "русский": "Властителю их",
-          "кыргыз": "Адамзаттын Падышасына,"
+          "transcription_latin": "Maliki an-nās",
+          "transcription_cyrillic": "Маликин-наас"
         },
         {
           "azkar_id": "morning_4",
           "count": "3",
           "timestamp": "11",
           "lineNumber": "4",
-          "transcription_latin": "Ilāhi an-nās",
-          "transcription_cyrillic": "Илааҳин-наас",
           "arabic": "﴿٣﴾ إِلَٰهِ النَّاسِ",
           "english": "the God of humankind,",
+          "кыргыз": "Адамзаттын Кудайына,",
           "русский": "[и] Богу их,",
-          "кыргыз": "Адамзаттын Кудайына,"
+          "transcription_latin": "Ilāhi an-nās",
+          "transcription_cyrillic": "Илааҳин-наас"
         },
         {
           "azkar_id": "morning_4",
           "count": "3",
           "timestamp": "13",
           "lineNumber": "5",
-          "transcription_latin": "Min sharri al-waswāsi al-khannās",
-          "transcription_cyrillic": "Мин шаррил-васваасил-хоннаас",
           "arabic": "﴿٤﴾ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
           "english": "from the evil of the lurking whisperer—",
+          "кыргыз": "Тымызын азгырган шайтандын жа мандыгынан,",
           "русский": "удаляясь от зла [Сатаны] нашептывающего и отступающего [при упоминании Творца].",
-          "кыргыз": "Тымызын азгырган шайтандын жа мандыгынан,"
+          "transcription_latin": "Min sharri al-waswāsi al-khannās",
+          "transcription_cyrillic": "Мин шаррил-васваасил-хоннаас"
         },
         {
           "azkar_id": "morning_4",
           "count": "3",
           "timestamp": "18",
           "lineNumber": "6",
-          "transcription_latin": "Alladhī yuwaswisu fī ṣudūri an-nās",
-          "transcription_cyrillic": "Аллазии йувасвису фии судуурин-наас",
           "arabic": "﴿٥﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ",
           "english": "who whispers into the hearts of humankind—",
+          "кыргыз": "Адамдардын көңүлдөрүнө азгырык салган,",
           "русский": "Он (Cатана) нашептывает [вносит смуту, смятение, страхи, сомнения] в сердца [души, умы] людей.",
-          "кыргыз": "Адамдардын көңүлдөрүнө азгырык салган,"
+          "transcription_latin": "Alladhī yuwaswisu fī ṣudūri an-nās",
+          "transcription_cyrillic": "Аллазии йувасвису фии судуурин-наас"
         },
         {
           "azkar_id": "morning_4",
           "count": "3",
           "timestamp": "23",
           "lineNumber": "7",
-          "transcription_latin": "Mina al-jinnati wa an-nās",
-          "transcription_cyrillic": "Минал-жиннати ван-наас",
           "arabic": "﴿٦﴾ مِنَ الْجِنَّةِ وَالنَّاسِ",
           "english": "from among jinn and humankind.”",
+          "кыргыз": "Жиндерден да, адамдардан да чык-кан (шайтандардан)!",
           "русский": "[И прося помощи у Господа, удаляюсь от всего сатанинского, исходящего] от джиннов и людей».",
-          "кыргыз": "Жиндерден да, адамдардан да чык-кан (шайтандардан)!"
+          "transcription_latin": "Mina al-jinnati wa an-nās",
+          "transcription_cyrillic": "Минал-жиннати ван-наас"
         },
         {
           "azkar_id": "evening_5",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "1",
-          "transcription_latin": "Amsaynā wa amsā al-mulku lillāhi wa al-ḥamdu lillāh",
-          "transcription_cyrillic": "Амсайнаа ва амсал-мулку лиллааҳи, вал-хамду лиллааҳи",
           "arabic": "أَمْسَيْنا وَأَمْسى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ،",
           "english": "We have entered a new day and with it all dominion is Allah's.",
+          "кыргыз": "Кеч кирди. Мүлк Аллахка таандык жана мактоолор Ага болсун.",
           "русский": "Мы дожили до вечера, и вечер власти – Аллаху, и хвала Аллаху.",
-          "кыргыз": "Кеч кирди. Мүлк Аллахка таандык жана мактоолор Ага болсун."
+          "transcription_latin": "Amsaynā wa amsā al-mulku lillāhi wa al-ḥamdu lillāh",
+          "transcription_cyrillic": "Амсайнаа ва амсал-мулку лиллааҳи, вал-хамду лиллааҳи"
         },
         {
           "azkar_id": "evening_5",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "2",
-          "transcription_latin": "Lā ilāha illā allāhu waḥdahu lā sharīka lah",
-          "transcription_cyrillic": "Лаа илааҳа иллаллооҳу ваҳдаҳу лаа шариика лаҳу",
           "arabic": "لاَ إِلَهَ إلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ،",
           "english": "None has the right to be worshiped but Allah alone, Who has no partner.",
+          "кыргыз": "Аллахтан башка ибадатка татыктуу эч ким жок, Ал жалгыз, Анын шериги жок.",
           "русский": "Нет божества, кроме Аллаха, Единого, нет у Него сотоварища.",
-          "кыргыз": "Аллахтан башка ибадатка татыктуу эч ким жок, Ал жалгыз, Анын шериги жок."
+          "transcription_latin": "Lā ilāha illā allāhu waḥdahu lā sharīka lah",
+          "transcription_cyrillic": "Лаа илааҳа иллаллооҳу ваҳдаҳу лаа шариика лаҳу"
         },
         {
           "azkar_id": "evening_5",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "3",
-          "transcription_latin": "Lahu al-mulku wa lahu al-ḥamdu wa huwa 'alā kulli shay’in qadīr",
-          "transcription_cyrillic": "Лаҳул-мулку ва лаҳул-хамду ва ҳува 'алаа кулли шай'ин қодиир",
           "arabic": "لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ،",
           "english": "To Allah belongs the dominion, and to Him is the praise and He is Able to do all things.",
+          "кыргыз": "Мүлк Аныкы жана мактоо Ага таандык. Ал бардык нерсеге кудуреттүү.",
           "русский": "Ему принадлежит власть и Ему хвала, и Он над всякой вещью мощен.",
-          "кыргыз": "Мүлк Аныкы жана мактоо Ага таандык. Ал бардык нерсеге кудуреттүү."
+          "transcription_latin": "Lahu al-mulku wa lahu al-ḥamdu wa huwa 'alā kulli shay’in qadīr",
+          "transcription_cyrillic": "Лаҳул-мулку ва лаҳул-хамду ва ҳува 'алаа кулли шай'ин қодиир"
         },
         {
           "azkar_id": "evening_5",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "4",
-          "transcription_latin": "Rabbi as'aluka khayra mā fī hādhihi al-laylati wa khayra mā ba'dahā",
-          "transcription_cyrillic": "Рабби ас'алука хойра маа фии ҳаазал-лайлати ва хойра маа ба'даҳа",
           "arabic": "رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا اللَّيْلَةِ وَخَيرَ مَا بَعْدَهُ،",
           "english": "My Lord, I ask You for the goodness of this night and of the days that come after it,",
+          "кыргыз": "Раббим! Сенден бул кеченин жана андан кийинкинин жакшылыгын сураймын;",
           "русский": "Господь мой, я прошу Тебя о благе этой ночи и благе того, что после нее.",
-          "кыргыз": "Раббим! Сенден бул кеченин жана андан кийинкинин жакшылыгын сураймын;"
+          "transcription_latin": "Rabbi as'aluka khayra mā fī hādhihi al-laylati wa khayra mā ba'dahā",
+          "transcription_cyrillic": "Рабби ас'алука хойра маа фии ҳаазал-лайлати ва хойра маа ба'даҳа"
         },
         {
           "azkar_id": "evening_5",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "5",
-          "transcription_latin": "Wa a'ūdhu bika min sharri mā fī hādhihi al-laylati wa sharri mā ba'dahā",
-          "transcription_cyrillic": "Ва а'уузу бика мин шарри маа фии ҳаазал-лайлати ва шарри маа ба'даҳа",
           "arabic": "وَأَعُوذُ بِكَ مِن شَرِّ مَا فِي هَذَا اللَّيْلَةِ وَشَرِّ مَا بَعْدَهُ،",
           "english": "and I seek refuge in You from the evil of this night and of the nights that come after it.",
+          "кыргыз": "Жана бул кеченин жамандыгынан жана андан кийинки (боло турган) жамандыктан Сенин коргооңо баш калкалаймын.",
           "русский": "И прибегаю к Тебе от зла этой ночи и зла того, что после нее.",
-          "кыргыз": "Жана бул кеченин жамандыгынан жана андан кийинки (боло турган) жамандыктан Сенин коргооңо баш калкалаймын."
+          "transcription_latin": "Wa a'ūdhu bika min sharri mā fī hādhihi al-laylati wa sharri mā ba'dahā",
+          "transcription_cyrillic": "Ва а'уузу бика мин шарри маа фии ҳаазал-лайлати ва шарри маа ба'даҳа"
         },
         {
           "azkar_id": "evening_5",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "6",
-          "transcription_latin": "Rabbi a'ūdhu bika mina al-kasali wa sū’i al-kibar",
-          "transcription_cyrillic": "Рабби а'уузу бика минал-касали ва суу'ил-кибар",
           "arabic": "رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ،",
           "english": "My Lord, I seek refuge in You from laziness and helpless old age.",
+          "кыргыз": "Раббим! Жалкоолуктан жана карып, алсыз болуп калуудан Сенин коргооңо баш калкалаймын.",
           "русский": "Господь мой, прибегаю к Тебе от лени и скверной старости.",
-          "кыргыз": "Раббим! Жалкоолуктан жана карып, алсыз болуп калуудан Сенин коргооңо баш калкалаймын."
+          "transcription_latin": "Rabbi a'ūdhu bika mina al-kasali wa sū’i al-kibar",
+          "transcription_cyrillic": "Рабби а'уузу бика минал-касали ва суу'ил-кибар"
         },
         {
           "azkar_id": "evening_5",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "7",
-          "transcription_latin": "Rabbi a'ūdhu bika min 'adhābin fī an-nār wa 'adhābin fī al-qabr",
-          "transcription_cyrillic": "Рабби а'уузу бика мин 'азаабин фин-наари ва 'азаабин фил-қобр",
           "arabic": "رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي القَـبْر.",
           "english": "My Lord, I seek refuge in You from the punishment of Hell-fire, and from the punishment of the grave.",
+          "кыргыз": "Раббим! Тозок отунун азабынан жана кабыр азабынан Сенин коргооңо баш калкалаймын.",
           "русский": "Господь мой, прибегаю к Тебе от мучений в огне и мучений в могиле.",
-          "кыргыз": "Раббим! Тозок отунун азабынан жана кабыр азабынан Сенин коргооңо баш калкалаймын."
+          "transcription_latin": "Rabbi a'ūdhu bika min 'adhābin fī an-nār wa 'adhābin fī al-qabr",
+          "transcription_cyrillic": "Рабби а'уузу бика мин 'азаабин фин-наари ва 'азаабин фил-қобр"
         },
         {
           "azkar_id": "evening_6",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "1",
-          "transcription_latin": "Allāhumma bika amsaynā wa bika aṣbaḥnā",
-          "transcription_cyrillic": "Аллооҳумма бика амсайнаа ва бика асбахнаа",
           "arabic": "اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا،",
           "english": "O Allah, by You we enter the evening and by You we enter the morning,",
+          "кыргыз": "Оо, Аллахым! Сенин (нээматың, коргооң жана зикириң) менен кеч кирип, Сенин (нээматың, коргооң жана зикириң) менен таң атырабыз.",
           "русский": "О Аллах, с Тобой мы дожили до вечера и с Тобой дожили до утра.",
-          "кыргыз": "Оо, Аллахым! Сенин (нээматың, коргооң жана зикириң) менен кеч кирип, Сенин (нээматың, коргооң жана зикириң) менен таң атырабыз."
+          "transcription_latin": "Allāhumma bika amsaynā wa bika aṣbaḥnā",
+          "transcription_cyrillic": "Аллооҳумма бика амсайнаа ва бика асбахнаа"
         },
         {
           "azkar_id": "evening_6",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "2",
-          "transcription_latin": "Wa bika naḥyā wa bika namūtu wa ilayka an-nushūr",
-          "transcription_cyrillic": "Ва бика нахйаа ва бика намууту ва илайкал-масиир",
           "arabic": " وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ.",
           "english": "by You we live and by You we die, and to You is the Final Return.",
+          "кыргыз": "Сенин жардамың менен жашайбыз жана Сенин жардамың менен өлөбүз. Жана (Кыямат күнү) кайтуу Сага гана.",
           "русский": "Тобой мы живем и Тобой умираем, и к Тебе возвращение.",
-          "кыргыз": "Сенин жардамың менен жашайбыз жана Сенин жардамың менен өлөбүз. Жана (Кыямат күнү) кайтуу Сага гана."
+          "transcription_latin": "Wa bika naḥyā wa bika namūtu wa ilayka an-nushūr",
+          "transcription_cyrillic": "Ва бика нахйаа ва бика намууту ва илайкал-масиир"
         },
         {
           "azkar_id": "morning_7",
           "count": "1",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Allāhumma anta rabbī, lā ilāha illā anta",
-          "transcription_cyrillic": "Аллооҳумма анта раббии лаа илааҳа иллаа анта",
           "arabic": "اللَّهُمَّ أَنْتَ رَبِّي لا إِلهَ إِلاَّ أَنْتَ،",
           "english": "O Allah, You are my Lord, there is none worthy of worship but You.",
+          "кыргыз": "Оо, Аллахым! Сен менин Раббимсиң. Сенден башка ибадатка татыктуу эч ким жок.",
           "русский": "О Аллах, Ты – Господь мой, нет божества, кроме Тебя.",
-          "кыргыз": "Оо, Аллахым! Сен менин Раббимсиң. Сенден башка ибадатка татыктуу эч ким жок."
+          "transcription_latin": "Allāhumma anta rabbī, lā ilāha illā anta",
+          "transcription_cyrillic": "Аллооҳумма анта раббии лаа илааҳа иллаа анта"
         },
         {
           "azkar_id": "morning_7",
           "count": "1",
           "timestamp": "7",
           "lineNumber": "2",
-          "transcription_latin": "Khalaqtanī wa anā 'abduka",
-          "transcription_cyrillic": "Холақтании ва ана 'абдука",
           "arabic": "خَلَقْتَنِي وَأَنا عَبْدُكَ،",
           "english": "You created me and I am your slave.",
+          "кыргыз": "Мени Сен жараттың жана мен Сенин кулуңмун.",
           "русский": "Ты сотворил меня, и я — Твой раб.",
-          "кыргыз": "Мени Сен жараттың жана мен Сенин кулуңмун."
+          "transcription_latin": "Khalaqtanī wa anā 'abduka",
+          "transcription_cyrillic": "Холақтании ва ана 'абдука"
         },
         {
           "azkar_id": "morning_7",
           "count": "1",
           "timestamp": "9",
           "lineNumber": "3",
-          "transcription_latin": "Wa anā 'alā 'ahdika wa wa'dika mā istaṭa'tu",
-          "transcription_cyrillic": "Ва ана 'алаа 'аҳдика ва ва'дика мастато'ту",
           "arabic": "وَأَنا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ،",
           "english": "I keep Your covenant, and my pledge to You so far as I am able.",
+          "кыргыз": "Мен күчүм жеткенче Сага берген убадамды (улуулугуңду жана жалгыздыгыңды таануу убадасын) аткаруудамын.",
           "русский": "Я постараюсь оправдать возложенную на меня ответственность, сдержать данное мною слово в меру своих сил и возможностей. ",
-          "кыргыз": "Мен күчүм жеткенче Сага берген убадамды (улуулугуңду жана жалгыздыгыңды таануу убадасын) аткаруудамын."
+          "transcription_latin": "Wa anā 'alā 'ahdika wa wa'dika mā istaṭa'tu",
+          "transcription_cyrillic": "Ва ана 'алаа 'аҳдика ва ва'дика мастато'ту"
         },
         {
           "azkar_id": "morning_7",
           "count": "1",
           "timestamp": "14",
           "lineNumber": "4",
-          "transcription_latin": "A'ūdhu bika min sharri mā ṣana'tu",
-          "transcription_cyrillic": "А'уузу бика мин шарри маа сона'ту",
           "arabic": "أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ،",
           "english": "I seek refuge in You from the evil of what I have done.",
+          "кыргыз": "Мен кылган иштеримдин жамандыгынан Сенин коргооңо баш калкалаймын.",
           "русский": "Я прибегаю к Тебе, удаляясь от всего недоброго, совершенного мною.",
-          "кыргыз": "Мен кылган иштеримдин жамандыгынан Сенин коргооңо баш калкалаймын."
+          "transcription_latin": "A'ūdhu bika min sharri mā ṣana'tu",
+          "transcription_cyrillic": "А'уузу бика мин шарри маа сона'ту"
         },
         {
           "azkar_id": "morning_7",
           "count": "1",
           "timestamp": "18",
           "lineNumber": "5",
-          "transcription_latin": "Abū'u laka bini'matika 'alayya",
-          "transcription_cyrillic": "Абу'у лака бини'матика 'алаййа",
           "arabic": "أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ،",
           "english": "I admit to Your blessings upon me,",
+          "кыргыз": "Мага берген нээматтарыңды моюнга аламын,",
           "русский": "Я признаю те блага, которыми Ты одарил меня, ",
-          "кыргыз": "Мага берген нээматтарыңды моюнга аламын,"
+          "transcription_latin": "Abū'u laka bini'matika 'alayya",
+          "transcription_cyrillic": "Абу'у лака бини'матика 'алаййа"
         },
         {
           "azkar_id": "morning_7",
           "count": "1",
           "timestamp": "21",
           "lineNumber": "6",
-          "transcription_latin": "Wa abū'u bidhambī faghfir lī",
-          "transcription_cyrillic": "Ва абу'у бизанбии фағфирлии",
           "arabic": "وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي،",
           "english": "and I admit to my misdeeds. Forgive me,",
+          "кыргыз": "Күнөөлөрүмдү да моюнга аламын. Мени кечир!",
           "русский": "и признаю свой грех. Прости меня!",
-          "кыргыз": "Күнөөлөрүмдү да моюнга аламын. Мени кечир!"
+          "transcription_latin": "Wa abū'u bidhambī faghfir lī",
+          "transcription_cyrillic": "Ва абу'у бизанбии фағфирлии"
         },
         {
           "azkar_id": "morning_7",
           "count": "1",
           "timestamp": "24",
           "lineNumber": "7",
-          "transcription_latin": "Fa-innahu lā yaghfiru adh-dhunūba illā anta",
-          "transcription_cyrillic": "Фа-иннаҳу лаа йағфируз-зунууба иллаа анта",
           "arabic": "فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ.",
           "english": "for there is none who may forgive sins but You.",
+          "кыргыз": "Анткени, күнөөлөрдү Сен гана кечире аласың.",
           "русский": "Поистине, никто не простит моих ошибок, кроме Тебя».",
-          "кыргыз": "Анткени, күнөөлөрдү Сен гана кечире аласың."
+          "transcription_latin": "Fa-innahu lā yaghfiru adh-dhunūba illā anta",
+          "transcription_cyrillic": "Фа-иннаҳу лаа йағфируз-зунууба иллаа анта"
         },
         {
           "azkar_id": "evening_8",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "1",
-          "transcription_latin": "Allāhumma innī amsaytu ush'hiduka",
-          "transcription_cyrillic": "Аллооҳумма иннии амсайту ушҳидука",
           "arabic": "اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ،",
           "english": "O Allah, I have entered a new evening and call upon You,",
+          "кыргыз": "Оо, Аллахым! Кеч кирди жана мен Сени күбөгө тартамын,",
           "русский": "О Аллах, поистине, я вступил в этот вечер, призывая Тебя в свидетели,",
-          "кыргыз": "Оо, Аллахым! Кеч кирди жана мен Сени күбөгө тартамын,"
+          "transcription_latin": "Allāhumma innī amsaytu ush'hiduka",
+          "transcription_cyrillic": "Аллооҳумма иннии амсайту ушҳидука"
         },
         {
           "azkar_id": "evening_8",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "2",
-          "transcription_latin": "Wa ush'hidu ḥamalata 'arshika",
-          "transcription_cyrillic": "Ва ушҳиду ҳамалата 'аршика",
           "arabic": "وَأُشْهِدُ حَمَلَةَ عَرْشِكَ،",
           "english": "and upon the bearers of Your Throne,",
+          "кыргыз": "жана Тактыңды көтөрүп туруучуларды да,",
           "русский": "и призываю в свидетели носителей Трона Твоего,",
-          "кыргыз": "жана Тактыңды көтөрүп туруучуларды да,"
+          "transcription_latin": "Wa ush'hidu ḥamalata 'arshika",
+          "transcription_cyrillic": "Ва ушҳиду ҳамалата 'аршика"
         },
         {
           "azkar_id": "evening_8",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "3",
-          "transcription_latin": "Wa malā'ikataka",
-          "transcription_cyrillic": "Ва малаайикатака",
           "arabic": "وَمَلَائِكَتَكَ،",
           "english": "upon Your angels,",
+          "кыргыз": "Периштелериңди,",
           "русский": "и ангелов Твоих,",
-          "кыргыз": "Периштелериңди,"
+          "transcription_latin": "Wa malā'ikataka",
+          "transcription_cyrillic": "Ва малаайикатака"
         },
         {
           "azkar_id": "evening_8",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "4",
-          "transcription_latin": "Wa jamī'a khalqika",
-          "transcription_cyrillic": "Ва жамии'а холқиқа",
           "arabic": "وَجَمِيعَ خَلْقِكَ،",
           "english": "and all creation to bear witness",
+          "кыргыз": "Жана жараткан нерселериңдин баарын,",
           "русский": "и все Творения Твои,",
-          "кыргыз": "Жана жараткан нерселериңдин баарын,"
+          "transcription_latin": "Wa jamī'a khalqika",
+          "transcription_cyrillic": "Ва жамии'а холқиқа"
         },
         {
           "azkar_id": "evening_8",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "5",
-          "transcription_latin": "Annaka anta Allāh, lā ilāha illā anta Waḥdaka, lā sharīka laka",
-          "transcription_cyrillic": "Аннака анталлооҳу лаа илааҳа иллаа анта ваҳдака лаа шариика лак",
           "arabic": "أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ،",
           "english": "that surely You are Allah, there is none worthy of worship but You alone, You have no partners,",
+          "кыргыз": "Чындыгында Сен – Аллахсың, Сенден башка ибадатка татыктуу эч ким жок. Сен жалгызсың жана Сенин шеригиң жок,",
           "русский": "что Ты – Аллах, и нет божества достойного поклонения, кроме Тебя Единого, не имеющего сотоварища,",
-          "кыргыз": "Чындыгында Сен – Аллахсың, Сенден башка ибадатка татыктуу эч ким жок. Сен жалгызсың жана Сенин шеригиң жок,"
+          "transcription_latin": "Annaka anta Allāh, lā ilāha illā anta Waḥdaka, lā sharīka laka",
+          "transcription_cyrillic": "Аннака анталлооҳу лаа илааҳа иллаа анта ваҳдака лаа шариика лак"
         },
         {
           "azkar_id": "evening_8",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "6",
-          "transcription_latin": "Wa anna Muḥammadan 'abduka wa rasūluka",
-          "transcription_cyrillic": "Ва анна Мухаммадан 'абдука ва расуулука",
           "arabic": "وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ",
           "english": "and that Muhammad is Your slave and Your Messenger.",
+          "кыргыз": "Жана Мухаммед (ага Алланын саламы жана салаваты болсун) Сенин кулуң жана элчиң экенине.",
           "русский": "и что Мухаммад – раб Твой и посланник Твой.",
-          "кыргыз": "Жана Мухаммед (ага Алланын саламы жана салаваты болсун) Сенин кулуң жана элчиң экенине."
+          "transcription_latin": "Wa anna Muḥammadan 'abduka wa rasūluka",
+          "transcription_cyrillic": "Ва анна Мухаммадан 'абдука ва расуулука"
         },
         {
           "azkar_id": "evening_9",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "1",
-          "transcription_latin": "Allāhumma mā amsā bī min ni'matin aw bi-aḥadin min khalqika",
-          "transcription_cyrillic": "Аллооҳумма маа амсаа бии мин ни'матин Ау би-аҳадин мин холқиқа",
           "arabic": "اللّهُـمَّ ما أَمسى بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِكَ،",
           "english": "Allah, whatever blessing has been received by me in this evening or anyone of Your creation,",
+          "кыргыз": "Аллахым, ушул кечте мага же Сенин жаратууларыңдын кайсы бирине берилген ар кандай нээмат Сенден гана ",
           "русский": "О Аллах, какое бы благо ни снизошло на меня в этот вечер или на кого-либо из Твоих созданий,",
-          "кыргыз": "Аллахым, ушул кечте мага же Сенин жаратууларыңдын кайсы бирине берилген ар кандай нээмат Сенден гана "
+          "transcription_latin": "Allāhumma mā amsā bī min ni'matin aw bi-aḥadin min khalqika",
+          "transcription_cyrillic": "Аллооҳумма маа амсаа бии мин ни'матин Ау би-аҳадин мин холқиқа"
         },
         {
           "azkar_id": "evening_9",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "2",
-          "transcription_latin": "Famin ka waḥdaka lā sharīka laka",
-          "transcription_cyrillic": "Фа минка ваҳдака лаа шариика лак",
           "arabic": "فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـكَ،",
           "english": "is from You alone, You have no partner.",
+          "кыргыз": "Сен жалгызсың, шеригиң жок,",
           "русский": "поистине, оно лишь от Тебя Единого, не имеющего сотоварища.",
-          "кыргыз": "Сен жалгызсың, шеригиң жок,"
+          "transcription_latin": "Famin ka waḥdaka lā sharīka laka",
+          "transcription_cyrillic": "Фа минка ваҳдака лаа шариика лак"
         },
         {
           "azkar_id": "evening_9",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "3",
-          "transcription_latin": "Falaka al-ḥamdu wa laka ash-shukr",
-          "transcription_cyrillic": "Фа лакал-хамду ва лакаш-шукру",
           "arabic": "فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـرُ.",
           "english": "All praise is for You and thanks is to You.",
+          "кыргыз": "Бардык мактоолор Сага, шүгүрлөр Сага.",
           "русский": "И Тебе вся хвала и Тебе вся благодарность.",
-          "кыргыз": "Бардык мактоолор Сага, шүгүрлөр Сага."
+          "transcription_latin": "Falaka al-ḥamdu wa laka ash-shukr",
+          "transcription_cyrillic": "Фа лакал-хамду ва лакаш-шукру"
         },
         {
           "azkar_id": "morning_10",
-          "count": "4",
+          "count": "3",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Allāhumma 'āfinī fī badanī",
-          "transcription_cyrillic": "Аллооҳумма 'аафинии фии бадании",
           "arabic": "اللَّهُمَّ عَافِنِي فِي بَدَنِي،",
-          "english": "O Allah, make me healthy in my body.",
+          "english": "O Allah, make me healthy in my body",
+          "кыргыз": "Оо, Аллахым! Денемди сак-саламат кыл.",
           "русский": " О Аллах! Дай здравие моему телу.",
-          "кыргыз": "Оо, Аллахым! Денемди саламат кыл,"
+          "transcription_latin": "Allāhumma 'āfinī fī badanī",
+          "transcription_cyrillic": "Аллооҳумма 'аафинии фии бадании"
         },
         {
           "azkar_id": "morning_10",
-          "count": "4",
+          "count": "3",
           "timestamp": "4",
           "lineNumber": "2",
-          "transcription_latin": "Allāhumma 'āfinī fī sam'ī",
-          "transcription_cyrillic": "Аллооҳумма 'аафинии фии сам'ии",
           "arabic": "اللَّهُمَّ عَافِنِي فِي سَمْعِي،",
-          "english": "O Allah, preserve for me my hearing.",
+          "english": "O Allah, preserve for me my hearing",
+          "кыргыз": "Оо, Аллахым! Кулагымды сак-саламат кыл.",
           "русский": " О Аллах! Дай здравие моему слуху.",
-          "кыргыз": "Угуумду саламат кыл,"
+          "transcription_latin": "Allāhumma 'āfinī fī sam'ī",
+          "transcription_cyrillic": "Аллооҳумма 'аафинии фии сам'ии"
         },
         {
           "azkar_id": "morning_10",
-          "count": "4",
+          "count": "3",
           "timestamp": "7",
           "lineNumber": "3",
-          "transcription_latin": "Allāhumma 'āfinī fī baṣarī",
-          "transcription_cyrillic": "Аллооҳумма 'аафинии фии басории",
           "arabic": "اللَّهُمَّ عَافِنِي فِي بَصَرِي،",
-          "english": "O Allah, preserve for me my sight.",
+          "english": "O Allah, preserve for me my sight",
+          "кыргыз": "Оо, Аллахым! Көзүмдү сак-саламат кыл.",
           "русский": "О Аллах! Дай здравие моему зрению.",
-          "кыргыз": "Көрүүмдү саламат кыл,"
+          "transcription_latin": "Allāhumma 'āfinī fī baṣarī",
+          "transcription_cyrillic": "Аллооҳумма 'аафинии фии басории"
         },
         {
           "azkar_id": "morning_10",
-          "count": "4",
+          "count": "3",
           "timestamp": "10",
           "lineNumber": "4",
-          "transcription_latin": "Lā ilāha illā anta",
-          "transcription_cyrillic": "Лаа илааҳа иллаа анта",
           "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
-          "english": "There is none worthy of worship but You.",
+          "english": "There is none worthy of worship but You",
+          "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок.",
           "русский": "Нет бога, кроме Тебя Одного.",
-          "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок."
+          "transcription_latin": "Lā ilāha illā ant",
+          "transcription_cyrillic": "Лаа илааҳа иллаа анта"
         },
         {
           "azkar_id": "morning_10",
-          "count": "4",
+          "count": "3",
           "timestamp": "13",
           "lineNumber": "5",
-          "transcription_latin": "Allāhumma innī a'ūdhu bika min al-kufri",
-          "transcription_cyrillic": "Аллоҳумма инни а'уузу бика минал-куфри",
-          "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ",
-          "english": "O Allah, I seek refuge in You from disbelief,",
-          "русский": "«О Аллах! Я удаляюсь с Твоей помощью от неверия ",
-          "кыргыз": "Оо, Аллахым! Мен Сага каапырлыктан сактанамын,"
+          "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ،",
+          "english": "O Allah, I seek refuge in You from disbelief and poverty",
+          "кыргыз": "Оо, Аллахым! Мен Сага каапырчылыктан жана жакырчылыктан сактануу үчүн кайрыламын.",
+          "русский": "«О Аллах! Я удаляюсь с Твоей помощью от неверия и бедности.",
+          "transcription_latin": "Allāhumma innī a'ūdhu bika mina al-kufri wa al-faqr",
+          "transcription_cyrillic": "Аллоҳумма инни а'уузу бика минал-куфри вал-фақри"
         },
         {
           "azkar_id": "morning_10",
-          "count": "4",
+          "count": "3",
           "timestamp": "17",
           "lineNumber": "7",
-          "transcription_latin": "Wa al-faqri",
-          "transcription_cyrillic": "вал-фақри",
-          "arabic": "وَالْفَقْرِ،",
-          "english": "and poverty,",
-          "русский": "и бедности.",
-          "кыргыз": "Жана жакырчылыктан Сага сактанамын,"
+          "arabic": "وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ،",
+          "english": "and I seek refuge in You from the punishment of the grave",
+          "кыргыз": "Жана мен Сага кабыр азабынан сактануу үчүн кайрыламын.",
+          "русский": "Я удаляюсь с Твоей помощью от мучений в могиле.",
+          "transcription_latin": "Wa a'ūdhu bika min 'adhābi al-qabr",
+          "transcription_cyrillic": "Ва а'уузу бика мин 'азабил-қобр"
         },
         {
           "azkar_id": "morning_10",
-          "count": "4",
+          "count": "3",
           "timestamp": "20",
           "lineNumber": "8",
-          "transcription_latin": "Wa a'ūdhu bika min 'adhābi al-qabr",
-          "transcription_cyrillic": "ва а'уузу бика мин 'азабил-қобр",
-          "arabic": "وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ،",
-          "english": "and I seek refuge in You from the punishment of the grave.",
-          "русский": "Я удаляюсь с Твоей помощью от мучений в могиле,",
-          "кыргыз": "Жана кабыр азабынан да Сага сактанамын."
-        },
-        {
-          "azkar_id": "morning_10",
-          "count": "4",
-          "timestamp": "1.2",
-          "lineNumber": "8",
-          "transcription_latin": "Lā ilāha illā anta",
-          "transcription_cyrillic": "ла илааҳа иллаа анта",
           "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
-          "english": "There is none worthy of worship but You.",
+          "english": "There is none worthy of worship but You",
+          "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок.",
           "русский": "Нет бога, кроме Тебя Одного».",
-          "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок."
+          "transcription_latin": "Lā ilāha illā ant",
+          "transcription_cyrillic": "Лаа илааҳа иллаа анта"
         },
         {
           "azkar_id": "morning_11",
           "count": "7",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Ḥasbīya Allāh, lā ilāha illā huwa",
-          "transcription_cyrillic": "Ҳасбииаллоҳу ла илааҳа иллаа ҳува, 'алайҳи таваккалту",
-          "arabic": "حَسْبِيَ اللهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ،",
+          "arabic": "حَسْبِىَ اللهُ لَا إِلٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ،",
           "english": "Allah is sufficient for me. There is none worthy of worship but Him. I have placed my trust in Him,",
+          "кыргыз": "Аллах мага жетиштүү, Андан башка ибадатка татыктуу эч ким жок. Мен Ага гана таянам.",
           "русский": "«Мне достаточно Всевышнего. Нет бога, кроме Него. На Него я положился, и Он — Господь великого Трона»",
-          "кыргыз": "Аллах мага жетиштүү, Андан башка ибадатка татыктуу эч ким жок. Мен Ага гана таянам."
+          "transcription_latin": "Ḥasbīya Allāh, lā ilāha illā huwa",
+          "transcription_cyrillic": "Ҳасбииаллоҳу ла илааҳа иллаа ҳува, 'алайҳи таваккалту"
         },
         {
           "azkar_id": "morning_11",
           "count": "7",
           "timestamp": "7",
           "lineNumber": "2",
-          "transcription_latin": "Alayhi tawakkaltu",
-          "transcription_cyrillic": "ва ҳува раббул-'аршил-'азийм",
-          "arabic": "وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.",
+          "arabic": "وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.",
           "english": "He is Lord of the Majestic Throne.",
+          "кыргыз": "Анткени Ал – улуу Тактынын, улуу Тактынын Эгеси.",
           "русский": "И Он – Господь великого Трона.",
-          "кыргыз": "Анткени Ал – улуу Тактынын, улуу Тактынын Эгеси."
+          "transcription_latin": "Alayhi tawakkaltu",
+          "transcription_cyrillic": "ва ҳува раббул-'аршил-'азийм"
         },
         {
           "azkar_id": "evening_12",
           "count": "7",
           "timestamp": "1.2",
           "lineNumber": "1",
-          "transcription_latin": "Wa huwa rabbu al-'arshi al-'aẓīm",
-          "transcription_cyrillic": "А'уузу би калимаатил-лааҳит-тааммаати мин шарри маа холақ",
           "arabic": "أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
           "english": "I seek refuge in the Perfect Words of Allah from the evil of what He has created.",
+          "кыргыз": "Жараткан нерселеринин жамандыгынан Аллахтын кемчиликсиз сөздөрүнө (аяттарына, сыпаттарына жана ысымдарына) баш калкалаймын.",
           "русский": "Прибегаю к совершенным Словам Аллаха от зла того, что Он создал.",
-          "кыргыз": "Жараткан нерселеринин жамандыгынан Аллахтын кемчиликсиз сөздөрүнө (аяттарына, сыпаттарына жана ысымдарына) баш калкалаймын."
+          "transcription_latin": "Wa huwa rabbu al-'arshi al-'aẓīm",
+          "transcription_cyrillic": "А'уузу би калимаатил-лааҳит-тааммаати мин шарри маа холақ"
         },
         {
           "azkar_id": "evening_13",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "1",
-          "transcription_latin": "A'ūdhu bikalimāti Allāhi at-tāmmāti min sharri mā khalaq",
-          "transcription_cyrillic": "Аллоҳумма инни ас'алукал- 'афва ва ал-'аа фииата фид-дунйаа ва ал-ахира",
           "arabic": "اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة،",
           "english": "O Allah, I seek Your forgiveness and Your protection in this world and the next.",
+          "кыргыз": "Оо, Аллахым! Дүйнөдө да, акыретте да Сенден кечирим жана аманчылык сураймын.",
           "русский": "О Аллах, поистине, я прошу у Тебя прощения и благополучия в мире этом и мире вечном.",
-          "кыргыз": "Оо, Аллахым! Дүйнөдө да, акыретте да Сенден кечирим жана аманчылык сураймын."
+          "transcription_latin": "A'ūdhu bikalimāti Allāhi at-tāmmāti min sharri mā khalaq",
+          "transcription_cyrillic": "Аллоҳумма инни ас'алукал- 'афва ва ал-'аа фииата фид-дунйаа ва ал-ахира"
         },
         {
           "azkar_id": "evening_13",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "2",
-          "transcription_latin": "Allāhumma innī as'aluka al-'afwa wa al-'āfiyata fī dīnī wa dunyāya wa ahli wa mālī",
-          "transcription_cyrillic": "Аллоҳумма инни ас'алукал- 'афва ва ал-'аа фииата  фии диний ва дунйаайа ва аҳлий ва маалий",
           "arabic": "اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي،",
           "english": "O Allah, I seek Your forgiveness and Your protection in my religion, in my worldly affairs, in my family and in my wealth.",
+          "кыргыз": "Оо, Аллахым, динимде, дүйнөмдө, үй-бүлөмдө жана мал-мүлкүмдө Сенден кечирим жана аманчылык сураймын.",
           "русский": "О Аллах, поистине, я прошу у Тебя прощения и благополучия в моей религии, и в земной жизни моей, и в семье моей, и в имуществе моем.",
-          "кыргыз": "Оо, Аллахым, динимде, дүйнөмдө, үй-бүлөмдө жана мал-мүлкүмдө Сенден кечирим жана аманчылык сураймын."
+          "transcription_latin": "Allāhumma innī as'aluka al-'afwa wa al-'āfiyata fī dīnī wa dunyāya wa ahli wa mālī",
+          "transcription_cyrillic": "Аллоҳумма инни ас'алукал- 'афва ва ал-'аа фииата  фии диний ва дунйаайа ва аҳлий ва маалий"
         },
         {
           "azkar_id": "evening_13",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "3",
-          "transcription_latin": "Allāhumma astur 'awrātī wa āmin raw'ātī",
-          "transcription_cyrillic": "Аллоҳумма стур 'авраатий ва аамин ра'уаатий",
           "arabic": "اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي،",
           "english": "O Allah, conceal my secrets and preserve me from anguish.",
+          "кыргыз": "Оо, Аллахым, кемчиликтеримди жашырып, жаман коркунучтарымды амандыкка айландыр.",
           "русский": "О Аллах, сокрой мои недостатки и огради меня от страхов.",
-          "кыргыз": "Оо, Аллахым, кемчиликтеримди жашырып, жаман коркунучтарымды амандыкка айландыр."
+          "transcription_latin": "Allāhumma astur 'awrātī wa āmin raw'ātī",
+          "transcription_cyrillic": "Аллоҳумма стур 'авраатий ва аамин ра'уаатий"
         },
         {
           "azkar_id": "evening_13",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "4",
-          "transcription_latin": "Allāhumma iḥfaẓnī min bayni yadayya wa min khalfī Wa 'an yamīnī wa 'an shimālī",
-          "transcription_cyrillic": "Аллоҳумма ҳфазний мин байна йадаййа ва мин хол фии ва 'ан йамийний ва 'ан шималий",
           "arabic": "اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي،",
           "english": "O Allah, guard me from what is in front of me and behind me, from my left, and from my right,",
+          "кыргыз": "Оо, Аллахым, мени алдымдан, артымдан, оң жагымдан, сол жагымдан,",
           "русский": "О Аллах, защити меня спереди и сзади, справа и слева,",
-          "кыргыз": "Оо, Аллахым, мени алдымдан, артымдан, оң жагымдан, сол жагымдан,"
+          "transcription_latin": "Allāhumma iḥfaẓnī min bayni yadayya wa min khalfī Wa 'an yamīnī wa 'an shimālī",
+          "transcription_cyrillic": "Аллоҳумма ҳфазний мин байна йадаййа ва мин хол фии ва 'ан йамийний ва 'ан шималий"
         },
         {
           "azkar_id": "evening_13",
           "count": "1",
           "timestamp": "1.2",
           "lineNumber": "5",
-          "transcription_latin": "Wa min fawqī, wa a'ūdhu bi'azamatika an ughtāla min taḥtī",
-          "transcription_cyrillic": "ва мин фавқий, ва а'уузу би 'азаматика ан уғтаала мин таҳтий",
           "arabic": "وَمِن فَوْقـي، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي.",
           "english": "and from above me. I seek refuge in Your Greatness from being struck down from beneath me.",
+          "кыргыз": "үстүмөн мени корго. Астыман жерге кирип кетүүдөн Сенин улуулугуңа баш калкалаймын.",
           "русский": "и сверху, и прибегаю к величию Твоему от того, чтобы быть схваченным из-под меня.",
-          "кыргыз": "үстүмөн мени корго. Астыман жерге кирип кетүүдөн Сенин улуулугуңа баш калкалаймын."
+          "transcription_latin": "Wa min fawqī, wa a'ūdhu bi'azamatika an ughtāla min taḥtī",
+          "transcription_cyrillic": "ва мин фавқий, ва а'уузу би 'азаматика ан уғтаала мин таҳтий"
         },
         {
           "azkar_id": "morning_13",
           "count": "1",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Allāhumma 'ālim al-ghaybi wa ash-shahādati fāṭir as-samāwāti wa al-arḍ Rabba kulli shay'in wa malikahu\n",
-          "transcription_cyrillic": "Аллоҳумма 'аалимал-ғойби ва аш-шаҳаада, фаатир ас-самааваати ва ал-ард, рабба кулли шай'ин ва малийкаҳ",
           "arabic": "اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه،",
           "english": "O Allah, Knower of the unseen and the evident, Maker of the heavens and the earth, Lord of everything and its Possessor,",
+          "кыргыз": "Оо, кайыпты жана көрүнгөндү Билүүчү, асмандарды жана жерди эч нерседен жаратпастан жараткан, ар бир нерсенин Раббиси жана Падышасы болгон Аллахым!",
           "русский": "О Аллах, Знающий сокрытое и явное, Творец небес и земли, Господь всего и Владыка его.",
-          "кыргыз": "Оо, кайыпты жана көрүнгөндү Билүүчү, асмандарды жана жерди эч нерседен жаратпастан жараткан, ар бир нерсенин Раббиси жана Падышасы болгон Аллахым!"
+          "transcription_latin": "Allāhumma 'ālim al-ghaybi wa ash-shahādati fāṭir as-samāwāti wa al-arḍ Rabba kulli shay'in wa malikahu\n",
+          "transcription_cyrillic": "Аллоҳумма 'аалимал-ғойби ва аш-шаҳаада, фаатир ас-самааваати ва ал-ард, рабба кулли шай'ин ва малийкаҳ"
         },
         {
           "azkar_id": "morning_13",
           "count": "1",
           "timestamp": "10",
           "lineNumber": "2",
-          "transcription_latin": "Ash-hadu an lā ilāha illā anta",
-          "transcription_cyrillic": "ашҳаду ан ла илааҳа иллаа анта",
           "arabic": "أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْتَ،",
           "english": "I bear witness that there is none worthy of worship but You.",
+          "кыргыз": "Күбөлүк беремин, Сенден башка ибадатка татыктуу кудай жок.",
           "русский": "Свидетельствую, что нет божества, кроме Тебя.",
-          "кыргыз": "Күбөлүк беремин, Сенден башка ибадатка татыктуу кудай жок."
+          "transcription_latin": "Ash-hadu an lā ilāha illā anta",
+          "transcription_cyrillic": "ашҳаду ан ла илааҳа иллаа анта"
         },
         {
           "azkar_id": "morning_13",
           "count": "1",
           "timestamp": "14",
           "lineNumber": "3",
-          "transcription_latin": "A'ūdhu bika min sharri nafsī Wa min sharri ash-shayṭāni wa shirkih",
-          "transcription_cyrillic": "а'уузу бика мин шарри нафсий ва мин шарри аш-шайтаани ва ширкӣҳи",
           "arabic": "أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِـرْكِه،",
           "english": "I seek refuge in You from the evil of my soul, and from the evil of Satan and his helpers.",
+          "кыргыз": "Напсинин жамандыгынан, шайтандын жана анын жардамчыларынын жамандыктарынан жана тузактарынан Сага баш калкалаймын.",
           "русский": "Прибегаю к Тебе от зла души моей и от зла шайтана и многобожия его.",
-          "кыргыз": "Напсинин жамандыгынан, шайтандын жана анын жардамчыларынын жамандыктарынан жана тузактарынан Сага баш калкалаймын."
+          "transcription_latin": "A'ūdhu bika min sharri nafsī Wa min sharri ash-shayṭāni wa shirkih",
+          "transcription_cyrillic": "а'уузу бика мин шарри нафсий ва мин шарри аш-шайтаани ва ширкӣҳи"
         },
         {
           "azkar_id": "morning_13",
           "count": "1",
           "timestamp": "19",
           "lineNumber": "4",
-          "transcription_latin": "Wa an aqtarifa 'alā nafsī sū'an aw ajurrahu ilā muslim",
-          "transcription_cyrillic": "ва ан ақтарифа 'алаа нафсий сууан ав ажурраҳу илаа муслим",
           "arabic": "وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم.",
           "english": "(I seek refuge in You) from bringing evil upon my soul and from harming any Muslim.",
+          "кыргыз": "Өзүмө же башка мусулманга жамандык кылуудан да Сага баш калкалаймын.",
           "русский": "и от нанесения вреда душе своей или причинения зла мусульманину.",
-          "кыргыз": "Өзүмө же башка мусулманга жамандык кылуудан да Сага баш калкалаймын."
+          "transcription_latin": "Wa an aqtarifa 'alā nafsī sū'an aw ajurrahu ilā muslim",
+          "transcription_cyrillic": "ва ан ақтарифа 'алаа нафсий сууан ав ажурраҳу илаа муслим"
         },
         {
           "azkar_id": "morning_14",
           "count": "3",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Bismi Allāhi alladhī lā yaḍurru ma'a ismihi shay'un fī al-arḍi wa lā fī as-samā’",
-          "transcription_cyrillic": "Бисмиллааҳил-лазий ла йадурру ма'асмиҳи шай'ун фил-арди ва ла фис-самаа'",
           "arabic": "بِسۡمِ ٱللَّهِ ٱلَّذِي لَا يَضُرُّ مَعَ ٱسۡمِهِۦ شَيۡءٞ فِي ٱلۡأَرۡضِ وَلَا فِي ٱلسَّمَآءِ",
           "english": "In the Name of Allah, Who with His Name nothing can cause harm in the earth nor in the heavens,",
+          "кыргыз": "Ысмы менен жерде да, асманда да эч нерсе зыян келтире албаган Аллахтын ысымы менен (Ага баш калкалаймын).",
           "русский": "«Начинаю [свой день] с именем Господа. Того, с именем Которого ничто ни на Земле, ни на небесах не может [мне] навредить.",
-          "кыргыз": "Ысмы менен жерде да, асманда да эч нерсе зыян келтире албаган Аллахтын ысымы менен (Ага баш калкалаймын)."
+          "transcription_latin": "Bismi Allāhi alladhī lā yaḍurru ma'a ismihi shay'un fī al-arḍi wa lā fī as-samā’",
+          "transcription_cyrillic": "Бисмиллааҳил-лазий ла йадурру ма'асмиҳи шай'ун фил-арди ва ла фис-самаа'"
         },
         {
           "azkar_id": "morning_14",
           "count": "3",
           "timestamp": "7",
           "lineNumber": "2",
-          "transcription_latin": "Wa huwa as-samī'u al-'alīm",
-          "transcription_cyrillic": "ва ҳува ас-самий'ул-'алийм",
           "arabic": "وَهُوَ السّمـيعُ العَلـيم.",
           "english": "and He is the All-Hearing, the All-Knowing.",
+          "кыргыз": "Ал – Угуучу, Баарын Билүүчү.",
           "русский": "Он — Всеслышащий, Всезнающий»",
-          "кыргыз": "Ал – Угуучу, Баарын Билүүчү."
+          "transcription_latin": "Wa huwa as-samī'u al-'alīm",
+          "transcription_cyrillic": "ва ҳува ас-самий'ул-'алийм"
         },
         {
           "azkar_id": "morning_15",
           "count": "3",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Raḍītu billāhi rabban wa bil-islāmi dīnan wa bimuḥammadin ṣallā Allāhu ʿalayhi wa sallam wa nabīyan.",
-          "transcription_cyrillic": "Радийту биллааҳи раббан ва бил-ислаами диинан ва би Мухаммадин соллаллоҳу 'алайҳи ва саллам набиийан",
           "arabic": "رَضِيتُ بِاللَّهِ رَبًّا وَبِالإِسْلَامِ دِينًا وَبِمُحَمَّدٍ ﷺ وَنَبِيًّا.",
           "english": "I am pleased with Allah as my Lord, with Islam as my religion and with Muhammad -Peace and Blessings of Allah be upon him – as my Prophet.",
+          "кыргыз": "Раббим катары Аллахка, диним катары Исламга жана пайгамбарым катары Мухаммед(ага Алланын саламы жана салаваты болсун) ыраазымын.",
           "русский": "Доволен я Аллахом как Господом, Исламом – как религией и Мухаммадом – как пророком.",
-          "кыргыз": "Раббим катары Аллахка, диним катары Исламга жана пайгамбарым катары Мухаммед(ага Алланын саламы жана салаваты болсун) ыраазымын."
+          "transcription_latin": "Raḍītu billāhi rabban wa bil-islāmi dīnan wa bimuḥammadin ṣallā Allāhu ʿalayhi wa sallam wa nabīyan.",
+          "transcription_cyrillic": "Радийту биллааҳи раббан ва бил-ислаами диинан ва би Мухаммадин соллаллоҳу 'алайҳи ва саллам набиийан"
         },
         {
           "azkar_id": "morning_17",
           "count": "100",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Subḥāna llāhi wa biḥamdihi",
-          "transcription_cyrillic": "Субхаана-ллааҳи ва бихамдиҳи",
           "arabic": "سُبْحَانَ ٱللَّهِ وَبِحَمْدِهِ",
           "english": "Glory is to Allah and praise is to Him.",
+          "кыргыз": "Аллахка мактоолор жана даңктар болсун.",
           "русский": "Пречист Аллах и хвала Ему.",
-          "кыргыз": "Аллахка мактоолор жана даңктар болсун."
+          "transcription_latin": "Subḥāna llāhi wa biḥamdihi",
+          "transcription_cyrillic": "Субхаана-ллааҳи ва бихамдиҳи"
         },
         {
           "azkar_id": "morning_18",
           "count": "1",
           "timestamp": "0",
           "lineNumber": "1",
-          "transcription_latin": "Yā ḥayyu yā qayyūmu biraḥmatika astaghīthu",
-          "transcription_cyrillic": "Йаа Ҳаййу, Йаа Қоййуму, би раҳматика астағийсу",
           "arabic": "يا حَـيُّ يا قَيّـومُ بِـرَحْمَـتِكَ أَسْتَـغـيث،",
           "english": "O Ever-Living One, O Eternal One, by Your mercy I call on You",
+          "кыргыз": "Оо, Түбөлүк Тирүү, Оо, Түбөлүк Туруучу! Сенин ырайымың менен жардам сураймын.",
           "русский": "О Живой, о Вечносущий, милостью Твоей я взываю о помощи,",
-          "кыргыз": "Оо, Түбөлүк Тирүү, Оо, Түбөлүк Туруучу! Сенин ырайымың менен жардам сураймын."
+          "transcription_latin": "Yā ḥayyu yā qayyūmu biraḥmatika astaghīthu",
+          "transcription_cyrillic": "Йаа Ҳаййу, Йаа Қоййуму, би раҳматика астағийсу"
         },
         {
           "azkar_id": "morning_18",
           "count": "1",
           "timestamp": "6",
           "lineNumber": "2",
-          "transcription_latin": "aṣliḥ lī sha'nī kullahu",
-          "transcription_cyrillic": "аслиҳ лий ша'ний куллаҳу",
           "arabic": "أَصْلِـحْ لي شَـأْنـي كُلَّـهُ،",
           "english": "to set right all my affairs.",
+          "кыргыз": "Бардык иштеримди оңдо,",
           "русский": "исправь для меня все дела мои,",
-          "кыргыз": "Бардык иштеримди оңдо,"
+          "transcription_latin": "aṣliḥ lī sha'nī kullahu",
+          "transcription_cyrillic": "аслиҳ лий ша'ний куллаҳу"
         },
         {
           "azkar_id": "morning_18",
           "count": "1",
           "timestamp": "8",
           "lineNumber": "3",
-          "transcription_latin": "wa lā takilnī ilā nafsī ṭarfata 'aynin",
-          "transcription_cyrillic": "ва ла такилний илә нафсий торфата 'айн",
           "arabic": "وَلا تَكِلـني إِلى نَفْـسي طَـرْفَةَ عَـينٍ",
           "english": "Do not place me in charge of my soul even for the blinking of an eye",
+          "кыргыз": "Жана мени өз напсиме көз ирмемге да болсо таштаба",
           "русский": "и не вверяй меня душе моей ни на мгновение ока. ",
-          "кыргыз": "Жана мени өз напсиме көз ирмемге да болсо таштаба"
+          "transcription_latin": "wa lā takilnī ilā nafsī ṭarfata 'aynin",
+          "transcription_cyrillic": "ва ла такилний илә нафсий торфата 'айн"
         }
       ],
       "virtues": [
