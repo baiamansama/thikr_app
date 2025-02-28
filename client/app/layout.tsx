@@ -18,9 +18,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "зикир & дуба",
     description: "Мусулманга зарыл болгон зикирлер жана дубалар топтому",
+    url: "https://azkar.link",
     images: [
       {
-        url: "/preview/english.png",
+        url: "https://azkar.link/preview/english.png",
         width: 1200,
         height: 630,
         alt: "Thikr App Preview",
