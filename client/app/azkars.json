@@ -515,7 +515,7 @@
           "русский": "«О Аллах! С именем Твоим наступает для нас утро и наступает ночь. ",
           "english": "O Allah, by You we enter the morning and by You we enter the evening",
           "transcription_latin": "Allāhumma bika aṣbaḥnā wa bika amsaynā",
-          "кыргыз": "Оо, Аллахым! Сенин атың менен таңды тосуп алабыз жана Сенин атың менен кечти тосуп алабыз.",
+          "кыргыз": "Оо, Аллахым! Сенин ысымың менен биз таңды тосуп алабыз жана Сенин ысымың менен биз кечти тосуп алабыз.",
           "transcription_cyrillic": "Аллооҳумма бика асбахнаа ва бика амсайнаа"
         },
         {
@@ -527,7 +527,7 @@
           "русский": " С Твоим именем мы оживаем и умираем. И к Тебе — возвращение.",
           "english": "By You we live and by You we die, and to You is the Final Return",
           "transcription_latin": "Wa bika naḥyā wa bika namūtu wa ilayka an-nushūr",
-          "кыргыз": "Сенин атың менен биз жашайбыз жана Сенин атың менен биз өлүп, Сага кайтып келебиз.",
+          "кыргыз": "Сенин ысымың менен биз жашайбыз жана Сенин ысымың менен биз өлүп, Сага кайтып келебиз.",
           "transcription_cyrillic": "Ва бика нахйаа ва бика намууту ва илайкан-нушуур"
         },
         {
@@ -715,7 +715,7 @@
           "count": "3",
           "timestamp": "0",
           "lineNumber": "1",
-          "arabic": "اللّهُـمَّ عافِـني في بَدَنـي،",
+          "arabic": "اللَّهُمَّ عَافِنِي فِي بَدَنِي،",
           "русский": " О Аллах! Дай здравие моему телу.",
           "english": "O Allah, make me healthy in my body",
           "transcription_latin": "Allāhumma 'āfinī fī badanī",
@@ -727,7 +727,7 @@
           "count": "3",
           "timestamp": "4",
           "lineNumber": "2",
-          "arabic": "اللّهُـمَّ عافِـني في سَمْـعي،",
+          "arabic": "اللَّهُمَّ عَافِنِي فِي سَمْعِي،",
           "русский": " О Аллах! Дай здравие моему слуху.",
           "english": "O Allah, preserve for me my hearing",
           "transcription_latin": "Allāhumma 'āfinī fī sam'ī",
@@ -739,7 +739,7 @@
           "count": "3",
           "timestamp": "7",
           "lineNumber": "3",
-          "arabic": "اللّهُـمَّ عافِـني في بَصَـري،",
+          "arabic": "اللَّهُمَّ عَافِنِي فِي بَصَرِي،",
           "русский": "О Аллах! Дай здравие моему зрению.",
           "english": "O Allah, preserve for me my sight",
           "transcription_latin": "Allāhumma 'āfinī fī baṣarī",
@@ -751,10 +751,10 @@
           "count": "3",
           "timestamp": "10",
           "lineNumber": "4",
-          "arabic": "لا إلهَ إلاّ اللّه أَنْـتَ،",
+          "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
           "русский": "Нет бога, кроме Тебя Одного.",
           "english": "There is none worthy of worship but You",
-          "transcription_latin": "Lā ilāha illā allāhu ant",
+          "transcription_latin": "Lā ilāha illā ant",
           "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок.",
           "transcription_cyrillic": "Лаа илааҳа иллаа анта"
         },
@@ -763,7 +763,7 @@
           "count": "3",
           "timestamp": "13",
           "lineNumber": "5",
-          "arabic": "اللّهُـمَّ إِنّـي أَعـوذُبِكَ مِنَ الْكُـفْرِ وَالفَـقْرِ،",
+          "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ،",
           "русский": "«О Аллах! Я удаляюсь с Твоей помощью от неверия и бедности.",
           "english": "O Allah, I seek refuge in You from disbelief and poverty",
           "transcription_latin": "Allāhumma innī a'ūdhu bika mina al-kufri wa al-faqr",
@@ -775,7 +775,7 @@
           "count": "3",
           "timestamp": "17",
           "lineNumber": "7",
-          "arabic": "وَأَعـوذُ بِكَ مِنْ عذابِ القَـبْرِ،",
+          "arabic": "وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ،",
           "русский": "Я удаляюсь с Твоей помощью от мучений в могиле.",
           "english": "and I seek refuge in You from the punishment of the grave",
           "transcription_latin": "Wa a'ūdhu bika min 'adhābi al-qabr",
@@ -787,7 +787,7 @@
           "count": "3",
           "timestamp": "20",
           "lineNumber": "8",
-          "arabic": "لا إلهَ إلاّ أَنْـتَ",
+          "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
           "русский": "Нет бога, кроме Тебя Одного».",
           "english": "There is none worthy of worship but You",
           "transcription_latin": "Lā ilāha illā ant",
@@ -2444,7 +2444,7 @@
           "arabic": "وَهُوَ الْعَلِيُّ الْعَظِيمُ",
           "english": "For He is the Most High, the Greatest.",
           "русский": "Он — Всевышний [во всех смыслах выше всего и вся], Великий [величие Его не имеет границ]!",
-          "кыргыз": "Ал – Эң Улуу, Эң бийик."
+          "кыргыз": "Ал – Эң Улуу, Эң бииик."
         },
         {
           "azkar_id": "morning_2",
@@ -2835,9 +2835,9 @@
           "count": "1",
           "timestamp": "21",
           "lineNumber": "6",
-          "transcription_latin": "Wa abū'u bidhambī faghfir lī fa-innahu lā yaghfiru adh-dhunūba illā anta",
+          "transcription_latin": "Wa abū'u bidhambī faghfir lī",
           "transcription_cyrillic": "Ва абу'у бизанбии фағфирлии",
-          "arabic": "وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لا يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ.",
+          "arabic": "وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي،",
           "english": "and I admit to my misdeeds. Forgive me,",
           "русский": "и признаю свой грех. Прости меня!",
           "кыргыз": "Күнөөлөрүмдү да моюнга аламын. Мени кечир!"
@@ -2849,7 +2849,7 @@
           "lineNumber": "7",
           "transcription_latin": "Fa-innahu lā yaghfiru adh-dhunūba illā anta",
           "transcription_cyrillic": "Фа-иннаҳу лаа йағфируз-зунууба иллаа анта",
-          "arabic": "فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ",
+          "arabic": "فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ.",
           "english": "for there is none who may forgive sins but You.",
           "русский": "Поистине, никто не простит моих ошибок, кроме Тебя».",
           "кыргыз": "Анткени, күнөөлөрдү Сен гана кечире аласың."
@@ -2969,7 +2969,7 @@
           "lineNumber": "1",
           "transcription_latin": "Allāhumma 'āfinī fī badanī",
           "transcription_cyrillic": "Аллооҳумма 'аафинии фии бадании",
-          "arabic": "اللّهُـمَّ عافِـني في بَدَنـي،",
+          "arabic": "اللَّهُمَّ عَافِنِي فِي بَدَنِي،",
           "english": "O Allah, make me healthy in my body.",
           "русский": " О Аллах! Дай здравие моему телу.",
           "кыргыз": "Оо, Аллахым! Денемди саламат кыл,"
@@ -2981,7 +2981,7 @@
           "lineNumber": "2",
           "transcription_latin": "Allāhumma 'āfinī fī sam'ī",
           "transcription_cyrillic": "Аллооҳумма 'аафинии фии сам'ии",
-          "arabic": "اللّهُـمَّ عافِـني في سَمْـعي،",
+          "arabic": "اللَّهُمَّ عَافِنِي فِي سَمْعِي،",
           "english": "O Allah, preserve for me my hearing.",
           "русский": " О Аллах! Дай здравие моему слуху.",
           "кыргыз": "Угуумду саламат кыл,"
@@ -2993,7 +2993,7 @@
           "lineNumber": "3",
           "transcription_latin": "Allāhumma 'āfinī fī baṣarī",
           "transcription_cyrillic": "Аллооҳумма 'аафинии фии басории",
-          "arabic": "اللّهُـمَّ عافِـني في بَصَـري،",
+          "arabic": "اللَّهُمَّ عَافِنِي فِي بَصَرِي،",
           "english": "O Allah, preserve for me my sight.",
           "русский": "О Аллах! Дай здравие моему зрению.",
           "кыргыз": "Көрүүмдү саламат кыл,"
@@ -3005,7 +3005,7 @@
           "lineNumber": "4",
           "transcription_latin": "Lā ilāha illā anta",
           "transcription_cyrillic": "Лаа илааҳа иллаа анта",
-          "arabic": "لا إلهَ إلاّ اللّه أَنْـتَ.",
+          "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
           "english": "There is none worthy of worship but You.",
           "русский": "Нет бога, кроме Тебя Одного.",
           "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок."
@@ -3017,7 +3017,7 @@
           "lineNumber": "5",
           "transcription_latin": "Allāhumma innī a'ūdhu bika min al-kufri",
           "transcription_cyrillic": "Аллоҳумма инни а'уузу бика минал-куфри",
-          "arabic": "اللّهُـمَّ إِنّـي أَعـوذُبِكَ مِنَ الْكُـفرِ،",
+          "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ",
           "english": "O Allah, I seek refuge in You from disbelief,",
           "русский": "«О Аллах! Я удаляюсь с Твоей помощью от неверия ",
           "кыргыз": "Оо, Аллахым! Мен Сага каапырлыктан сактанамын,"
@@ -3029,7 +3029,7 @@
           "lineNumber": "7",
           "transcription_latin": "Wa al-faqri",
           "transcription_cyrillic": "вал-фақри",
-          "arabic": "وَالفَـقْرِ،",
+          "arabic": "وَالْفَقْرِ،",
           "english": "and poverty,",
           "русский": "и бедности.",
           "кыргыз": "Жана жакырчылыктан Сага сактанамын,"
@@ -3041,7 +3041,7 @@
           "lineNumber": "8",
           "transcription_latin": "Wa a'ūdhu bika min 'adhābi al-qabr",
           "transcription_cyrillic": "ва а'уузу бика мин 'азабил-қобр",
-          "arabic": "وَأَعـوذُ بِكَ مِنْ عَذابِ القَـبْر،",
+          "arabic": "وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ،",
           "english": "and I seek refuge in You from the punishment of the grave.",
           "русский": "Я удаляюсь с Твоей помощью от мучений в могиле,",
           "кыргыз": "Жана кабыр азабынан да Сага сактанамын."
@@ -3053,7 +3053,7 @@
           "lineNumber": "8",
           "transcription_latin": "Lā ilāha illā anta",
           "transcription_cyrillic": "ла илааҳа иллаа анта",
-          "arabic": "لا إلهَ إلاّ أَنْـتَ.",
+          "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ.",
           "english": "There is none worthy of worship but You.",
           "русский": "Нет бога, кроме Тебя Одного».",
           "кыргыз": "Сенден башка ибадатка татыктуу эч ким жок."
@@ -3065,7 +3065,7 @@
           "lineNumber": "1",
           "transcription_latin": "Ḥasbīya Allāh, lā ilāha illā huwa",
           "transcription_cyrillic": "Ҳасбииаллоҳу ла илааҳа иллаа ҳува, 'алайҳи таваккалту",
-          "arabic": "حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ",
+          "arabic": "حَسْبِيَ اللهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ،",
           "english": "Allah is sufficient for me. There is none worthy of worship but Him. I have placed my trust in Him,",
           "русский": "«Мне достаточно Всевышнего. Нет бога, кроме Него. На Него я положился, и Он — Господь великого Трона»",
           "кыргыз": "Аллах мага жетиштүү, Андан башка ибадатка татыктуу эч ким жок. Мен Ага гана таянам."
@@ -3077,7 +3077,7 @@
           "lineNumber": "2",
           "transcription_latin": "Alayhi tawakkaltu",
           "transcription_cyrillic": "ва ҳува раббул-'аршил-'азийм",
-          "arabic": "وَهُوَ رَبُّ العَرْشِ العَظـيم.",
+          "arabic": "وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.",
           "english": "He is Lord of the Majestic Throne.",
           "русский": "И Он – Господь великого Трона.",
           "кыргыз": "Анткени Ал – улуу Тактынын, улуу Тактынын Эгеси."
@@ -3089,7 +3089,7 @@
           "lineNumber": "1",
           "transcription_latin": "Wa huwa rabbu al-'arshi al-'aẓīm",
           "transcription_cyrillic": "А'уузу би калимаатил-лааҳит-тааммаати мин шарри маа холақ",
-          "arabic": "أَعـوذُ بِكَلِمـاتِ اللّهِ التّـامّـاتِ مِنْ شَـرِّ ما خَلَـق.",
+          "arabic": "أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
           "english": "I seek refuge in the Perfect Words of Allah from the evil of what He has created.",
           "русский": "Прибегаю к совершенным Словам Аллаха от зла того, что Он создал.",
           "кыргыз": "Жараткан нерселеринин жамандыгынан Аллахтын кемчиликсиз сөздөрүнө (аяттарына, сыпаттарына жана ысымдарына) баш калкалаймын."
@@ -3257,7 +3257,7 @@
           "lineNumber": "1",
           "transcription_latin": "Yā ḥayyu yā qayyūmu biraḥmatika astaghīthu",
           "transcription_cyrillic": "Йаа Ҳаййу, Йаа Қоййуму, би раҳматика астағийсу",
-          "arabic": "يا حَـيُّ يا قَيّـومُ بِـرَحْمَـتِكِ أَسْتَـغـيث،",
+          "arabic": "يا حَـيُّ يا قَيّـومُ بِـرَحْمَـتِكَ أَسْتَـغـيث،",
           "english": "O Ever-Living One, O Eternal One, by Your mercy I call on You",
           "русский": "О Живой, о Вечносущий, милостью Твоей я взываю о помощи,",
           "кыргыз": "Оо, Түбөлүк Тирүү, Оо, Түбөлүк Туруучу! Сенин ырайымың менен жардам сураймын."
