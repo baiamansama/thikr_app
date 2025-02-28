@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useCallback, useMemo, forwardRef, Ref, useState } from "react";
+import surah_namesData from "../app/surah_names.json";
+import periodsData from "../app/periods.json";
 
 interface Translation {
   [language: string]: string;
@@ -211,6 +213,67 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       [isEnglish, isRussianOrKyrgyz]
     );
 
+    const handleShare = useCallback(() => {
+      if (!navigator.share) return;
+
+      let shareText = azkar.lines.map((line) => line.arabic).join("\n\n");
+
+      // Add category-specific data
+      if (selectedCategory === "duas") {
+        const period = periodsData.find((p) => p.text_id === azkar.id);
+        if (period) {
+          const periodTranslation =
+            period[language as keyof typeof period] || period.arabic;
+          shareText = `${periodTranslation}\n\n${shareText}`;
+        }
+      } else if (selectedCategory === "surahs") {
+        const surah = surah_namesData.find((s) => s.surah_id === azkar.id);
+        if (surah) {
+          const surahName =
+            surah[language as keyof typeof surah] || surah.arabic;
+          shareText = `${surahName}\n\n${shareText}`;
+        }
+      }
+
+      // Include transcription if toggled
+      if (showTranscription && hasTranscription) {
+        const transcriptions = azkar.lines
+          .map((line) => getTranscriptionText(line))
+          .join("\n\n");
+        shareText += `\n\n${transcriptions}`;
+      }
+
+      // Include translation if toggled
+      if (showTranslation && language !== "عربي") {
+        const translations = azkar.lines
+          .map((line) => line.translations[language])
+          .filter(Boolean)
+          .join("\n\n");
+        if (translations) {
+          shareText += `\n\n${translations}`;
+        }
+      }
+
+      navigator
+        .share({
+          text: shareText,
+          url: "https://azkar.link/",
+        })
+        .catch((err) => {
+          if (err.name !== "AbortError") {
+            console.error("Share failed:", err);
+          }
+        });
+    }, [
+      azkar,
+      selectedCategory,
+      language,
+      showTranslation,
+      showTranscription,
+      hasTranscription,
+      getTranscriptionText,
+    ]);
+
     if (isPlayerDrawer) {
       return (
         <div className="flex items-center justify-center gap-4 p-4">
@@ -413,21 +476,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
           )}
 
           <button
-            onClick={() => {
-              if (navigator.share) {
-                navigator
-                  .share({
-                    title: "Azkar",
-                    text: azkar.lines.map((line) => line.arabic).join("\n\n"),
-                    url: "https://thikrapp.vercel.app/",
-                  })
-                  .catch((err) => {
-                    if (err.name !== "AbortError") {
-                      console.error("Share failed:", err);
-                    }
-                  });
-              }
-            }}
+            onClick={handleShare}
             aria-label="Share"
             className={buttonClassNames}
           >
