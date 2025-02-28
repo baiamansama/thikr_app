@@ -36,6 +36,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Analytics } from "@vercel/analytics/react";
+
 interface Translation {
   [language: string]: string;
 }
@@ -168,10 +169,12 @@ export default function HomePage() {
     availableAudios: new Set<string>(),
     currentLineIndex: -1,
   });
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const isMounted = useRef(false);
   const drawerOpenRef = useRef(drawerOpen);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioAzkarIdRef = useRef<string | null>(null);
   const [playbackRate, setPlaybackRate] = useState(1);
@@ -260,6 +263,13 @@ export default function HomePage() {
 
   const handleCategoryChange = useCallback((categoryId: string) => {
     setDb((prev) => ({ ...prev, selectedCategory: categoryId }));
+    setActiveCardIndex(0);
+    requestAnimationFrame(() => {
+      if (containerRef.current) {
+        containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
   }, []);
 
   const updateCounter = useCallback((azkarId: string, newCount: number) => {
@@ -509,10 +519,34 @@ export default function HomePage() {
     };
   }, [groupedAzkars, selectedCategory]);
 
-  // Scroll to top when category changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [selectedCategory]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = cardRefs.current.findIndex(
+              (ref) => ref === entry.target
+            );
+            setActiveCardIndex(index);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.6,
+      }
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      cardRefs.current.forEach((card) => {
+        if (card) observer.unobserve(card);
+      });
+    };
+  }, [groupedAzkars]);
 
   if (!hasMounted || !selectedCategoryData) return null;
 
@@ -520,160 +554,160 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="container mx-auto px-0 py-6 transition-colors">
-        <div style={{ paddingBottom: "120px" }}>
-          <header className="mb-8 text-center py-4 relative">
-            <div className="flex items-center justify-center relative">
-              <h1
-                className="text-4xl font-extrabold text-[var(--card-text)]"
-                dir={language === "عربي" ? "rtl" : "ltr"}
-              >
-                {selectedCategoryData.translations[language] ||
-                  selectedCategoryData.id}
-              </h1>
-              {categoryInfo && (
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="absolute right-2 top-1/2 transform -translate-y-2/3 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80 rounded-full"
-                    >
-                      <span className="material-icons-round text-2xl">
-                        info
-                      </span>
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="w-[90%] max-w-lg bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] rounded-xl shadow-lg p-4">
-                    <DialogHeader>
-                      <DialogTitle className="text-lg font-semibold text-center">
-                        {selectedCategoryData.translations[language] ||
-                          selectedCategoryData.id}
-                      </DialogTitle>
-                    </DialogHeader>
-                    <div
-                      className="text-sm leading-relaxed whitespace-pre-wrap"
-                      dir={language === "عربي" ? "rtl" : "ltr"}
-                    >
-                      {language === "عربي" && categoryInfo.arabic}
-                      {language === "english" && categoryInfo.english}
-                      {language === "русский" && categoryInfo.русский}
-                      {language === "кыргыз" && categoryInfo.кыргыз}
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              )}
-            </div>
-            {(selectedCategory === "morning" ||
-              selectedCategory === "evening") && (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  const newCounters = { ...db.counters };
-                  groupedAzkars.forEach((azkar) => {
-                    newCounters[azkar.id] = 0;
-                  });
-                  setDb((prev) => ({
-                    ...prev,
-                    counters: newCounters,
-                  }));
-                  setClearHistoryClicked(true);
-                  setTimeout(() => setClearHistoryClicked(false), 200);
-                }}
-                className={`mt-5 transition-colors px-3 py-1 rounded border ${
-                  clearHistoryClicked
-                    ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                    : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-                }`}
-              >
-                {data.uiTranslations.actions.clean_history[language] ||
-                  "🗑️ Clear History"}
-              </Button>
+      <div
+        ref={containerRef}
+        className="container mx-auto px-0 py-6 transition-colors"
+        style={{ paddingBottom: "120px" }}
+      >
+        <header className="mb-8 text-center py-4 relative">
+          <div className="flex items-center justify-center relative">
+            <h1
+              className="text-4xl font-extrabold text-[var(--card-text)]"
+              dir={language === "عربي" ? "rtl" : "ltr"}
+            >
+              {selectedCategoryData.translations[language] ||
+                selectedCategoryData.id}
+            </h1>
+            {categoryInfo && (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="absolute right-2 top-1/2 transform -translate-y-2/3 p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80 rounded-full"
+                  >
+                    <span className="material-icons-round text-2xl">info</span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="w-[90%] max-w-lg bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] rounded-xl shadow-lg p-4">
+                  <DialogHeader>
+                    <DialogTitle className="text-lg font-semibold text-center">
+                      {selectedCategoryData.translations[language] ||
+                        selectedCategoryData.id}
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div
+                    className="text-sm leading-relaxed whitespace-pre-wrap"
+                    dir={language === "عربي" ? "rtl" : "ltr"}
+                  >
+                    {language === "عربي" && categoryInfo.arabic}
+                    {language === "english" && categoryInfo.english}
+                    {language === "русский" && categoryInfo.русский}
+                    {language === "кыргыз" && categoryInfo.кыргыз}
+                  </div>
+                </DialogContent>
+              </Dialog>
             )}
-          </header>
-          <section className="grid grid-cols-1 gap-6 mt-6">
-            {groupedAzkars.map((azkar, index) => {
-              const virtue = selectedCategoryData.virtues.find(
-                (v) => v.azkar_id === azkar.id
-              );
-              const hasAudio = audioState.availableAudios.has(azkar.id);
-              const isFavorite = (favorites[selectedCategory] || new Set()).has(
-                azkar.id
-              );
-              const audioSrc = hasAudio
-                ? `/audio/${azkar.id}.${
-                    selectedCategory === "surahs" ? "mp3" : "m4a"
-                  }`
-                : undefined;
+          </div>
+          {(selectedCategory === "morning" ||
+            selectedCategory === "evening") && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                const newCounters = { ...db.counters };
+                groupedAzkars.forEach((azkar) => {
+                  newCounters[azkar.id] = 0;
+                });
+                setDb((prev) => ({
+                  ...prev,
+                  counters: newCounters,
+                }));
+                setClearHistoryClicked(true);
+                setTimeout(() => setClearHistoryClicked(false), 200);
+              }}
+              className={`mt-5 transition-colors px-3 py-1 rounded border ${
+                clearHistoryClicked
+                  ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                  : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+              }`}
+            >
+              {data.uiTranslations.actions.clean_history[language] ||
+                "🗑️ Clear History"}
+            </Button>
+          )}
+        </header>
+        <section className="grid grid-cols-1 gap-6 mt-6">
+          {groupedAzkars.map((azkar, index) => {
+            const virtue = selectedCategoryData.virtues.find(
+              (v) => v.azkar_id === azkar.id
+            );
+            const hasAudio = audioState.availableAudios.has(azkar.id);
+            const isFavorite = (favorites[selectedCategory] || new Set()).has(
+              azkar.id
+            );
+            const audioSrc = hasAudio
+              ? `/audio/${azkar.id}.${
+                  selectedCategory === "surahs" ? "mp3" : "m4a"
+                }`
+              : undefined;
 
-              const surah_names =
-                selectedCategory === "surahs"
-                  ? surahs.find((s) => s.surah_id === azkar.id)
-                  : null;
-              const period_info =
-                selectedCategory === "duas" &&
-                periods.find((period) => period.text_id === azkar.id)
-                  ? periods.find((period) => period.text_id === azkar.id)
-                  : null;
+            const surah_names =
+              selectedCategory === "surahs"
+                ? surahs.find((s) => s.surah_id === azkar.id)
+                : null;
+            const period_info =
+              selectedCategory === "duas" &&
+              periods.find((period) => period.text_id === azkar.id)
+                ? periods.find((period) => period.text_id === azkar.id)
+                : null;
 
-              return (
-                <div
-                  key={azkar.id}
-                  ref={(el) => {
-                    cardRefs.current[index] = el;
-                  }}
-                  className="relative z-10 w-full mx-0"
-                >
-                  {surah_names && selectedCategory === "surahs" && (
-                    <h2
-                      className="text-2xl font-semibold text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2"
-                      dir={language === "عربي" ? "rtl" : "ltr"}
-                    >
-                      {surah_names[language as keyof typeof surah_names] ||
-                        surah_names.arabic}
-                    </h2>
-                  )}
-                  {period_info && selectedCategory === "duas" && (
-                    <h2
-                      className="text-xl font-medium text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2 bg-[var(--card-bg)]/80 rounded-t-md"
-                      dir={language === "عربي" ? "rtl" : "ltr"}
-                    >
-                      {period_info[language as keyof typeof period_info] ||
-                        period_info.arabic}
-                    </h2>
-                  )}
-                  <AzkarCard
-                    azkar={azkar}
-                    language={language}
-                    uiTranslations={data.uiTranslations}
-                    counter={
-                      selectedCategory === "duas" ? 0 : counters[azkar.id] || 0
-                    }
-                    updateCounter={updateCounter}
-                    virtue={virtue}
-                    audioSrc={audioSrc}
-                    isCurrentlyPlaying={
-                      audioState.currentlyPlayingId === azkar.id
-                    }
-                    currentLineIndex={
-                      audioState.lastPlayedId === azkar.id
-                        ? audioState.currentLineIndex
-                        : -1
-                    }
-                    onAudioControl={handleAudioControl}
-                    playbackRate={playbackRate}
-                    isRepeat={isRepeat}
-                    onSpeedChange={handleSpeedChange}
-                    onRepeatToggle={handleRepeatToggle}
-                    onSkip={handleSkip}
-                    selectedCategory={selectedCategory}
-                    isFavorite={isFavorite}
-                    toggleFavorite={toggleFavorite}
-                  />
-                </div>
-              );
-            })}
-          </section>
-        </div>
+            return (
+              <div
+                key={azkar.id}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
+                className="relative z-10 w-full mx-0"
+              >
+                {surah_names && selectedCategory === "surahs" && (
+                  <h2
+                    className="text-2xl font-semibold text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2"
+                    dir={language === "عربي" ? "rtl" : "ltr"}
+                  >
+                    {surah_names[language as keyof typeof surah_names] ||
+                      surah_names.arabic}
+                  </h2>
+                )}
+                {period_info && selectedCategory === "duas" && (
+                  <h2
+                    className="text-xl font-medium text-[var(--card-text)] mb-2 px-4 border-b-2 border-[var(--card-border)] pb-2 bg-[var(--card-bg)]/80 rounded-t-md"
+                    dir={language === "عربي" ? "rtl" : "ltr"}
+                  >
+                    {period_info[language as keyof typeof period_info] ||
+                      period_info.arabic}
+                  </h2>
+                )}
+                <AzkarCard
+                  azkar={azkar}
+                  language={language}
+                  uiTranslations={data.uiTranslations}
+                  counter={
+                    selectedCategory === "duas" ? 0 : counters[azkar.id] || 0
+                  }
+                  updateCounter={updateCounter}
+                  virtue={virtue}
+                  audioSrc={audioSrc}
+                  isCurrentlyPlaying={
+                    audioState.currentlyPlayingId === azkar.id
+                  }
+                  currentLineIndex={
+                    audioState.lastPlayedId === azkar.id
+                      ? audioState.currentLineIndex
+                      : -1
+                  }
+                  onAudioControl={handleAudioControl}
+                  playbackRate={playbackRate}
+                  isRepeat={isRepeat}
+                  onSpeedChange={handleSpeedChange}
+                  onRepeatToggle={handleRepeatToggle}
+                  onSkip={handleSkip}
+                  selectedCategory={selectedCategory}
+                  isFavorite={isFavorite}
+                  toggleFavorite={toggleFavorite}
+                />
+              </div>
+            );
+          })}
+        </section>
       </div>
 
       <div className="fixed bottom-14 left-0 right-0 flex justify-end px-4 gap-2 z-50">
@@ -888,6 +922,7 @@ export default function HomePage() {
             const isFavorite = (favorites[selectedCategory] || new Set()).has(
               azkar.id
             );
+            const isActive = index === activeCardIndex;
 
             return (
               <button
@@ -898,7 +933,11 @@ export default function HomePage() {
                     block: "start",
                   })
                 }
-                className="relative w-10 h-10 flex-shrink-0 border border-[var(--card-text)] rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200"
+                className={`relative w-10 h-10 flex-shrink-0 border rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200 ${
+                  isActive
+                    ? "border-[#606c38] shadow-lg shadow-[#606c38]/30 scale-110"
+                    : "border-[var(--card-text)]"
+                }`}
               >
                 <div
                   className={`absolute left-0 top-0 h-full transition-all duration-200 ${
@@ -906,12 +945,15 @@ export default function HomePage() {
                   }`}
                   style={{ width: `${progress * 100}%` }}
                 />
+                {isActive && (
+                  <div className="absolute inset-0 bg-[#606c38]/20 animate-pulse rounded-full" />
+                )}
                 <span
                   className={`relative z-10 ${
                     isFavorite
                       ? "material-icons-round text-[var(--card-text)] text-xl"
                       : "text-[var(--card-text)]"
-                  }`}
+                  } ${isActive ? "font-extrabold" : ""}`}
                 >
                   {isFavorite
                     ? progress === 1
