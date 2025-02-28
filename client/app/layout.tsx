@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         url: "https://azkar.link/preview/english.png",
         width: 1200,
         height: 630,
-        alt: "Thikr App Preview",
+        alt: "Azkar App Preview",
       },
     ],
     locale: "en_US",
