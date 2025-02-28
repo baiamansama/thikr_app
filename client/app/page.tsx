@@ -199,6 +199,24 @@ export default function HomePage() {
     });
   }, []);
 
+  const handleShare = useCallback(() => {
+    if (navigator.share) {
+      navigator
+        .share({
+          url: "https://azkar.link",
+        })
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            console.error("Error sharing:", error);
+          }
+        });
+    } else {
+      alert(
+        "Sharing is not supported in your browser. You can copy this URL: https://azkar.link"
+      );
+    }
+  }, []);
+
   useEffect(() => {
     setHasMounted(true);
     if (typeof window !== "undefined") {
@@ -215,6 +233,7 @@ export default function HomePage() {
       }
     }
   }, []);
+
   useEffect(() => {
     const paginationContainer = document.querySelector(".overflow-x-auto");
     if (!paginationContainer) return;
@@ -848,14 +867,32 @@ export default function HomePage() {
             dir={language === "عربي" ? "rtl" : "ltr"}
           >
             <DrawerHeader>
-              <div className="flex justify-center">
-                <DrawerTitle className="text-center">
+              <div className="flex justify-between items-center w-full">
+                <Button
+                  variant="ghost"
+                  className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                  onClick={() =>
+                    (window.location.href = "https://wa.me/821097319912")
+                  }
+                >
+                  <span className="material-icons-round text-2xl">mail</span>
+                </Button>
+                <DrawerTitle className="text-center flex-1">
                   {data.uiTranslations.settings[language] || "Settings"}
                 </DrawerTitle>
-                <DrawerDescription className="sr-only">
-                  Settings options for language, theme, and categories
-                </DrawerDescription>
+                <Button
+                  variant="ghost"
+                  className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                  onClick={handleShare}
+                >
+                  <span className="material-icons-round text-2xl">
+                    ios_share
+                  </span>
+                </Button>
               </div>
+              <DrawerDescription className="sr-only">
+                Settings options for language, theme, and categories
+              </DrawerDescription>
             </DrawerHeader>
             <div className="flex flex-col">
               <div className="p-4">
