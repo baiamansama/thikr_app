@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useCallback, useMemo, forwardRef, Ref, useState } from "react";
-import surah_namesData from "../app/surah_names.json";
-import periodsData from "../app/periods.json";
+import surah_namesData from "../public/data/surah_names.json";
+import periodsData from "../public/data/periods.json";
 
 interface Translation {
   [language: string]: string;

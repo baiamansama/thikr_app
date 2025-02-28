@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     url: "https://azkar.link",
     images: [
       {
-        url: "https://azkar.link/preview/english.png",
+        url: "https://azkar.link/preview/all_in_one.png",
         width: 1200,
         height: 630,
-        alt: "Azkar App Preview",
+        alt: "Azkar and Duas App Preview",
       },
     ],
     locale: "en_US",
@@ -42,6 +42,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
           rel="stylesheet"
         />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#606c38" />
+        <link rel="apple-touch-icon" href="/icons/logo_192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

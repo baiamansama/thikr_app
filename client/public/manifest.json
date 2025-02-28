@@ -1,0 +1,23 @@
+{
+  "name": "Azkar & Duas",
+  "short_name": "Зикир",
+  "description": "Мусулманга зарыл болгон зикирлер жана дубалар топтому",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#606c38",
+  "icons": [
+    {
+      "src": "/icons/logo_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/logo_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait",
+  "scope": "/"
+}

@@ -7,17 +7,16 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import azkarsData from "./azkars.json";
-import surah_namesData from "./surah_names.json";
-import periodsData from "./periods.json";
-import infoData from "./info.json";
+import azkarsData from "../public/data/azkars.json";
+import surah_namesData from "../public/data/surah_names.json";
+import periodsData from "../public/data/periods.json";
+import infoData from "../public/data/info.json";
 import AzkarCard from "./../components/AzkarCard";
 import {
   Drawer,
   DrawerTrigger,
   DrawerContent,
   DrawerHeader,
-  DrawerTitle,
   DrawerClose,
   DrawerDescription,
 } from "@/components/ui/drawer";
@@ -39,6 +38,15 @@ import { Analytics } from "@vercel/analytics/react";
 
 interface Translation {
   [language: string]: string;
+}
+
+interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: string[];
+  readonly userChoice: Promise<{
+    outcome: "accepted" | "dismissed";
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
 }
 
 interface IMetadata {
@@ -184,6 +192,8 @@ export default function HomePage() {
   >(null);
   const timeUpdateListener = useRef<(() => void) | null>(null);
   const endedListener = useRef<(() => void) | null>(null);
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
 
   const handleSpeedChange = useCallback(() => {
     const newRate = playbackRate === 1 ? 1.5 : playbackRate === 1.5 ? 2 : 1;
@@ -215,6 +225,40 @@ export default function HomePage() {
         "Sharing is not supported in your browser. You can copy this URL: https://azkar.link"
       );
     }
+  }, []);
+
+  // Install button handler
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+
+    await deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+
+    if (choiceResult.outcome === "accepted") {
+      console.log("User accepted the install prompt");
+    } else {
+      console.log("User dismissed the install prompt");
+    }
+
+    setDeferredPrompt(null); // Reset after use
+  };
+
+  // Install Prompt Logic (always available)
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      console.log("Install prompt available");
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+    };
   }, []);
 
   useEffect(() => {
@@ -593,6 +637,14 @@ export default function HomePage() {
 
   const categoryInfo = info.find((item) => item.category === selectedCategory);
 
+  // Define translations for "Install App"
+  const installAppTranslations: Translation = {
+    english: "Install App",
+    русский: "Установить приложение",
+    кыргыз: "Колдонмону орнотуу",
+    عربي: "تثبيت التطبيق",
+  };
+
   return (
     <>
       <div
@@ -625,6 +677,13 @@ export default function HomePage() {
                       {selectedCategoryData.translations[language] ||
                         selectedCategoryData.id}
                     </DialogTitle>
+                    {/* Add VisuallyHidden DialogTitle for accessibility */}
+                    <VisuallyHidden>
+                      <DialogTitle>
+                        {selectedCategoryData.translations[language] ||
+                          selectedCategoryData.id}
+                      </DialogTitle>
+                    </VisuallyHidden>
                   </DialogHeader>
                   <div
                     className="text-sm leading-relaxed whitespace-pre-wrap"
@@ -868,7 +927,7 @@ export default function HomePage() {
             dir={language === "عربي" ? "rtl" : "ltr"}
           >
             <DrawerHeader>
-              <div className="flex justify-between items-center w-full">
+              <div className="flex justify-between items-center w-full px-4">
                 <Button
                   variant="ghost"
                   className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
@@ -878,9 +937,21 @@ export default function HomePage() {
                 >
                   <span className="material-icons-round text-2xl">mail</span>
                 </Button>
-                <DrawerTitle className="text-center flex-1">
-                  {data.uiTranslations.settings[language] || "Settings"}
-                </DrawerTitle>
+                {/* Install App Button (Middle) */}
+                {deferredPrompt && (
+                  <Button
+                    variant="ghost"
+                    className="flex flex-col items-center p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                    onClick={handleInstallClick}
+                  >
+                    <span className="material-icons-round text-2xl">
+                      get_app
+                    </span>
+                    <span className="text-xs mt-1">
+                      {installAppTranslations[language] || "Install App"}
+                    </span>
+                  </Button>
+                )}
                 <Button
                   variant="ghost"
                   className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
@@ -963,7 +1034,7 @@ export default function HomePage() {
       </div>
 
       <div
-        className={`fixed bottom-0 left-0 right-0 p-2 shadow-inner z-20 ${
+        className={`fixed bottom-0 left-0 right-0 p-4 shadow-inner z-20 ${
           computedTheme === "light"
             ? "bg-[#ffffff]"
             : computedTheme === "dark"
