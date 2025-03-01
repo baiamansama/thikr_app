@@ -173,7 +173,6 @@ function HomePageContent() {
 
   const [hasMounted, setHasMounted] = useState(false);
   const [db, setDb] = useState<IThikrDB>(() => {
-    // Initialize db with URL params if present, otherwise use INITIAL_DB
     const specificLanguage = searchParams.get("lang");
     const specificCategory = searchParams.get("category");
 
@@ -222,7 +221,6 @@ function HomePageContent() {
   const specificLanguage = searchParams.get("lang");
   const specificCategory = searchParams.get("category");
 
-  // Sync db with URL params on mount and when params change
   useEffect(() => {
     if (!hasMounted) return;
 
@@ -262,7 +260,6 @@ function HomePageContent() {
     hasMounted,
     categories,
     data.metadata.supportedLanguages,
-    db,
   ]);
 
   const handleSpeedChange = useCallback(() => {
@@ -339,11 +336,10 @@ function HomePageContent() {
         Object.keys(favorites).forEach((key) => {
           favorites[key] = new Set(favorites[key]);
         });
-        // Only apply stored DB if no specific URL params are present
         if (!specificAzkarId && !specificLanguage && !specificCategory) {
           setDb({ ...parsedDB, favorites });
         }
-        setDrawerOpen(!storedDB); // Open drawer for new users
+        setDrawerOpen(!storedDB);
       }
     }
   }, []);
@@ -520,7 +516,6 @@ function HomePageContent() {
     let result = Array.from(groups.values());
     if (specificAzkarId) {
       result = result.filter((azkar) => azkar.id === specificAzkarId);
-      // Scroll to the card if it exists
       if (result.length > 0 && cardRefs.current[0]) {
         requestAnimationFrame(() => {
           cardRefs.current[0]?.scrollIntoView({
@@ -739,12 +734,20 @@ function HomePageContent() {
     عربي: "تثبيت التطبيق",
   };
 
+  // Creative CTA translations to invite users to explore azkar.link
+  const exploreAzkarTranslations: Translation = {
+    english: "🌟 Discover More Blessings at Azkar.link! 🌟",
+    русский: "🌟 Откройте больше благословений на Azkar.link! 🌟",
+    кыргыз: "🌟 Azkar.link сайтында көбүрөөк береке табыңыз! 🌟",
+    عربي: "🌟 اكتشف المزيد من البركات على Azkar.link! 🌟",
+  };
+
   return (
     <>
       <div
         ref={containerRef}
         className="container mx-auto px-0 py-6 transition-colors"
-        style={{ paddingBottom: specificAzkarId ? "20px" : "120px" }}
+        style={{ paddingBottom: specificAzkarId ? "80px" : "120px" }}
       >
         <header className="mb-8 text-center py-4 relative">
           <div className="flex items-center justify-center relative">
@@ -902,6 +905,20 @@ function HomePageContent() {
             );
           })}
         </section>
+
+        {/* Creative CTA to explore azkar.link when viewing a specific card */}
+        {specificAzkarId && (
+          <div className="flex justify-center mt-6">
+            <Button
+              variant="outline"
+              onClick={() => router.push("/")}
+              className="bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80 px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg text-lg font-semibold"
+            >
+              {exploreAzkarTranslations[language] ||
+                exploreAzkarTranslations["english"]}
+            </Button>
+          </div>
+        )}
       </div>
 
       {!specificAzkarId && (
