@@ -218,7 +218,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
 
       let shareText = azkar.lines.map((line) => line.arabic).join("\n\n");
 
-      // Add category-specific data
       if (selectedCategory === "duas") {
         const period = periodsData.find((p) => p.text_id === azkar.id);
         if (period) {
@@ -235,7 +234,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         }
       }
 
-      // Always include transcription if available
       if (hasTranscription) {
         const transcriptions = azkar.lines
           .map((line) => getTranscriptionText(line))
@@ -243,7 +241,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         shareText += `\n\n----\n${transcriptions}`;
       }
 
-      // Always include translation if available and not Arabic
       if (language !== "عربي") {
         const translations = azkar.lines
           .map((line) => line.translations[language])
@@ -254,13 +251,16 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         }
       }
 
-      // Include virtues if available
       if (shouldRenderVirtues) {
         shareText += `\n\n----\n${virtuesLabel}\n${virtueText}`;
       }
 
-      // Add link at the end
-      shareText += "\n\n----\nhttps://azkar.link/";
+      const deepLink = `https://azkar.link/?id=${encodeURIComponent(
+        azkar.id
+      )}&lang=${encodeURIComponent(language)}&category=${encodeURIComponent(
+        selectedCategory
+      )}`;
+      shareText += `\n\n----\n${deepLink}`;
 
       navigator
         .share({

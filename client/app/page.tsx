@@ -6,7 +6,9 @@ import React, {
   useCallback,
   useEffect,
   useRef,
+  Suspense,
 } from "react";
+import { useRouter, useSearchParams } from "next/navigation"; // Import Next.js routing hooks
 import azkarsData from "../public/data/azkars.json";
 import surah_namesData from "../public/data/surah_names.json";
 import periodsData from "../public/data/periods.json";
@@ -160,15 +162,35 @@ const INITIAL_DB: IThikrDB = {
   favorites: {},
 };
 
-export default function HomePage() {
+function HomePageContent() {
   const data: IData = azkarsData;
   const surahs = surah_namesData;
   const periods: IPeriod[] = periodsData;
   const info: IInfo[] = infoData;
   const categories = useMemo(() => data.categories, [data]);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [hasMounted, setHasMounted] = useState(false);
-  const [db, setDb] = useState<IThikrDB>(INITIAL_DB);
+  const [db, setDb] = useState<IThikrDB>(() => {
+    const specificLanguage = searchParams.get("lang");
+    const specificCategory = searchParams.get("category");
+
+    const initial = { ...INITIAL_DB };
+    if (
+      specificCategory &&
+      categories.some((cat) => cat.id === specificCategory)
+    ) {
+      initial.selectedCategory = specificCategory;
+    }
+    if (
+      specificLanguage &&
+      data.metadata.supportedLanguages.includes(specificLanguage)
+    ) {
+      initial.language = specificLanguage;
+    }
+    return initial;
+  });
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [clearHistoryClicked, setClearHistoryClicked] = useState(false);
   const [audioState, setAudioState] = useState<AudioState>({
@@ -195,6 +217,53 @@ export default function HomePage() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
 
+  const specificAzkarId = searchParams.get("id");
+  const specificLanguage = searchParams.get("lang");
+  const specificCategory = searchParams.get("category");
+
+  // Sync db with URL params on mount and when params change
+  useEffect(() => {
+    if (!hasMounted) return;
+
+    const newDb = { ...db };
+    let updated = false;
+
+    if (
+      specificCategory &&
+      categories.some((cat) => cat.id === specificCategory) &&
+      specificCategory !== db.selectedCategory
+    ) {
+      newDb.selectedCategory = specificCategory;
+      updated = true;
+    }
+    if (
+      specificLanguage &&
+      data.metadata.supportedLanguages.includes(specificLanguage) &&
+      specificLanguage !== db.language
+    ) {
+      newDb.language = specificLanguage;
+      updated = true;
+    }
+
+    if (updated) {
+      setDb(newDb);
+      setActiveCardIndex(0);
+      requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+    }
+  }, [
+    specificCategory,
+    specificLanguage,
+    hasMounted,
+    categories,
+    data.metadata.supportedLanguages,
+    db,
+  ]);
+
   const handleSpeedChange = useCallback(() => {
     const newRate = playbackRate === 1 ? 1.5 : playbackRate === 1.5 ? 2 : 1;
     setPlaybackRate(newRate);
@@ -207,7 +276,7 @@ export default function HomePage() {
       if (audioRef.current) audioRef.current.loop = newRepeat;
       return newRepeat;
     });
-  }, []);
+  }, [specificAzkarId, specificCategory, specificLanguage]);
 
   const handleShare = useCallback(() => {
     if (navigator.share) {
@@ -227,7 +296,6 @@ export default function HomePage() {
     }
   }, []);
 
-  // Install button handler
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;
 
@@ -240,10 +308,9 @@ export default function HomePage() {
       console.log("User dismissed the install prompt");
     }
 
-    setDeferredPrompt(null); // Reset after use
+    setDeferredPrompt(null);
   };
 
-  // Install Prompt Logic (always available)
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
@@ -271,16 +338,18 @@ export default function HomePage() {
         Object.keys(favorites).forEach((key) => {
           favorites[key] = new Set(favorites[key]);
         });
-        setDb({ ...parsedDB, favorites });
-      } else {
-        setDrawerOpen(true);
+        // Only apply stored DB if no specific URL params are present
+        if (!specificAzkarId && !specificLanguage && !specificCategory) {
+          setDb({ ...parsedDB, favorites });
+        }
+        setDrawerOpen(!storedDB); // Open drawer for new users
       }
     }
   }, []);
 
   useEffect(() => {
     const paginationContainer = document.querySelector(".overflow-x-auto");
-    if (!paginationContainer) return;
+    if (!paginationContainer || specificAzkarId) return;
 
     const paginationButtons = paginationContainer.querySelectorAll("button");
     if (paginationButtons.length === 0) return;
@@ -298,7 +367,7 @@ export default function HomePage() {
       left: Math.max(0, scrollTo),
       behavior: "smooth",
     });
-  }, [activeCardIndex]);
+  }, [activeCardIndex, specificAzkarId]);
 
   useEffect(() => {
     drawerOpenRef.current = drawerOpen;
@@ -345,16 +414,22 @@ export default function HomePage() {
     setDb((prev) => ({ ...prev, theme: newTheme }));
   }, []);
 
-  const handleCategoryChange = useCallback((categoryId: string) => {
-    setDb((prev) => ({ ...prev, selectedCategory: categoryId }));
-    setActiveCardIndex(0);
-    requestAnimationFrame(() => {
-      if (containerRef.current) {
-        containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
-        window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleCategoryChange = useCallback(
+    (categoryId: string) => {
+      setDb((prev) => ({ ...prev, selectedCategory: categoryId }));
+      setActiveCardIndex(0);
+      requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+      if (specificAzkarId || specificLanguage || specificCategory) {
+        router.push("/", undefined);
       }
-    });
-  }, []);
+    },
+    [router, specificAzkarId, specificLanguage, specificCategory]
+  );
 
   const updateCounter = useCallback((azkarId: string, newCount: number) => {
     setDb((prev) => ({
@@ -383,7 +458,11 @@ export default function HomePage() {
     });
   }, []);
 
-  const { language, selectedCategory, theme, counters, favorites } = db;
+  const language = specificLanguage || db.language;
+  const selectedCategory = specificCategory || db.selectedCategory;
+  const theme = db.theme;
+  const counters = db.counters;
+  const favorites = db.favorites;
 
   const computedTheme = useMemo(() => {
     if (theme === "auto") {
@@ -437,8 +516,21 @@ export default function HomePage() {
       entry.lines.sort((a, b) => a.lineNumber - b.lineNumber);
     }
 
-    return Array.from(groups.values());
-  }, [selectedCategoryData, selectedCategory]);
+    let result = Array.from(groups.values());
+    if (specificAzkarId) {
+      result = result.filter((azkar) => azkar.id === specificAzkarId);
+      // Scroll to the card if it exists
+      if (result.length > 0 && cardRefs.current[0]) {
+        requestAnimationFrame(() => {
+          cardRefs.current[0]?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      }
+    }
+    return result;
+  }, [selectedCategoryData, selectedCategory, specificAzkarId]);
 
   const handleAudioControl = useCallback(
     (control: { azkarId: string; isPlaying: boolean; audioSrc?: string }) => {
@@ -604,6 +696,8 @@ export default function HomePage() {
   }, [groupedAzkars, selectedCategory]);
 
   useEffect(() => {
+    if (specificAzkarId) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -631,13 +725,12 @@ export default function HomePage() {
         if (card) observer.unobserve(card);
       });
     };
-  }, [groupedAzkars]);
+  }, [groupedAzkars, specificAzkarId]);
 
   if (!hasMounted || !selectedCategoryData) return null;
 
   const categoryInfo = info.find((item) => item.category === selectedCategory);
 
-  // Define translations for "Install App"
   const installAppTranslations: Translation = {
     english: "Install App",
     русский: "Установить приложение",
@@ -650,7 +743,7 @@ export default function HomePage() {
       <div
         ref={containerRef}
         className="container mx-auto px-0 py-6 transition-colors"
-        style={{ paddingBottom: "120px" }}
+        style={{ paddingBottom: specificAzkarId ? "20px" : "120px" }}
       >
         <header className="mb-8 text-center py-4 relative">
           <div className="flex items-center justify-center relative">
@@ -661,7 +754,7 @@ export default function HomePage() {
               {selectedCategoryData.translations[language] ||
                 selectedCategoryData.id}
             </h1>
-            {categoryInfo && (
+            {categoryInfo && !specificAzkarId && (
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
@@ -677,7 +770,6 @@ export default function HomePage() {
                       {selectedCategoryData.translations[language] ||
                         selectedCategoryData.id}
                     </DialogTitle>
-                    {/* Add VisuallyHidden DialogTitle for accessibility */}
                     <VisuallyHidden>
                       <DialogTitle>
                         {selectedCategoryData.translations[language] ||
@@ -698,32 +790,33 @@ export default function HomePage() {
               </Dialog>
             )}
           </div>
-          {(selectedCategory === "morning" ||
-            selectedCategory === "evening") && (
-            <Button
-              variant="outline"
-              onClick={() => {
-                const newCounters = { ...db.counters };
-                groupedAzkars.forEach((azkar) => {
-                  newCounters[azkar.id] = 0;
-                });
-                setDb((prev) => ({
-                  ...prev,
-                  counters: newCounters,
-                }));
-                setClearHistoryClicked(true);
-                setTimeout(() => setClearHistoryClicked(false), 200);
-              }}
-              className={`mt-5 transition-colors px-3 py-1 rounded border ${
-                clearHistoryClicked
-                  ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                  : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-              }`}
-            >
-              {data.uiTranslations.actions.clean_history[language] ||
-                "🗑️ Clear History"}
-            </Button>
-          )}
+          {!specificAzkarId &&
+            (selectedCategory === "morning" ||
+              selectedCategory === "evening") && (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  const newCounters = { ...db.counters };
+                  groupedAzkars.forEach((azkar) => {
+                    newCounters[azkar.id] = 0;
+                  });
+                  setDb((prev) => ({
+                    ...prev,
+                    counters: newCounters,
+                  }));
+                  setClearHistoryClicked(true);
+                  setTimeout(() => setClearHistoryClicked(false), 200);
+                }}
+                className={`mt-5 transition-colors px-3 py-1 rounded border ${
+                  clearHistoryClicked
+                    ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                    : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                }`}
+              >
+                {data.uiTranslations.actions.clean_history[language] ||
+                  "🗑️ Clear History"}
+              </Button>
+            )}
         </header>
         <section className="grid grid-cols-1 gap-6 mt-6">
           {groupedAzkars.map((azkar, index) => {
@@ -810,293 +903,308 @@ export default function HomePage() {
         </section>
       </div>
 
-      <div className="fixed bottom-14 left-0 right-0 flex justify-end px-4 gap-2 z-50">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              className={`p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)] relative overflow-hidden ${
-                isAudioPlaying && audioState.currentlyPlayingId
-                  ? "animate-pulse bg-[#606c38]/50 shadow-lg shadow-[#606c38]/30"
-                  : ""
-              }`}
-              disabled={!audioState.lastPlayedId}
-            >
-              <span className="material-icons-round text-2xl">radio</span>
-            </Button>
-          </PopoverTrigger>
-          {audioState.lastPlayedId && (
-            <PopoverContent
-              className="w-64 bg-[var(--card-bg)]/80 backdrop-blur-md border-[var(--card-border)]/50 text-[var(--card-text)] rounded-xl shadow-lg p-3"
-              align="end"
-            >
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between gap-2">
-                  <Button
-                    size="sm"
-                    className={`p-1 rounded-full transition-colors relative ${
-                      skipFeedback === "backward"
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
-                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
-                    }`}
-                    onClick={() => handleSkip("backward")}
-                  >
-                    <span className="material-icons-round text-lg text-[var(--card-text)]">
-                      skip_previous
-                    </span>
-                  </Button>
-
-                  <Button
-                    size="sm"
-                    className={`p-2 rounded-full transition-colors ${
-                      isAudioPlaying
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
-                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
-                    }`}
-                    onClick={() =>
-                      handleAudioControl({
-                        azkarId: audioState.lastPlayedId!,
-                        isPlaying: !isAudioPlaying,
-                        audioSrc: `/audio/${audioState.lastPlayedId}.${
-                          selectedCategory === "surahs" ? "mp3" : "m4a"
-                        }`,
-                      })
-                    }
-                  >
-                    <span className="material-icons-round text-xl text-[var(--card-text)]">
-                      {isAudioPlaying ? "pause" : "play_arrow"}
-                    </span>
-                  </Button>
-
-                  <Button
-                    size="sm"
-                    className={`p-1 rounded-full transition-colors relative ${
-                      skipFeedback === "forward"
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
-                        : "bg-transparent text-[var(--card-text)] hover:bg-[var(---card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
-                    }`}
-                    onClick={() => handleSkip("forward")}
-                  >
-                    <span className="material-icons-round text-lg text-[var(--card-text)]">
-                      skip_next
-                    </span>
-                  </Button>
-                </div>
-
-                <div className="flex justify-between text-xs">
-                  <Button
-                    size="sm"
-                    className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
-                      playbackRate !== 1
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
-                        : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
-                    }`}
-                    onClick={handleSpeedChange}
-                  >
-                    {playbackRate}x
-                  </Button>
-                  <Button
-                    size="sm"
-                    className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
-                      isRepeat
-                        ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
-                        : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
-                    }`}
-                    onClick={handleRepeatToggle}
-                  >
-                    <span className="material-icons-round text-lg text-[var(--card-text)]">
-                      repeat
-                    </span>
-                  </Button>
-                </div>
-              </div>
-            </PopoverContent>
-          )}
-        </Popover>
-        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
-          <DrawerTrigger asChild>
-            <Button
-              variant="outline"
-              className="p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)]"
-            >
-              <span className="material-icons-round text-2xl">settings</span>
-            </Button>
-          </DrawerTrigger>
-          <DrawerContent
-            className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]"
-            dir={language === "عربي" ? "rtl" : "ltr"}
-          >
-            <DrawerHeader>
-              <div className="flex justify-between items-center w-full px-4">
+      {!specificAzkarId && (
+        <>
+          <div className="fixed bottom-14 left-0 right-0 flex justify-end px-4 gap-2 z-50">
+            <Popover>
+              <PopoverTrigger asChild>
                 <Button
-                  variant="ghost"
-                  className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
-                  onClick={() =>
-                    (window.location.href = "https://wa.me/821097319912")
-                  }
+                  variant="outline"
+                  className={`p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)] relative overflow-hidden ${
+                    isAudioPlaying && audioState.currentlyPlayingId
+                      ? "animate-pulse bg-[#606c38]/50 shadow-lg shadow-[#606c38]/30"
+                      : ""
+                  }`}
+                  disabled={!audioState.lastPlayedId}
                 >
-                  <span className="material-icons-round text-2xl">mail</span>
+                  <span className="material-icons-round text-2xl">radio</span>
                 </Button>
-                {/* Install App Button (Middle) */}
-                {deferredPrompt && (
-                  <Button
-                    variant="ghost"
-                    className="flex flex-col items-center p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
-                    onClick={handleInstallClick}
-                  >
-                    <span className="material-icons-round text-2xl">
-                      get_app
-                    </span>
-                    <span className="text-xs mt-1">
-                      {installAppTranslations[language] || "Install App"}
-                    </span>
-                  </Button>
-                )}
+              </PopoverTrigger>
+              {audioState.lastPlayedId && (
+                <PopoverContent
+                  className="w-64 bg-[var(--card-bg)]/80 backdrop-blur-md border-[var(--card-border)]/50 text-[var(--card-text)] rounded-xl shadow-lg p-3"
+                  align="end"
+                >
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <Button
+                        size="sm"
+                        className={`p-1 rounded-full transition-colors relative ${
+                          skipFeedback === "backward"
+                            ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                            : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
+                        }`}
+                        onClick={() => handleSkip("backward")}
+                      >
+                        <span className="material-icons-round text-lg text-[var(--card-text)]">
+                          skip_previous
+                        </span>
+                      </Button>
+
+                      <Button
+                        size="sm"
+                        className={`p-2 rounded-full transition-colors ${
+                          isAudioPlaying
+                            ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                            : "bg-transparent text-[var(--card-text)] hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
+                        }`}
+                        onClick={() =>
+                          handleAudioControl({
+                            azkarId: audioState.lastPlayedId!,
+                            isPlaying: !isAudioPlaying,
+                            audioSrc: `/audio/${audioState.lastPlayedId}.${
+                              selectedCategory === "surahs" ? "mp3" : "m4a"
+                            }`,
+                          })
+                        }
+                      >
+                        <span className="material-icons-round text-xl text-[var(--card-text)]">
+                          {isAudioPlaying ? "pause" : "play_arrow"}
+                        </span>
+                      </Button>
+
+                      <Button
+                        size="sm"
+                        className={`p-1 rounded-full transition-colors relative ${
+                          skipFeedback === "forward"
+                            ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                            : "bg-transparent text-[var(--card-text)] hover:bg-[var(---card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
+                        }`}
+                        onClick={() => handleSkip("forward")}
+                      >
+                        <span className="material-icons-round text-lg text-[var(--card-text)]">
+                          skip_next
+                        </span>
+                      </Button>
+                    </div>
+
+                    <div className="flex justify-between text-xs">
+                      <Button
+                        size="sm"
+                        className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
+                          playbackRate !== 1
+                            ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                            : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
+                        }`}
+                        onClick={handleSpeedChange}
+                      >
+                        {playbackRate}x
+                      </Button>
+                      <Button
+                        size="sm"
+                        className={`p-1 rounded-full transition-colors text-[var(--card-text)] ${
+                          isRepeat
+                            ? "bg-[#606c38] text-white hover:bg-[#606c38]/90 active:bg-[#606c38]/90 focus:bg-[#606c38]/90"
+                            : "bg-transparent hover:bg-[var(--card-bg)]/70 active:bg-[var(--card-bg)]/70 focus:bg-[var(--card-bg)]/70"
+                        }`}
+                        onClick={handleRepeatToggle}
+                      >
+                        <span className="material-icons-round text-lg text-[var(--card-text)]">
+                          repeat
+                        </span>
+                      </Button>
+                    </div>
+                  </div>
+                </PopoverContent>
+              )}
+            </Popover>
+            <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+              <DrawerTrigger asChild>
                 <Button
-                  variant="ghost"
-                  className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
-                  onClick={handleShare}
+                  variant="outline"
+                  className="p-2 bg-transparent border-[var(--card-border)] text-[var(--card-text)]"
                 >
                   <span className="material-icons-round text-2xl">
-                    ios_share
+                    settings
                   </span>
                 </Button>
-              </div>
-              <DrawerDescription className="sr-only">
-                Settings options for language, theme, and categories
-              </DrawerDescription>
-            </DrawerHeader>
-            <div className="flex flex-col">
-              <div className="p-4">
-                <div className="flex flex-wrap gap-4 justify-center">
-                  {data.metadata.supportedLanguages.map((lang) => (
-                    <button
-                      key={lang}
-                      onClick={() => handleLanguageClick(lang)}
-                      className={`flex justify-center items-center px-3 py-1 rounded border transition-colors ${
-                        lang === language
-                          ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                          : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-                      }`}
-                      aria-pressed={lang === language}
-                    >
-                      {lang === "عربي" ? "عربي" : lang}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-4">
-                <div className="flex flex-wrap gap-4 justify-center">
-                  {data.themes.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => handleThemeClick(item.id)}
-                      className={`flex justify-center items-center gap-2 px-3 py-1 rounded border transition-colors ${
-                        item.id === theme
-                          ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                          : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-                      }`}
-                      aria-pressed={item.id === theme}
-                    >
-                      <span>{item.translations[language] || item.id}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-4">
-                <div className="flex flex-wrap gap-4 justify-center">
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => handleCategoryChange(category.id)}
-                      className={`flex justify-center items-center px-4 py-2 rounded border transition-colors ${
-                        selectedCategory === category.id
-                          ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
-                          : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
-                      }`}
-                      aria-pressed={selectedCategory === category.id}
-                    >
-                      {category.translations[language] || category.id}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <DrawerClose asChild>
-              <VisuallyHidden>
-                <Button autoFocus />
-              </VisuallyHidden>
-            </DrawerClose>
-          </DrawerContent>
-        </Drawer>
-      </div>
-
-      <div
-        className={`fixed bottom-0 left-0 right-0 p-4 shadow-inner z-20 ${
-          computedTheme === "light"
-            ? "bg-[#ffffff]"
-            : computedTheme === "dark"
-            ? "bg-[#0a0a0a]"
-            : "bg-[#f4ecd8]"
-        }`}
-      >
-        <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
-          {groupedAzkars.map((azkar, index) => {
-            const currentCount = counters[azkar.id] || 0;
-            const progress =
-              selectedCategory === "duas"
-                ? 0
-                : Math.min(currentCount / azkar.count, 1);
-            const isFavorite = (favorites[selectedCategory] || new Set()).has(
-              azkar.id
-            );
-            const isActive = index === activeCardIndex;
-
-            return (
-              <button
-                key={azkar.id}
-                onClick={() =>
-                  cardRefs.current[index]?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
-                }
-                className={`relative w-10 h-10 flex-shrink-0 border rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200 ${
-                  isActive
-                    ? "border-[#606c38] shadow-lg shadow-[#606c38]/30 scale-110"
-                    : "border-[var(--card-text)]"
-                }`}
+              </DrawerTrigger>
+              <DrawerContent
+                className="w-full p-4 h-auto bg-[var(--card-bg)] text-[var(--card-text)]"
+                dir={language === "عربي" ? "rtl" : "ltr"}
               >
-                <div
-                  className={`absolute left-0 top-0 h-full transition-all duration-200 ${
-                    isFavorite ? "bg-[#ef233c]" : "bg-[#606c38]"
-                  }`}
-                  style={{ width: `${progress * 100}%` }}
-                />
-                {isActive && (
-                  <div className="absolute inset-0 bg-[#606c38]/20 animate-pulse rounded-full" />
-                )}
-                <span
-                  className={`relative z-10 ${
-                    isFavorite
-                      ? "material-icons-round text-[var(--card-text)] text-xl"
-                      : "text-[var(--card-text)]"
-                  } ${isActive ? "font-extrabold" : ""}`}
-                >
-                  {isFavorite
-                    ? progress === 1
-                      ? "favorite"
-                      : "favorite_border"
-                    : index + 1}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+                <DrawerHeader>
+                  <div className="flex justify-between items-center w-full px-4">
+                    <Button
+                      variant="ghost"
+                      className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                      onClick={() =>
+                        (window.location.href = "https://wa.me/821097319912")
+                      }
+                    >
+                      <span className="material-icons-round text-2xl">
+                        mail
+                      </span>
+                    </Button>
+                    {deferredPrompt && (
+                      <Button
+                        variant="ghost"
+                        className="flex flex-col items-center p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                        onClick={handleInstallClick}
+                      >
+                        <span className="material-icons-round text-2xl">
+                          get_app
+                        </span>
+                        <span className="text-xs mt-1">
+                          {installAppTranslations[language] || "Install App"}
+                        </span>
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                      onClick={handleShare}
+                    >
+                      <span className="material-icons-round text-2xl">
+                        ios_share
+                      </span>
+                    </Button>
+                  </div>
+                  <DrawerDescription className="sr-only">
+                    Settings options for language, theme, and categories
+                  </DrawerDescription>
+                </DrawerHeader>
+                <div className="flex flex-col">
+                  <div className="p-4">
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {data.metadata.supportedLanguages.map((lang) => (
+                        <button
+                          key={lang}
+                          onClick={() => handleLanguageClick(lang)}
+                          className={`flex justify-center items-center px-3 py-1 rounded border transition-colors ${
+                            lang === language
+                              ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                          }`}
+                          aria-pressed={lang === language}
+                        >
+                          {lang === "عربي" ? "عربي" : lang}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-4">
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {data.themes.map((item) => (
+                        <button
+                          key={item.id}
+                          onClick={() => handleThemeClick(item.id)}
+                          className={`flex justify-center items-center gap-2 px-3 py-1 rounded border transition-colors ${
+                            item.id === theme
+                              ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                          }`}
+                          aria-pressed={item.id === theme}
+                        >
+                          <span>{item.translations[language] || item.id}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-4">
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {categories.map((category) => (
+                        <button
+                          key={category.id}
+                          onClick={() => handleCategoryChange(category.id)}
+                          className={`flex justify-center items-center px-4 py-2 rounded border transition-colors ${
+                            selectedCategory === category.id
+                              ? "bg-[#606c38] text-white border-[#606c38] hover:bg-[#606c38]/90"
+                              : "bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80"
+                          }`}
+                          aria-pressed={selectedCategory === category.id}
+                        >
+                          {category.translations[language] || category.id}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <DrawerClose asChild>
+                  <VisuallyHidden>
+                    <Button autoFocus />
+                  </VisuallyHidden>
+                </DrawerClose>
+              </DrawerContent>
+            </Drawer>
+          </div>
+
+          <div
+            className={`fixed bottom-0 left-0 right-0 p-4 shadow-inner z-20 ${
+              computedTheme === "light"
+                ? "bg-[#ffffff]"
+                : computedTheme === "dark"
+                ? "bg-[#0a0a0a]"
+                : "bg-[#f4ecd8]"
+            }`}
+          >
+            <div className="flex gap-2 overflow-x-auto whitespace-nowrap px-2">
+              {groupedAzkars.map((azkar, index) => {
+                const currentCount = counters[azkar.id] || 0;
+                const progress =
+                  selectedCategory === "duas"
+                    ? 0
+                    : Math.min(currentCount / azkar.count, 1);
+                const isFavorite = (
+                  favorites[selectedCategory] || new Set()
+                ).has(azkar.id);
+                const isActive = index === activeCardIndex;
+
+                return (
+                  <button
+                    key={azkar.id}
+                    onClick={() =>
+                      cardRefs.current[index]?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      })
+                    }
+                    className={`relative w-10 h-10 flex-shrink-0 border rounded-full flex items-center justify-center text-sm font-bold overflow-hidden transition-all duration-200 ${
+                      isActive
+                        ? "border-[#606c38] shadow-lg shadow-[#606c38]/30 scale-110"
+                        : "border-[var(--card-text)]"
+                    }`}
+                  >
+                    <div
+                      className={`absolute left-0 top-0 h-full transition-all duration-200 ${
+                        isFavorite ? "bg-[#ef233c]" : "bg-[#606c38]"
+                      }`}
+                      style={{ width: `${progress * 100}%` }}
+                    />
+                    {isActive && (
+                      <div className="absolute inset-0 bg-[#606c38]/20 animate-pulse rounded-full" />
+                    )}
+                    <span
+                      className={`relative z-10 ${
+                        isFavorite
+                          ? "material-icons-round text-[var(--card-text)] text-xl"
+                          : "text-[var(--card-text)]"
+                      } ${isActive ? "font-extrabold" : ""}`}
+                    >
+                      {isFavorite
+                        ? progress === 1
+                          ? "favorite"
+                          : "favorite_border"
+                        : index + 1}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
       <Analytics />
     </>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomePageContent />
+    </Suspense>
   );
 }
