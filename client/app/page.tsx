@@ -173,6 +173,7 @@ function HomePageContent() {
 
   const [hasMounted, setHasMounted] = useState(false);
   const [db, setDb] = useState<IThikrDB>(() => {
+    // Initialize db with URL params if present, otherwise use INITIAL_DB
     const specificLanguage = searchParams.get("lang");
     const specificCategory = searchParams.get("category");
 
@@ -276,7 +277,7 @@ function HomePageContent() {
       if (audioRef.current) audioRef.current.loop = newRepeat;
       return newRepeat;
     });
-  }, [specificAzkarId, specificCategory, specificLanguage]);
+  }, []);
 
   const handleShare = useCallback(() => {
     if (navigator.share) {
@@ -425,7 +426,7 @@ function HomePageContent() {
         }
       });
       if (specificAzkarId || specificLanguage || specificCategory) {
-        router.push("/", undefined);
+        router.push("/");
       }
     },
     [router, specificAzkarId, specificLanguage, specificCategory]

@@ -218,6 +218,7 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
 
       let shareText = azkar.lines.map((line) => line.arabic).join("\n\n");
 
+      // Add category-specific data
       if (selectedCategory === "duas") {
         const period = periodsData.find((p) => p.text_id === azkar.id);
         if (period) {
@@ -234,14 +235,15 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         }
       }
 
-      if (hasTranscription) {
-        const transcriptions = azkar.lines
-          .map((line) => getTranscriptionText(line))
-          .join("\n\n");
-        shareText += `\n\n----\n${transcriptions}`;
-      }
-
+      // Include transcription and translation only if not Arabic
       if (language !== "عربي") {
+        if (hasTranscription) {
+          const transcriptions = azkar.lines
+            .map((line) => getTranscriptionText(line))
+            .join("\n\n");
+          shareText += `\n\n----\n${transcriptions}`;
+        }
+
         const translations = azkar.lines
           .map((line) => line.translations[language])
           .filter(Boolean)
@@ -251,16 +253,26 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         }
       }
 
+      // Include virtues if available
       if (shouldRenderVirtues) {
         shareText += `\n\n----\n${virtuesLabel}\n${virtueText}`;
       }
 
+      // Add "Listen to it 🎧" in 4 languages and the deep link
       const deepLink = `https://azkar.link/?id=${encodeURIComponent(
         azkar.id
       )}&lang=${encodeURIComponent(language)}&category=${encodeURIComponent(
         selectedCategory
       )}`;
-      shareText += `\n\n----\n${deepLink}`;
+      const listenText = {
+        عربي: "استمع إليه 🎧",
+        english: "Listen to it 🎧",
+        русский: "Слушать 🎧",
+        кыргыз: "Угуңуз 🎧",
+      };
+      shareText += `\n\n----\n${
+        listenText[language as keyof typeof listenText]
+      }\n${deepLink}`;
 
       navigator
         .share({
