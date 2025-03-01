@@ -736,10 +736,10 @@ function HomePageContent() {
 
   // Creative CTA translations to invite users to explore azkar.link
   const exploreAzkarTranslations: Translation = {
-    english: "🌟 Discover More Blessings at Azkar.link! 🌟",
-    русский: "🌟 Откройте больше благословений на Azkar.link! 🌟",
-    кыргыз: "🌟 Azkar.link сайтында көбүрөөк береке табыңыз! 🌟",
-    عربي: "🌟 اكتشف المزيد من البركات على Azkar.link! 🌟",
+    english: "🌟 More Blessings at azkar.link! 🌟",
+    русский: "🌟 Больше благословений на azkar.link! 🌟",
+    кыргыз: "🌟 azkar.link'те көбүрөөк береке! 🌟",
+    عربي: "🌟 المزيد من البركات على azkar.link! 🌟",
   };
 
   return (
@@ -908,12 +908,31 @@ function HomePageContent() {
 
         {/* Creative CTA to explore azkar.link when viewing a specific card */}
         {specificAzkarId && (
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-8 mb-4">
             <Button
-              variant="outline"
               onClick={() => router.push("/")}
-              className="bg-[var(--card-bg)] text-[var(--card-text)] border-[var(--card-border)] hover:bg-[var(--card-bg)]/80 px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg text-lg font-semibold"
+              className="
+                bg-[#606c38] 
+                text-white 
+                border-none 
+                hover:bg-[#505c30] 
+                px-8 
+                py-4 
+                rounded-xl 
+                text-lg 
+                font-semibold 
+                shadow-lg 
+                hover:shadow-xl 
+                transition-all 
+                duration-300 
+                transform 
+                hover:scale-105 
+                flex 
+                items-center 
+                gap-2
+              "
             >
+              <span className="material-icons-round text-xl">explore</span>
               {exploreAzkarTranslations[language] ||
                 exploreAzkarTranslations["english"]}
             </Button>
