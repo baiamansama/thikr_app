@@ -235,29 +235,36 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
         }
       }
 
-      // Include transcription if toggled
-      if (showTranscription && hasTranscription) {
+      // Always include transcription if available
+      if (hasTranscription) {
         const transcriptions = azkar.lines
           .map((line) => getTranscriptionText(line))
           .join("\n\n");
-        shareText += `\n\n${transcriptions}`;
+        shareText += `\n\n----\n${transcriptions}`;
       }
 
-      // Include translation if toggled
-      if (showTranslation && language !== "عربي") {
+      // Always include translation if available and not Arabic
+      if (language !== "عربي") {
         const translations = azkar.lines
           .map((line) => line.translations[language])
           .filter(Boolean)
           .join("\n\n");
         if (translations) {
-          shareText += `\n\n${translations}`;
+          shareText += `\n\n----\n${translations}`;
         }
       }
+
+      // Include virtues if available
+      if (shouldRenderVirtues) {
+        shareText += `\n\n----\n${virtuesLabel}\n${virtueText}`;
+      }
+
+      // Add link at the end
+      shareText += "\n\n----\nhttps://azkar.link/";
 
       navigator
         .share({
           text: shareText,
-          url: "https://azkar.link/",
         })
         .catch((err) => {
           if (err.name !== "AbortError") {
@@ -268,10 +275,11 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
       azkar,
       selectedCategory,
       language,
-      showTranslation,
-      showTranscription,
       hasTranscription,
       getTranscriptionText,
+      shouldRenderVirtues,
+      virtuesLabel,
+      virtueText,
     ]);
 
     if (isPlayerDrawer) {
