@@ -53,6 +53,21 @@ export default function Articles({ language }: { language: string }) {
         عربي: "content/tarawih_ar.md",
       },
     },
+    {
+      id: "itikaf",
+      title: {
+        english: "I’tikaf",
+        русский: "Итикааф",
+        кыргыз: "Итикааф",
+        عربي: "الاعتكاف",
+      },
+      path: {
+        english: "content/itikaf_en.md",
+        русский: "content/itikaf_ru.md",
+        кыргыз: "content/itikaf_ky.md",
+        عربي: "content/itikaf_ar.md",
+      },
+    },
     // Add more articles here as needed
   ]);
 
