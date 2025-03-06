@@ -218,7 +218,6 @@ const AzkarCard = forwardRef<HTMLDivElement, IAzkarCardProps>(
 
       let shareText = azkar.lines.map((line) => line.arabic).join("\n\n");
 
-      // Add category-specific data
       if (selectedCategory === "duas") {
         const period = periodsData.find((p) => p.text_id === azkar.id);
         if (period) {

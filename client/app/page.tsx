@@ -730,10 +730,24 @@ function HomePageContent() {
   const categoryInfo = info.find((item) => item.category === selectedCategory);
 
   const installAppTranslations: Translation = {
-    english: "Install App",
-    русский: "Установить приложение",
-    кыргыз: "Колдонмону орнотуу",
-    عربي: "تثبيت التطبيق",
+    english: "Install",
+    русский: "Установить",
+    кыргыз: "Жүктөп ал",
+    عربي: "تَنْزيل‬",
+  };
+
+  const contactDeveloperTranslations: Translation = {
+    english: "Contact Developer",
+    русский: "Связаться с разработчиком",
+    кыргыз: "Програмчы менен байланыш",
+    عربي: "تواصل مع المطور",
+  };
+
+  const shareTranslations: Translation = {
+    english: "Share",
+    русский: "Поделиться",
+    кыргыз: "Бөлүш",
+    عربي: "مشاركة",
   };
 
   const exploreAzkarTranslations: Translation = {
@@ -1077,13 +1091,17 @@ function HomePageContent() {
                   <div className="flex justify-between items-center w-full px-4">
                     <Button
                       variant="ghost"
-                      className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                      className="flex flex-col items-center p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
                       onClick={() =>
                         (window.location.href = "https://wa.me/821097319912")
                       }
                     >
                       <span className="material-icons-round text-2xl">
                         mail
+                      </span>
+                      <span className="text-xs mt-1">
+                        {contactDeveloperTranslations[language] ||
+                          "contact developer"}
                       </span>
                     </Button>
                     {deferredPrompt && (
@@ -1102,11 +1120,14 @@ function HomePageContent() {
                     )}
                     <Button
                       variant="ghost"
-                      className="p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
+                      className="flex flex-col items-center p-2 text-[var(--card-text)] hover:bg-[var(--card-bg)]/80"
                       onClick={handleShare}
                     >
                       <span className="material-icons-round text-2xl">
                         ios_share
+                      </span>
+                      <span className="text-xs mt-1">
+                        {shareTranslations[language] || "Share"}
                       </span>
                     </Button>
                   </div>
