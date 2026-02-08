@@ -1,0 +1,234 @@
+{
+  "Common": {
+    "untitled": "Аталышы жок",
+    "dbNotConnected": "Маалымат базасы туташкан жок. Supabase'тин чөйрө өзгөрмөлөрүн (environment variables) тууралап коюңуз.",
+    "dbNotConnectedShort": "Маалымат базасы туташкан жок."
+  },
+  "Header": {
+    "brand": "Thikr",
+    "home": "Башкы бет",
+    "courses": "Курстар",
+    "profile": "Профиль",
+    "signIn": "Кирүү"
+  },
+  "LocaleSwitcher": {
+    "label": "Тил",
+    "en": "English",
+    "ky": "Кыргызча"
+  },
+  "ThemeToggle": {
+    "light": "Жарык режим",
+    "dark": "Караңгы режим",
+    "system": "Тутум темасы"
+  },
+  "Auth": {
+    "loginTitle": "Кайра кош келиңиз",
+    "loginSubtitle": "Окууңузду улантуу үчүн кириңиз",
+    "registerTitle": "Аккаунт түзүү",
+    "registerSubtitle": "Ислам илимин үйрөнүү жолун баштаңыз",
+    "continueGoogle": "Google аркылуу улантуу",
+    "orContinueEmail": "Же болбосо email аркылуу улантыңыз",
+    "orSignUpEmail": "Же болбосо email аркылуу катталыңыз",
+    "email": "Email",
+    "password": "Сырсөз",
+    "fullName": "Толук аты-жөнү",
+    "placeholderEmail": "you@example.com",
+    "placeholderPassword": "Сырсөзүңүз",
+    "placeholderName": "Атыңыз",
+    "placeholderPasswordMin": "Кеминде 6 белгиден",
+    "signingIn": "Кирүүдө...",
+    "signIn": "Кирүү",
+    "creatingAccount": "Аккаунт түзүлүүдө...",
+    "createAccount": "Аккаунт түзүү",
+    "noAccount": "Аккаунтуңуз жокпу?",
+    "signUp": "Катталуу",
+    "haveAccount": "Аккаунтуңуз барбы?"
+  },
+  "Courses": {
+    "title": "Курстар",
+    "subtitle": "Ислам илимин системалуу курстар аркылуу үйрөнүңүз",
+    "all": "Баары",
+    "empty": "Курс табылган жок. Чыпкаларды өзгөртүп көрүңүз.",
+    "lessonsHeading": "Сабактар",
+    "lessons": "{count, plural, one {# сабак} other {# сабак}}",
+    "minutes": "{count} мүн",
+    "progress": "Прогресс",
+    "completedFraction": "{completed}/{total} бүткөн",
+    "enroll": "Бул курска жазылуу",
+    "signInToEnroll": "Жазылуу үчүн кириңиз",
+    "teacher": "Мугалим",
+    "categories": {
+      "azkar": "Зикирлер жана тасбих",
+      "duas": "Дубалар жана жалбаруулар",
+      "quran": "Куран",
+      "seerah": "Сира",
+      "fiqh": "Фикх",
+      "aqeedah": "Акыда",
+      "other": "Башка"
+    },
+    "difficulties": {
+      "beginner": "Башталгыч",
+      "intermediate": "Орто",
+      "advanced": "Жогорку"
+    }
+  },
+  "Create": {
+    "title": "Түзүү",
+    "subtitle": "Курстарыңызды түзүп, жарыялаңыз.",
+    "viewCourses": "Курстарды көрүү",
+    "yourCourses": "Сиздин курстар",
+    "noCoursesYet": "Азырынча курс жок.",
+    "edit": "Оңдоо",
+    "published": "Жарыяланган",
+    "draft": "Каралама",
+    "backToCourses": "Курстарга кайтуу",
+    "publish": "Жарыялоо",
+    "unpublish": "Жарыялоону токтотуу",
+    "builder": {
+      "title": "Жаңы курс түзүү",
+      "titleEn": "Аталышы (English)",
+      "titleKy": "Аталышы (Кыргызча)",
+      "titleAr": "Аталышы (Arabic)",
+      "titleEnPlaceholder": "Course title in English",
+      "titleKyPlaceholder": "Курстун аталышы кыргызча",
+      "titleArPlaceholder": "عنوان الدورة بالعربية",
+      "descEn": "Сүрөттөмө (English)",
+      "descKy": "Сүрөттөмө (Кыргызча)",
+      "descAr": "Сүрөттөмө (Arabic)",
+      "descEnPlaceholder": "Brief description of the course",
+      "descKyPlaceholder": "Курстун кыскача сүрөттөмөсү",
+      "descArPlaceholder": "وصف مختصر للدورة",
+      "category": "Категория",
+      "selectCategory": "Категория тандаңыз",
+      "difficulty": "Деңгээл",
+      "selectDifficulty": "Деңгээл тандаңыз",
+      "creating": "Түзүлүүдө...",
+      "create": "Курс түзүү",
+      "errors": {
+        "titleRequired": "Кеминде бир аталыш жазыңыз."
+      }
+    },
+    "lessonEditor": {
+      "title": "Сабактар",
+      "empty": "Азырынча сабак жок. Төмөндөн биринчи сабагыңызды кошуңуз.",
+      "addTitle": "Сабак кошуу",
+      "titleEn": "Аталышы (English)",
+      "titleKy": "Аталышы (Кыргызча)",
+      "titleAr": "Аталышы (Arabic)",
+      "titleEnPlaceholder": "Lesson title in English",
+      "titleKyPlaceholder": "Сабактын аталышы кыргызча",
+      "titleArPlaceholder": "عنوان الدرس بالعربية",
+      "type": "Түрү",
+      "types": {
+        "azkar": "Зикир жана тасбих",
+        "text": "Текст / Макала",
+        "audio": "Аудио"
+      },
+      "items": "{count, plural, one {# пункт} other {# пункт}}",
+      "adding": "Кошулууда...",
+      "add": "Сабак кошуу",
+      "errors": {
+        "titleRequired": "Аталыш сөзсүз керек."
+      }
+    },
+    "contentEditor": {
+      "title": "Мазмун сабын кошуу",
+      "arabic": "Арабча текст",
+      "arabicPlaceholder": "النص العربي",
+      "translationEn": "Котормо (English)",
+      "translationKy": "Котормо (Кыргызча)",
+      "translationEnPlaceholder": "English translation",
+      "translationKyPlaceholder": "Кыргызча котормосу",
+      "transcriptionLatin": "Транскрипция (Latin)",
+      "transcriptionCyrillic": "Транскрипция (Кирилл)",
+      "transcriptionLatinPlaceholder": "Subhan Allah",
+      "transcriptionCyrillicPlaceholder": "Субхан Аллах",
+      "repeatCount": "Кайталоо саны",
+      "adding": "Кошулууда...",
+      "add": "Мазмун кошуу"
+    }
+  },
+  "Home": {
+    "metaTitle": "Thikr — Ислам илимине карай сапарыңыз",
+    "heroTitleLine1": "Ислам илимине карай",
+    "heroTitleHighlight": "сапарыңыз",
+    "heroBody": "Зикирлерди, дубаларды жана Куранды кыска, түзүмдүү курстар аркылуу үйрөнүңүз. Прогрессти көзөмөлдөп, серияңызды сактап, жетишкендиктер үчүн белгилерди алыңыз.",
+    "browseCourses": "Курстарды көрүү",
+    "getStarted": "Баштоо",
+    "feature1Title": "Түзүмдүү окуу",
+    "feature1Body": "Зикир, дуба жана Куран боюнча тандалган кыска курстарды аудио колдоо менен өтүңүз",
+    "feature2Title": "Белгилерди алыңыз",
+    "feature2Body": "Прогрессти көзөмөлдөп, серияңызды сактап, жетишкендиктер үчүн белгилерди алыңыз",
+    "feature3Title": "Үйрөтүңүз жана бөлүшүңүз",
+    "feature3Body": "Мугалим болууга арыз берип, коомчулук үчүн өз курстарыңызды түзүңүз",
+    "featuredTitle": "Тандалма курстар",
+    "viewAll": "Баарын көрүү",
+    "ctaTitle": "Илимиңиз менен бөлүшүңүз",
+    "ctaBody": "Ислам илимдеринде тажрыйбаңыз барбы? Мугалим болууга арыз берип, Үммөт үчүн пайдалуу курстарды түзүңүз.",
+    "ctaButton": "Мугалим болууга арыз берүү"
+  },
+  "ApplyTeacher": {
+    "title": "Мугалим болуңуз",
+    "subtitle": "Ислам илимин үйрөтүп, коомчулукка курстарды түзүү аркылуу салым кошуңуз.",
+    "reasonLabel": "Эмне үчүн мугалим болгуңуз келет?",
+    "reasonPlaceholder": "Ислам илимин үйрөтүүгө болгон ниетиңизди кыскача жазыңыз...",
+    "qualLabel": "Билим жана тажрыйба",
+    "qualPlaceholder": "Тийиштүү билим, сертификаттар же окутуу тажрыйбаңыз болсо жазыңыз...",
+    "submit": "Арыз жөнөтүү",
+    "submitting": "Жөнөтүлүүдө...",
+    "successTitle": "Арызыңыз кабыл алынды!",
+    "successBody": "Арызыңызды карап чыгып, жакын арада жооп беребиз."
+  },
+  "Lesson": {
+    "backToCourse": "Курска кайтуу",
+    "previous": "Мурунку",
+    "next": "Кийинки",
+    "needEnroll": "Сабактарды көрүү үчүн бул курска жазылуу керек.",
+    "goToCourse": "Курска өтүү"
+  },
+  "Errors": {
+    "title": "Бир нерсе туура эмес болуп калды",
+    "body": "Күтүлбөгөн ката кетти. Кайра аракет кылып көрүңүз.",
+    "tryAgain": "Кайра аракет кылуу"
+  },
+  "NotFound": {
+    "title": "Баракча табылган жок",
+    "goHome": "Башкы бетке"
+  },
+  "Admin": {
+    "title": "Админ панели",
+    "subtitle": "Мугалим болууга берилген арыздарды карап чыгып, башкаруу.",
+    "pending": "Күтүүдөгү арыздар ({count})",
+    "empty": "Күтүүдөгү арыз жок.",
+    "reason": "Себеп",
+    "qualifications": "Билим жана тажрыйба",
+    "applied": "Жөнөтүлгөн",
+    "approve": "Бекитүү",
+    "reject": "Четке кагуу"
+  },
+  "Profile": {
+    "metaTitle": "Профиль",
+    "roles": {
+      "student": "Окуучу",
+      "teacher": "Мугалим",
+      "admin": "Админ"
+    },
+    "edit": "Оңдоо",
+    "tabs": {
+      "inProgress": "Окууда",
+      "liked": "Жактырылган",
+      "created": "Түзүлгөн",
+      "empty": "Азырынча бул жерде курс жок."
+    },
+    "stats": {
+      "currentStreak": "Учурдагы серия",
+      "bestStreak": "Эң узун серия",
+      "lessonsDone": "Бүткөн сабактар",
+      "badges": "Белгилер",
+      "days": "{count} күн"
+    },
+    "signOut": "Чыгуу",
+    "badgesTitle": "Белгилер",
+    "coursesTitle": "Курстар"
+  }
+}

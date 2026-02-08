@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Uthmanic Script HAFS";
+  src: url("/fonts/UthmanicHafs1_Ver09.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Thmanyah-inspired warm design system */
+@layer base {
+  :root {
+    --background: 30 33% 97%;
+    --foreground: 30 30% 15%;
+    --card: 33 33% 95%;
+    --card-foreground: 30 30% 15%;
+    --popover: 33 33% 95%;
+    --popover-foreground: 30 30% 15%;
+    --primary: 100 23% 37%;
+    --primary-foreground: 30 33% 97%;
+    --secondary: 33 25% 90%;
+    --secondary-foreground: 30 30% 20%;
+    --muted: 33 20% 92%;
+    --muted-foreground: 33 15% 50%;
+    --accent: 37 40% 60%;
+    --accent-foreground: 30 30% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 33 25% 84%;
+    --input: 33 25% 84%;
+    --ring: 100 23% 37%;
+    --radius: 0.75rem;
+
+    /* Legacy custom properties for backward compatibility */
+    --card-bg: #f5f1ea;
+    --card-text: #4a3822;
+    --card-border: #ebe4d7;
+    --translation-text: #4a3822;
+  }
+
+  .dark {
+    --background: 30 10% 8%;
+    --foreground: 30 15% 90%;
+    --card: 30 10% 12%;
+    --card-foreground: 30 15% 90%;
+    --popover: 30 10% 12%;
+    --popover-foreground: 30 15% 90%;
+    --primary: 100 23% 45%;
+    --primary-foreground: 30 10% 8%;
+    --secondary: 30 10% 18%;
+    --secondary-foreground: 30 15% 90%;
+    --muted: 30 10% 18%;
+    --muted-foreground: 30 10% 55%;
+    --accent: 37 40% 50%;
+    --accent-foreground: 30 15% 90%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 10% 20%;
+    --input: 30 10% 20%;
+    --ring: 100 23% 45%;
+
+    --card-bg: #1c1a17;
+    --card-text: #e8e0d4;
+    --card-border: #2d2a25;
+    --translation-text: #c4bbb0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Quran font styles */
+.quran-font {
+  font-family: "Uthmanic Script HAFS", sans-serif;
+  font-weight: normal;
+  line-height: 2;
+}
+
+/* Audio highlight for synced lines */
+.combined-text-highlight {
+  background-color: rgba(90, 114, 71, 0.15);
+  border-radius: 4px;
+}
+
+/* Legacy card styles (used in azkar display) */
+.card {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Speed control box */
+.speed-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  font-weight: bold;
+}

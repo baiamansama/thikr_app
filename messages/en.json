@@ -1,0 +1,234 @@
+{
+  "Common": {
+    "untitled": "Untitled",
+    "dbNotConnected": "Database not connected. Please set up your Supabase environment variables.",
+    "dbNotConnectedShort": "Database not connected."
+  },
+  "Header": {
+    "brand": "Thikr",
+    "home": "Home",
+    "courses": "Courses",
+    "profile": "Profile",
+    "signIn": "Sign In"
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "ky": "Kyrgyz"
+  },
+  "ThemeToggle": {
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "system": "System theme"
+  },
+  "Auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to continue your learning journey",
+    "registerTitle": "Create an account",
+    "registerSubtitle": "Start your Islamic learning journey",
+    "continueGoogle": "Continue with Google",
+    "orContinueEmail": "Or continue with email",
+    "orSignUpEmail": "Or sign up with email",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full name",
+    "placeholderEmail": "you@example.com",
+    "placeholderPassword": "Your password",
+    "placeholderName": "Your name",
+    "placeholderPasswordMin": "At least 6 characters",
+    "signingIn": "Signing in...",
+    "signIn": "Sign In",
+    "creatingAccount": "Creating account...",
+    "createAccount": "Create Account",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "haveAccount": "Already have an account?"
+  },
+  "Courses": {
+    "title": "Courses",
+    "subtitle": "Explore structured Islamic learning courses",
+    "all": "All",
+    "empty": "No courses found. Try adjusting your filters.",
+    "lessonsHeading": "Lessons",
+    "lessons": "{count, plural, one {# lesson} other {# lessons}}",
+    "minutes": "{count} min",
+    "progress": "Progress",
+    "completedFraction": "{completed}/{total} completed",
+    "enroll": "Enroll in this Course",
+    "signInToEnroll": "Sign in to Enroll",
+    "teacher": "Teacher",
+    "categories": {
+      "azkar": "Azkar & Dhikr",
+      "duas": "Duas & Supplications",
+      "quran": "Quran",
+      "seerah": "Seerah",
+      "fiqh": "Fiqh",
+      "aqeedah": "Aqeedah",
+      "other": "Other"
+    },
+    "difficulties": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
+  },
+  "Create": {
+    "title": "Create",
+    "subtitle": "Build and publish your courses.",
+    "viewCourses": "View Courses",
+    "yourCourses": "Your Courses",
+    "noCoursesYet": "No courses yet.",
+    "edit": "Edit",
+    "published": "Published",
+    "draft": "Draft",
+    "backToCourses": "Back to Courses",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "builder": {
+      "title": "Create New Course",
+      "titleEn": "Title (English)",
+      "titleKy": "Title (Kyrgyz)",
+      "titleAr": "Title (Arabic)",
+      "titleEnPlaceholder": "Course title in English",
+      "titleKyPlaceholder": "Курстун аталышы кыргызча",
+      "titleArPlaceholder": "عنوان الدورة بالعربية",
+      "descEn": "Description (English)",
+      "descKy": "Description (Kyrgyz)",
+      "descAr": "Description (Arabic)",
+      "descEnPlaceholder": "Brief description of the course",
+      "descKyPlaceholder": "Курстун кыскача сүрөттөмөсү",
+      "descArPlaceholder": "وصف مختصر للدورة",
+      "category": "Category",
+      "selectCategory": "Select category",
+      "difficulty": "Difficulty",
+      "selectDifficulty": "Select difficulty",
+      "creating": "Creating...",
+      "create": "Create Course",
+      "errors": {
+        "titleRequired": "Please provide at least one title."
+      }
+    },
+    "lessonEditor": {
+      "title": "Lessons",
+      "empty": "No lessons yet. Add your first lesson below.",
+      "addTitle": "Add Lesson",
+      "titleEn": "Title (English)",
+      "titleKy": "Title (Kyrgyz)",
+      "titleAr": "Title (Arabic)",
+      "titleEnPlaceholder": "Lesson title in English",
+      "titleKyPlaceholder": "Сабактын аталышы кыргызча",
+      "titleArPlaceholder": "عنوان الدرس بالعربية",
+      "type": "Type",
+      "types": {
+        "azkar": "Azkar & Dhikr",
+        "text": "Text / Article",
+        "audio": "Audio"
+      },
+      "items": "{count, plural, one {# item} other {# items}}",
+      "adding": "Adding...",
+      "add": "Add Lesson",
+      "errors": {
+        "titleRequired": "Title is required."
+      }
+    },
+    "contentEditor": {
+      "title": "Add Content Line",
+      "arabic": "Arabic Text",
+      "arabicPlaceholder": "النص العربي",
+      "translationEn": "Translation (English)",
+      "translationKy": "Translation (Kyrgyz)",
+      "translationEnPlaceholder": "English translation",
+      "translationKyPlaceholder": "Кыргызча котормосу",
+      "transcriptionLatin": "Transcription (Latin)",
+      "transcriptionCyrillic": "Transcription (Cyrillic)",
+      "transcriptionLatinPlaceholder": "Subhan Allah",
+      "transcriptionCyrillicPlaceholder": "Субхан Аллах",
+      "repeatCount": "Repeat Count",
+      "adding": "Adding...",
+      "add": "Add Content"
+    }
+  },
+  "Home": {
+    "metaTitle": "Thikr — Your Journey to Islamic Knowledge",
+    "heroTitleLine1": "Your Journey to",
+    "heroTitleHighlight": "Islamic Knowledge",
+    "heroBody": "Learn azkar, duas, and Quran through structured minicourses. Track your progress, earn badges, and grow your knowledge.",
+    "browseCourses": "Browse Courses",
+    "getStarted": "Get Started",
+    "feature1Title": "Structured Learning",
+    "feature1Body": "Follow curated minicourses on azkar, duas, and Quran with audio support",
+    "feature2Title": "Earn Badges",
+    "feature2Body": "Track your progress, maintain streaks, and earn badges for your achievements",
+    "feature3Title": "Teach & Share",
+    "feature3Body": "Apply to become a teacher and create your own courses for the community",
+    "featuredTitle": "Featured Courses",
+    "viewAll": "View All",
+    "ctaTitle": "Share Your Knowledge",
+    "ctaBody": "Have expertise in Islamic sciences? Apply to become a teacher and create courses that benefit the Ummah.",
+    "ctaButton": "Apply as Teacher"
+  },
+  "ApplyTeacher": {
+    "title": "Become a Teacher",
+    "subtitle": "Share your knowledge with the community by creating Islamic learning courses.",
+    "reasonLabel": "Why do you want to teach?",
+    "reasonPlaceholder": "Tell us about your motivation to teach Islamic knowledge...",
+    "qualLabel": "Qualifications & Experience",
+    "qualPlaceholder": "Any relevant qualifications, certifications, or teaching experience...",
+    "submit": "Submit Application",
+    "submitting": "Submitting...",
+    "successTitle": "Application Submitted!",
+    "successBody": "We will review your application and get back to you soon."
+  },
+  "Lesson": {
+    "backToCourse": "Back to Course",
+    "previous": "Previous",
+    "next": "Next",
+    "needEnroll": "You need to enroll in this course to view lessons.",
+    "goToCourse": "Go to Course"
+  },
+  "Errors": {
+    "title": "Something went wrong",
+    "body": "An unexpected error occurred. Please try again.",
+    "tryAgain": "Try Again"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "goHome": "Go Home"
+  },
+  "Admin": {
+    "title": "Admin Panel",
+    "subtitle": "Review and manage teacher applications.",
+    "pending": "Pending Applications ({count})",
+    "empty": "No pending applications.",
+    "reason": "Reason",
+    "qualifications": "Qualifications",
+    "applied": "Applied",
+    "approve": "Approve",
+    "reject": "Reject"
+  },
+  "Profile": {
+    "metaTitle": "Profile",
+    "roles": {
+      "student": "Student",
+      "teacher": "Teacher",
+      "admin": "Admin"
+    },
+    "edit": "Edit",
+    "tabs": {
+      "inProgress": "In Progress",
+      "liked": "Liked",
+      "created": "Created",
+      "empty": "No courses here yet."
+    },
+    "stats": {
+      "currentStreak": "Current Streak",
+      "bestStreak": "Best Streak",
+      "lessonsDone": "Lessons Done",
+      "badges": "Badges",
+      "days": "{count, plural, one {# day} other {# days}}"
+    },
+    "signOut": "Sign Out",
+    "badgesTitle": "Badges",
+    "coursesTitle": "Courses"
+  }
+}
