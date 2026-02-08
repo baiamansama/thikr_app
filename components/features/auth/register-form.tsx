@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 export function RegisterForm() {
   const t = useTranslations("Auth");
   const [state, formAction, isPending] = useActionState(
-    async (_prev: { error?: string } | null, formData: FormData) => {
+    async (_prev: { error?: string; success?: string } | null, formData: FormData) => {
       const result = await signUp(formData);
       return result ?? null;
     },
@@ -45,6 +45,11 @@ export function RegisterForm() {
         {state?.error && (
           <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
             {state.error}
+          </div>
+        )}
+        {state?.success && (
+          <div className="rounded-lg bg-green-50 p-3 text-sm text-green-700">
+            {state.success}
           </div>
         )}
 

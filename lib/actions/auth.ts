@@ -21,6 +21,11 @@ export async function signUp(formData: FormData) {
     return { error: error.message };
   }
 
+  // If email confirmations are enabled, Supabase will create the user but not a session.
+  if (!data.session) {
+    return { success: "Check your email to confirm your account, then sign in." };
+  }
+
   if (data.user) {
     await createUser({
       authId: data.user.id,
