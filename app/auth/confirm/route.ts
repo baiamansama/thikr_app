@@ -11,10 +11,19 @@ export async function GET(request: NextRequest) {
 
   // In dev, rely on request origin. In prod, prefer canonical.
   const origin = url.origin;
-  const base =
-    process.env.NODE_ENV === "development"
-      ? origin
-      : (getCanonicalSiteUrl() ?? origin);
+  const isLocalEnv = process.env.NODE_ENV === "development";
+  const canonical = getCanonicalSiteUrl();
+  const base = isLocalEnv ? origin : (canonical ?? origin);
+
+  // Enforce canonical host before verifying OTP so cookies land on the right domain.
+  if (!isLocalEnv && canonical) {
+    const c = new URL(canonical);
+    if (url.hostname !== c.hostname || url.protocol !== c.protocol) {
+      return NextResponse.redirect(
+        new URL(`${c.origin}/auth/confirm${url.search}`)
+      );
+    }
+  }
 
   if (!token_hash || !type) {
     return NextResponse.redirect(new URL(`/login?error=confirm`, base));
