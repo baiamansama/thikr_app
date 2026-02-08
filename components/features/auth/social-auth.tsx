@@ -1,20 +1,32 @@
 "use client";
 
+import { useActionState } from "react";
 import { signInWithGoogle } from "@/lib/actions/auth";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
 export function SocialAuth() {
   const t = useTranslations("Auth");
-  async function handleGoogleSignIn() {
-    await signInWithGoogle();
-  }
+  const [state, formAction, isPending] = useActionState(
+    async () => {
+      const result = await signInWithGoogle();
+      return result ?? null;
+    },
+    null as { error?: string } | null
+  );
 
   return (
-    <form action={handleGoogleSignIn}>
+    <div className="space-y-3">
+      {state?.error && (
+        <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+          {state.error}
+        </div>
+      )}
+      <form action={formAction}>
       <Button
         type="submit"
         variant="outline"
+        disabled={isPending}
         className="w-full border-cream-200 bg-cream-100 text-brown-700 hover:bg-cream-200"
       >
         <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -38,5 +50,6 @@ export function SocialAuth() {
         {t("continueGoogle")}
       </Button>
     </form>
+    </div>
   );
 }
