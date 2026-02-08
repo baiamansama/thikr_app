@@ -12,9 +12,22 @@ export async function signUp(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
+  const origin = await getRequestOrigin();
+  const canonical = getCanonicalSiteUrl();
+  const isDev = process.env.NODE_ENV !== "production";
+  const baseUrl =
+    (isDev ? origin : canonical) ??
+    canonical ??
+    origin ??
+    "http://localhost:3000";
+  const emailRedirectTo = new URL("/auth/confirm", baseUrl).toString();
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      emailRedirectTo,
+    },
   });
 
   if (error) {
@@ -23,7 +36,10 @@ export async function signUp(formData: FormData) {
 
   // If email confirmations are enabled, Supabase will create the user but not a session.
   if (!data.session) {
-    return { success: "Check your email to confirm your account, then sign in." };
+    return {
+      success:
+        "Check your email to confirm your account, then sign in. (If you don't see it, check spam.)",
+    };
   }
 
   if (data.user) {
@@ -72,7 +88,14 @@ export async function signIn(formData: FormData) {
 export async function signInWithGoogle() {
   const supabase = await createClient();
 
-  const baseUrl = getCanonicalSiteUrl() ?? (await getRequestOrigin()) ?? "http://localhost:3000";
+  const origin = await getRequestOrigin();
+  const canonical = getCanonicalSiteUrl();
+  const isDev = process.env.NODE_ENV !== "production";
+  const baseUrl =
+    (isDev ? origin : canonical) ??
+    canonical ??
+    origin ??
+    "http://localhost:3000";
   const redirectTo = new URL("/api/auth/callback", baseUrl).toString();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
