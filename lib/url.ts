@@ -20,7 +20,9 @@ export async function getRequestOrigin(): Promise<string | null> {
     const h = await headers();
     const host = h.get("x-forwarded-host") ?? h.get("host");
     if (!host) return null;
-    const proto = h.get("x-forwarded-proto") ?? "http";
+    const proto =
+      h.get("x-forwarded-proto") ??
+      (process.env.NODE_ENV === "production" ? "https" : "http");
     return `${proto}://${host}`;
   } catch {
     return null;
@@ -36,4 +38,3 @@ export function safeRedirectPath(nextPath: string | null, fallback = "/"): strin
   if (nextPath.includes("\\") || nextPath.includes("\0")) return fallback;
   return nextPath;
 }
-
