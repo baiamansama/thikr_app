@@ -67,6 +67,7 @@ async function main() {
       name: "Thikr Team",
       role: "teacher",
       isTeacherApproved: true,
+      isSystem: true,
     })
     .onConflictDoNothing()
     .returning();
@@ -75,7 +76,8 @@ async function main() {
   if (!teacherId) {
     console.log("System teacher may already exist. Looking up...");
     const existing = await db.query.users.findFirst({
-      where: (u, { eq }) => eq(u.name, "Thikr Team"),
+      where: (u, { eq, and }) =>
+        and(eq(u.name, "Thikr Team"), eq(u.isSystem, true)),
     });
     if (!existing) {
       console.error("Failed to create or find system teacher");
@@ -84,8 +86,27 @@ async function main() {
   }
 
   const finalTeacherId = teacherId || (await db.query.users.findFirst({
-    where: (u, { eq }) => eq(u.name, "Thikr Team"),
+    where: (u, { eq, and }) =>
+      and(eq(u.name, "Thikr Team"), eq(u.isSystem, true)),
   }))!.id;
+
+  // Safety: prevent accidental re-runs that duplicate a bunch of data.
+  const force = process.env.FORCE_MIGRATE_AZKARS === "1";
+  if (!force) {
+    const existingCourse = await db.query.courses.findFirst({
+      where: (c, { eq }) => eq(c.teacherId, finalTeacherId),
+      columns: { id: true },
+    });
+    if (existingCourse) {
+      console.log(
+        "Migration appears to have already run (courses exist for system teacher)."
+      );
+      console.log(
+        "Set FORCE_MIGRATE_AZKARS=1 if you really want to re-run it."
+      );
+      process.exit(0);
+    }
+  }
 
   // 2. Migrate each category as a course
   for (const category of azkarsData.categories) {
@@ -185,54 +206,63 @@ async function main() {
 
   const badgeData = [
     {
+      code: "first_steps",
       name: { en: "First Steps", ar: "الخطوات الأولى" },
       description: { en: "Complete your first lesson" },
       criteriaType: "milestone" as const,
       criteriaValue: { lessonsCompleted: 1 },
     },
     {
+      code: "dedicated_learner",
       name: { en: "Dedicated Learner", ar: "طالب مجتهد" },
       description: { en: "Complete 10 lessons" },
       criteriaType: "milestone" as const,
       criteriaValue: { lessonsCompleted: 10 },
     },
     {
+      code: "knowledge_seeker",
       name: { en: "Knowledge Seeker", ar: "طالب العلم" },
       description: { en: "Complete 50 lessons" },
       criteriaType: "milestone" as const,
       criteriaValue: { lessonsCompleted: 50 },
     },
     {
+      code: "azkar_master",
       name: { en: "Azkar Master", ar: "أستاذ الأذكار" },
       description: { en: "Complete an azkar course" },
       criteriaType: "course_completion" as const,
       criteriaValue: { category: "azkar" },
     },
     {
+      code: "dua_scholar",
       name: { en: "Dua Scholar", ar: "عالم الدعاء" },
       description: { en: "Complete a duas course" },
       criteriaType: "course_completion" as const,
       criteriaValue: { category: "duas" },
     },
     {
+      code: "quran_student",
       name: { en: "Quran Student", ar: "طالب القرآن" },
       description: { en: "Complete a Quran course" },
       criteriaType: "course_completion" as const,
       criteriaValue: { category: "quran" },
     },
     {
+      code: "streak_7",
       name: { en: "7-Day Streak", ar: "سلسلة ٧ أيام" },
       description: { en: "Maintain a 7-day learning streak" },
       criteriaType: "streak" as const,
       criteriaValue: { days: 7 },
     },
     {
+      code: "streak_30",
       name: { en: "30-Day Streak", ar: "سلسلة ٣٠ يوم" },
       description: { en: "Maintain a 30-day learning streak" },
       criteriaType: "streak" as const,
       criteriaValue: { days: 30 },
     },
     {
+      code: "streak_100",
       name: { en: "100-Day Streak", ar: "سلسلة ١٠٠ يوم" },
       description: { en: "Maintain a 100-day learning streak" },
       criteriaType: "streak" as const,
@@ -241,7 +271,10 @@ async function main() {
   ];
 
   for (const badge of badgeData) {
-    await db.insert(schema.badges).values(badge);
+    await db
+      .insert(schema.badges)
+      .values(badge)
+      .onConflictDoNothing({ target: schema.badges.code });
     console.log(`  Badge: ${badge.name.en}`);
   }
 

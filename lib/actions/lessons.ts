@@ -3,8 +3,8 @@
 import { db } from "@/lib/db";
 import { lessons, lessonContent } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "./auth";
+import { revalidateLocalizedPath } from "@/lib/revalidate";
 
 export async function updateLesson(
   lessonId: string,
@@ -37,7 +37,7 @@ export async function updateLesson(
     .where(eq(lessons.id, lessonId))
     .returning();
 
-  revalidatePath(`/create/${lesson.course.id}`);
+  revalidateLocalizedPath(`/create/${lesson.course.id}`);
   return { data: updated };
 }
 
@@ -58,7 +58,7 @@ export async function deleteLesson(lessonId: string) {
   }
 
   await db.delete(lessons).where(eq(lessons.id, lessonId));
-  revalidatePath(`/create/${lesson.course.id}`);
+  revalidateLocalizedPath(`/create/${lesson.course.id}`);
   return { success: true };
 }
 

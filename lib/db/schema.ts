@@ -9,8 +9,9 @@ import {
   uniqueIndex,
   index,
   pgEnum,
+  check,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 
 // Enums
 export const userRoleEnum = pgEnum("user_role", [
@@ -52,9 +53,21 @@ export const users = pgTable("users", {
   bio: text("bio"),
   role: userRoleEnum("role").default("student").notNull(),
   isTeacherApproved: boolean("is_teacher_approved").default(false),
+  // Allow a single "system" user (seed/migration ownership) without an auth_id.
+  isSystem: boolean("is_system").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+}, (table) => [
+  // Prevent creating "auth-less" users except system accounts.
+  check(
+    "users_auth_id_or_system_chk",
+    sql`${table.isSystem} OR ${table.authId} IS NOT NULL`
+  ),
+  // Make the system user insert idempotent (see scripts/migrate-azkars.ts).
+  uniqueIndex("users_system_name_idx")
+    .on(table.name)
+    .where(sql`${table.isSystem} = true`),
+]);
 
 export const teacherApplications = pgTable(
   "teacher_applications",
@@ -97,33 +110,47 @@ export const courses = pgTable(
   ]
 );
 
-export const lessons = pgTable("lessons", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  courseId: uuid("course_id")
-    .notNull()
-    .references(() => courses.id, { onDelete: "cascade" }),
-  title: jsonb("title").notNull().$type<Record<string, string>>(),
-  description: jsonb("description").$type<Record<string, string>>(),
-  order: integer("order").notNull(),
-  type: lessonTypeEnum("type").default("azkar").notNull(),
-  estimatedDuration: integer("estimated_duration"),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
+export const lessons = pgTable(
+  "lessons",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    courseId: uuid("course_id")
+      .notNull()
+      .references(() => courses.id, { onDelete: "cascade" }),
+    title: jsonb("title").notNull().$type<Record<string, string>>(),
+    description: jsonb("description").$type<Record<string, string>>(),
+    order: integer("order").notNull(),
+    type: lessonTypeEnum("type").default("azkar").notNull(),
+    estimatedDuration: integer("estimated_duration"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    // Ensure a stable lesson ordering per course.
+    uniqueIndex("lessons_course_order_idx").on(table.courseId, table.order),
+  ]
+);
 
-export const lessonContent = pgTable("lesson_content", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  lessonId: uuid("lesson_id")
-    .notNull()
-    .references(() => lessons.id, { onDelete: "cascade" }),
-  order: integer("order").notNull(),
-  arabic: text("arabic"),
-  translations: jsonb("translations").$type<Record<string, string>>(),
-  transcriptionLatin: text("transcription_latin"),
-  transcriptionCyrillic: text("transcription_cyrillic"),
-  audioUrl: text("audio_url"),
-  timestamp: integer("timestamp"),
-  repeatCount: integer("repeat_count").default(1),
-});
+export const lessonContent = pgTable(
+  "lesson_content",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    lessonId: uuid("lesson_id")
+      .notNull()
+      .references(() => lessons.id, { onDelete: "cascade" }),
+    order: integer("order").notNull(),
+    arabic: text("arabic"),
+    translations: jsonb("translations").$type<Record<string, string>>(),
+    transcriptionLatin: text("transcription_latin"),
+    transcriptionCyrillic: text("transcription_cyrillic"),
+    audioUrl: text("audio_url"),
+    timestamp: integer("timestamp"),
+    repeatCount: integer("repeat_count").default(1),
+  },
+  (table) => [
+    // Ensure content ordering is deterministic within a lesson.
+    uniqueIndex("lesson_content_lesson_order_idx").on(table.lessonId, table.order),
+  ]
+);
 
 export const enrollments = pgTable(
   "enrollments",
@@ -169,14 +196,20 @@ export const lessonProgress = pgTable(
   ]
 );
 
-export const badges = pgTable("badges", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  name: jsonb("name").notNull().$type<Record<string, string>>(),
-  description: jsonb("description").$type<Record<string, string>>(),
-  iconUrl: text("icon_url"),
-  criteriaType: badgeCriteriaEnum("criteria_type").notNull(),
-  criteriaValue: jsonb("criteria_value").$type<Record<string, unknown>>(),
-});
+export const badges = pgTable(
+  "badges",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    // Stable identifier for idempotent seeds/migrations.
+    code: text("code").notNull(),
+    name: jsonb("name").notNull().$type<Record<string, string>>(),
+    description: jsonb("description").$type<Record<string, string>>(),
+    iconUrl: text("icon_url"),
+    criteriaType: badgeCriteriaEnum("criteria_type").notNull(),
+    criteriaValue: jsonb("criteria_value").$type<Record<string, unknown>>(),
+  },
+  (table) => [uniqueIndex("badges_code_idx").on(table.code)]
+);
 
 export const userBadges = pgTable(
   "user_badges",

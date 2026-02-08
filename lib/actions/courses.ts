@@ -3,8 +3,8 @@
 import { db } from "@/lib/db";
 import { courses, enrollments, courseLikes, lessons, lessonContent } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "./auth";
+import { revalidateLocalizedPath } from "@/lib/revalidate";
 
 export async function createCourse(data: {
   title: Record<string, string>;
@@ -61,7 +61,9 @@ export async function updateCourse(
     .where(eq(courses.id, courseId))
     .returning();
 
-  revalidatePath(`/courses/${courseId}`);
+  revalidateLocalizedPath("/courses");
+  revalidateLocalizedPath(`/courses/${courseId}`);
+  revalidateLocalizedPath(`/create/${courseId}`);
   return { data: updated };
 }
 
@@ -78,7 +80,8 @@ export async function deleteCourse(courseId: string) {
   }
 
   await db.delete(courses).where(eq(courses.id, courseId));
-  revalidatePath("/courses");
+  revalidateLocalizedPath("/courses");
+  revalidateLocalizedPath("/create");
   return { success: true };
 }
 
@@ -107,7 +110,7 @@ export async function enrollInCourse(courseId: string) {
     .values({ userId: user.id, courseId })
     .returning();
 
-  revalidatePath(`/courses/${courseId}`);
+  revalidateLocalizedPath(`/courses/${courseId}`);
   return { data: enrollment };
 }
 
@@ -124,12 +127,12 @@ export async function toggleCourseLike(courseId: string) {
 
   if (existing) {
     await db.delete(courseLikes).where(eq(courseLikes.id, existing.id));
-    revalidatePath(`/courses/${courseId}`);
+    revalidateLocalizedPath(`/courses/${courseId}`);
     return { liked: false };
   }
 
   await db.insert(courseLikes).values({ userId: user.id, courseId });
-  revalidatePath(`/courses/${courseId}`);
+  revalidateLocalizedPath(`/courses/${courseId}`);
   return { liked: true };
 }
 
@@ -153,7 +156,7 @@ export async function addLesson(data: {
   }
 
   const [lesson] = await db.insert(lessons).values(data).returning();
-  revalidatePath(`/create/${data.courseId}`);
+  revalidateLocalizedPath(`/create/${data.courseId}`);
   return { data: lesson };
 }
 

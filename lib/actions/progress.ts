@@ -3,9 +3,9 @@
 import { db } from "@/lib/db";
 import { lessonProgress, userStreaks, enrollments, lessons } from "@/lib/db/schema";
 import { eq, and } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "./auth";
 import { checkAndAwardBadges } from "./badges";
+import { revalidateLocalizedPath } from "@/lib/revalidate";
 
 export async function markLessonComplete(lessonId: string, courseId: string) {
   const user = await getCurrentUser();
@@ -45,7 +45,7 @@ export async function markLessonComplete(lessonId: string, courseId: string) {
     await updateStreak(user.id);
     await checkAndAwardBadges(user.id);
 
-    revalidatePath(`/courses/${courseId}`);
+    revalidateLocalizedPath(`/courses/${courseId}`);
     return { data: updated };
   }
 
@@ -68,7 +68,7 @@ export async function markLessonComplete(lessonId: string, courseId: string) {
   await updateStreak(user.id);
   await checkAndAwardBadges(user.id);
 
-  revalidatePath(`/courses/${courseId}`);
+  revalidateLocalizedPath(`/courses/${courseId}`);
   return { data: progress };
 }
 
@@ -93,6 +93,19 @@ async function updateStreak(userId: string) {
   const lastActivity = streak.lastActivityDate
     ? new Date(streak.lastActivityDate)
     : null;
+
+  if (!lastActivity) {
+    const newStreak = Math.max(streak.currentStreak ?? 0, 1);
+    await db
+      .update(userStreaks)
+      .set({
+        currentStreak: newStreak,
+        longestStreak: Math.max(newStreak, streak.longestStreak ?? 0),
+        lastActivityDate: today,
+      })
+      .where(eq(userStreaks.id, streak.id));
+    return;
+  }
 
   if (lastActivity) {
     const lastDate = new Date(

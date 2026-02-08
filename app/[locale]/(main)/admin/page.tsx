@@ -15,7 +15,7 @@ async function approveApplication(formData: FormData) {
   const { db } = await import("@/lib/db");
   const { teacherApplications, users } = await import("@/lib/db/schema");
   const { eq } = await import("drizzle-orm");
-  const { revalidatePath } = await import("next/cache");
+  const { revalidateLocalizedPath } = await import("@/lib/revalidate");
   const { getCurrentUser } = await import("@/lib/actions/auth");
 
   const admin = await getCurrentUser();
@@ -38,9 +38,7 @@ async function approveApplication(formData: FormData) {
     .set({ role: "teacher", isTeacherApproved: true })
     .where(eq(users.id, userId));
 
-  // Locale-prefixed routes
-  revalidatePath("/en/admin");
-  revalidatePath("/ky/admin");
+  revalidateLocalizedPath("/admin");
 }
 
 async function rejectApplication(formData: FormData) {
@@ -48,7 +46,7 @@ async function rejectApplication(formData: FormData) {
   const { db } = await import("@/lib/db");
   const { teacherApplications } = await import("@/lib/db/schema");
   const { eq } = await import("drizzle-orm");
-  const { revalidatePath } = await import("next/cache");
+  const { revalidateLocalizedPath } = await import("@/lib/revalidate");
   const { getCurrentUser } = await import("@/lib/actions/auth");
 
   const admin = await getCurrentUser();
@@ -65,9 +63,7 @@ async function rejectApplication(formData: FormData) {
     })
     .where(eq(teacherApplications.id, applicationId));
 
-  // Locale-prefixed routes
-  revalidatePath("/en/admin");
-  revalidatePath("/ky/admin");
+  revalidateLocalizedPath("/admin");
 }
 
 export default async function AdminPage() {
