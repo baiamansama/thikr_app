@@ -12,7 +12,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "migrate:azkars": "tsx scripts/migrate-azkars.ts",
-    "assets:upload-audio": "tsx scripts/upload-audio-to-supabase.ts"
+    "assets:upload-audio": "tsx scripts/upload-audio-to-supabase.ts",
+    "vercel:doctor": "tsx scripts/vercel-doctor.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

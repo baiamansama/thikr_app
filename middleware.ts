@@ -4,10 +4,7 @@ import { routing } from "@/i18n/routing";
 import { updateSession } from "@/lib/supabase/middleware";
 
 function getCanonicalFromEnv(): URL | null {
-  const raw =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.SITE_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null);
+  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? null;
   if (!raw) return null;
   try {
     const u = new URL(raw);

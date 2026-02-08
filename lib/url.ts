@@ -2,9 +2,7 @@ import { headers } from "next/headers";
 
 export function getCanonicalSiteUrl(): string | null {
   const raw =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.SITE_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null);
+    process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? null;
 
   if (!raw) return null;
 
