@@ -47,3 +47,10 @@ next-env.d.ts
 
 # supabase
 .supabase
+
+# large media is stored in Supabase Storage
+/public/audio/
+
+# local-only artifacts (kept out of git)
+/local_assets/
+/_tmp_test/

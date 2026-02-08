@@ -7,6 +7,7 @@ import { AudioPlayer } from "./audio-player";
 import { Languages, Captions, CaptionsOff } from "lucide-react";
 import { useAudioStore } from "@/stores/audio-store";
 import { useAudio } from "@/hooks/use-audio";
+import { resolveAudioUrl } from "@/lib/assets";
 
 interface ContentLine {
   id: string;
@@ -49,6 +50,8 @@ export function AzkarDisplay({
   const hasTranscription = contentLines.some(
     (l) => l.transcriptionLatin || l.transcriptionCyrillic
   );
+
+  const resolvedAudioUrl = resolveAudioUrl(audioUrl);
 
   return (
     <div className="rounded-xl border border-cream-200 bg-cream-100 p-4 md:p-6">
@@ -123,9 +126,9 @@ export function AzkarDisplay({
           </button>
         )}
 
-        {audioUrl && (
+        {resolvedAudioUrl && (
           <AudioPlayer
-            audioUrl={audioUrl}
+            audioUrl={resolvedAudioUrl}
             contentId={contentLines[0]?.id || "unknown"}
             onToggle={toggle}
             onSkip={skip}
