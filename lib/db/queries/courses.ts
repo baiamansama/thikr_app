@@ -67,6 +67,31 @@ export async function getCourseById(courseId: string) {
   });
 }
 
+// Course page doesn't need the full lesson content payload; fetch a lighter shape.
+export async function getCourseOverviewById(courseId: string) {
+  return db.query.courses.findFirst({
+    where: eq(courses.id, courseId),
+    with: {
+      teacher: {
+        columns: { id: true, name: true, avatarUrl: true, bio: true },
+      },
+      lessons: {
+        orderBy: (lessons, { asc }) => [asc(lessons.order)],
+        columns: {
+          id: true,
+          title: true,
+          type: true,
+          order: true,
+          estimatedDuration: true,
+        },
+      },
+      likes: {
+        columns: { userId: true },
+      },
+    },
+  });
+}
+
 export async function getCoursesByTeacher(teacherId: string) {
   return db.query.courses.findMany({
     where: eq(courses.teacherId, teacherId),

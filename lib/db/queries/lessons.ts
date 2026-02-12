@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { lessons } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, and, lt, gt, asc, desc } from "drizzle-orm";
 
 export async function getLessonById(lessonId: string) {
   return db.query.lessons.findFirst({
@@ -29,19 +29,18 @@ export async function getLessonsByCourse(courseId: string) {
 }
 
 export async function getAdjacentLessons(courseId: string, currentOrder: number) {
-  const allLessons = await db.query.lessons.findMany({
-    where: eq(lessons.courseId, courseId),
-    orderBy: (lessons, { asc }) => [asc(lessons.order)],
-    columns: { id: true, order: true, title: true },
-  });
+  const [previous, next] = await Promise.all([
+    db.query.lessons.findFirst({
+      where: and(eq(lessons.courseId, courseId), lt(lessons.order, currentOrder)),
+      orderBy: [desc(lessons.order)],
+      columns: { id: true, order: true, title: true },
+    }),
+    db.query.lessons.findFirst({
+      where: and(eq(lessons.courseId, courseId), gt(lessons.order, currentOrder)),
+      orderBy: [asc(lessons.order)],
+      columns: { id: true, order: true, title: true },
+    }),
+  ]);
 
-  const currentIndex = allLessons.findIndex((l) => l.order === currentOrder);
-
-  return {
-    previous: currentIndex > 0 ? allLessons[currentIndex - 1] : null,
-    next:
-      currentIndex < allLessons.length - 1
-        ? allLessons[currentIndex + 1]
-        : null,
-  };
+  return { previous: previous ?? null, next: next ?? null };
 }

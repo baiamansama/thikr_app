@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import {
-  getCourseById,
+  getCourseOverviewById,
   isUserEnrolled,
   isCourseLikedByUser,
 } from "@/lib/db/queries/courses";
@@ -23,7 +23,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { courseId } = await params;
   try {
-    const course = await getCourseById(courseId);
+    const course = await getCourseOverviewById(courseId);
     if (!course) return { title: "Course Not Found | Thikr" };
     if (!course.isPublished) return { title: "Course | Thikr" };
     const title = course.title.en || course.title.ky || course.title.ar || "Course";
@@ -50,7 +50,7 @@ export default async function CourseDetailPage({ params }: Props) {
 
   let course;
   try {
-    course = await getCourseById(courseId);
+    course = await getCourseOverviewById(courseId);
   } catch {
     return (
       <div className="mx-auto max-w-4xl px-4 py-16 text-center">

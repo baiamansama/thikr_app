@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { lessonProgress, userStreaks } from "@/lib/db/schema";
-import { eq, and, count } from "drizzle-orm";
+import { eq, and, count, inArray } from "drizzle-orm";
 
 export async function getLessonProgressForUser(
   userId: string,
@@ -42,12 +42,11 @@ export async function getCompletedLessonIds(
   const completed = await db.query.lessonProgress.findMany({
     where: and(
       eq(lessonProgress.userId, userId),
-      eq(lessonProgress.completed, true)
+      eq(lessonProgress.completed, true),
+      inArray(lessonProgress.lessonId, lessonIds)
     ),
     columns: { lessonId: true },
   });
 
-  return completed
-    .map((p) => p.lessonId)
-    .filter((id) => lessonIds.includes(id));
+  return completed.map((p) => p.lessonId);
 }
