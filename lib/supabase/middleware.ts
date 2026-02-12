@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabasePublishableOrAnonKey, getSupabaseUrl } from "./env";
+import { hasSupabaseAuthCookieFromNames } from "./auth-cookie";
 
 export async function updateSession(
   request: NextRequest,
@@ -11,6 +12,12 @@ export async function updateSession(
     NextResponse.next({
       request,
     });
+
+  const cookieNames = request.cookies.getAll().map((c) => c.name);
+  // If there's no Supabase auth cookie, skip the network roundtrip entirely.
+  if (!hasSupabaseAuthCookieFromNames(cookieNames)) {
+    return supabaseResponse;
+  }
 
   const supabase = createServerClient(
     getSupabaseUrl(),

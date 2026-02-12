@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { createUser, getUserByAuthId } from "@/lib/db/queries/users";
 import { getCanonicalSiteUrl, getRequestOrigin } from "@/lib/url";
+import { cookies } from "next/headers";
+import { hasSupabaseAuthCookieFromNames } from "@/lib/supabase/auth-cookie";
 
 export async function signUp(formData: FormData) {
   const supabase = await createClient();
@@ -121,6 +123,15 @@ export async function signOut() {
 }
 
 export async function getCurrentUser() {
+  // Avoid a Supabase network call for anonymous users.
+  try {
+    const cookieStore = await cookies();
+    const cookieNames = cookieStore.getAll().map((c) => c.name);
+    if (!hasSupabaseAuthCookieFromNames(cookieNames)) return null;
+  } catch {
+    // Fall through; Supabase will return null anyway.
+  }
+
   const supabase = await createClient();
   const {
     data: { user: authUser },

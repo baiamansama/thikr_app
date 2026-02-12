@@ -18,9 +18,13 @@ export async function createClient() {
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options)
             );
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing sessions.
+          } catch (e) {
+            // Next.js throws when trying to mutate cookies from Server Components.
+            // In that case, ignore (middleware refresh will handle it). Otherwise, surface the error.
+            const msg = e instanceof Error ? e.message : String(e);
+            if (msg.includes("Cookies can only be modified")) return;
+            if (msg.toLowerCase().includes("readonly")) return;
+            throw e;
           }
         },
       },
