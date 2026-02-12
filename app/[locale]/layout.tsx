@@ -68,7 +68,8 @@ export default async function LocaleLayout({ children, params }: Props) {
         <link rel="apple-touch-icon" href="/icons/logo_192.png" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-cream-50`}
+        // Don't hardcode a light background here; it prevents `next-themes` + CSS vars from taking effect.
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>

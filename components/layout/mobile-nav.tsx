@@ -24,7 +24,7 @@ export function MobileNav({ isLoggedIn }: MobileNavProps) {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-cream-200 bg-cream-50/90 backdrop-blur-md md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-cream-200 bg-cream-50/90 backdrop-blur-md md:hidden dark:bg-card">
       <div className="flex items-center justify-around py-2">
         {links.map((link) => {
           const isActive =
