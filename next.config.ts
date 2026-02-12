@@ -22,6 +22,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config, { dev }) => {
+    // Work around occasional Webpack dev runtime/HMR corruption issues
+    // (e.g. "__webpack_modules__[moduleId] is not a function") by avoiding
+    // filesystem cache in development.
+    if (dev) {
+      config.cache = false;
+    }
+    return config;
+  },
 };
 
 export default withNextIntl(nextConfig);

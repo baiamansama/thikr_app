@@ -2,8 +2,13 @@
   "name": "thikr-app",
   "version": "1.0.0",
   "private": true,
+  "overrides": {
+    "esbuild": "0.27.3"
+  },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbopack",
+    "dev:clean": "rm -rf .next/cache/webpack .next/cache/swc && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -61,7 +66,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "drizzle-kit": "^0.30.4",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9",
     "eslint-config-next": "^15.1.6",
     "postcss": "^8",
